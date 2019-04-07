@@ -12,11 +12,7 @@
                 </el-select>
             </el-form-item>
             <el-form-item label="路线" >
-                <el-select placeholder="A" v-model="search.attribute10" >
-                    <el-option label="A" value="A"></el-option>
-                    <el-option label="E" value="E"></el-option>
-                    <el-option label="C22" value="C22"></el-option>
-                </el-select>
+              <el-input v-model="search.attribute10"></el-input>
             </el-form-item>
             <el-form-item label="订单类型">
                 <el-select placeholder="订单类型" v-model="search.attribute09">
@@ -28,7 +24,7 @@
             </el-col>
             
              <el-col :span="8">
-              <el-form-item label="订单号" >
+              <el-form-item label="WIP号" >
                  <el-input v-model="search.attribute03"></el-input>
             </el-form-item>
              </el-col>
@@ -38,7 +34,7 @@
             </el-form-item>
             </el-col>
              <el-col :span="8">
-            <el-form-item label="订单行" >
+            <el-form-item label="WIP订单行" >
                  <el-input v-model="search.attribute04"></el-input>
             </el-form-item>
              </el-col>
@@ -48,35 +44,35 @@
             </el-form-item>
             </el-col>
             <el-col :span="8">
-             <el-form-item label="打印记录">
-                <el-input v-model="search.pickTaskStatus"></el-input>
+            <el-form-item label="ISP经销商">
+                <el-select placeholder="ISP经销商" v-model="search.attribute19">
+                <el-option
+                v-for="item in Y_N_STATUS"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value" 
+                > 
+              </el-option>
+          </el-select>
             </el-form-item>
             </el-col>
             <el-col :span="8">
-            <el-form-item label="页面大小" >
-                <el-select placeholder="10" v-model="search.ict4">
-                    <el-option label="10" value="10"></el-option>
-                    <el-option label="20" value="20"></el-option>
-                    <el-option label="30" value="30"></el-option>
-                    <el-option label="50" value="50"></el-option>
-                    <el-option label="80" value="80"></el-option>
-                    <el-option label="100" value="100"></el-option>
-                </el-select>
+            <el-form-item label="ICT经销商">
+                 <el-select placeholder="ICT经销商" v-model="search.attribute18">
+                <el-option
+                v-for="item in Y_N_STATUS"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value" 
+                > 
+              </el-option>
+               </el-select>
             </el-form-item>
             </el-col>
             <el-col :span="8">
-            <el-form-item label="网络供应商">
-                <el-select placeholder="网络供应商" v-model="search.attribute18">
-                    <el-option label="全部" value=""></el-option>
-                    <el-option label="没有" value="N"></el-option>
-                    <el-option label="有" value="Y"></el-option>
-                </el-select>
-            </el-form-item>
-            </el-col>
-            <el-col :span="8">
-           <el-form-item label="初始日期" >
+           <el-form-item label="下单初始日期" >
               <el-date-picker
-                v-model="search.startTime"
+                v-model="search.startTimeCreateDtVar"
                 format="yyyy-MM-dd HH:mm:ss"
                 value-format="yyyy-MM-dd HH:mm:ss"
                 type="datetime"
@@ -86,9 +82,78 @@
             </el-form-item>
             </el-col>
             <el-col :span="8">
-            <el-form-item label="截止日期" >
+            <el-form-item label="下单截止日期" >
               <el-date-picker
-                v-model="search.endTime"
+                v-model="search.endTimeCreateDtVar"
+                format="yyyy-MM-dd HH:mm:ss"
+                value-format="yyyy-MM-dd HH:mm:ss"
+                type="datetime"
+                placeholder="请选择完成日期"
+              ></el-date-picker>
+            </el-form-item>
+            </el-col>
+                 <el-col :span="8">
+           <el-form-item label="创建波次初始日期" >
+              <el-date-picker
+                v-model="search.startTimeWaveCreateDate"
+                format="yyyy-MM-dd HH:mm:ss"
+                value-format="yyyy-MM-dd HH:mm:ss"
+                type="datetime"
+                placeholder="请选择完成日期"
+                @change="handleChangeTime"
+              ></el-date-picker>
+            </el-form-item>
+            </el-col>
+            <el-col :span="8">
+            <el-form-item label="创建波次截止日期" >
+              <el-date-picker
+                v-model="search.endTimeWaveCreateDate"
+                format="yyyy-MM-dd HH:mm:ss"
+                value-format="yyyy-MM-dd HH:mm:ss"
+                type="datetime"
+                placeholder="请选择完成日期"
+              ></el-date-picker>
+            </el-form-item>
+            </el-col>
+                 <el-col :span="8">
+           <el-form-item label="打印初始日期" >
+              <el-date-picker
+                v-model="search.startTimeLastUpdateDate"
+                format="yyyy-MM-dd HH:mm:ss"
+                value-format="yyyy-MM-dd HH:mm:ss"
+                type="datetime"
+                placeholder="请选择完成日期"
+                @change="handleChangeTime"
+              ></el-date-picker>
+            </el-form-item>
+            </el-col>
+            <el-col :span="8">
+            <el-form-item label="打印截止日期" >
+              <el-date-picker
+                v-model="search.endTimeLastUpdateDate"
+                format="yyyy-MM-dd HH:mm:ss"
+                value-format="yyyy-MM-dd HH:mm:ss"
+                type="datetime"
+                placeholder="请选择完成日期"
+              ></el-date-picker>
+            </el-form-item>
+            </el-col>
+                 <el-col :span="8">
+           <el-form-item label="导入初始日期" >
+              <el-date-picker
+                v-model="search.startTimeOrderInDate"
+                format="yyyy-MM-dd HH:mm:ss"
+                value-format="yyyy-MM-dd HH:mm:ss"
+                type="datetime"
+                placeholder="请选择完成日期"
+                @change="handleChangeTime"
+              ></el-date-picker>
+            </el-form-item>
+            </el-col>
+            <el-col :span="8">
+            <el-form-item label="导入截止日期" >
+              <el-date-picker
+                v-model="search.endTimeOrderInDate"
                 format="yyyy-MM-dd HH:mm:ss"
                 value-format="yyyy-MM-dd HH:mm:ss"
                 type="datetime"
@@ -97,7 +162,7 @@
             </el-form-item>
             </el-col>
             <el-col :span=12>
-            <el-form-item >
+            <el-form-item>
                 <el-button type="primary" @click="confirm">确认</el-button>
                 <el-button type="primary" @click="cancel">取消</el-button>
             </el-form-item>
@@ -143,60 +208,39 @@
             </el-table-column>
             <el-table-column prop="skuNum" label="零件编码"  width="100">
             </el-table-column>
-            <el-table-column prop="orderInDate" label="下单时间" width="150">
+            <el-table-column prop="createDtVar" label="下单时间" width="150">
                <template slot-scope="scope">
-                        {{getDate(scope.row.orderInDate,true)}}
+                        {{$DateFormat.dateFormat(scope.row.createDtVar,true)}}
                       </template>
             </el-table-column>
             <el-table-column prop="attribute19" label="ISP经销商" width="200"> 
               <template slot-scope="scope" width="100%">
-              <el-select placeholder="" v-model="scope.row.attribute19" :disabled="true">
-              <el-option
-                v-for="item in Y_N_STATUS"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value" 
-              > 
-              </el-option>
-            </el-select>
+                {{$Enum.getEnumSelectByValue(Y_N_STATUS,scope.row.attribute19)}}
               </template>
             </el-table-column>
             <el-table-column prop="attribute18" label="ICT经销商" width="200">
                <template slot-scope="scope" width="100%">
-              <el-select placeholder="" v-model="scope.row.attribute18" :disabled="true">
-              <el-option
-                v-for="item in Y_N_STATUS"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value" 
-              > 
-              </el-option>
-            </el-select>
+                  {{$Enum.getEnumSelectByValue(Y_N_STATUS,scope.row.attribute18)}}
               </template>
             </el-table-column>
             <el-table-column prop="dmlOrderStatus" label="订单状态" width="200">
               <template slot-scope="scope" width="100%">
-              <el-select  v-model="scope.row.dmlOrderStatus" :disabled="true">
-              <el-option
-                v-for="item in DML_PICK_ORDER_STATUS"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value" 
-              > 
-              </el-option>
-            </el-select>
+                {{$Enum.getEnumSelectByValue(DML_PICK_ORDER_STATUS,scope.row.dmlOrderStatus)}}
               </template>
             </el-table-column>
-             <el-table-column prop="" label="导入时间"  width="200">
+            <el-table-column prop="orderInDate" label="导入时间" width="150">
+               <template slot-scope="scope">
+                        {{$DateFormat.dateFormat(scope.row.orderInDate,true)}}
+                      </template>
             </el-table-column>
              <el-table-column prop="waveCreateDate" label="创建波次时间" width="200">
                <template slot-scope="scope">
-                        {{getDate(scope.row.waveCreateDate,true)}}
+                        {{$DateFormat.dateFormat(scope.row.waveCreateDate,true)}}
                       </template>
             </el-table-column>
              <el-table-column prop="lastUpdateDate" label="打印时间" width="200">
                <template slot-scope="scope">
-                        {{getDate(scope.row.lastUpdateDate,true)}}
+                        {{$DateFormat.dateFormat(scope.row.lastUpdateDate,true)}}
                       </template>
             </el-table-column>
         </el-table>
@@ -212,32 +256,33 @@
 </template>
 <script>
 import axios from '../../util/http'
-import EnumSelect from '../../util/enum'
-import dateFormat from '../../util/date'
 
 export default {
   data () {
     return {
       axios,
-      EnumSelect,
-      dateFormat,
       // 查询参数
       search: {
-        orderStatus: '',
+        dmlOrderStatus: '',
         attribute10: '',
         attribute09: '',
         attribute03: '',
         attribute07: '',
         attribute04: '',
         locNum: '',
-        pickTaskStatus: '',
-        ict4: '',
-        ict5: '',
-        startTime: '',
-        endTime: '',
+        attribute19: '',
+        attribute18: '',
         wsId: '',
         currentPage: 1,
-        printAll: false
+        printAll: false,
+        startTimeCreateDtVar:'',
+        endTimeCreateDtVar:'',
+        startTimeWaveCreateDate:'',
+        endTimeWaveCreateDate:'',
+        startTimeLastUpdateDate:'',
+        endTimeLastUpdateDate:'',
+        startTimeOrderInDate:'',
+        endTimeOrderInDate:''
       },
       tableData: [],
       multipleSelection: [],
@@ -255,11 +300,8 @@ export default {
     this.getSelectValues()
   },
   methods: {
-    getDate(data, flag) {
-      return this.dateFormat(data, flag)
-    },
     getSelectValues() {
-      let Enum = EnumSelect()
+      let Enum = this.$Enum.EnumSelect()
       this.Y_N_STATUS = Enum.Y_N_STATUS
       this.axios.get('common/enum/selectEnumList', {
         params: 'test'
@@ -298,7 +340,7 @@ export default {
     getTableData () {
       this.tableLoading = true
       let that = this
-      this.axios.get('pickManage/pickInfo/selectManualPrintList', {
+      axios.get('pickManage/pickInfo/selectManualPrintList', {
         params: that.search
       }).then((res) => {
         if (res.errCode === 'S') {

@@ -1,4 +1,7 @@
-function EnumSelect() {
+const Enum = {
+
+}
+Enum.EnumSelect = function() {
   let EnumObj = {}
   EnumObj = {
     openStatus: [
@@ -22,6 +25,10 @@ function EnumSelect() {
       }
     ],
     Y_N_STATUS: [
+      {
+        label: '全部',
+        value: ''
+      },
       {
         label: '是',
         value: 'Y'
@@ -199,5 +206,19 @@ function EnumSelect() {
   return EnumObj
 }
 
-// 获取枚举值
-export default EnumSelect
+Enum.getEnumSelectByValue = function(enumArray, enumKey) {
+
+  if (enumKey === undefined || enumKey === null) {
+    return ''
+  }
+  for (let i in enumArray) {
+    let e = enumArray[i]
+    if (e && e.value === enumKey) {
+      return e.label
+    }
+  }
+
+  return enumKey
+}
+
+export default Enum

@@ -7,15 +7,7 @@
         </el-table-column>
         <el-table-column prop="batteryFaultCode" label="错误类型" width="200">
            <template slot-scope="scope" width="100%">
-              <el-select placeholder="错误类型" v-model="scope.row.batteryFaultCode" :disabled="true">
-              <el-option
-                v-for="item in KID_BATTERY_FAULT_CODE"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value" 
-              > 
-              </el-option>
-            </el-select>
+             {{$Enum.getEnumSelectByValue(KID_BATTERY_FAULT_CODE,scope.row.batteryFaultCode)}}
             </template>
         </el-table-column>
         <el-table-column prop="posX" label="X轴位置">
@@ -24,15 +16,7 @@
         </el-table-column>
         <el-table-column prop="kidStatus" label="状态" width="200">
            <template slot-scope="scope" width="100%">
-              <el-select placeholder="状态" v-model="scope.row.kidStatus" :disabled="true">
-              <el-option
-                v-for="item in KM_KID_STATUS"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value" 
-              > 
-              </el-option>
-            </el-select>
+              {{$Enum.getEnumSelectByValue(KM_KID_STATUS,scope.row.kidStatus)}}
             </template>
         </el-table-column>
         <el-table-column prop="kidTaskId" label="任务编码">
@@ -43,7 +27,7 @@
         </el-table-column>
         <el-table-column prop="lastUpdateDate" label="最后更新日期" width="200">
           <template slot-scope="scope">
-                {{getDate(scope.row.lastUpdateDate,true)}}
+                {{$DateFormat.dateFormat(scope.row.lastUpdateDate,true)}}
             </template>
         </el-table-column>
       </el-table>
@@ -61,28 +45,12 @@
         </el-table-column>
         <el-table-column prop="tasktType" label="任务类型" width="200">
           <template slot-scope="scope" width="100%">
-              <el-select placeholder="任务类型" v-model="scope.row.tasktType" :disabled="true">
-              <el-option
-                v-for="item in KM_KID_TASK_TYPE"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value" 
-              > 
-              </el-option>
-            </el-select>
+            {{$Enum.getEnumSelectByValue(KM_KID_TASK_TYPE,scope.row.tasktType)}}
             </template>
         </el-table-column>
         <el-table-column prop="taskStatus" label="任务状态" width="200">
           <template slot-scope="scope" width="100%">
-              <el-select placeholder="任务状态" v-model="scope.row.taskStatus" :disabled="true">
-              <el-option
-                v-for="item in KM_KID_TASK_STATUS"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value" 
-              > 
-              </el-option>
-            </el-select>
+            {{$Enum.getEnumSelectByValue(KM_KID_TASK_STATUS,scope.row.taskStatus)}}
             </template>
         </el-table-column>
         <el-table-column prop="srcPosX" label="初始位置X" width="100">
@@ -103,12 +71,12 @@
         </el-table-column>
         <el-table-column prop="creationDate" label="创建日期" width="200">
            <template slot-scope="scope">
-                {{getDate(scope.row.creationDate,true)}}
+                {{$DateFormat.dateFormat(scope.row.creationDate,true)}}
             </template>
         </el-table-column>
         <el-table-column prop="lastUpdateDate" label="最后更新日期" width="200">
            <template slot-scope="scope">
-                {{getDate(scope.row.lastUpdateDate,true)}}
+                {{$DateFormat.dateFormat(scope.row.lastUpdateDate,true)}}
             </template>
         </el-table-column>
       </el-table>
@@ -126,28 +94,12 @@
         </el-table-column>
         <el-table-column prop="taskType" label="任务类型" width="200">
            <template slot-scope="scope" width="100%">
-              <el-select placeholder="任务类型" v-model="scope.row.tasktType" :disabled="true">
-              <el-option
-                v-for="item in KM_KID_TASK_TYPE"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value" 
-              > 
-              </el-option>
-            </el-select>
+             {{$Enum.getEnumSelectByValue(KM_KID_TASK_TYPE,scope.row.tasktType)}}
             </template>
         </el-table-column>
         <el-table-column prop="taskStatus" label="任务状态" width="200">
           <template slot-scope="scope" width="100%">
-              <el-select placeholder="任务状态" v-model="scope.row.taskStatus" :disabled="true">
-              <el-option
-                v-for="item in KM_KID_TASK_STATUS"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value" 
-              > 
-              </el-option>
-            </el-select>
+             {{$Enum.getEnumSelectByValue(KM_KID_TASK_STATUS,scope.row.taskStatus)}}
             </template>
         </el-table-column>
         <el-table-column prop="srcPosX" label="初始位置X" width="100">
@@ -172,15 +124,7 @@
         </el-table-column>
         <el-table-column prop="releaseLoadFlag" label="是否举升" width="200">
           <template slot-scope="scope" width="100%">
-              <el-select placeholder="任务状态" v-model="scope.row.releaseLoadFlag" :disabled="true">
-              <el-option
-                v-for="item in TM_MOVE_TASK_RELEASE_LOAD"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value" 
-              > 
-              </el-option>
-            </el-select>
+            {{$Enum.getEnumSelectByValue(TM_MOVE_TASK_RELEASE_LOAD,scope.row.releaseLoadFlag)}}
             </template>
         </el-table-column>
         <el-table-column prop="chargePointId" label="充电桩编码" width="100">
@@ -189,12 +133,12 @@
         </el-table-column>
         <el-table-column prop="creationDate" label="创建日期" width="200">
            <template slot-scope="scope">
-                {{getDate(scope.row.creationDate,true)}}
+                {{$DateFormat.dateFormat(scope.row.creationDate,true)}}
             </template>
         </el-table-column>
         <el-table-column prop="lastUpdateDate" label="最后更新日期" width="200">
            <template slot-scope="scope">
-                {{getDate(scope.row.lastUpdateDate,true)}}
+                {{$DateFormat.dateFormat(scope.row.lastUpdateDate,true)}}
             </template>
         </el-table-column>
       </el-table>
@@ -207,13 +151,10 @@
 </template>
 <script>
 import axios from '../../util/http'
-import dateFormat from '../../util/date'
-import EnumSelect from '../../util/enum'
 export default {
   data () {
     return {
       axios,
-      dateFormat,
       tableLoading: false,
       KID_BATTERY_FAULT_CODE: [],
       KM_KID_STATUS: [],
@@ -250,11 +191,8 @@ export default {
     this.getSelectValues()
   },
   methods: {
-    getDate(data, flag) {
-      return this.dateFormat(data, flag)
-    },
     getSelectValues() {
-      let Enum = EnumSelect()
+      let Enum = this.$Enum.EnumSelect()
       this.KID_BATTERY_FAULT_CODE = Enum.KID_BATTERY_FAULT_CODE
       this.KM_KID_STATUS = Enum.KM_KID_STATUS
       this.KM_KID_TASK_TYPE = Enum.KM_KID_TASK_TYPE
@@ -268,7 +206,6 @@ export default {
       }).then((res) => {
         // console.log(res);
         if (res.errCode === 'S') {
-          console.log(res.data.result)
           that.tableData.list = res.data.result
         }
       })
@@ -284,7 +221,6 @@ export default {
       }).then((res) => {
         // console.log(res);
         if (res.errCode === 'S') {
-          console.log(res.data.result)
           that.tableData.list1 = res.data.result
         }
       })
@@ -300,7 +236,6 @@ export default {
       }).then((res) => {
         // console.log(res);
         if (res.errCode === 'S') {
-          console.log(res.data.result)
           that.tableData.list2 = res.data.result
         }
       })

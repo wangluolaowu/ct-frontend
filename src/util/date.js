@@ -1,4 +1,8 @@
-function dateFormat (time, flag) {
+const DateFormat = {
+
+}
+
+DateFormat.dateFormat = function (time, flag) {
   if (time) {
     let date = new Date(time)
     let y = date.getFullYear()
@@ -18,4 +22,5 @@ function dateFormat (time, flag) {
     return ''
   }
 }
-export default dateFormat
+
+export default DateFormat

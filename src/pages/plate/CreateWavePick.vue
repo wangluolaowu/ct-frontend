@@ -49,7 +49,7 @@
                     </el-table-column>
                     <el-table-column prop="pickTicketNum" label="备货标签" width="200">
                     </el-table-column>
-                    <el-table-column prop="route" label="路线" width="100">
+                    <el-table-column prop="route" label="路线" width="50">
                     </el-table-column>
                      <el-table-column prop="subRoute" label="子路线" width="100">
                     </el-table-column>
@@ -63,35 +63,19 @@
                     </el-table-column>
                     <el-table-column prop="qty" label="数量" width="100">
                     </el-table-column>
-                    <el-table-column  prop="ispDealer"  label="ISP经销商" width="200">
+                    <el-table-column  prop="ispDealer"  label="ISP经销商" width="100">
                       <template slot-scope="scope" width="100%">
-                        <el-select placeholder="ISP经销商"  v-model="scope.row.ispDealer" :disabled="true">
-                        <el-option
-                          v-for="item in Y_N_STATUS"
-                          :key="item.value"
-                          :label="item.label"
-                          :value="item.value" 
-                        > 
-                       </el-option>
-                       </el-select>
+                         {{$Enum.getEnumSelectByValue(Y_N_STATUS,scope.row.ispDealer)}}
                     </template>
                     </el-table-column>
-                    <el-table-column prop="ictDealer" label="ICT经销商" width="200">
+                    <el-table-column prop="ictDealer" label="ICT经销商" width="100">
                        <template slot-scope="scope" width="100%">
-                        <el-select placeholder="ICT经销商" v-model="scope.row.ictDealer" :disabled="true">
-                        <el-option
-                          v-for="item in Y_N_STATUS"
-                          :key="item.value"
-                          :label="item.label"
-                          :value="item.value" 
-                        > 
-                       </el-option>
-                       </el-select>
+                          {{$Enum.getEnumSelectByValue(Y_N_STATUS,scope.row.ictDealer)}}
                     </template>
                     </el-table-column>
                     <el-table-column prop="creationDate" label="导入时间" width="200">
                       <template slot-scope="scope">
-                        {{getDate(scope.row.creationDate,true)}}
+                        {{$DateFormat.dateFormat(scope.row.creationDate,true)}}
                       </template>
                     </el-table-column>
                 </el-table>
@@ -172,15 +156,11 @@
 import axios from '../../util/http'
 import draggable from 'vuedraggable'
 import qs from 'qs'
-import EnumSelect from '../../util/enum'
-import dateFormat from '../../util/date'
 
 export default {
   data () {
     return {
       axios,
-      dateFormat,
-      EnumSelect,
       draggable,
       drag: false,
       search: { // 查询参数
@@ -220,11 +200,8 @@ export default {
     this.getSelectValues()
   },
   methods: {
-    getDate(data, flag) {
-      return this.dateFormat(data, flag)
-    },
     getSelectValues() {
-      let Enum = EnumSelect()
+      let Enum = this.$Enum.EnumSelect()
       this.Y_N_STATUS = Enum.Y_N_STATUS
     },
     handleSelectionChange (val) {
@@ -297,28 +274,6 @@ export default {
           this.isShowOkDialog = true // 弹出层 分配成功
         }
       })
-    }, // 确认创建波次
-    submitSelect () {
-      this.axios.get('reloc/createWave/selectRelocInfoList', {
-        params: {
-          orderWaveId: this.id,
-          orderType: this.search.orderType
-        }
-      }).then((res) => {
-        if (res.errCode === 'S') {
-          this.dialogTableData = res.data.result.map(item => {
-            if (!item.result) {
-              item.result = []
-            }
-            return item
-          })
-          this.deleteOk = false
-          this.updateOk = false
-          this.isShowDialog = true
-        }
-        this.handleCheckAllChange(false)
-        this.tableLoading = false
-      })
     },
     submit () {
       this.submitIsDisabled = true
@@ -331,12 +286,22 @@ export default {
       dataResult.search = JSON.stringify(this.search)
       this.axios.post('reloc/createWave/createWaveId', qs.stringify(dataResult)).then((res) => {
         if (res.errCode === 'S') {
-          this.id = res.data.result
-          this.submitSelect()
-        } else {
-          this.submitIsDisabled = false
-          this.tableLoading = false
+          this.id = res.data.orderWaveId
+          this.dialogTableData = res.data.result.map(item => {
+            if (!item.result) {
+              item.result = []
+            }
+            return item
+          })
+          this.deleteOk = false
+          this.updateOk = false
+          this.isShowDialog = true
+        }else{
+          this.getTableData()
         }
+        this.submitIsDisabled = false
+        this.handleCheckAllChange(false)
+        this.tableLoading = false
       })
     }, // 点击是否全部提交
     handleCheckAllChange (e) {

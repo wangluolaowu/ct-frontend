@@ -14,6 +14,11 @@ import 'element-ui/lib/theme-chalk/index.css'
 import './assets/framework/css/global.css'
 import './assets/js/common/element-ui/index.css'
 import './assets/css/style.css'
+import Enum from './util/enum'
+import DateFormat from './util/date'
+
+Vue.prototype.$Enum = Enum
+Vue.prototype.$DateFormat = DateFormat
 promise.polyfill()
 window.axios = axios
 

@@ -10,33 +10,17 @@
       </el-table-column>
       <el-table-column prop="workstationStatus" label="工位状态" width="200">
         <template slot-scope="scope" width="100%">
-              <el-select placeholder="工作状态" v-model="scope.row.workstationStatus" :disabled="true">
-              <el-option
-                v-for="item in WS_STATUS"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value" 
-              > 
-              </el-option>
-            </el-select>
+          {{$Enum.getEnumSelectByValue(WS_STATUS,scope.row.workstationStatus)}}
          </template>
       </el-table-column>
       <el-table-column prop="workstationType" label="工作类型" width="300">
          <template slot-scope="scope" width="100%">
-              <el-select placeholder="工作类型" v-model="scope.row.workstationType" :disabled="true">
-              <el-option
-                v-for="item in WS_TYPE"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value" 
-              > 
-              </el-option>
-            </el-select>
+            {{$Enum.getEnumSelectByValue(WS_TYPE,scope.row.workstationType)}}
          </template>
       </el-table-column>
       <el-table-column prop="lastUpdateDate" label="最后更新日期">
          <template slot-scope="scope">
-                {{getDate(scope.row.lastUpdateDate,true)}}
+                {{$DateFormat.dateFormat(scope.row.lastUpdateDate,true)}}
             </template>
       </el-table-column>
     </el-table>
@@ -48,12 +32,10 @@
 </template>
 <script>
 import axios from '../../util/http'
-import dateFormat from '../../util/date'
 export default {
   data () {
     return {
       axios,
-      dateFormat,
       tableLoading: false,
       WS_STATUS: [],
       WS_TYPE: [],
@@ -72,9 +54,6 @@ export default {
     this.getEnumSelectValues()
   },
   methods: {
-    getDate(data, flag) {
-      return this.dateFormat(data, flag)
-    },
     getEnumSelectValues() {
       this.tableLoading = true
       this.axios.get('common/enum/selectEnumList', {

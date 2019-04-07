@@ -25,16 +25,8 @@
           <el-table-column prop="entityWorkstationId" label="工作站编号" width="100"></el-table-column>
           <el-table-column prop="forecastWallCount" label="播种墙数量" width="100"></el-table-column>
           <el-table-column prop="workstationStatus" label="工作状态" width="200">
-            <template slot-scope="scope" width="100%">
-              <el-select placeholder="工作状态" v-model="scope.row.workstationStatus" :disabled="true">
-              <el-option
-                v-for="item in WS_STATUS"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value" 
-              > 
-              </el-option>
-            </el-select>
+            <template slot-scope="scope">
+              {{$Enum.getEnumSelectByValue(WS_STATUS,scope.row.workstationStatus)}}
             </template>
           </el-table-column>
           <el-table-column prop="complC" label="当天已完成订单行总数" width="180"></el-table-column>
@@ -81,15 +73,7 @@
           <el-table-column prop="forecastWallCount" label="播种墙数量" width="100"></el-table-column>
           <el-table-column prop="workstationStatus" label="工作状态" width="200">
              <template slot-scope="scope" width="100%">
-              <el-select placeholder="工作状态" v-model="scope.row.workstationStatus" :disabled="true">
-              <el-option
-                v-for="item in WS_STATUS"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value" 
-              > 
-              </el-option>
-            </el-select>
+             {{$Enum.getEnumSelectByValue(WS_STATUS,scope.row.workstationStatus)}}
             </template>
           </el-table-column>
           <el-table-column prop="complC" label="当天已完成订单行总数" width="200"></el-table-column>
@@ -136,15 +120,7 @@
           <el-table-column prop="entityWorkstationId" label="工作站编号" width="100"></el-table-column>
           <el-table-column prop="workstationStatus" label="工作状态" width="200">
              <template slot-scope="scope" width="100%">
-              <el-select placeholder="工作状态" v-model="scope.row.workstationStatus" :disabled="true">
-              <el-option
-                v-for="item in WS_STATUS"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value" 
-              > 
-              </el-option>
-            </el-select>
+              {{$Enum.getEnumSelectByValue(WS_STATUS,scope.row.workstationStatus)}}
             </template>
           </el-table-column>
           <el-table-column prop="complC" label="当天已完成订单行总数" width="175"></el-table-column>
@@ -192,15 +168,7 @@
           <el-table-column prop="entityWorkstationId" label="工作站编号" width="100"></el-table-column>
           <el-table-column prop="workstationStatus" label="工作状态" width="200">
              <template slot-scope="scope" width="100%">
-              <el-select placeholder="工作状态" v-model="scope.row.workstationStatus" :disabled="true">
-              <el-option
-                v-for="item in WS_STATUS"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value" 
-              > 
-              </el-option>
-            </el-select>
+              {{$Enum.getEnumSelectByValue(WS_STATUS,scope.row.workstationStatus)}}
             </template>
           </el-table-column>
           <el-table-column prop="complC" label="当天已完成订单行总数" width="200"></el-table-column>
@@ -224,50 +192,41 @@
        <div class="tabConOther">
         <h4 class="h2">召唤货架汇总</h4>
         <!--新添加表格-->
-        <el-table :data='tableData.TiaoCangAllList' highlight-current-row v-loading="tableLoading" style="width: 100%" border>
-           <el-table-column prop="inC" label="系统当天录入订单行总数" width="190"></el-table-column>
-          <el-table-column prop="complC" label="当天已完成订单行" width="150"></el-table-column>
+        <el-table :data='tableData.resultCallShelfSum' highlight-current-row v-loading="tableLoading" style="width: 100%" border>
+           <el-table-column prop="allCou" label="系统当天录入订单行总数" width="190"></el-table-column>
+          <el-table-column prop="complCou" label="当天已完成订单行" width="150"></el-table-column>
 
-          <el-table-column prop="uncomplC" label="当天未完成订单行" width="150"></el-table-column>
-          <el-table-column prop="comingC" label="正在进行中订单行" width="150"></el-table-column>
+          <el-table-column prop="uncomplCou" label="当天未完成订单行" width="150"></el-table-column>
+          <el-table-column prop="comingCou" label="正在进行中订单行" width="150"></el-table-column>
           <el-table-column prop="instantRaion" label="瞬时平均效率（行/人/分钟）" width="220"></el-table-column>
           <!--新添加字段-->
            <el-table-column prop="complPercent" label="完成百分比" width="100"></el-table-column>
-          <el-table-column prop="forecastComplDate" label="预计完成时间" width="200">
+          <el-table-column prop="forecastComplSecond" label="预计完成时间" width="200">
              <template slot-scope="scope">
-                {{getDate(scope.row.forecastComplDate,true)}}
+                {{getDate(scope.row.forecastComplSecond,true)}}
             </template>
           </el-table-column>
         </el-table>
       </div>
        <div class="tabConOther">
         <h4 class="h2">召唤货架</h4>
-        <el-table :data='tableData.TiaoCangLists1' highlight-current-row v-loading="tableLoading" border>
+        <el-table :data='tableData.resultCallShelfInfoList' highlight-current-row v-loading="tableLoading" border>
           <el-table-column prop="entityWorkstationId" label="工作站编号" width="100"></el-table-column>
-          <el-table-column prop="forecastWallCount" label="播种墙数量" width="100"></el-table-column>
           <el-table-column prop="workstationStatus" label="工作状态" width="200">
              <template slot-scope="scope" width="100%">
-              <el-select placeholder="工作状态" v-model="scope.row.workstationStatus" :disabled="true">
-              <el-option
-                v-for="item in WS_STATUS"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value" 
-              > 
-              </el-option>
-            </el-select>
+             {{$Enum.getEnumSelectByValue(WS_STATUS,scope.row.workstationStatus)}}
             </template>
           </el-table-column>
-          <el-table-column prop="complC" label="当天已完成订单行总数" width="200"></el-table-column>
+          <el-table-column prop="complCou" label="当天已完成订单行总数" width="200"></el-table-column>
 
-          <el-table-column prop="uncomplC" label="已分配且未完成的订单行数量" width="220"></el-table-column>
-          <el-table-column prop="comingC" label="正在进行订单行数量" width="180"></el-table-column>
+          <el-table-column prop="uncomplCou" label="已分配且未完成的订单行数量" width="220"></el-table-column>
+          <el-table-column prop="comingCou" label="正在进行订单行数量" width="180"></el-table-column>
           <el-table-column prop="instantRaion" label="瞬时平均效率（行/人/分钟）" width="220"></el-table-column>
           <!--新添加字段-->
           <el-table-column prop="complPercent" label="完成百分比" width="100"></el-table-column>
-          <el-table-column prop="forecastComplDate" label="预计完成时间" width="200">
+          <el-table-column prop="forecastComplSecond" label="预计完成时间" width="200">
              <template slot-scope="scope">
-                {{getDate(scope.row.forecastComplDate,true)}}
+                {{getDate(scope.row.forecastComplSecond,true)}}
             </template>
           </el-table-column>
         </el-table>
@@ -279,51 +238,42 @@
        <div class="tabConOther">
         <h4 class="h2">盘点订单汇总</h4>
         <!--新添加表格-->
-        <el-table :data='tableData.TiaoCangAllList2' highlight-current-row v-loading="tableLoading" style="width: 100%" border>
-           <el-table-column prop="inC" label="系统当天接收订单行总数" width="190"></el-table-column>
-          <el-table-column prop="waveC" label="当天已创建波次订单行" width="200"></el-table-column>
-          <el-table-column prop="complC" label="当天已完成订单行" width="150"></el-table-column>
+        <el-table :data='tableData.resultStockSum' highlight-current-row v-loading="tableLoading" style="width: 100%" border>
+           <el-table-column prop="allCou" label="系统当天接收订单行总数" width="190"></el-table-column>
+          <el-table-column prop="wavedCou" label="当天已创建波次订单行" width="200"></el-table-column>
+          <el-table-column prop="complCou" label="当天已完成订单行" width="150"></el-table-column>
 
-          <el-table-column prop="uncomplC" label="当天未完成订单行" width="150"></el-table-column>
-          <el-table-column prop="comingC" label="正在进行中订单行" width="150"></el-table-column>
+          <el-table-column prop="uncomplCou" label="当天未完成订单行" width="150"></el-table-column>
+          <el-table-column prop="comingCou" label="正在进行中订单行" width="150"></el-table-column>
           <el-table-column prop="instantRaion" label="瞬时平均效率（行/人/分钟）" width="220"></el-table-column>
           <!--新添加字段-->
            <el-table-column prop="complPercent" label="完成百分比" width="100"></el-table-column>
-          <el-table-column prop="forecastComplDate" label="预计完成时间" width="200">
+          <el-table-column prop="forecastComplSecond" label="预计完成时间" width="200">
              <template slot-scope="scope">
-                {{getDate(scope.row.forecastComplDate,true)}}
+                {{getDate(scope.row.forecastComplSecond,true)}}
             </template>
           </el-table-column>
         </el-table>
       </div>
        <div class="tabConOther">
         <h4 class="h2">盘点订单</h4>
-        <el-table :data='tableData.TiaoCangLists2' highlight-current-row v-loading="tableLoading" border>
+        <el-table :data='tableData.resultStockInfoList' highlight-current-row v-loading="tableLoading" border>
           <el-table-column prop="entityWorkstationId" label="工作站编号" width="100"></el-table-column>
-          <el-table-column prop="forecastWallCount" label="播种墙数量" width="100"></el-table-column>
           <el-table-column prop="workstationStatus" label="工作状态" width="200">
              <template slot-scope="scope" width="100%">
-              <el-select placeholder="工作状态" v-model="scope.row.workstationStatus" :disabled="true">
-              <el-option
-                v-for="item in WS_STATUS"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value" 
-              > 
-              </el-option>
-            </el-select>
+              {{$Enum.getEnumSelectByValue(WS_STATUS,scope.row.workstationStatus)}}
             </template>
           </el-table-column>
-          <el-table-column prop="complC" label="当天已完成订单行总数" width="200"></el-table-column>
+          <el-table-column prop="complCou" label="当天已完成订单行总数" width="200"></el-table-column>
 
-          <el-table-column prop="uncomplC" label="已分配且未完成的订单行数量" width="220"></el-table-column>
-          <el-table-column prop="comingC" label="正在进行订单行数量" width="180"></el-table-column>
+          <el-table-column prop="uncomplCou" label="已分配且未完成的订单行数量" width="220"></el-table-column>
+          <el-table-column prop="comingCou" label="正在进行订单行数量" width="180"></el-table-column>
           <el-table-column prop="instantRaion" label="瞬时平均效率（行/人/分钟）" width="220"></el-table-column>
           <!--新添加字段-->
           <el-table-column prop="complPercent" label="完成百分比" width="100"></el-table-column>
           <el-table-column prop="forecastComplSecond" label="预计完成时间" width="200">
              <template slot-scope="scope">
-                {{getDate(scope.row.forecastComplDate,true)}}
+                {{getDate(scope.row.forecastComplSecond,true)}}
             </template>
           </el-table-column>
         </el-table>
@@ -346,7 +296,7 @@
         </el-tabs>
         <div class="clears">
           <h4 class="h2 fl">24小时订单完成统计</h4>
-          <span class="fr">2019-03-05</span>
+          <span class="fr">{{endTime24}}</span>
         </div>
         <div id="myChart" style="width: 100%;height: 400px;"></div>
       </div>
@@ -358,7 +308,6 @@
 // import qs from 'qs'
 import axios from '../../util/http'
 import dateFormat from '../../util/date'
-import EnumSelect from '../../util/enum'
 import echarts from 'echarts'
 export default {
   name: 'Order',
@@ -395,7 +344,11 @@ export default {
         PickOutOrdersList: [],
         ShelvesToalList: [],
         OrderSummaryList: [],
-        SetPointList: []
+        SetPointList: [],
+        resultStockSum: [],
+        resultStockInfoList: [],
+        resultCallShelfSum: [],
+        resultCallShelfInfoList: []
       },
       VOrderListSearch: {
         totalRows: -1,
@@ -413,8 +366,10 @@ export default {
         totalRows: -1,
         pageSize: -1,
         currentPage: 1
-      }
-
+      },
+      sum24KeyList:[],
+      sum24ValueList:[],
+      endTime24:''
     }
   },
   // 页面加
@@ -436,8 +391,7 @@ export default {
       }
     },
     getSelectValues() {
-      let Enum = EnumSelect()
-      this.WS_STATUS = Enum.WS_STATUS
+      this.WS_STATUS = this.$Enum.EnumSelect().WS_STATUS
     },
     getTimeOut() {
       this.getPutaway()
@@ -446,11 +400,27 @@ export default {
       this.getVData()
       this.getVAllData()
       this.getSAllData()
-      this.drawLine()
+      this.getSum24()
       this.getTiaoCangAllList()
       this.getTiaoCangLists()
+      this.getStockCallShelfList()
     },
-    getDayTime() {
+    getStockCallShelfList () { // 盘点，召唤货架信息
+      let that = this
+      this.tableLoadingVDT = true
+      this.axios.get('kanban/orderKanban/selectStockCallShelfList', {
+        params: {
+          orderType: 'V'
+        }
+      }).then((res) => {
+        if (res.errCode === 'S') {
+          that.tableData.resultStockSum = res.data.resultStockSum
+          that.tableData.resultStockInfoList = res.data.resultStockInfoList
+          that.tableData.resultCallShelfSum = res.data.resultCallShelfSum
+          that.tableData.resultCallShelfInfoList = res.data.resultCallShelfInfoList
+        }
+      })
+      this.tableLoadingVDT = false
     },
     getVAllData () { // 获取拣货V单汇总
       let that = this
@@ -461,7 +431,6 @@ export default {
         }
       }).then((res) => {
         if (res.errCode === 'S') {
-          console.log(res)
           that.tableData.Vlist = res.data.result
         }
       })
@@ -474,7 +443,6 @@ export default {
         params: that.VOrderListSearch
       }).then((res) => {
         if (res.errCode === 'S') {
-          console.log(res)
           that.tableData.VOrderList = res.data.result
         }
       })
@@ -494,7 +462,6 @@ export default {
         }
       }).then((res) => {
         if (res.errCode === 'S') {
-          console.log(res)
           that.tableData.SList = res.data.result
         }
       })
@@ -541,7 +508,6 @@ export default {
         }
       }).then((res) => {
         if (res.errCode === 'S') {
-          console.log(res)
           that.tableData.TiaoCangLists = res.data.result
         }
       })
@@ -567,7 +533,6 @@ export default {
       }).then((res) => {
         // console.log(res);
         if (res.errCode === 'S') {
-          console.log(res.data.result)
           that.tableData.PutawayList = res.data.result
         }
       })
@@ -577,6 +542,23 @@ export default {
       this.PutawayListSearch.currentPage = val
       this.getPutaway()
     }, // 切换
+    getSum24(){
+      this.axios.get('kanban/orderKanban/select24HDmlBinDeliveryVList', {
+        params: this.PutawayListSearch
+      }).then((res) => {
+        // console.log(res);
+        if (res.errCode === 'S') {
+           res.data.result.map((item,i) => {
+            if(i === 0){
+              this.endTime24 = item.LAST_UPDATE_TIME
+            }
+            this.sum24KeyList.push(item.LAST_UPDATE_DATE)
+            this.sum24ValueList.push(item.COU)
+          })
+        }
+        this.drawLine ()
+      })
+    },
     drawLine () { // 统计图
       let mychart = echarts.init(document.getElementById('myChart'))
       mychart.setOption({
@@ -602,13 +584,13 @@ export default {
             interval: 0,
             rotate: 40 },
 
-          data: ['0:00', '1:00', '2:00', '3:00', '4:00', '5:00', '6:00', '7:00', '8:00', '9:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00']
+          data: this.sum24KeyList
         },
         yAxis: {},
         series: [{
           name: '订单',
           type: 'bar',
-          data: [4, 65, 79, 10, 90, 80, 62, 88, 100, 120, 230, 330, 160, 230, 350, 460, 880, 1000, 122, 580, 980, 440], // 需要填写的Y动态数据
+          data: this.sum24ValueList, // 需要填写的Y动态数据
           barWidth: 30
         }]
       })

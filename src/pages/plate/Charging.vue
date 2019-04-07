@@ -14,15 +14,7 @@
       </el-table-column>
       <el-table-column prop="offsetDirectioin" label="方向">
          <template slot-scope="scope" width="100%">
-              <el-select placeholder="方向" v-model="scope.row.offsetDirectioin" :disabled="true">
-              <el-option
-                v-for="item in MD_MAP_DIRECTION_LIMIT"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value" 
-              > 
-              </el-option>
-            </el-select>
+            {{ $Enum.getEnumSelectByValue(MD_MAP_DIRECTION_LIMIT,scope.row.offsetDirectioin) }}
          </template>
       </el-table-column>
       <el-table-column prop="externalDevice" label="充电信息">
@@ -32,7 +24,7 @@
       </el-table-column>
       <el-table-column prop="lastUpdateDate" label="最后更新日期" width="200">
         <template slot-scope="scope">
-                {{getDate(scope.row.lastUpdateDate,true)}}
+                {{ $DateFormat.dateFormat(scope.row.lastUpdateDate,true) }}
             </template>
       </el-table-column>
     </el-table>
@@ -44,12 +36,11 @@
 </template>
 <script>
 import axios from '../../util/http'
-import dateFormat from '../../util/date'
+
 export default {
   data () {
     return {
       axios,
-      dateFormat,
       tableLoading: false,
       MD_MAP_DIRECTION_LIMIT: [],
       tableData: {
@@ -66,9 +57,6 @@ export default {
     this.getEnumSelectValues()
   },
   methods: {
-    getDate(data, flag) {
-      return this.dateFormat(data, flag)
-    },
     getEnumSelectValues() {
       this.tableLoading = true
       this.axios.get('common/enum/selectEnumList', {

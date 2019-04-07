@@ -201,7 +201,7 @@ const routes = [
     children: [
       {
         path: '/robotManage/stopReceive',
-        component: () => import('@/pages/plate/robotManage/stopReceive'),
+        component: () => import('@/pages/plate/robotManage/stopReceiveRobot'),
         name: '暂停/恢复机器人'
       }
     ]

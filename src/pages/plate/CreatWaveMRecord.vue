@@ -12,77 +12,32 @@
             <el-row :span="16">
               <el-col :span="8">
                 <el-form-item label="初始日期" prop>
-                  <el-date-picker
-                    v-model="search.startTime"
-                    format="yyyy-MM-dd HH:mm:ss"
-                    value-format="yyyy-MM-dd HH:mm:ss"
-                    type="datetime"
-                    placeholder="请选择完成日期"
-                    @change="cc"
-                  ></el-date-picker>
+                <el-date-picker
+                v-model="search.startTime"
+                format="yyyy-MM-dd HH:mm:ss"
+                value-format="yyyy-MM-dd HH:mm:ss"
+                type="datetime"
+                placeholder="请选择初始日期"
+                @change="handleChangeTime"
+              ></el-date-picker>
                 </el-form-item>
               </el-col>
               <el-col :span="8">
                 <el-form-item label="截止日期日期" prop>
                   <el-date-picker
-                    v-model="search.endTime"
-                    format="yyyy-MM-dd HH:mm:ss"
-                    value-format="yyyy-MM-dd HH:mm:ss"
-                    type="datetime"
-                    placeholder="请选择完成日期"
-                  ></el-date-picker>
+                v-model="search.endTime"
+                format="yyyy-MM-dd HH:mm:ss"
+                value-format="yyyy-MM-dd HH:mm:ss"
+                type="datetime"
+                placeholder="请选择完成日期"
+                 @change="handleChangeTime"
+              ></el-date-picker>
                 </el-form-item>
               </el-col>
             </el-row>
             <el-row :span="24">
-              <el-col :span="8" style="padding-left: 68px;box-sizing: border-box;">
-                  <el-select style="width: 85px;" v-model="groupOneSel">
-                    <el-option v-for="item in groupOneOptL"
-                               :key="item.value"
-                               :label="item.label"
-                               :value="item.value">
-                    </el-option>
-                  </el-select>
-                  <el-select style="width: 85px;" v-model="groupOneSel2">
-                  <el-option v-for="item in groupOneOptM"
-                             :key="item.value"
-                             :label="item.label"
-                             :value="item.value">
-                  </el-option>
-                </el-select>
-                  <el-select style="width: 85px;" v-model="groupOneSel3">
-                  <el-option v-for="item in groupOneOptR"
-                             :key="item.value"
-                             :label="item.label"
-                             :value="item.value">
-                  </el-option>
-                </el-select>
-              </el-col>
-              <el-col :span="8" style="padding-left: 93px;box-sizing: border-box;">
-                <el-select style="width: 85px;" v-model="groupTwoSel">
-                  <el-option v-for="item in groupOptLeft"
-                             :key="item.value"
-                             :label="item.label"
-                             :value="item.value">
-                  </el-option>
-                </el-select>
-                <el-select style="width: 85px;" v-model="groupTwoSel2">
-                  <el-option v-for="item in groupOptM"
-                             :key="item.value"
-                             :label="item.label"
-                             :value="item.value">
-                  </el-option>
-                </el-select>
-                <el-select style="width: 85px;" v-model="groupTwoSel3">
-                  <el-option v-for="item in groupOptR"
-                             :key="item.value"
-                             :label="item.label"
-                             :value="item.value">
-                  </el-option>
-                </el-select>
-              </el-col>
               <el-col :span="5">
-                <el-form-item id="groupBtn">
+                <el-form-item>
                   <el-button type="primary" @click="confirm">查找</el-button>
                   <el-button type="primary" @click="cancel">清空</el-button>
                 </el-form-item>
@@ -94,7 +49,12 @@
            <!-- 弹层start -->
     <div>
        <el-row v-for="(tableDataItem, j) in this.dialogTableData" :key="j" width="100%">
-         <div><label><span></span></label></div>
+         <div>
+           <label>
+           <span style="line-height:3">{{'创建波次号: ' + (tableDataItem[0].orderWaveId || '') }}</span>
+           <span style="line-height:3">{{'创建波时间: ' + $DateFormat.dateFormat(tableDataItem[0].creatDate,true) }}</span>
+           </label>
+           </div>
         <el-row :gutter="10">
           <el-col :span="4" v-for="(item, i) in tableDataItem" :key="i">
             <el-card style="min-height: 520px">
@@ -103,10 +63,10 @@
                       <label for="">工作站</label><span>{{i + 1}}</span>
                   </li>
                   <li>
-                      <label for="">订单总行数</label><span></span>
+                      <label for="">订单总行数</label><span>{{item.orderListCount || ''}}</span>
                   </li>
                   <li>
-                      <label for="">播种墙</label><span></span>
+                      <label for="">播种墙</label><span>{{item.forecastWallCount || ''}}</span>
                   </li>
               </ul>
               <transition-group>            
@@ -131,8 +91,8 @@
        </el-row>
         </div>
     <!-- 弹层end -->
-         <el-pagination v-if="search.totalRows>0" class="pagination" background @current-change="handleCurrentChange" :current-page.sync="search.currentPage" :page-size="search.pageSize" :page-sizes="[search.pageSize]" layout="total, sizes, prev, pager, next, jumper" :total="search.totalRows">
-                </el-pagination>
+        <el-pagination v-if="totalRows>0" class="pagination" background @current-change="handleCurrentChange" :current-page.sync="search.currentPage" :page-size="pageSize" :page-sizes="[pageSize]" layout="total, sizes, prev, pager, next, jumper" :total="totalRows">
+        </el-pagination>
         </div>
       </el-col>
     </el-row>
@@ -140,158 +100,65 @@
 </template>
 <script>
 import axios from '../../util/http'
+import draggable from 'vuedraggable'
 
 export default {
   data() {
     return {
       axios,
+      draggable, 
       closeIsDisabled: false,
       openIsDisabled: false,
       search: { // 查询参数
         orderType: 'S',
         startTime: '',
         endTime: '',
-        currentPage: 1,
-        totalRows: -1,
-        pageSize: 5
+        currentPage: 1
       },
-      dialogTableData: [],
-      groupOneSel:'',
-      groupOneSel2:'',
-      groupOneSel3:'',
-      groupTwoSel:'',
-      groupTwoSel2:'',
-      groupTwoSel3:'',
-      groupOneOptL:[{
-        value: '选项1',
-        label: '1'
-      }, {
-        value: '选项2',
-        label: '2'
-      }, {
-        value: '选项3',
-        label: '3'
-      }, {
-        value: '选项4',
-        label: '4'
-      }, {
-        value: '选项5',
-        label: '5'
-      }],
-      groupOneOptM:[{
-        value: '选项1',
-        label: '1'
-      }, {
-        value: '选项2',
-        label: '2'
-      }, {
-        value: '选项3',
-        label: '3'
-      }, {
-        value: '选项4',
-        label: '4'
-      }, {
-        value: '选项5',
-        label: '5'
-      }],
-      groupOneOptR:[{
-        value: '选项1',
-        label: '1'
-      }, {
-        value: '选项2',
-        label: '2'
-      }, {
-        value: '选项3',
-        label: '3'
-      }, {
-        value: '选项4',
-        label: '4'
-      }, {
-        value: '选项5',
-        label: '5'
-      }],
-      groupOptLeft:[{
-        value: '选项1',
-        label: '1'
-      }, {
-        value: '选项2',
-        label: '2'
-      }, {
-        value: '选项3',
-        label: '3'
-      }, {
-        value: '选项4',
-        label: '4'
-      }, {
-        value: '选项5',
-        label: '5'
-      }],
-      groupOptM:[{
-        value: '选项1',
-        label: '1'
-      }, {
-        value: '选项2',
-        label: '2'
-      }, {
-        value: '选项3',
-        label: '3'
-      }, {
-        value: '选项4',
-        label: '4'
-      }, {
-        value: '选项5',
-        label: '5'
-      }],
-      groupOptR:[{
-        value: '选项1',
-        label: '1'
-      }, {
-        value: '选项2',
-        label: '2'
-      }, {
-        value: '选项3',
-        label: '3'
-      }, {
-        value: '选项4',
-        label: '4'
-      }, {
-        value: '选项5',
-        label: '5'
-      }],
+      totalRows: -1,
+      pageSize: 5,
+      dialogTableData: []
     }
   },
   mounted() {
-    this.getTableData()
+    this.confirm()
   },
   methods: {
     // 单分页
     handleCurrentChange (val) {
       this.search.currentPage = val
-      this.getTableData()
-    },
-    confirm() {//点击查找执行的操作
-
+      this.confirm()
     },
     cancel() {//点击清空时应执行的操作
-
-    },
-    handleTabClick: function (tab, event) {
+      this.startTime = ''
+      this.endTime = ''
+    },handleTabClick: function (tab, event) {
       this.initParams()
-      this.getTableData()
+      this.confirm()
     },
-    initParams() {
-      this.search.endTime = ''
-      this.search.startTime = ''
+    initParams () {
+      this.search.ispDealer = ''
+      this.search.ictDealer = ''
       this.search.currentPage = 1
     },
-    getTableData() { // 获取波次号列表以及对应波次号信息
+    handleChangeTime(){//点查找按钮
+      let that = this;
+      let startTime = that.startTime;
+      let endTime = that.endTime;
+      //判断时间
+      if(startTime > endTime){
+        return false;
+      }
+    },
+    confirm() { // 获取波次号列表以及对应波次号信息
       let that = this
       this.axios.get('binningManage/pickRecord/selectPickRecordWavedIdList', {
         params: that.search
       }).then((res) => {
         if (res.errCode === 'S') {
-          this.search.totalRows = res.data.totalRows
-          this.dialogTableData = res.data.result
+          that.dialogTableData = res.data.result
+          that.totalRows = res.data.totalRows
+          that.pageSize = res.data.pageSize
         }
       })
     },
@@ -300,10 +167,10 @@ export default {
       console.log(currentPage)
       this.search.currentPage = currentPage
       this.getTableData()
-    },
-    cc() {
-      console.log(this.search.startTime)
     }
+  },
+  components: {
+    draggable
   }
 }
 </script>

@@ -1,171 +1,152 @@
 <template>
-  <div>
-    <el-row>
-      <el-col :span="23" class="main">
-        <div class="grid-content bg-purple-dark">
-          <el-tabs v-model="search.orderType" @tab-click="handleTabClick">
-            <el-tab-pane label="订单类型S" name="S"></el-tab-pane>
-            <el-tab-pane label="订单类型V" name="V"></el-tab-pane>
-          </el-tabs>
-          <!-- 搜索区域 -->
-          <el-form :inline="true" class="demo-form-inline">
-            <el-form-item label="初始日期" prop>
+  <div id="mainContainer">
+    <el-row :span="24" style="margin-bottom: 20px;">
+      <el-col :span="12">
+        <div class="block">
+          <span class="demonstration">初始日期</span>
               <el-date-picker
                 v-model="search.startTime"
                 format="yyyy-MM-dd HH:mm:ss"
                 value-format="yyyy-MM-dd HH:mm:ss"
                 type="datetime"
-                placeholder="请选择完成日期"
-                @change="cc"
+                placeholder="请选择初始日期"
+                @change="handleChangeTime"
               ></el-date-picker>
-            </el-form-item>
-            <el-form-item label="截止日期日期" prop>
-              <el-date-picker
+        </div>
+      </el-col>
+      <el-col :span="12">
+        <div class="block">
+          <span class="demonstration">结束日期</span>
+         <el-date-picker
                 v-model="search.endTime"
                 format="yyyy-MM-dd HH:mm:ss"
                 value-format="yyyy-MM-dd HH:mm:ss"
                 type="datetime"
                 placeholder="请选择完成日期"
+                 @change="handleChangeTime"
               ></el-date-picker>
-            </el-form-item>
-
-            <el-form-item>
-              <el-button type="primary" @click="confirm">查找</el-button>
-              <el-button type="primary" @click="cancel">清空</el-button>
-            </el-form-item>
-          </el-form>
-
-           <!-- 弹层start -->
-    <div>
-       <el-row v-for="(tableDataItem, j) in this.dialogTableData" :key="j" width="100%">
-         <div><label><span></span></label></div>
-        <el-row :gutter="10">
-          <el-col :span="4" v-for="(item, i) in tableDataItem" :key="i">
-            <el-card style="min-height: 520px">
-              <ul class="station-info">
-                  <li>
-                      <label for="">工作站</label><span>{{i + 1}}</span>
-                  </li>
-                  <li>
-                      <label for="">订单总行数</label><span></span>
-                  </li>
-                  <li>
-                      <label for="">播种墙</label><span></span>
-                  </li>
-              </ul>
-              <transition-group>            
-                <draggable v-model="item.result" :options="{group:'people', animation: 300}"  :key="i">
-                    <el-row
-                      class="drag-item"
-                      :class="{gray: element.isChange}"
-                      v-for="(element, index) in item.result"
-                      :key="index">
-                      <el-col :span="6"> <div style="margin-top:3px">{{index + 1}}、</div></el-col>
-                      <el-col :span="18" style="line-height:1.7">
-                        <div>{{ 'route: ' + (element.route  || '') }}</div>
-                        <div>{{ 'dealer: ' + (element.dealerCou  || '') }}</div>
-                        <div>{{ '订单行: ' + (element.lineCou || '') }}</div>                        
-                      </el-col>
-                    </el-row>
-                </draggable>
-              </transition-group>
-            </el-card>        
-          </el-col>
-        </el-row>
-       </el-row>
-        </div>
-    <!-- 弹层end -->
-         <el-pagination v-if="search.totalRows>0" class="pagination" background @current-change="handleCurrentChange" :current-page.sync="search.currentPage" :page-size="search.pageSize" :page-sizes="[search.pageSize]" layout="total, sizes, prev, pager, next, jumper" :total="search.totalRows">
-                </el-pagination>
         </div>
       </el-col>
     </el-row>
+    <el-row >
+      <el-col :span="12">
+        <el-button type="primary" @click="researchBtn" style="display: inline-block;width:80px;">查找</el-button>
+        <el-button type="primary" @click="cancel" style="display: inline-block;width:80px;"> 取消</el-button>
+      </el-col>
+    </el-row>
+    <el-table :data="tableData" highlight-current-rowstyle="width: 100%" border v-loading="tableLoading">
+      <el-table-column prop="ROW_ID" label="序号"></el-table-column>
+      <el-table-column prop="WAVEID" label="波次号"></el-table-column>
+      <el-table-column prop="DEALERCOU" label="任务波次订单行总数"></el-table-column>
+      <el-table-column prop="CREATIONDATE" label="创建波次时间">
+         <template slot-scope="scope">
+                {{getDate(scope.row.CREATIONDATE,true)}}
+            </template>
+      </el-table-column>
+    </el-table>
+ <el-pagination v-if="totalRows>0" class="pagination" background @current-change="handleCurrentChange" :current-page.sync="search.currentPage" :page-size="pageSize" :page-sizes="[pageSize]" layout="total, sizes, prev, pager, next, jumper" :total="totalRows">
+                </el-pagination>
   </div>
 </template>
 <script>
 import axios from '../../../util/http'
+import dateFormat from '../../../util/date'
 
 export default {
-  data() {
+  data () {
     return {
       axios,
-      closeIsDisabled: false,
-      openIsDisabled: false,
-      search: { // 查询参数
-        orderType: 'S',
+      dateFormat,
+      tableLoading: false,
+      search:{
         startTime: '',
-        endTime: '',
-        currentPage: 1,
-        totalRows: -1,
-        pageSize: 5
+        endTime:'',
+        currentPage:1,
+        extWorkstationType: 'STOCK_TAKING'
       },
-      dialogTableData: []
+      totalRows: -1,
+      pageSize: -1,
+      tableData: []
     }
   },
-  mounted() {
-    this.getTableData()
+  mounted () {
+    this.researchBtn()
   },
-  methods: {
-    // 单分页
-    handleCurrentChange (val) {
-      this.search.currentPage = val
-      this.getTableData()
+  methods: { 
+    getDate(data, flag) {
+      return this.dateFormat(data, flag)
     },
-    confirm() {
-
-    },
-    cancel() {
-
-    },
-    handleTabClick: function (tab, event) {
-      this.initParams()
-      this.getTableData()
-    },
-    initParams() {
-      this.search.endTime = ''
-      this.search.startTime = ''
-      this.search.currentPage = 1
-    },
-    getTableData() { // 获取波次号列表以及对应波次号信息
+    researchBtn () {
+      this.tableLoading = true
       let that = this
-      this.axios.get('binningManage/pickRecord/selectPickRecordWavedIdList', {
-        params: that.search
+      this.axios.get('stock/waveHistory/selectWaveHistory', {
+        params:this.search
       }).then((res) => {
+        // console.log(res);
         if (res.errCode === 'S') {
-          this.search.totalRows = res.data.totalRows
-          this.dialogTableData = res.data.result
+          that.tableData = res.data.result
+          that.totalRows = res.data.totalRows
+          that.pageSize = res.data.pageSize
         }
+        this.tableLoading = false
       })
     },
-    // 分页器
-    currentchange(currentPage) {
-      console.log(currentPage)
-      this.search.currentPage = currentPage
-      this.getTableData()
+    cancel (){
+      this.search.startTime = ''
+      this.search.endTime = ''
     },
-    cc() {
-      console.log(this.search.startTime)
+    handleCurrentChange (val) {
+      this.search.currentPage = val
+      this.researchBtn()
+    },
+    handleChangeTime(){//点查找按钮
+      let that = this;
+      let startTime = that.startTime;
+      let endTime = that.endTime;
+      //判断时间
+      if(startTime > endTime){
+        return false;
+      }
     }
   }
 }
 </script>
-<style lang="less" scoped>
-.WorkstationBox {
-  overflow:auto;
-  white-space: nowrap;
+<style>
+.activated{
+color: dimgrey;
 }
-.Workstation {
-  box-shadow: 1px 1px 5px #888888;
-  margin: 10px;
-  width: 300px;
-  display: inline-table;
-  vertical-align: top;
+#mainContainer{
+margin: 40px 0 100px;
 }
 
-.activated {
-  color: dimgrey;
+</style>
+<style>
+html{
+  color: #333333;
+  font-family: 'PingFangSC-Semibold', 'PingFang SC Semibold', 'PingFang SC';
 }
-
-  .drag-item {border:1px solid #ddd ; background: #f9f9f9; padding: 10px; margin-top: 10px; cursor: pointer;}
-  .gray {background: #026780; color: #ffffff;}
+.el-table .cell{
+  text-align: center!important;
+  font-size: 15px;
+}
+.el-col .title{
+  font-size: 24px;
+  font-weight: bolder;
+}
+.el-breadcrumb__item .el-breadcrumb__inner,.el-breadcrumb__separator{
+  font-size: 18px;
+}
+.el-table__empty-block .el-table__empty-text{
+  font-size: 15px;
+}
+#topTitle .el-tabs__item{
+  font-size: 15px;
+  font-weight: bold;
+}
+.el-picker-panel{
+  top: 195px;
+}
+#tabs .has-gutter >tr >th >.cell{
+  color: #999;
+}
 </style>
