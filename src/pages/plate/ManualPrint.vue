@@ -164,7 +164,8 @@
             <el-col :span=12>
             <el-form-item>
                 <el-button type="primary" @click="confirm">确认</el-button>
-                <el-button type="primary" @click="cancel">取消</el-button>
+                 <el-button type="primary" @click="reset">清空</el-button>
+                 <el-button type="primary" :disabled="cancelDisabled" @click="cancel">取消</el-button>
             </el-form-item>
             </el-col>
             <el-col :span=12>
@@ -182,7 +183,7 @@
                 </el-select>
              </el-form-item>
               <el-form-item >
-                <el-button type="primary" @click="toDoPrint">打印</el-button>
+                <el-button type="primary" :disabled="submitIsDisabled" @click="toDoPrint">打印</el-button>
             </el-form-item>
             </el-col>
         </el-form>
@@ -256,6 +257,7 @@
 </template>
 <script>
 import axios from '../../util/http'
+import qs from 'qs'
 
 export default {
   data () {
@@ -288,11 +290,13 @@ export default {
       multipleSelection: [],
       totalRows: -1,
       pageSize: -1,
-      sendStr: '',
+      sendStr: [],
       isShowInnerConfirmDialog: false,
       tableLoading: false,
       DML_PICK_ORDER_STATUS: [],
-      Y_N_STATUS: []
+      Y_N_STATUS: [],
+      submitIsDisabled:true,
+      cancelDisabled:true
     }
   },
   created: function () {
@@ -326,8 +330,31 @@ export default {
       this.search.currentPage = 1
       this.getTableData()
     },
+    reset(){
+        this.search.dmlOrderStatus=''
+        this.search.attribute10=''
+        this.search.attribute09= ''
+        this.search.attribute03=''
+        this.search.attribute07=''
+        this.search.attribute04=''
+        this.search.locNum =''
+        this.search.attribute19=''
+        this.search.attribute18=''
+        this.search.wsId= ''
+        this.search.currentPage=1,
+        this.search.printAll=false,
+        this.search.startTimeCreateDtVar=''
+        this.search.endTimeCreateDtVar=''
+        this.search.startTimeWaveCreateDate=''
+        this.search.endTimeWaveCreateDate=''
+        this.search.startTimeLastUpdateDate=''
+        this.search.endTimeLastUpdateDate=''
+        this.search.startTimeOrderInDate=''
+        this.search.endTimeOrderInDate=''
+    },
     cancel () {
       this.$refs.multipleTable.clearSelection()
+      this.handleCheckAllChange(false)
     },
     handleChangeTime() {},
     handleCurrentChange (val) {
@@ -336,6 +363,13 @@ export default {
     }, // 点击是否全部提交
     handleCheckAllChange (e) {
       this.search.printAll = e
+      if (e || this.sendStr.length > 0) {
+        this.submitIsDisabled = false
+        this.cancelDisabled = false
+      } else {
+        this.submitIsDisabled = true
+        this.cancelDisabled = true
+      }
     },
     getTableData () {
       this.tableLoading = true
@@ -354,28 +388,38 @@ export default {
     }, // 执行打印
     toDoPrint () {
       this.tableLoading = true
-      this.axios.get('pickManage/pickInfo/toDoManualPrint', {
-        params: this.search
-      }).then((res) => {
+      let resultData = {}
+      resultData.result = JSON.stringify(this.sendStr)
+      resultData.params = JSON.stringify(this.search)
+      this.axios.post('pickManage/pickInfo/toDoManualPrint', qs.stringify(resultData)).then((res) => {
         if (res.errCode === 'S') {
           this.isShowInnerConfirmDialog = true
           this.tableLoading = false
-          // console.log(res.data.result)
-          // that.tableData = res.data.result;
-          // that.totalRows = r.totalRows;
-          // that.pageSize = r.pageSize;
         }
       })
+      this.submitIsDisabled = true
+      this.cancelDisabled = true
     },
     confirmReject() {
       this.isShowInnerConfirmDialog = false
+      this.getTableData()
+      this.submitIsDisabled = true
+      this.cancelDisabled = true
+      this.handleCheckAllChange(false)
     },
     handleSelectionChange (val) {
       let arr = []
       val.map(item => {
-        arr.push(item.pickTaskId)
+        arr.push(item)
       })
-      this.sendStr = arr.join(',')
+      this.sendStr = arr
+       if (this.search.printAll || this.sendStr.length > 0) {
+        this.submitIsDisabled = false
+        this.cancelDisabled = false
+      } else {
+        this.submitIsDisabled = true
+        this.cancelDisabled = true
+      }
       console.log(this.sendStr)
     }
   }

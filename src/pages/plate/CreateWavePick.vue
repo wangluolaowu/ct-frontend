@@ -28,12 +28,13 @@
                         <el-button type="primary" @click="confirm">确认</el-button>
                         <el-button type="primary" :disabled = "cancelDisabled" @click="cancel">取消</el-button>
                     </el-form-item>
-                    <el-form-item>
+                    <el-form-item class="checkBoxGroup">
                      <el-checkbox v-model="search.submitAll"  @change="handleCheckAllChange">提交全部</el-checkbox>
+                     <el-button type="primary" @click="submit" :disabled = "submitIsDisabled" >提交</el-button>
                     </el-form-item>
-                    <el-form-item>
+                    <!--<el-form-item>
                        <el-button type="primary" @click="submit" :disabled = "submitIsDisabled" >提交</el-button>
-                    </el-form-item>
+                    </el-form-item>-->
                 </el-form>
 
                 <el-table ref="multipleTable" :data="tableData" tooltip-effect="dark" style="width: 100%" border @selection-change="handleSelectionChange" v-loading="tableLoading">
@@ -393,6 +394,9 @@ export default {
   .selectedCont .el-form-item{
     margin-right:30px;
   }
+  .selectedCont .el-form-item:last-child{
+    margin-right: 0px;
+  }
   .selectedCont{
     margin-bottom: 30px;
   }
@@ -411,6 +415,18 @@ export default {
     margin-top: 10px;
     cursor: pointer;
   }
+  .checkBoxGroup .el-checkbox{
+    margin-right: 5px;
+  }
+  /* 提交按钮样式 */
+  .checkBoxGroup .el-button{
+    width: 80px;
+    height: 40px;
+    text-align: center;
+    margin-top:-10px;
+    font-size: 15px;
+  }
+  
   .clears:after{
     display: block;
     content: '';
@@ -428,6 +444,14 @@ export default {
   .gray {
     background: #026780;
     color: #ffffff;
+  }
+ .el-table th>.cell,.el-table .cell{
+    color: #000;
+    font-size: 15px;
+    text-align: center;
+  }
+  .el-table th>.cell{
+    font-weight: bold
   }
 </style>
 

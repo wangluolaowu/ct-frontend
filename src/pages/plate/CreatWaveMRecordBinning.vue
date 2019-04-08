@@ -40,7 +40,7 @@
       <el-table-column prop="ORDERSUM" label="任务波次订单行总数"></el-table-column>
       <el-table-column prop="WHITECREATIONDATE" label="创建波次时间">
          <template slot-scope="scope">
-                {{getDate(scope.row.WHITECREATIONDATE,true)}}
+                {{$DateFormat.dateFormat(scope.row.WHITECREATIONDATE,true)}}
             </template>
       </el-table-column>
     </el-table>

@@ -13,9 +13,9 @@
                      <el-form-item>
                      <el-checkbox v-model="search.submitAll"  @change="handleCheckAllChange">提交全部</el-checkbox>
                     </el-form-item>
-                     <el-form-item>
+                    <el-form-item>
                      <el-button type="primary" :disabled = "submitIsDisabled" @click="submit">提交</el-button>
-                    </el-form-item>
+                    </el-form-item> 
                 </el-form>
                 <el-table ref="multipleTable" :data="tableData" tooltip-effect="dark" style="width: 100%" border @selection-change="handleSelectionChange" v-loading="tableLoading">
                     <el-table-column type="selection" width="55">
@@ -40,14 +40,14 @@
                     </el-table-column>
                     <el-table-column prop="binTicketNum" label="上货标签号" width="200">
                     </el-table-column>
-                    <el-table-column prop="creationDate" label="上货标签打印时间" width="200">
+                    <el-table-column prop="lastUpdateDate" label="上货标签打印时间" width="200">
                        <template slot-scope="scope">
-                            {{getDate(scope.row.creationDate,true)}}
+                            {{$DateFormat.dateFormat(scope.row.lastUpdateDate,true)}}
                       </template>
                     </el-table-column>
                     <el-table-column prop="creationDate" label="导入时间" width="200">
                        <template slot-scope="scope">
-                            {{getDate(scope.row.creationDate,true)}}
+                            {{$DateFormat.dateFormat(scope.row.creationDate,true)}}
                       </template>
                     </el-table-column>
                 </el-table>
@@ -86,12 +86,10 @@
 // 接口数据
 import axios from '../../util/http'
 import draggable from 'vuedraggable'
-import dateFormat from '../../util/date'
 export default {
   data () {
     return {
       axios,
-      dateFormat,
       draggable,
       drag: false,
       search: { // 查询参数
@@ -128,9 +126,6 @@ export default {
     this.getTableData()
   },
   methods: {
-    getDate(data, flag) {
-      return this.dateFormat(data, flag)
-    },
     handleSelectionChange (val) {
       let arr = []
       val.map(item => {

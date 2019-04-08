@@ -46,7 +46,7 @@
       <el-table-column prop="locCou" label="货位总数"></el-table-column>
       <el-table-column prop="creationDate" label="创建波次时间">
          <template slot-scope="scope">
-                {{getDate(scope.row.creationDate,true)}}
+                {{$DateFormat.dateFormat(scope.row.creationDate,true)}}
             </template>
       </el-table-column>
     </el-table>
@@ -56,13 +56,11 @@
 </template>
 <script>
 import axios from '../../../util/http'
-import dateFormat from '../../../util/date'
 
 export default {
   data () {
     return {
       axios,
-      dateFormat,
       tableLoading: false,
       search:{
         startTime: '',
@@ -78,9 +76,6 @@ export default {
     this.researchBtn()
   },
   methods: { 
-    getDate(data, flag) {
-      return this.dateFormat(data, flag)
-    },
     researchBtn () {
       this.tableLoading = true
       let that = this

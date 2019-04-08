@@ -82,19 +82,19 @@
                     </el-table-column>
                     <el-table-column prop="skuNum" label="零件编码" width="200">
                     </el-table-column>
-                    <el-table-column prop="page" label="任务页">
+                    <el-table-column prop="page" label="任务页"  width="100"> 
                     </el-table-column>
-                    <el-table-column prop="binQty" label="盘点数量">
+                    <el-table-column prop="binQty" label="盘点数量" width="100">
                     </el-table-column>
-                    <el-table-column prop="noOfCount" label="盘点次数">
+                    <el-table-column prop="noOfCount" label="盘点次数"  width="100">
                     </el-table-column>
-                     <el-table-column prop="countBy" label="盘点用户">
+                     <el-table-column prop="countBy" label="盘点用户"  width="100">
                     </el-table-column>
-                     <el-table-column prop="rfdcUserId" label="用户ID">
+                     <el-table-column prop="rfdcUserId" label="用户ID"  width="100">
                     </el-table-column>
                     <el-table-column prop="creationDate" label="导入时间" width="200">
                       <template slot-scope="scope">
-                         {{getDate(scope.row.creationDate,true)}}
+                         {{$DateFormat.dateFormat(scope.row.creationDate,true)}}
                      </template>
                     </el-table-column>
                 </el-table>
@@ -108,7 +108,7 @@
         <!-- 搜索区域 -->
         <el-form :inline="true" class="demo-form-inline">
             <el-form-item>
-                <el-button type="primary" @click="showConfirmDialog">确认打回</el-button>
+                <el-button type="primary" @click="showConfirmDialog">取消</el-button>
                 <el-button type="primary" @click="confirmAssign">任务分配</el-button>
             </el-form-item>
         </el-form>
@@ -147,14 +147,12 @@
 import axios from '../../../util/http'
 import draggable from 'vuedraggable'
 import qs from 'qs'
-import dateFormat from '../../../util/date'
 
 export default {
   data () {
     return {
       axios,
       draggable,
-      dateFormat,
       drag: false,
       search: {
         locNum: '',
@@ -197,9 +195,7 @@ export default {
     handleChangeTime() {
 
     },
-    getDate(data, flag) {
-      return this.dateFormat(data, flag)
-    }, // 下载excel模板
+     // 下载excel模板
     SetDownloadFunc () {
       this.axios.post('stock/createWave/downloadExcelTemplate', {}).then(res => {
         if (res.errCode === 'S') {
@@ -274,6 +270,7 @@ export default {
           this.deleteOk = true
           this.isShowInnerConfirmDialog = false
           this.isShowDialog = false
+          this.handleCheckAllChange (false) 
           this.search.currentPage = 1
           this.getTableData()
         }
@@ -284,6 +281,7 @@ export default {
       this.isShowOkDialog = false
       this.isShowDialog = false
       this.search.currentPage = 1
+      this.handleCheckAllChange (false) 
       this.getTableData()
     },
     confirmAssign () {
@@ -323,12 +321,19 @@ export default {
       dataResult.search = JSON.stringify(this.search)
       this.axios.post('stock/createWave/createWaveId', qs.stringify(dataResult)).then((res) => {
         if (res.errCode === 'S') {
-          this.id = res.data.result
-          this.submitSelect()
+          this.id = res.data.orderWaveId
+          this.tableDataDialog = res.data.result
+          this.deleteOk = false
+          this.updateOk = false
+          this.isShowDialog = true
+          this.submitIsDisabled = false
+          this.tableLoading = false
         } else {
           this.submitIsDisabled = false
           this.tableLoading = false
           this.$message.warning('提交失败')
+          this.handleCheckAllChange (false) 
+          this.getTableData()
         }
       })
     }, // 点击是否全部提交

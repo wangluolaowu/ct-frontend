@@ -30,7 +30,14 @@
                       <el-button type="primary" :disabled = "submitIsDisabled" @click="submit">提交</el-button>
                       <el-button type="primary" :disabled = "cancelIsDisabled" @click="cancel">取消</el-button>
                 </el-form-item>
+                <el-row>
+                 <el-card style="min-height: 20px">          
+                   <span>{{'系统查询总数:'+tableTotalRows}}</span>
+                   <span>{{'当前选择总数:'+tableSelectRows}}</span>
+                 </el-card>
+               </el-row>
                </el-form>
+               
                 <el-table ref="multipleTable" :data="tableData" tooltip-effect="dark" style="width: 100%" border @selection-change="handleSelectionChange" v-loading="tableLoading">
                     <el-table-column type="selection" width="55">
                     </el-table-column>
@@ -44,7 +51,7 @@
                     </el-table-column>
                     <el-table-column prop="creationDate" label="导入时间">
                       <template slot-scope="scope">
-                         {{getDate(scope.row.creationDate,true)}}
+                         {{$DateFormat.dateFormat(scope.row.creationDate,true)}}
                      </template>
                     </el-table-column>
                 </el-table>
@@ -118,14 +125,12 @@
 import axios from '../../../util/http'
 import draggable from 'vuedraggable'
 import qs from 'qs'
-import dateFormat from '../../../util/date'
 
 export default {
   data () {
     return {
       axios,
       draggable,
-      dateFormat,
       drag: false,
       search: { // 查询参数
         orderType: 'RELOC',
@@ -155,16 +160,15 @@ export default {
       sendStr: [],
       updateOk: false,
       deleteOk: false,
-      fileList: []
+      fileList: [],
+      tableTotalRows:'0',
+      tableSelectRows:'0'
     }
   },
   created: function () {
     this.getTableData()
   },
   methods: { // 下载excel模板
-    getDate(data, flag) {
-      return this.dateFormat(data, flag)
-    },
     SetDownloadFunc () {
       this.axios.post('reloc/createWave/downloadExcelTemplate', {}).then(res => {
         if (res.errCode === 'S') {
@@ -223,6 +227,7 @@ export default {
         arr.push(item)
       })
       this.sendStr = arr
+      this.tableSelectRows = this.sendStr.length
       console.log(this.sendStr)
       if (arr.length > 0) {
         this.cancelIsDisabled = false
@@ -325,12 +330,24 @@ export default {
       dataResult.search = JSON.stringify(this.search)
       this.axios.post('reloc/createWave/createWaveId', qs.stringify(dataResult)).then((res) => {
         if (res.errCode === 'S') {
-          this.id = res.data.result
-          this.submitSelect()
+          this.id = res.data.orderWaveId
+          this.dialogTableData = res.data.result.map(item => {
+            if (!item.result) {
+              item.result = []
+            }
+            return item
+          })
+          this.deleteOk = false
+          this.updateOk = false
+          this.isShowDialog = true
+          this.$message.warning('提交成功')
+          this.submitIsDisabled = false
+          this.tableLoading = false
         } else {
           this.submitIsDisabled = false
           this.tableLoading = false
           this.$message.warning('提交失败')
+          this.getTableData()
         }
       })
     }, // 点击是否全部提交
@@ -361,8 +378,7 @@ export default {
       // this.axios.get('reloc/createWave/selectMainRelocInfoList', {params: this.search}).then((res) => {
         if (res.errCode === 'S') {
           that.tableData = res.data.result
-          // that.totalRows = res.data.totalRows
-          // that.pageSize = res.data.pageSize
+          this.tableTotalRows = that.tableData.length
         }
       })
     },

@@ -57,8 +57,8 @@
             sessionStorage.setItem('user', res.data.user)
             this.$router.push({ path: '/' })
           } else {
-            // window.location.href = 'https://bixi-test.cn.isn.corpintra.net/ct/login'
-            this.isShowDialog = true
+            window.location.href = 'https://bixi-test.cn.isn.corpintra.net/ct/login'
+            //this.isShowDialog = true
           }
         })
       },
