@@ -224,7 +224,7 @@ export default {
     handleSelectionChange (val) {
       let arr = []
       val.map(item => {
-        arr.push(item)
+        arr.push(item.)
       })
       this.sendStr = arr
       this.tableSelectRows = this.sendStr.length
