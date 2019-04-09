@@ -6,9 +6,9 @@
             <el-form-item label="订单状态">
                 <el-select placeholder="完成" v-model="search.dmlOrderStatus">
                     <el-option label="全部" value=""></el-option>
-                    <el-option label="未完成" value="5"></el-option>
-                    <el-option label="完成" value="3"></el-option>
                     <el-option label="手工打印" value="2"></el-option>
+                    <el-option label="完成" value="3"></el-option>
+                    <el-option label="不在途" value="5"></el-option>   
                 </el-select>
             </el-form-item>
             <el-form-item label="路线" >
@@ -173,14 +173,15 @@
               <el-checkbox v-model="search.printAll" @change="handleCheckAllChange">打印全部</el-checkbox>
             </el-form-item>
             <el-form-item label="选择打印工作站：" >
-                <el-select placeholder="选择打印工作站" v-model="search.wsId">
-                    <el-option label="1" value="1"></el-option>
-                    <el-option label="2" value="2"></el-option>
-                    <el-option label="3" value="3"></el-option>
-                    <el-option label="4" value="4"></el-option>
-                    <el-option label="5" value="5"></el-option>
-                    <el-option label="6" value="6"></el-option>
-                </el-select>
+              <el-select v-model="search.wsId" >
+                <el-option
+                v-for="item in WS_ENTITY_WORKSTATION"
+                :key="item.value"
+                :label="item.lable"
+                :value="item.value" 
+                > 
+              </el-option>
+             </el-select>
              </el-form-item>
               <el-form-item >
                 <el-button type="primary" :disabled="submitIsDisabled" @click="toDoPrint">打印</el-button>
@@ -199,7 +200,7 @@
             </el-table-column>
             <el-table-column prop="attribute04" label="WIP订单行"  width="100">
             </el-table-column>
-            <el-table-column prop="attribute01" label="拣货记录"  width="100">
+            <el-table-column prop="attribute01" label="拣货标签"  width="100">
             </el-table-column>
             <el-table-column prop="attribute10" label="路线"  width="100">
             </el-table-column>
@@ -274,7 +275,7 @@ export default {
         locNum: '',
         attribute19: '',
         attribute18: '',
-        wsId: '',
+        wsId: '1',
         currentPage: 1,
         printAll: false,
         startTimeCreateDtVar:'',
@@ -296,14 +297,29 @@ export default {
       DML_PICK_ORDER_STATUS: [],
       Y_N_STATUS: [],
       submitIsDisabled:true,
-      cancelDisabled:true
+      cancelDisabled:true,
+      WS_ENTITY_WORKSTATION:[]
     }
   },
   created: function () {
     this.getTableData()
     this.getSelectValues()
+    this.getSelectValuesWorkstationId()
   },
   methods: {
+    getSelectValuesWorkstationId() {
+        this.axios.get('pickManage/pickInfo/selectWsEntityWorkstation', {
+          params: this.search
+        }).then((res) => {
+          if (res.errCode === 'S') {
+            this.WS_ENTITY_WORKSTATION = res.data.result.map(item => {
+              item.value = item.entityWorkstationId
+              item.lable = item.entityWorkstationId
+              return item
+            })
+          }
+        })
+    },
     getSelectValues() {
       let Enum = this.$Enum.EnumSelect()
       this.Y_N_STATUS = Enum.Y_N_STATUS
@@ -340,7 +356,7 @@ export default {
         this.search.locNum =''
         this.search.attribute19=''
         this.search.attribute18=''
-        this.search.wsId= ''
+        this.search.wsId= '1'
         this.search.currentPage=1,
         this.search.printAll=false,
         this.search.startTimeCreateDtVar=''

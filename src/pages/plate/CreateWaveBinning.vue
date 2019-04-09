@@ -76,7 +76,7 @@
         </el-dialog>
         <el-dialog width="30%" title="已提交完成" :visible.sync="isShowOkDialog" append-to-body @close="confirmShowOkDialog">
             <p class="dialog-text">调配任务已完成</p>
-            <el-button type="primary" @click="confirmShowOkDialog"> OK</el-button>
+            <el-button type="primary" @click="confirmShowOkDialog"> 确定</el-button>
         </el-dialog>
     <!-- 弹层end -->
 </div>

@@ -19,10 +19,12 @@
 </template>
 <script>
   import axios from '../../../util/http'
+  import qs from 'qs'
   export default {
     data () {
       return {
         axios,
+        qs,
         fullscreenLoading: false,
         closeIsDisabled: false,
         openIsDisabled: false,
@@ -48,7 +50,7 @@
     },
     methods: {
       initWebSocket(){ //初始化weosocket
-        const wsuri = "ws://localhost:8080/pickManage/pickInfo/selectStopRestReceiveStatus"      
+        const wsuri = "ws://localhost:8080/pickManage/pickInfo/selectStopRestReceiveStatusExit"
         this.websock = new WebSocket(wsuri);   
         this.websock.onmessage = this.websocketonmessage;      
         this.websock.onopen = this.websocketonopen;       
@@ -56,14 +58,14 @@
         this.websock.onclose = this.websocketclose;
       },
       websocketonopen(){ //连接建立之后执行send方法发送数据    
-        this.websocketsend('heloo')
+        this.websocketsend(qs.stringify(this.search))
       },
       websocketonerror(){//连接建立失败重连
-        //this.initWebSocket()
+        this.initWebSocket()
       },
       websocketonmessage(e){ //数据接收
-        const redata = JSON.parse(e.data)
-        console.log('redata==========='+redata)
+        //const redata = JSON.parse(e)
+        console.log('redata==========='+JSON.parse(e.Data))
       },
       websocketsend(Data){//数据发送
         this.websock.send(Data);

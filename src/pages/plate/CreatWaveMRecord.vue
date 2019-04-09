@@ -70,7 +70,7 @@
                   </li>
               </ul>
               <transition-group>            
-                <draggable v-model="item.result" :options="{group:'people', animation: 300}"  :key="i">
+                <draggable v-model="item.result" :options="{group:'people', animation: 300,disabled:true}"  :key="i">
                     <el-row
                       class="drag-item"
                       :class="{gray: element.isChange}"
@@ -80,7 +80,7 @@
                       <el-col :span="18" style="line-height:1.7">
                         <div>{{ 'route: ' + (element.route  || '') }}</div>
                         <div>{{ 'dealer: ' + (element.dealerCou  || '') }}</div>
-                        <div>{{ '订单行: ' + (element.lineCou || '') }}</div>                        
+                        <div>{{ '订单行: ' + (element.orderLineCou || '') }}</div>                        
                       </el-col>
                     </el-row>
                 </draggable>

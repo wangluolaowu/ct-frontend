@@ -51,9 +51,11 @@
             <el-form-item label="订单状态">
                 <el-select placeholder="完成" v-model="searchPick.dmlOrderStatus">
                     <el-option label="全部" value=""></el-option>
-                    <el-option label="未完成" value="5"></el-option>
-                    <el-option label="完成" value="3"></el-option>
+                    <el-option label="未创建波次" value="1"></el-option>
                     <el-option label="手工打印" value="2"></el-option>
+                    <el-option label="完成" value="3"></el-option>
+                    <el-option label="在途" value="4"></el-option>
+                    <el-option label="不在途" value="5"></el-option>    
                 </el-select>
             </el-form-item>
             <el-form-item label="路线" >
@@ -438,9 +440,10 @@
         this.getMychartData()
       },
       initParams () {
-        this.search.ispDealer = ''
-        this.search.ictDealer = ''
-        this.search.currentPage = 1
+        this.dataTimeDonekeyList=[]
+        this.dataTimeDoneValueList=[]
+        this.dataTimePrintkeyList=[]
+        this.dataTimePrintValueList=[]
       },
       getMychartData () {
         let that = this
@@ -468,14 +471,14 @@
             this.dataTimePrintkeyList.push(item.LAST_UPDATE_DATE)
             this.dataTimePrintValueList.push(item.COU)
           })
-          this.drawLine()
-          this.drawLineTwo()
+          this.drawLine(this.dataTimeDonekeyList,this.dataTimeDoneValueList)
+          this.drawLineTwo(this.dataTimePrintkeyList,this.dataTimePrintValueList)
          }
         })
           
       },
       // 统计图
-      drawLine () {
+      drawLine (dataTimeDonekeyListArg,dataTimeDoneValueListArg) {
         let mychart = echarts.init(document.getElementById('myChart'))
         mychart.setOption({
           tooltip: {
@@ -503,18 +506,18 @@
               rotate: 40
             },
             // x轴的动态数据需要填写在则里面
-            data: this.dataTimeDonekeyList
+            data: dataTimeDonekeyListArg
           },
           yAxis: {},
           series: [{
             name: '订单',
             type: 'bar',
-            data: this.dataTimeDoneValueList, // 需要填写的Y动态数据
+            data: dataTimeDoneValueListArg, // 需要填写的Y动态数据
             barWidth: 20
           }]
         })
       },
-      drawLineTwo () {
+      drawLineTwo (dataTimePrintkeyListArg,dataTimePrintValueListArg) {
         let mychartss = echarts.init(document.getElementById('myChart2'))
         mychartss.setOption({
           tooltip: {
@@ -542,13 +545,13 @@
               rotate: 40
             },
             // x轴的动态数据需要填写在则里面
-            data: this.dataTimePrintkeyList
+            data: dataTimePrintkeyListArg
           },
           yAxis: {},
           series: [{
             name: '订单',
             type: 'bar',
-            data: this.dataTimePrintValueList, // 需要填写的Y动态数据
+            data: dataTimePrintValueListArg, // 需要填写的Y动态数据
             barWidth: 30
           }]
         })

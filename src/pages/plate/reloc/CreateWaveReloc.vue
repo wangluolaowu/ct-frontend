@@ -224,7 +224,7 @@ export default {
     handleSelectionChange (val) {
       let arr = []
       val.map(item => {
-        arr.push(item.)
+        arr.push(item)
       })
       this.sendStr = arr
       this.tableSelectRows = this.sendStr.length
@@ -268,6 +268,8 @@ export default {
       this.updateOk = true
       this.isShowOkDialog = false
       this.isShowDialog = false
+      this.tableTotalRows = 0
+      this.tableSelectRows = 0
       this.getTableData()
     },
     confirmAssign () {
@@ -347,6 +349,8 @@ export default {
           this.submitIsDisabled = false
           this.tableLoading = false
           this.$message.warning('提交失败')
+          this.tableTotalRows = 0
+          this.tableSelectRows = 0
           this.getTableData()
         }
       })

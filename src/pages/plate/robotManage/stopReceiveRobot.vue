@@ -84,8 +84,8 @@ export default {
       checkedResumeRobot: [],
       stopRobotName: [],
       resumeName: [],
-      isIndeterminate: true,
-      isIndeterminate2: true,
+      isIndeterminate: false,
+      isIndeterminate2: false,
       isShowInnerConfirmDialog: false,
       dialogVisibleStart: false
     }
@@ -105,10 +105,17 @@ export default {
           this.resumeName = res.data.result
           this.checkedResumeRobot = res.data.resultStart
           this.checkedStop = res.data.resultPause
+          this.isIndeterminate = false
+          this.isIndeterminate2 = false
+          this.checkAll2 = res.data.result.length === res.data.resultStart.length
+          this.checkAll = res.data.result.length === res.data.resultPause.length
         }
       })
     },
     submitBtn (arg) {
+       this.$confirm('确认提交吗?', '提示', {
+        // type: 'warning'
+      }).then(() => {
       let dataResult = {}
       dataResult.activeType = arg
       if (arg === 1) {
@@ -130,10 +137,12 @@ export default {
           this.checkedStop = res.data.resultPause
           this.isShowInnerConfirmDialog = true
         }
-      })
+       })
+      }).catch(() => {})
     },
     confirmReject() {
       this.isShowInnerConfirmDialog = false
+      this.getData()
     },
     getVal: function () { //  打印当前滑块的值
       console.log('当前值' + this.sliderVal)
