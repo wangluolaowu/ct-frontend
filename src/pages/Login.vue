@@ -60,7 +60,7 @@
           } else {
             console.log('golbalData.loginUrl====' +golbalData.loginUrl)
             window.location.href = golbalData.loginUrl
-            // this.isShowDialog = true
+            //this.isShowDialog = true
           }
         })
       },

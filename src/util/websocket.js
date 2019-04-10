@@ -1,8 +1,10 @@
+
 const golbalData = require('./baseData')
 var websock = null
 var globalCallback = null
 
-var ws = 'ws://' + golbalData.wsURL + '/pickManage/pickInfo/selectStopRestReceiveStatusExit'
+var ws = 'wss://' + golbalData.wsURL + '/pickManage/pickInfo/selectStopRestReceiveStatusExit'
+
 // 初始化weosocket
 function initWebSocket (ws) {
   // ws地址 -->这里是你的请求路径
