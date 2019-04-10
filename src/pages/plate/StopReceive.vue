@@ -51,7 +51,7 @@
       this.getSelectValues()
     },
     created() {
-      // this.getReceiveStatus()     
+      this.getReceiveStatus()     
       this.websocketToLogin()
     },
     destroyed() { 

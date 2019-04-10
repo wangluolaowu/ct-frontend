@@ -42,7 +42,7 @@
     },
     created() { 
       this.getReceiveStatus()  
-      //this.websocketToLogin()
+      this.websocketToLogin()
     },
     destroyed() { 
      clearInterval(this.interval)

@@ -43,7 +43,7 @@
       this.getSelectValues()
     },
     created() {     
-      //this.websocketToLogin()
+      this.websocketToLogin()
       this.getReceiveStatus()
     },
     destroyed() { 
