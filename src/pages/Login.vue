@@ -19,6 +19,7 @@
 <script>
   import axios from '../util/http'
   import qs from 'qs'
+  import golbalData from '../util/baseData'
   export default {
     name: 'login',
     data () {
@@ -57,8 +58,9 @@
             sessionStorage.setItem('user', res.data.user)
             this.$router.push({ path: '/' })
           } else {
-            window.location.href = 'https://bixi-test.cn.isn.corpintra.net/ct/login'
-            //this.isShowDialog = true
+            console.log('golbalData.loginUrl====' +golbalData.loginUrl)
+            window.location.href = golbalData.loginUrl
+            // this.isShowDialog = true
           }
         })
       },

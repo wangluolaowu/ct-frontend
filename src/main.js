@@ -16,9 +16,12 @@ import './assets/js/common/element-ui/index.css'
 import './assets/css/style.css'
 import Enum from './util/enum'
 import DateFormat from './util/date'
+import * as socketApi from './util/websocket'
 
 Vue.prototype.$Enum = Enum
 Vue.prototype.$DateFormat = DateFormat
+Vue.prototype.$socketApi = socketApi
+
 promise.polyfill()
 window.axios = axios
 

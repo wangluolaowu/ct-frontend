@@ -35,43 +35,40 @@
           workstationType: 5
         },
         websock: null,
-        WS_ENTITY_WORKSTATION: []
+        WS_ENTITY_WORKSTATION: [],
+        interval:''
       }
     },
-    created() {     
-     this.initWebSocket();
-    },
-    destroyed() {     
-     this.websock.close() //离开路由之后断开websocket连接
-    },
     mounted () {
-      this.getReceiveStatus()
       this.getSelectValues()
     },
+    created() {     
+      this.websocketToLogin()
+    },
+    destroyed() { 
+     clearInterval(this.interval)
+    },
+   
     methods: {
-      initWebSocket(){ //初始化weosocket
-        const wsuri = "ws://localhost:8080/pickManage/pickInfo/selectStopRestReceiveStatusExit"
-        this.websock = new WebSocket(wsuri);   
-        this.websock.onmessage = this.websocketonmessage;      
-        this.websock.onopen = this.websocketonopen;       
-        this.websock.onerror = this.websocketonerror;      
-        this.websock.onclose = this.websocketclose;
+      getConfigResult (res) {
+      // 接收回调函数返回数据的方法
+        if (res.errCode === 'S') {
+            if (res.data.result === 20) {
+              this.openIsDisabled = true
+              this.closeIsDisabled = false
+            } else {
+              this.openIsDisabled = false
+              this.closeIsDisabled = true
+            }
+        }
       },
-      websocketonopen(){ //连接建立之后执行send方法发送数据    
-        this.websocketsend(qs.stringify(this.search))
-      },
-      websocketonerror(){//连接建立失败重连
-        this.initWebSocket()
-      },
-      websocketonmessage(e){ //数据接收
-        //const redata = JSON.parse(e)
-        console.log('redata==========='+JSON.parse(e.Data))
-      },
-      websocketsend(Data){//数据发送
-        this.websock.send(Data);
-      },
-      websocketclose(e){  //关闭
-        console.log('断开连接',e);
+      websocketToLogin () {
+      // 【agentData：发送的参数；this.getConfigResult：回调方法】
+        let This = this
+        this.interval=window.setInterval(() => {
+         setTimeout(This.$socketApi.sendSock(qs.stringify(this.search), this.getConfigResult), 0)
+        }, 1000)
+      
       },
       getSelectValues() {
         this.axios.get('pickManage/pickInfo/selectWsEntityWorkstation', {

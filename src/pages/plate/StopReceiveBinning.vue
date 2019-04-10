@@ -1,7 +1,7 @@
 <template>
      <el-form :inline="true" class="demo-form-inline">
        <el-form-item label="工作站编号：">
-         <el-select v-model="search.entityWorkstationId" @change="getReceiveStatus" v-loading.fullscreen.lock="fullscreenLoading">
+         <el-select v-model="search.entityWorkstationId" @change="websocketToLogin" v-loading.fullscreen.lock="fullscreenLoading">
                 <el-option
                 v-for="item in WS_ENTITY_WORKSTATION"
                 :key="item.value"
@@ -19,6 +19,7 @@
 </template>
 <script>
   import axios from '../../util/http'
+  import qs from 'qs'
   export default {
     data () {
       return {
@@ -32,14 +33,40 @@
           activeType: '',
           workstationType: 1
         },
-        WS_ENTITY_WORKSTATION: []
+        WS_ENTITY_WORKSTATION: [],
+        interval:''
       }
     },
     mounted () {
-      this.getReceiveStatus()
       this.getSelectValues()
     },
+    created() {   
+      this.websocketToLogin()
+    },
+    destroyed() { 
+     clearInterval(this.interval)
+    }, 
     methods: {
+      getConfigResult (res) {
+      // 接收回调函数返回数据的方法
+        if (res.errCode === 'S') {
+            if (res.data.result === 20) {
+              this.openIsDisabled = true
+              this.closeIsDisabled = false
+            } else {
+              this.openIsDisabled = false
+              this.closeIsDisabled = true
+            }
+        }
+      },
+      websocketToLogin () {
+      // 【agentData：发送的参数；this.getConfigResult：回调方法】
+        let This = this
+        this.interval=window.setInterval(() => {
+         setTimeout(This.$socketApi.sendSock(qs.stringify(this.search), this.getConfigResult), 0)
+        }, 1000)
+      
+      },
       getSelectValues() {
         this.axios.get('pickManage/pickInfo/selectWsEntityWorkstation', {
           params: this.search
@@ -73,27 +100,7 @@
           }
         })
         this.fullscreenLoading = false
-      }, // 刚进入页面，获取当前任务状态
-      getReceiveStatus () {
-        let that = this
-        this.fullscreenLoading = true
-        this.axios.get('pickManage/pickInfo/selectStopRestReceiveStatus', {
-          params: this.search
-        }).then((res) => {
-          // console.log(res);
-          if (res.errCode === 'S') {
-            if (res.data.result === 20) {
-              that.openIsDisabled = true
-              that.closeIsDisabled = false
-            } else {
-              that.openIsDisabled = false
-              that.closeIsDisabled = true
-            }
-          }
-        })
-        this.fullscreenLoading = false
       }
-
     }
 }
 </script>
