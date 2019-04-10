@@ -1,7 +1,7 @@
 <template>
      <el-form :inline="true" class="demo-form-inline">
        <el-form-item label="工作站编号：">
-         <el-select v-model="search.entityWorkstationId" @change="websocketToLogin" v-loading.fullscreen.lock="fullscreenLoading">
+         <el-select v-model="search.entityWorkstationId" @change="getReceiveStatus" v-loading.fullscreen.lock="fullscreenLoading">
                 <el-option
                 v-for="item in WS_ENTITY_WORKSTATION"
                 :key="item.value"
@@ -40,8 +40,9 @@
     mounted () {
       this.getSelectValues()
     },
-    created() {   
-      this.websocketToLogin()
+    created() { 
+      this.getReceiveStatus()  
+      //this.websocketToLogin()
     },
     destroyed() { 
      clearInterval(this.interval)
@@ -100,6 +101,25 @@
           }
         })
         this.fullscreenLoading = false
+      },
+      getReceiveStatus () {	
+        let that = this	
+        this.fullscreenLoading = true	
+        this.axios.get('pickManage/pickInfo/selectStopRestReceiveStatus', {	
+          params: this.search	
+        }).then((res) => {	
+          // console.log(res);	
+          if (res.errCode === 'S') {	
+            if (res.data.result === 20) {	
+              that.openIsDisabled = true	
+              that.closeIsDisabled = false	
+            } else {	
+              that.openIsDisabled = false	
+              that.closeIsDisabled = true	
+            }	
+          }	
+        })	
+        this.fullscreenLoading = false	
       }
     }
 }
