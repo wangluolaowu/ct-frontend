@@ -2,7 +2,7 @@
      <div class="mainCon">
        <el-form :inline="true" class="demo-form-inline">
         <el-form-item label="工作站编号：">
-          <el-select v-model="search.entityWorkstationId" @change="getReceiveStatus" v-loading.fullscreen.lock="fullscreenLoading">
+          <el-select v-model="search.entityWorkstationId" @change="websocketToLogin" v-loading.fullscreen.lock="fullscreenLoading">
                   <el-option
                   v-for="item in WS_ENTITY_WORKSTATION"
                   :key="item.value"
@@ -13,7 +13,7 @@
             </el-select>
           </el-form-item>
           <el-form-item label="工作类型：">
-            <el-select  v-model="search.extWorkstationType" @change="getReceiveStatus" v-loading.fullscreen.lock="fullscreenLoading">
+            <el-select  v-model="search.extWorkstationType" @change="websocketToLogin" v-loading.fullscreen.lock="fullscreenLoading">
                   <el-option label="V" value="V"></el-option>
                   <el-option label="S" value="S"></el-option>
               </el-select>
@@ -51,8 +51,8 @@
       this.getSelectValues()
     },
     created() {
-      this.getReceiveStatus()     
-      //this.websocketToLogin()
+      // this.getReceiveStatus()     
+      this.websocketToLogin()
     },
     destroyed() { 
      clearInterval(this.interval)
