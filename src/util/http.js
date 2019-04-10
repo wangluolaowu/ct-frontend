@@ -7,8 +7,9 @@ let axiosInstance = axios.create({
   // baseURL: 'http://172.16.10.201:8080/',
   // baseURL: 'http://123.126.3.190:12212/',
   // baseURL: 'http://localhost:8090/api/',
-  baseURL: golbalData.baseURL,
-
+  baseURL: 'http://192.168.0.100:8080/',
+  // baseURL: 'https://bixi-test.cn.isn.corpintra.net/ct',
+  // baseURL: 'http://172.16.18.97:8080/',
   headers: {
     // 'X-Requested-With': 'XMLHttpRequest',
     'Content-Type': 'application/json;charset=utf-8',

@@ -1,5 +1,6 @@
 const Enum = {
 
+  
 }
 Enum.EnumSelect = function() {
   let EnumObj = {}
