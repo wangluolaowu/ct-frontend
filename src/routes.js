@@ -1,4 +1,5 @@
 import Login from './pages/Login.vue'
+import LoginAlone from './pages/LoginAlone.vue'
 import NotFound from './pages/404.vue'
 import Layout from './pages/Layout.vue'
 let routerlist = [
@@ -24,8 +25,8 @@ const routes = [
     hidden: true
   },
   {
-    path: '/loginSSO',
-    component: Login,
+    path: '/loginAlone',
+    component: LoginAlone,
     name: '登录',
     hidden: true
   },
@@ -203,6 +204,49 @@ const routes = [
         path: '/robotManage/stopReceive',
         component: () => import('@/pages/plate/robotManage/stopReceiveRobot'),
         name: '暂停/恢复机器人'
+      },
+      {
+        path: '/robotManage/kidMoveContr',
+        component: () => import('@/pages/plate/robotManage/kidMoveContr'),
+        name: '动作控制'
+      }
+    ]
+  },
+  {
+    path: '/',
+    component: Layout,
+    name: 'AdminstratorPage',
+    icon: 'el-icon-service',
+    children: [
+      {
+        path: '/adminstratorPage/createSimpleMoveTask',
+        component: () => import('@/pages/plate/adminstratorPage/createSimpleMoveTask'),
+        name: '小车移动任务'
+      },
+      {
+        path: '/adminstratorPage/createLoadMoveTask',
+        component: () => import('@/pages/plate/adminstratorPage/createLoadMoveTask'),
+        name: '托货架移动任务'
+      },
+      {
+        path: '/adminstratorPage/createChargeMoveTask',
+        component: () => import('@/pages/plate/adminstratorPage/createChargeMoveTask'),
+        name: '充电任务'
+      },
+      {
+        path: '/adminstratorPage/crtFloorQrcodeTask',
+        component: () => import('@/pages/plate/adminstratorPage/crtFloorQrcodeTask'),
+        name: '检查地图任务'
+      },
+      {
+        path: '/adminstratorPage/crtHolderQrcodeTask',
+        component: () => import('@/pages/plate/adminstratorPage/crtHolderQrcodeTask'),
+        name: '货架检查任务'
+      },
+      {
+        path: '/adminstratorPage/createKidTaskChange',
+        component: () => import('@/pages/plate/adminstratorPage/createKidTaskChange'),
+        name: '任务变更'
       }
     ]
   }

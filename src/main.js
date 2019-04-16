@@ -39,7 +39,7 @@ router.beforeEach((to, from, next) => {
     sessionStorage.removeItem('token')
   }
   let token = sessionStorage.getItem('token')
-  console.log(token)
+  console.log('token==' + token)
   if (!token && (to.path !== '/login')) {
     window.location.reload()
     console.log(to)

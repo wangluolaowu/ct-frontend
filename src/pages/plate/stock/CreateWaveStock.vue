@@ -3,13 +3,17 @@
     <el-row>
         <el-col :span="23" class="main">
             <div class="grid-content bg-purple-dark">
-            <el-form  :inline="true" class="demo-form-inline">
-              <el-form-item :span="20">
+            <el-form  label-width="150px" class="demo-form-inline">
+              <el-row>
+                <el-col :span="8">
+              <el-form-item >
                     <el-tooltip class="item" effect="dark" content="下载数据集模板" placement="bottom">
                         <el-button icon="yx-download3" @click="SetDownloadFunc">下载excel模板 </el-button>
                     </el-tooltip>
               </el-form-item>
-              <el-form-item :span="20">
+                </el-col>
+                <el-col :span="8">
+              <el-form-item>
              <el-upload
                 class="upload-demo"
                 action=""
@@ -21,26 +25,60 @@
                 :limit="3"
                 :on-exceed="handleExceed"
                 :file-list="fileList">
-                <el-button size="small" type="primary">点击上传</el-button>
-                <div slot="tip" class="el-upload__tip">只能上传xls,xlsx文件，且不超过500kb</div>
+                 <el-tooltip class="item" effect="dark" content="只能上传xls,xlsx文件，且不超过500kb" placement="bottom">
+                        <el-button size="small" icon="yx-download3">点击上传</el-button>
+                    </el-tooltip>
+                <span slot="tip" class="el-upload__tip"></span>
               </el-upload>
               </el-form-item>
+              </el-col>
+              </el-row>
+              <el-row>
+                <el-col :span="8">
                  <el-form-item label="货位号" >
-                 <el-input v-model="search.locNum"></el-input>
+                 <el-input v-model="search.locNum" style="width:200px"></el-input>
                 </el-form-item>
-                 <el-form-item label="盘点次数" >
-                 <el-input v-model="search.noOfCount"></el-input>
-                </el-form-item>
-                 <el-form-item label="零件编码" >
-                 <el-input v-model="search.skuNum"></el-input>
-                </el-form-item>
-                 <el-form-item label="用户ID" >
-                 <el-input v-model="search.rfdcUserId"></el-input>
-                </el-form-item>
-                 <el-form-item label="任务页" >
-                 <el-input v-model="search.page"></el-input>
-                </el-form-item>
+                </el-col>
                  <el-col :span="8">
+                 <el-form-item label="盘点次数" >
+                 <el-input v-model="search.noOfCount" style="width:200px"></el-input>
+                </el-form-item>
+                 </el-col>
+              </el-row>
+               <el-row>
+                <el-col :span="8">
+                 <el-form-item label="零件编码" >
+                 <el-input v-model="search.skuNum" style="width:200px"></el-input>
+                </el-form-item>
+                 </el-col>
+                  <el-col :span="8">
+                 <el-form-item label="用户ID" >
+                 <el-input v-model="search.rfdcUserId" style="width:200px"></el-input>
+                </el-form-item>
+                   </el-col>
+              </el-row>
+              <el-row>
+                <el-col :span="8">
+                 <el-form-item label="任务页" >
+                 <el-input v-model="search.page" style="width:200px"></el-input>
+                </el-form-item>
+                </el-col>
+                <el-col :span="8">  
+            <el-form-item label="页面大小" >
+              <el-select placeholder="页面大小" v-model="search.pageSize" style="width:200px">
+                <el-option
+                v-for="item in $Enum.EnumSelect().page_size"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value" 
+                > 
+              </el-option>
+           </el-select>
+            </el-form-item>
+        </el-col>   
+                 </el-row>
+                  <el-row>
+                  <el-col :span="8">
            <el-form-item label="初始日期" >
               <el-date-picker
                 v-model="search.startTime"
@@ -49,9 +87,11 @@
                 type="datetime"
                 placeholder="请选择初始日期"
                 @change="handleChangeTime"
+                style="width:200px"
               ></el-date-picker>
             </el-form-item>
             </el-col>
+             <el-col :span="8">
             <el-form-item label="截止日期" >
               <el-date-picker
                 v-model="search.endTime"
@@ -60,22 +100,27 @@
                 type="datetime"
                 placeholder="请选择完成日期"
                  @change="handleChangeTime"
+                 style="width:200px"
               ></el-date-picker>
             </el-form-item>
+             </el-col>
+               </el-row>
                <el-row>
-                 <el-form-item class="fl" id="groupBtn">
+                 <el-col :span="8">
+                 <el-form-item class="fl">
                         <el-button type="primary" @click="confirm">确认</el-button>
                         <el-button type="primary" :disabled = "cancelIsDisabled" @click="cancel">取消</el-button>
                     </el-form-item>
+                 </el-col>
+                     <el-col :span="8">
                     <el-form-item>
-                     <el-checkbox v-model="search.submitAll"  @change="handleCheckAllChange">提交全部</el-checkbox>
-                    </el-form-item>
-                    <el-form-item>
+                       <el-checkbox v-model="search.submitAll"  @change="handleCheckAllChange">提交全部</el-checkbox>
                        <el-button type="primary" @click="submit" :disabled = "submitIsDisabled" >提交</el-button>
                     </el-form-item>
+                    </el-col>
                 </el-row>
                </el-form>
-                <el-table ref="multipleTable" :data="tableData" tooltip-effect="dark" style="width: 100%" border @selection-change="handleSelectionChange" v-loading="tableLoading">
+                <el-table ref="multipleTable" :data="tableData" tooltip-effect="dark" :row-class-name="tableRowClassName" style="width: 99.99%" border @selection-change="handleSelectionChange" v-loading="tableLoading">
                     <el-table-column type="selection" width="55">
                     </el-table-column>
                     <el-table-column prop="locNum" label="货位号" width="200">
@@ -98,7 +143,7 @@
                      </template>
                     </el-table-column>
                 </el-table>
-                <el-pagination v-if="totalRows>0" class="pagination" background @current-change="handleCurrentChange" :current-page.sync="search.currentPage" :page-size="pageSize" :page-sizes="[pageSize]" layout="total, sizes, prev, pager, next, jumper" :total="totalRows">
+                <el-pagination v-if="totalRows>0" class="pagination" background @current-change="handleCurrentChange" :current-page.sync="search.currentPage" :page-size="search.pageSize" :page-sizes="[search.pageSize]" layout="total, sizes, prev, pager, next, jumper" :total="totalRows">
                 </el-pagination>
             </div>
         </el-col>
@@ -163,6 +208,7 @@ export default {
         startTime: '',
         endTime: '',
         currentPage: 1,
+        pageSize:200,
         submitAll: false
       },
       tableLoading: false,
@@ -171,7 +217,6 @@ export default {
       submitIsDisabled: true,
       cancelIsDisabled: true,
       totalRows: -1,
-      pageSize: -1,
       currentPageDialog: 1,
       totalRowsDialog: -1,
       pageSizeDialog: -1,
@@ -205,6 +250,12 @@ export default {
         }
       })
     },
+    tableRowClassName({row, rowIndex}) {
+        if (row.skuNumValidate === false || row.locNumValidate === false ) {
+          return 'warning-row'
+        } 
+        return 'success-row'
+      },
     beforeUpload (file, fileList) {
       this.tableLoading = true
       let fd = new FormData()
@@ -376,7 +427,6 @@ export default {
         if (res.errCode === 'S') {
           that.tableData = res.data.result
           that.totalRows = res.data.totalRows
-          that.pageSize = res.data.pageSize
         }
       })
     },
@@ -411,5 +461,12 @@ export default {
 <style>
   .drag-item {border:1px solid #ddd ; background: #f9f9f9; padding: 10px; margin-top: 10px; cursor: pointer;}
   .gray {background: #026780; color: #ffffff;}
+  .el-table .warning-row {
+    background: oldlace;
+  }
+
+  .el-table .success-row {
+    background: #f0f9eb;
+  }
 </style>
 

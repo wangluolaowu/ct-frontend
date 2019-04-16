@@ -369,7 +369,8 @@ export default {
       },
       sum24KeyList:[],
       sum24ValueList:[],
-      endTime24:''
+      endTime24:'',
+      interval:''
     }
   },
   // 页面加
@@ -378,9 +379,12 @@ export default {
     this.getSelectValues()
   },
   created () {
-    // window.setInterval(() => {
-    // setTimeout(this.getTimeOut(), 0)
-    // }, 60000)
+     this.interval=window.setInterval(() => {
+     setTimeout(this.getTimeOut(), 0)
+    }, 60000)
+  },
+  destroyed() { 
+     clearInterval(this.interval)
   },
   methods: {
     getDate(data, unCou,instation) {
@@ -407,6 +411,7 @@ export default {
       this.getTiaoCangAllList()
       this.getTiaoCangLists()
       this.getStockCallShelfList()
+      this.getSum24()
     },
     getStockCallShelfList () { // 盘点，召唤货架信息
       let that = this

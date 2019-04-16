@@ -4,12 +4,16 @@
         <el-col :span="23" class="main">
             <div class="grid-content bg-purple-dark">
             <el-form class="demo-form-inline">
-              <el-form-item :span="20">
+              <el-row>
+                <el-col :span="8">
+              <el-form-item >
                     <el-tooltip class="item" effect="dark" content="下载数据集模板" placement="bottom">
                         <el-button icon="yx-download3" @click="SetDownloadFunc">下载excel模板 </el-button>
                     </el-tooltip>
               </el-form-item>
-              <el-form-item :span="20">
+                </el-col>
+                <el-col :span="8">
+              <el-form-item>
              <el-upload
                 class="upload-demo"
                 action=""
@@ -21,15 +25,22 @@
                 :limit="3"
                 :on-exceed="handleExceed"
                 :file-list="fileList">
-                <el-button size="small" type="primary">点击上传</el-button>
-                <div slot="tip" class="el-upload__tip">只能上传xls,xlsx文件，且不超过500kb</div>
-              </el-upload>
+                <el-tooltip class="item" effect="dark" content="只能上传xls,xlsx文件，且不超过500kb" placement="bottom">
+                        <el-button size="small" icon="yx-download3">点击上传</el-button>
+                    </el-tooltip>
+                <span slot="tip" class="el-upload__tip"></span>
+              </el-upload> 
               </el-form-item>
-              
+                </el-col>
+              </el-row>
+                <el-row>
+                  <el-col :span="8">
                 <el-form-item>
                       <el-button type="primary" :disabled = "submitIsDisabled" @click="submit">提交</el-button>
                       <el-button type="primary" :disabled = "cancelIsDisabled" @click="cancel">取消</el-button>
                 </el-form-item>
+                  </el-col>
+                </el-row>
                 <el-row>
                  <el-card style="min-height: 20px">          
                    <span>{{'系统查询总数:'+tableTotalRows}}</span>
@@ -38,7 +49,7 @@
                </el-row>
                </el-form>
                
-                <el-table ref="multipleTable" :data="tableData" tooltip-effect="dark" style="width: 100%" border @selection-change="handleSelectionChange" v-loading="tableLoading">
+                <el-table ref="multipleTable" :data="tableData" :row-class-name="tableRowClassName" tooltip-effect="dark" style="width: 100%" border @selection-change="handleSelectionChange" v-loading="tableLoading">
                     <el-table-column type="selection" width="55">
                     </el-table-column>
                     <el-table-column prop="locNum" label="Bin位号">
@@ -177,24 +188,13 @@ export default {
           this.$message.warning('文件下载失败')
         }
       })
-      this.axios.postD('reloc/createWave/downloadExcelTemplate', {}).then(res => {
-        const content = res
-        const blob = new Blob([content], {type: 'application/vnd.ms-excel'})
-        const fileName = '测试表格123.xlsx'
-        if ('download' in document.createElement('a')) { // 非IE下载
-          const elink = document.createElement('a')
-          elink.download = fileName
-          elink.style.display = 'none'
-          elink.href = URL.createObjectURL(blob)
-          document.body.appendChild(elink)
-          elink.click()
-          URL.revokeObjectURL(elink.href) // 释放URL 对象
-          document.body.removeChild(elink)
-        } else { // IE10+下载
-          navigator.msSaveBlob(blob, fileName)
-        }
-      })
     },
+    tableRowClassName({row, rowIndex}) {
+        if (row.skuNumValidate === false || row.locNumValidate === false ) {
+          return 'warning-row'
+        } 
+        return 'success-row'
+      },
     beforeUpload (file, fileList) {
       this.tableLoading = true
       let fd = new FormData()
@@ -431,5 +431,12 @@ export default {
 <style>
   .drag-item {border:1px solid #ddd ; background: #f9f9f9; padding: 10px; margin-top: 10px; cursor: pointer;}
   .gray {background: #026780; color: #ffffff;}
+  .el-table .warning-row {
+    background: oldlace;
+  }
+
+  .el-table .success-row {
+    background: #f0f9eb;
+  }
 </style>
 

@@ -1,6 +1,5 @@
 const Enum = {
-
-  
+ 
 }
 Enum.EnumSelect = function() {
   let EnumObj = {}
@@ -202,6 +201,150 @@ Enum.EnumSelect = function() {
         label: '举升',
         value: 2
       }
+    ],
+    pi_dest_object_side: [
+      {
+        label: '0',
+        value: 0
+      },
+      {
+        label: '1',
+        value: 1
+      },
+      {
+        label: '2',
+        value: 2
+      },
+      {
+        label: '3',
+        value: 3
+      },
+      {
+        label: '4',
+        value: 4
+      }
+    ],
+    pi_run_direction: [
+      {
+        label: 'X',
+        value: 'X'
+      },
+      {
+        label: 'Y',
+        value: 'Y'
+      }
+    ],
+    pi_task_type: [
+      {
+        label: '0',
+        value: 0
+      },
+      {
+        label: 'simple move',
+        value: 2
+      },
+      {
+        label: 'load move',
+        value: 3
+      },
+      {
+        label: 'charge move',
+        value: 4
+      }
+    ],
+    dml_Bin_Status: [
+      {
+        label: '全部',
+        value: ''
+      },
+      {
+        label: '未创建波次',
+        value: 1
+      },
+      {
+        label: '完成',
+        value: 3
+      },
+      {
+        label: '在途',
+        value: 4
+      },
+      {
+        label: '不在途',
+        value: 5
+      }
+    ],
+    page_size: [
+      {
+        label: '10',
+        value: 10
+      },
+      {
+        label: '20',
+        value: 20
+      },
+      {
+        label: '30',
+        value: 30
+      },
+      {
+        label: '50',
+        value: 50
+      },
+      {
+        label: '100',
+        value: 100
+      },
+      {
+        label: '200',
+        value: 200
+      }
+    ],
+    pi_pose_control_type: [
+      {
+        label: '移动',
+        value: 'SIMPLE_MOVE'
+      },
+      {
+        label: '举起',
+        value: 'SIMPLE_MOVE1'
+      },
+      {
+        label: '放下',
+        value: 'SIMPLE_MOVE2'
+      },
+      {
+        label: '旋转90',
+        value: 'SIMPLE_MOVE3'
+      },
+      {
+        label: '旋转180',
+        value: 'SIMPLE_MOVE4'
+      },
+      {
+        label: '旋转270',
+        value: 'SIMPLE_MOVE5'
+      },
+      {
+        label: '旋转360',
+        value: 'SIMPLE_MOVE6'
+      },
+      {
+        label: '旋转-90',
+        value: 'SIMPLE_MOVE7'
+      },
+      {
+        label: '旋转-180',
+        value: 'SIMPLE_MOVE8'
+      },
+      {
+        label: '旋转-270',
+        value: 'SIMPLE_MOVE9'
+      },
+      {
+        label: '旋转-360',
+        value: 'SIMPLE_MOVE10'
+      } 
     ]
   }
   return EnumObj
