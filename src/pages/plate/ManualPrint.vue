@@ -1,21 +1,28 @@
 
 <template>
  <div>
-  <el-form :inline="true" class="demo-form-inline">
+  <el-form :inline="true" class="demo-form-inline" label-width="150px">
+         <el-row>
           <el-col :span="8">
             <el-form-item label="订单状态">
-                <el-select placeholder="完成" v-model="search.dmlOrderStatus">
+                <el-select placeholder="完成" v-model="search.dmlOrderStatus" style="width:200px">
                     <el-option label="全部" value=""></el-option>
                     <el-option label="手工打印" value="2"></el-option>
                     <el-option label="完成" value="3"></el-option>
                     <el-option label="不在途" value="5"></el-option>   
                 </el-select>
             </el-form-item>
+          </el-col>
+          <el-col :span="8">
             <el-form-item label="路线" >
-              <el-input v-model="search.attribute10"></el-input>
+              <el-input v-model="search.attribute10" style="width:200px"></el-input>
             </el-form-item>
+          </el-col>
+         </el-row>
+         <el-row>
+          <el-col :span="8">
             <el-form-item label="订单类型">
-                <el-select placeholder="订单类型" v-model="search.attribute09">
+                <el-select placeholder="订单类型" v-model="search.attribute09" style="width:200px">
                     <el-option label="全部" value=""></el-option>
                     <el-option label="S" value="S"></el-option>
                     <el-option label="V" value="V"></el-option>
@@ -25,27 +32,46 @@
             
              <el-col :span="8">
               <el-form-item label="WIP号" >
-                 <el-input v-model="search.attribute03"></el-input>
+                 <el-input v-model="search.attribute03" style="width:200px"></el-input>
             </el-form-item>
              </el-col>
+         </el-row>
+         <el-row>
               <el-col :span="8">
              <el-form-item label="客户">
-               <el-input v-model="search.attribute07"></el-input>
+               <el-input v-model="search.attribute07" style="width:200px"></el-input>
             </el-form-item>
             </el-col>
              <el-col :span="8">
             <el-form-item label="WIP订单行" >
-                 <el-input v-model="search.attribute04"></el-input>
+                 <el-input v-model="search.attribute04" style="width:200px"></el-input>
             </el-form-item>
              </el-col>
+         </el-row>
+         <el-row>
             <el-col :span="8">
             <el-form-item label="货位">
-                <el-input v-model="search.locNum"></el-input>
+                <el-input v-model="search.locNum" style="width:200px"></el-input>
             </el-form-item>
             </el-col>
-            <el-col :span="8">
+             <el-col :span="8">  
+            <el-form-item label="页面大小" >
+              <el-select placeholder="页面大小" v-model="search.pageSize" style="width:200px">
+                <el-option
+                v-for="item in $Enum.EnumSelect().page_size"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value" 
+                > 
+              </el-option>
+           </el-select>
+            </el-form-item>
+        </el-col>   
+         </el-row>
+         <el-row>
+         <el-col :span="8">
             <el-form-item label="ISP经销商">
-                <el-select placeholder="ISP经销商" v-model="search.attribute19">
+                <el-select placeholder="ISP经销商" v-model="search.attribute19" style="width:200px">
                 <el-option
                 v-for="item in Y_N_STATUS"
                 :key="item.value"
@@ -58,7 +84,7 @@
             </el-col>
             <el-col :span="8">
             <el-form-item label="ICT经销商">
-                 <el-select placeholder="ICT经销商" v-model="search.attribute18">
+                 <el-select placeholder="ICT经销商" v-model="search.attribute18" style="width:200px">
                 <el-option
                 v-for="item in Y_N_STATUS"
                 :key="item.value"
@@ -69,29 +95,35 @@
                </el-select>
             </el-form-item>
             </el-col>
+         </el-row>
+         <el-row>
             <el-col :span="8">
            <el-form-item label="下单初始日期" >
               <el-date-picker
-                v-model="search.startTimeCreateDtVar"
+                v-model="search.startTimeCreateDt"
                 format="yyyy-MM-dd HH:mm:ss"
                 value-format="yyyy-MM-dd HH:mm:ss"
                 type="datetime"
                 placeholder="请选择完成日期"
                 @change="handleChangeTime"
+                style="width:200px"
               ></el-date-picker>
             </el-form-item>
             </el-col>
             <el-col :span="8">
             <el-form-item label="下单截止日期" >
               <el-date-picker
-                v-model="search.endTimeCreateDtVar"
+                v-model="search.endTimeCreateDt"
                 format="yyyy-MM-dd HH:mm:ss"
                 value-format="yyyy-MM-dd HH:mm:ss"
                 type="datetime"
                 placeholder="请选择完成日期"
+                style="width:200px"
               ></el-date-picker>
             </el-form-item>
             </el-col>
+         </el-row>
+         <el-row>
                  <el-col :span="8">
            <el-form-item label="创建波次初始日期" >
               <el-date-picker
@@ -101,6 +133,7 @@
                 type="datetime"
                 placeholder="请选择完成日期"
                 @change="handleChangeTime"
+                style="width:200px"
               ></el-date-picker>
             </el-form-item>
             </el-col>
@@ -112,9 +145,12 @@
                 value-format="yyyy-MM-dd HH:mm:ss"
                 type="datetime"
                 placeholder="请选择完成日期"
+                style="width:200px"
               ></el-date-picker>
             </el-form-item>
             </el-col>
+         </el-row>
+         <el-row>
                  <el-col :span="8">
            <el-form-item label="打印初始日期" >
               <el-date-picker
@@ -124,6 +160,7 @@
                 type="datetime"
                 placeholder="请选择完成日期"
                 @change="handleChangeTime"
+                style="width:200px"
               ></el-date-picker>
             </el-form-item>
             </el-col>
@@ -135,9 +172,12 @@
                 value-format="yyyy-MM-dd HH:mm:ss"
                 type="datetime"
                 placeholder="请选择完成日期"
+                style="width:200px"
               ></el-date-picker>
             </el-form-item>
             </el-col>
+         </el-row>
+         <el-row>
                  <el-col :span="8">
            <el-form-item label="导入初始日期" >
               <el-date-picker
@@ -147,6 +187,7 @@
                 type="datetime"
                 placeholder="请选择完成日期"
                 @change="handleChangeTime"
+                style="width:200px"
               ></el-date-picker>
             </el-form-item>
             </el-col>
@@ -158,9 +199,12 @@
                 value-format="yyyy-MM-dd HH:mm:ss"
                 type="datetime"
                 placeholder="请选择完成日期"
+                style="width:200px"
               ></el-date-picker>
             </el-form-item>
             </el-col>
+            </el-row>
+            <el-row>
             <el-col :span=12>
             <el-form-item>
                 <el-button type="primary" @click="confirm">确认</el-button>
@@ -187,6 +231,7 @@
                 <el-button type="primary" :disabled="submitIsDisabled" @click="toDoPrint">打印</el-button>
             </el-form-item>
             </el-col>
+            </el-row>
         </el-form>
 
         <el-table ref="multipleTable" :data="tableData" style="width: 100%" @selection-change="handleSelectionChange" border v-loading="tableLoading">
@@ -247,7 +292,7 @@
             </el-table-column>
         </el-table>
          <el-pagination v-if="totalRows>0" class="pagination" background @current-change="handleCurrentChange"
-                        :current-page.sync="search.currentPage" :page-size="pageSize" :page-sizes="[pageSize]" layout="total, sizes, prev, pager, next, jumper"
+                        :current-page.sync="search.currentPage" :page-size="search.pageSize" :page-sizes="[search.pageSize]" layout="total, sizes, prev, pager, next, jumper"
                         :total="totalRows">
           </el-pagination>
            <el-dialog width="30%" title="提示" :visible.sync="isShowInnerConfirmDialog" append-to-body @close="closeDialog">
@@ -278,19 +323,19 @@ export default {
         wsId: '1',
         currentPage: 1,
         printAll: false,
-        startTimeCreateDtVar:'',
-        endTimeCreateDtVar:'',
+        startTimeCreateDt:'',
+        endTimeCreateDt:'',
         startTimeWaveCreateDate:'',
         endTimeWaveCreateDate:'',
         startTimeLastUpdateDate:'',
         endTimeLastUpdateDate:'',
         startTimeOrderInDate:'',
-        endTimeOrderInDate:''
+        endTimeOrderInDate:'',
+        pageSize:200
       },
       tableData: [],
       multipleSelection: [],
       totalRows: -1,
-      pageSize: -1,
       sendStr: [],
       isShowInnerConfirmDialog: false,
       tableLoading: false,
@@ -345,6 +390,7 @@ export default {
     closeDialog() {
       this.search.currentPage = 1
       this.getTableData()
+      this.handleCheckAllChange(false)
     },
     reset(){
         this.search.dmlOrderStatus=''
@@ -359,8 +405,8 @@ export default {
         this.search.wsId= '1'
         this.search.currentPage=1,
         this.search.printAll=false,
-        this.search.startTimeCreateDtVar=''
-        this.search.endTimeCreateDtVar=''
+        this.search.startTimeCreateDt=''
+        this.search.endTimeCreateDt=''
         this.search.startTimeWaveCreateDate=''
         this.search.endTimeWaveCreateDate=''
         this.search.startTimeLastUpdateDate=''
@@ -397,7 +443,6 @@ export default {
           console.log(res)
           that.tableData = res.data.result
           that.totalRows = res.data.totalRows
-          that.pageSize = res.data.pageSize
         }
       })
       this.tableLoading = false
