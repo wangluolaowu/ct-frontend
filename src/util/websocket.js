@@ -3,7 +3,9 @@ const golbalData = require('./baseData')
 var websock = null
 var globalCallback = null
 
-var ws = 'wss://' + golbalData.wsURL + '/pickManage/pickInfo/selectStopRestReceiveStatusExit'
+// let ws = location.protocol === 'https' ? 'wss://localhost:8888' : 'ws://localhost:8889'
+// console.log('ws=========' + ws)
+var ws = golbalData.wsURL
 
 // 初始化weosocket
 function initWebSocket (ws) {
@@ -58,6 +60,7 @@ function websocketsend (agentData) {
 // 关闭
 function websocketclose (e) {
   console.log('connection closed (' + e.code + ')')
+  initWebSocket(ws)
 }
 
 // 创建 websocket 连接

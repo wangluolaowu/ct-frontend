@@ -1,7 +1,7 @@
 <template>
   <div id="loginCon" v-if="isShowDialog">
     <el-form  :model="ruleForm2" :rules="rules2" ref="ruleForm2" label-position="left" label-width="0px" class="demo-ruleForm login-container">
-      <h2 class="title">DAIMLER Control Tower</h2>
+      <h2 class="title">DAIMLER BIXI Control Tower</h2>
       <el-form-item prop="account">
         <el-input type="text" v-model="ruleForm2.account" auto-complete="off" placeholder="账号"></el-input>
       </el-form-item>

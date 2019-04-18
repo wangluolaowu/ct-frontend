@@ -1,5 +1,5 @@
 import Login from './pages/Login.vue'
-import LoginAlone from './pages/LoginAlone.vue'
+import LoginAlone1 from './pages/LoginAlone1.vue'
 import NotFound from './pages/404.vue'
 import Layout from './pages/Layout.vue'
 let routerlist = [
@@ -26,7 +26,7 @@ const routes = [
   },
   {
     path: '/loginAlone',
-    component: LoginAlone,
+    component: LoginAlone1,
     name: '登录',
     hidden: true
   },
