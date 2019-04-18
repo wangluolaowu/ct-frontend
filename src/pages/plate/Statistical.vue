@@ -103,7 +103,15 @@
             </el-col>
             <el-col :span="8">
             <el-form-item label="页面大小">
-                <el-input v-model="searchPick.locNum" style="width:200px"></el-input>
+               <el-select placeholder="页面大小" v-model="searchPick.pageSize" style="width:200px">
+                <el-option
+                v-for="item in $Enum.EnumSelect().page_size"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value" 
+                > 
+              </el-option>
+           </el-select>
             </el-form-item>
             </el-col>
              </el-row>
@@ -235,14 +243,21 @@
             </el-form-item>
             </el-col>
             </el-row>
-            <el-form-item>  
+            <el-col :span="8">
+            <el-form-item >  
                  <el-button type="primary" @click="confirm">确认</el-button>
                  <el-button type="primary" @click="reset">清空</el-button>
                  <el-button type="primary" @click="cancel">取消</el-button>
-                 <el-button  type="primary" @click="SetDownloadFunc('PICK')">下载excel </el-button>
             </el-form-item>
+            </el-col>
+            <el-col :span="12">
+            <el-form-item>
+                 <el-checkbox v-model="searchPick.submitAll"  @change="handleCheckAllChangePICK">提交全部</el-checkbox>
+                 <el-button  type="primary" :disabled="downLoadDisabledPick" @click="SetDownloadFunc('PICK')">下载excel </el-button>
+            </el-form-item>
+            </el-col>
       </el-form>
-      <el-table ref="multipleTable" :data="tableData.pick" style="width: 100%" @selection-change="handleSelectionChangePick" border v-loading="tableLoadingPick">
+      <el-table ref="multipleTable" :data="tableData.pick" tooltip-effect="dark" style="width: 100%" @selection-change="handleSelectionChangePick" border v-loading="tableLoadingPick">
             <el-table-column type="selection" width="55">
             </el-table-column>
             <el-table-column prop="attribute07" label="客户编码" width="100">
@@ -266,7 +281,7 @@
             <el-table-column prop="createDt" label="下单时间" width="150">
                <template slot-scope="scope">
                         {{$DateFormat.dateFormat(scope.row.createDt,true)}}
-                      </template>
+                </template>
             </el-table-column>
             <el-table-column prop="attribute19" label="ISP经销商" width="200"> 
               <template slot-scope="scope" width="100%">
@@ -482,12 +497,19 @@
             </el-form-item>
         </el-col>
         </el-row>
+        <el-col :span="8">
         <el-form-item>  
               <el-button type="primary" @click="confirmBIN">确认</el-button>
               <el-button type="primary" @click="resetBIN">清空</el-button>
               <el-button type="primary" @click="cancelBIN">取消</el-button>
-              <el-button  type="primary" @click="SetDownloadFunc('BIN')">下载excel </el-button>
         </el-form-item>
+        </el-col>
+        <el-col :span="12">
+        <el-form-item>    
+              <el-checkbox v-model="searchBIN.submitAll"  @change="handleCheckAllChangeBIN">提交全部</el-checkbox>
+              <el-button  type="primary" :disabled="downLoadDisabledBIN" @click="SetDownloadFunc('BIN')">下载excel </el-button>
+        </el-form-item>
+        </el-col>
       </el-form>
       <el-table ref="multipleTableBIN" :data="tableData.BIN" height="500" style="width: 100%" @selection-change="handleSelectionChangeBIN" border v-loading="tableLoadingBIN">
             <el-table-column type="selection" width="55" fixed="left">
@@ -661,12 +683,21 @@
             </el-form-item>
         </el-col> 
         </el-row>
+        <el-row>
+        <el-col :span="12">
         <el-form-item>  
               <el-button type="primary" @click="confirmRELOC_PICKOUT">确认</el-button>
               <el-button type="primary" @click="resetRELOC_PICKOUT">清空</el-button>
               <el-button type="primary" @click="cancelRELOC_PICKOUT">取消</el-button>
-              <el-button  type="primary" @click="SetDownloadFunc('RELOC_PICKOUT')">下载excel </el-button>
         </el-form-item>
+        </el-col>
+        <el-col :span="12">
+        <el-form-item>    
+               <el-checkbox v-model="searchRelocPickOut.submitAll"  @change="handleCheckAllChangeRelocPickOut">提交全部</el-checkbox>
+              <el-button  type="primary" :disabled="downLoadDisabledRelocPickOut" @click="SetDownloadFunc('RELOC_PICKOUT')">下载excel </el-button>
+        </el-form-item>
+        </el-col>
+        </el-row>  
       </el-form>
       <el-table ref="multipleTableRELOC_PICKOUT" :data="tableData.RELOC_PICKOUT" height="500" style="width: 100%" @selection-change="handleSelectionChangeRELOC_PICKOUT" border v-loading="tableLoadingRELOC_PICKOUT">
             <el-table-column type="selection" width="55" fixed="left">
@@ -770,12 +801,21 @@
             </el-form-item>
         </el-col>
         </el-row>
+        <el-row>
+       <el-col :span="12">
         <el-form-item>  
               <el-button type="primary" @click="confirmCALL_SHELF">确认</el-button>
               <el-button type="primary" @click="resetCALL_SHELF">清空</el-button>
               <el-button type="primary" @click="cancelCALL_SHELF">取消</el-button>
-              <el-button  type="primary" @click="SetDownloadFunc('CALL_SHELF')">下载excel </el-button>
         </el-form-item>
+        </el-col>
+       <el-col :span="12">
+        <el-form-item>
+              <el-checkbox v-model="searchCALL_SHELF.submitAll"  @change="handleCheckAllChangeCALL_SHELF">提交全部</el-checkbox>
+              <el-button  type="primary" :disabled="downLoadDisabledCALL_SHELF" @click="SetDownloadFunc('CALL_SHELF')">下载excel </el-button>
+        </el-form-item>
+        </el-col>
+        </el-row>
       </el-form>
       <el-table ref="multipleTableCALL_SHELF" :data="tableData.CALL_SHELF" height="500"  @selection-change="handleSelectionChangeCALL_SHELF" border v-loading="tableLoadingCALL_SHELF">
             <el-table-column type="selection" width="55" fixed="left">
@@ -931,12 +971,21 @@
             </el-form-item>
         </el-col>
         </el-row>
+        <el-row>
+        <el-col :span="12">
         <el-form-item>  
               <el-button type="primary" @click="confirmSTOCK_TAKING">确认</el-button>
               <el-button type="primary" @click="resetSTOCK_TAKING">清空</el-button>
               <el-button type="primary" @click="cancelSTOCK_TAKING">取消</el-button>
-              <el-button  type="primary" @click="SetDownloadFunc">下载excel </el-button>
         </el-form-item>
+          </el-col>
+       <el-col :span="12">
+        <el-form-item>
+              <el-checkbox v-model="searchSTOCK_TAKING.submitAll"  @change="handleCheckAllChangeSTOCK_TAKING">提交全部</el-checkbox>
+              <el-button  type="primary" :disabled="downLoadDisabledSTOCK_TAKING"   @click="SetDownloadFunc('STOCK_TAKING')">下载excel </el-button>
+        </el-form-item>
+        </el-col>
+        </el-row>
       </el-form>
       <el-table ref="multipleTableSTOCK_TAKING" :data="tableData.STOCK_TAKING" height="500" style="width: 100%" @selection-change="handleSelectionChangeSTOCK_TAKING" border v-loading="tableLoadingSTOCK_TAKING">
             <el-table-column type="selection" width="55" fixed="left">
@@ -1006,7 +1055,16 @@
           orderType: 'S',
           currentPage: 1
         },
-         // 查询参数
+       searchPickSelect:[],
+       searchBINSelect:[],
+       searchRelocPickOutSelect:[],
+       searchCALL_SHELFSelect:[],
+       searchSTOCK_TAKINGSelect:[],
+       downLoadDisabledPick:true,
+       downLoadDisabledBIN:true,
+       downLoadDisabledRelocPickOut:true,
+       downLoadDisabledCALL_SHELF:true,
+       downLoadDisabledSTOCK_TAKING:true,
        searchPick: {
         dmlOrderStatus: '',
         attribute10: '',
@@ -1020,8 +1078,8 @@
         wsId: '',
         currentPage: 1,
         printAll: false,
-        startTimeCreateDtVar:'',
-        endTimeCreateDtVar:'',
+        startTimeCreateDt:'',
+        endTimeCreateDt:'',
         startTimeWaveCreateDate:'',
         endTimeWaveCreateDate:'',
         startTimeLastUpdateDate:'',
@@ -1029,7 +1087,8 @@
         startTimeOrderInDate:'',
         endTimeOrderInDate:'',
         totalRows:-1,
-        pageSize:-1
+        pageSize:50,
+        submitAll:false
       }, // 查询参数
       searchBIN: {
         dmlBinStatus:'',
@@ -1039,7 +1098,7 @@
         skuNum:'',
         locNum:'',
         binTicketNum:'',
-        pageSize:'50',
+        pageSize:50,
         binTicketNum:'',
         startTimeCreateDt:'',
         endTimeCreateDt:'',
@@ -1050,7 +1109,8 @@
         startTimeLastUpdateDate:'',
         endTimeLastUpdateDate:'',
         totalRows:-1,
-        currentPage:1
+        currentPage:1,
+        submitAll:false
       },
       searchRelocPickOut:{
         locNum:'',
@@ -1063,7 +1123,8 @@
         endTimeLastUpdateDate:'',
         pageSize:50,
         totalRows:-1,
-        currentPage:1
+        currentPage:1,
+        submitAll:false
       },
       searchCALL_SHELF:{
         locNum:'',
@@ -1073,7 +1134,8 @@
         endTimeLastUpdateDate:'',
         pageSize:50,
         totalRows:-1,
-        currentPage:1
+        currentPage:1,
+        submitAll:false
       },
       searchSTOCK_TAKING:{
         locNum:'',
@@ -1089,7 +1151,8 @@
         endTimeLastUpdateDate:'',
         pageSize:50,
         totalRows:-1,
-        currentPage:1
+        currentPage:1,
+        submitAll:false
       },
       searchOrder: { 
           orderType: 'dialogPICK'
@@ -1121,31 +1184,89 @@
     },
     mounted () {
       this.getSelectValues()
+      this.getdialogPICK()
       this.getMychartData()
     },
     methods: {
+      handleCheckAllChangePICK(val){
+        this.searchPick.submitAll=val
+        if(this.searchPickSelect.length > 0 || val){
+         this.downLoadDisabledPick = false
+        }else{
+         this.downLoadDisabledPick = true
+        }
+      },
+       handleCheckAllChangeBIN(val){
+        this.searchBIN.submitAll=val
+        if(this.searchBINSelect.length > 0 || val){
+         this.downLoadDisabledBIN = false
+        }else{
+         this.downLoadDisabledBIN = true
+        }
+      },
+       handleCheckAllChangeRelocPickOut(val){
+        this.searchRelocPickOut.submitAll=val
+        if(this.searchRelocPickOutSelect.length > 0 || val){
+         this.downLoadDisabledRelocPickOut = false
+        }else{
+         this.downLoadDisabledRelocPickOut = true
+        }
+      },
+       handleCheckAllChangeCALL_SHELF(val){
+        this.searchCALL_SHELF.submitAll=val
+        if(this.searchCALL_SHELFSelect.length > 0 || val){
+         this.downLoadDisabledCALL_SHELF = false
+        }else{
+         this.downLoadDisabledCALL_SHELF = true
+        }
+      },
+       handleCheckAllChangeSTOCK_TAKING(val){
+        this.searchSTOCK_TAKING.submitAll=val
+        if(this.searchSTOCK_TAKINGSelect.length > 0 || val){
+         this.downLoadDisabledSTOCK_TAKING = false
+        }else{
+         this.downLoadDisabledSTOCK_TAKING = true
+        }
+      },
      SetDownloadFunc (arg1) {
        let resultData = {}
+       let fileName = ''
        resultData.OrderType = arg1
        if(arg1 === 'PICK'){
+        fileName='拣货订单流水数据'
+        resultData.submitAll=this.searchPick.submitAll
         resultData.params = JSON.stringify(this.searchPick)
+        resultData.result = JSON.stringify(this.searchPickSelect)
        }else if(arg1 === 'BIN'){
-        resultData.params = JSON.stringify(this.searchBIN)
+         fileName='上货订单流水数据'
+         resultData.submitAll=this.searchBIN.submitAll
+          resultData.params = JSON.stringify(this.searchBIN)
+        resultData.result = JSON.stringify(this.searchBINSelect)
        }else if(arg1 === 'STOCK_PICK_OUT'){
-        resultData.params = JSON.stringify(this.searchPick)
+         fileName='调仓订单流水数据'
+         resultData.submitAll=this.searchRelocPickOut.submitAll
+          resultData.params = JSON.stringify(this.searchRelocPickOut)
+        resultData.result = JSON.stringify(this.searchRelocPickOutSelect)
        }else if(arg1 === 'CALL_SHELF'){
-        resultData.params = JSON.stringify(this.searchPick)
+          fileName='召唤货架订单流水数据'
+         resultData.submitAll=this.searchCALL_SHELF.submitAll
+          resultData.params = JSON.stringify(this.searchCALL_SHELF)
+        resultData.result = JSON.stringify(this.searchCALL_SHELFSelect)
        }else{
-        resultData.params = JSON.stringify(this.searchPick)
+          fileName='盘点订单流水数据'
+         resultData.submitAll=this.searchSTOCK_TAKING.submitAll
+          resultData.params = JSON.stringify(this.searchSTOCK_TAKING)
+        resultData.result = JSON.stringify(this.searchSTOCK_TAKINGSelect)
        }
  
        this.axios.postD('kanban/orderSum/exportDmlPickDetailsVList', qs.stringify(resultData)).then(res => {
         const content = res
         const blob = new Blob([content], {type: 'application/vnd.ms-excel'})
-        const fileName = '测试表格123.xls'
+        const exportFileName = this.$DateFormat.dateFormat(new Date(),true)+'_'+fileName+'.xls'
         if ('download' in document.createElement('a')) { // 非IE下载
+          this.$message.warning('文件下载中。。。')
           const elink = document.createElement('a')
-          elink.download = fileName
+          elink.download = exportFileName
           elink.style.display = 'none'
           elink.href = URL.createObjectURL(blob)
           document.body.appendChild(elink)
@@ -1153,7 +1274,8 @@
           URL.revokeObjectURL(elink.href) // 释放URL 对象
           document.body.removeChild(elink)
         } else { // IE10+下载
-          navigator.msSaveBlob(blob, fileName)
+          this.$message.warning('文件下载中。。。')
+          navigator.msSaveBlob(blob, exportFileName)
         }
       })
     },
@@ -1175,8 +1297,13 @@
         }
       })
     },
-    handleSelectionChangePick(){
-
+    handleSelectionChangePick(val){
+       this.searchPickSelect = val
+      if (this.searchPickSelect.length > 0 || this.searchPick.submitAll) {
+        this.downLoadDisabledPick = false
+      } else {
+        this.downLoadDisabledPick = true
+      }
       },
       handleCurrentChangePick(){
       this.searchPick.currentPage = val
@@ -1185,29 +1312,49 @@
       handleChangeTime(){
 
       },
-      handleSelectionChangeBIN(){
-
+      handleSelectionChangeBIN(val){
+        this.searchBINSelect = val
+        if (this.searchBINSelect.length > 0 || this.searchBIN.submitAll) {
+          this.downLoadDisabledBIN = false
+        } else {
+          this.downLoadDisabledBIN = true
+        }
       }, 
       handleCurrentChangeBIN(){
       this.searchBIN.currentPage = val
       this.getdialogBIN()
       },
-      handleSelectionChangeRELOC_PICKOUT(){
-
+      handleSelectionChangeRELOC_PICKOUT(val){
+        this.searchRelocPickOutSelect = val
+        if (this.searchRelocPickOutSelect.length > 0 || this.searchRelocPickOut.submitAll) {
+          this.downLoadDisabledRelocPickOut = false
+        } else {
+          this.downLoadDisabledRelocPickOut = true
+        }
       }, 
       handleCurrentChangeRELOC_PICKOUT(){
       this.searchRelocPickOut.currentPage = val
       this.getdialogRELOC_PICKOUT()
       },
-      handleSelectionChangeCALL_SHELF(){
-
+      handleSelectionChangeCALL_SHELF(val){
+        this.searchCALL_SHELFSelect = val
+        if (this.searchCALL_SHELFSelect.length > 0 || this.searchCALL_SHELF.submitAll) {
+          this.downLoadDisabledCALL_SHELF = false
+        } else {
+          this.downLoadDisabledCALL_SHELF = true
+        }
       }, 
       handleCurrentChangeCALL_SHELF(){
       this.searchCALL_SHELF.currentPage = val
       this.getdialogCALL_SHELF()
       },
-      handleSelectionChangeSTOCK_TAKING(){
-
+      handleSelectionChangeSTOCK_TAKING(val){
+        this.searchSTOCK_TAKINGSelect = val
+        if (this.searchSTOCK_TAKINGSelect.length > 0 || this.searchSTOCK_TAKING.submitAll) {
+          this.downLoadDisabledSTOCK_TAKING = false
+        } else {
+          this.downLoadDisabledSTOCK_TAKING = true
+        }
       }, 
       handleCurrentChangeSTOCK_TAKING(){
       this.searchSTOCK_TAKING.currentPage = val
