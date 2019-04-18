@@ -357,8 +357,8 @@ Enum.getEnumSelectByValue = function(enumArray, enumKey) {
   }
   for (let i in enumArray) {
     let e = enumArray[i]
-    if (e && e.value === enumKey) {
-      return e.label
+    if (e && ((e.value === enumKey) || (e.VALUE === enumKey))) {
+      return e.label || e.LABEL
     }
   }
 

@@ -215,6 +215,34 @@ const routes = [
   {
     path: '/',
     component: Layout,
+    name: '货架管理',
+    icon: 'el-icon-service',
+    children: [
+      {
+        path: '/holderManage/holderHomePage',
+        component: () => import('@/pages/plate/holderManage/HolderMove'),
+        name: '货架主数据'
+      },
+      {
+        path: '/holderManage/holderMoveContr',
+        component: () => import('@/pages/plate/holderManage/HolderMove'),
+        name: '货架搬运'
+      },
+      {
+        path: '/holderManage/holderSide',
+        component: () => import('@/pages/plate/holderManage/HolderMove'),
+        name: '货位'
+      },
+      {
+        path: '/holderManage/holderSideType',
+        component: () => import('@/pages/plate/holderManage/HolderMove'),
+        name: '货架位类型'
+      }
+    ]
+  },
+  {
+    path: '/',
+    component: Layout,
     name: 'AdminstratorPage',
     icon: 'el-icon-service',
     children: [

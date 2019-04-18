@@ -29,15 +29,28 @@
            </el-select>
           </template>
         </el-table-column>
+         <el-table-column  label="货架编码" align="center">
+          <template slot-scope="scope">
+               <el-select placeholder="货架编码" v-model="scope.row.pi_holder_id">
+                <el-option
+                v-for="item in PI_HOLDER_ID"
+                :key="item.VALUE"
+                :label="item.LABEL"
+                :value="item.VALUE" 
+                > 
+              </el-option>
+           </el-select>
+          </template>
+        </el-table-column>
         <el-table-column label="动作类型">
           <template slot-scope="scope">
-             <el-select placeholder="动作类型" v-model="scope.row.pi_pose_control_type">
-                <el-option
-                v-for="item in $Enum.EnumSelect().pi_pose_control_type"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value" 
-                > 
+             <el-select placeholder="动作类型" v-model="scope.row.pi_release_load_flag">
+               <el-option
+                    v-for="item in $Enum.EnumSelect().TM_MOVE_TASK_RELEASE_LOAD"
+                    :key="item.value"
+                    :label="item.label"
+                    :value="item.value" 
+                    > 
               </el-option>
            </el-select>
           </template>
@@ -64,6 +77,11 @@
         style="width: 95%" @close='confirm'>
          <el-table-column prop="pi_kid_id" label="机器人编码" align="center">
         </el-table-column>
+         <el-table-column prop="pi_holder_id" label="货架编码" align="center">
+           <template slot-scope="scope">
+             {{$Enum.getEnumSelectByValue(PI_HOLDER_ID,scope.row.pi_holder_id)}}
+          </template>
+        </el-table-column>
         <el-table-column prop="isSucess" label="是否成功" align="center">
         </el-table-column>
         <el-table-column prop="po_retmsg" label="错误描述" align="center">
@@ -89,15 +107,17 @@
         tableData: [{
           rowNum: 1,
           pi_kid_id: 0,
-          pi_pose_control_type: 'SIMPLE_MOVE',
+          pi_holder_id: '',
           pi_dest_pos_x: '',
-          pi_dest_pos_y: ''
+          pi_dest_pos_y: '',
+          pi_release_load_flag:1
         }],
         selectlistRow: [],
         PI_KID_ID:[],
         submitDisabled:true,
         dialogVisibleStart:false,
-        tableDataDialog:[]
+        tableDataDialog:[],
+        PI_HOLDER_ID:[]
       }
     },
     mounted () {
@@ -114,12 +134,11 @@
           this.tableData=[]
           this.addRow()
           this.dialogVisibleStart = false
-
       },
       submit(){
         let resultData = {}
         resultData.params=JSON.stringify(this.selectlistRow)
-        this.axios.post('robotManage/kidMoveContr/holdUpAndDown/kidPoseControl', qs.stringify(resultData)).then(res => {
+        this.axios.post('holderManage/holderMoveContr/holderMove', qs.stringify(resultData)).then(res => {
          if (res.errCode === 'S') {
             this.tableDataDialog = res.data.result
             this.dialogVisibleStart=true
@@ -134,6 +153,13 @@
        }).then((res) => {
         if (res.errCode === 'S') {
           this.PI_KID_ID=res.data.result
+        }
+       })
+       this.axios.get('holderManage/holderMoveContr/selectPiHolderId', {
+        params: 'test'
+       }).then((res) => {
+        if (res.errCode === 'S') {
+          this.PI_HOLDER_ID=res.data.result
         }
        })
       },
@@ -151,9 +177,11 @@
         var list = {
           rowNum: '',
           pi_kid_id: 0,
-          pi_pose_control_type:'SIMPLE_MOVE',
+          pi_holder_id: this.pi_holder_id,
           pi_dest_pos_x: this.pi_dest_pos_x,
-          pi_dest_pos_y: this.pi_dest_pos_y}
+          pi_dest_pos_y: this.pi_dest_pos_y,
+          pi_release_load_flag: this.pi_release_load_flag
+          }
           this.tableData.unshift(list)
       },
       // 删除方法
