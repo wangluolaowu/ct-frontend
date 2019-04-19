@@ -98,7 +98,7 @@
                 </el-input>
             </el-form-item>
             <el-form-item>
-                <el-button type="primary" @click="showConfirmDialog">取消</el-button>
+                <el-button type="info" @click="showConfirmDialog">取消</el-button>
                 <el-button type="primary" @click="confirmAssign">任务分配</el-button>
             </el-form-item>
         </el-form>

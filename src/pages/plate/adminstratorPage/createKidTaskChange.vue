@@ -17,7 +17,7 @@
        </el-col>
 
 
-         <el-table :data="userInfoList" style="width: 100%" height="500"   border>
+         <el-table :data="userInfoList" style="width: 100%"   border>
             <el-table-column label="操作" align="center" min-width="100" fixed="left"  style='color:#fff;'>
                 <template slot-scope="scope" >
                      <el-button type="text" @click="checkDetail(scope.row)">查看详情</el-button>

@@ -1,20 +1,26 @@
 <template>
 	<el-container>
 		<el-header id="headCon">
-      <el-col :span="13" id="logo" class="clears">
+      <el-col id="logo" class="clears">
         <img id="logoTag" class="fl" src="../assets/images/logo.png" alt="">
         <!-- <img id="logoLine" class="fl" src="../assets/images/head1.png" alt=""> -->
         <span id="titles" class="fl">BIXI Control Tower</span>
       </el-col>
-			<el-col :span="6" class="userinfo">
-				<el-dropdown trigger="hover">
-					<span class="el-dropdown-link userinfo-inner"> 欢迎您，{{sysUserName}}</span>
-					<el-dropdown-menu slot="dropdown">
-						<el-dropdown-item>我的消息</el-dropdown-item>
-						<el-dropdown-item>设置</el-dropdown-item>
-						<el-dropdown-item divided @click.native="logout">退出登录</el-dropdown-item>
-					</el-dropdown-menu>
-				</el-dropdown>
+			<el-col  class="userinfo">
+				<!-- <el-dropdown trigger="hover">
+          <span class="el-dropdown-link userinfo-inner"> 欢迎您，{{sysUserName}}</span>
+          <el-dropdown-menu slot="dropdown">
+            <el-dropdown-item>我的消息</el-dropdown-item>
+            <el-dropdown-item>设置</el-dropdown-item>
+            <el-dropdown-item divided @click.native="logout">退出登录</el-dropdown-item>
+          </el-dropdown-menu>
+        </el-dropdown> -->
+        <ul class="clears userinfoCon">
+          <li><img src="../assets/images/u549.png"  alt="" title="用户"><span>{{sysUserName}}</span></li>
+          <!-- <li><i class="el-icon-edit"></i>{{sysUserName}}</li> -->
+          <li  @click='changeLanguage'  title="切换语言"><img src="../assets/images/u547.png"  alt=""><span v-model='sysLanguage'>{{sysLanguage}}</span></li>
+          <li  @click='logout'><img src="../assets/images/u545.png"  alt="" title="退出"><span>退出</span></li>
+        </ul>
 			</el-col>
 		</el-header>
         <el-container>
@@ -61,6 +67,7 @@ export default {
       // sysName: 'DAIMLER Control Tower',
       collapsed: false,
       sysUserName: '',
+      sysLanguage:'中文',
       sysUserAvatar: '',
       user: null,
       menuList: null,
@@ -119,6 +126,16 @@ export default {
       this.$refs.menuCollapsed.getElementsByClassName(
         'submenu-hook-' + i
       )[0].style.display = status ? 'block' : 'none'
+    },
+    changeLanguage(){
+      //中英文切换
+      let that = this;
+      console.log(that.sysLanguage);
+      if (that.sysLanguage == '中文') {
+        that.sysLanguage = 'English'
+      }else if(that.sysLanguage == 'English'){
+        that.sysLanguage = '中文'
+      }
     }
   },
   mounted () {
@@ -160,6 +177,7 @@ export default {
   .userinfo{
     display: flex;
     justify-content: flex-end;
+    width:500px;
   }
   .userinfo-inner{
     font-size: 18px;
@@ -186,4 +204,36 @@ export default {
   .fr{
     float: right;
   }
+  /*头部样式*/
+  #headCon {
+    min-width:1200px;
+  }
+  #logo{
+    width:680px;
+  }
+   #titles{
+    width:350px;
+   }
+   .userinfoCon{
+    margin-right:20px;
+   }
+   .userinfoCon li{
+     float:left;
+     color:#fff;
+     margin-right:30px;
+     font-size:16px;
+   }
+   .userinfoCon li img{
+      vertical-align: middle;
+      width:36px;
+      height:36px;
+      margin-right:5px;
+   }
+   .userinfoCon li span{
+     cursor:pointer;
+     letter-spacing:1px;
+   }
+   .userinfoCon li:last-child{
+    margin-right:0px;
+   }
 </style>

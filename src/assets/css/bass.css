@@ -149,8 +149,10 @@ font-size: 20px;
 	margin-top: 50px;
 }
 
+/* 内容部分的宽度 */
 .el-main{
-	width:85%;
+	/*width: calc( 100% - 300px);*/
+	min-width: 900px;
 }
 .el-form-item__content{
 	margin-right: 24px;
@@ -178,6 +180,14 @@ font-size: 20px;
 .el-main .formCon .el-form-item__content,.el-main .formCon .el-input{
 	width: 206px!important;
 }
+.buttonGroups{
+	display: inline-block;
+	width: 350px;
+	/*margin-left: 100px;*/
+}
+.buttonGroups .el-form-item__content{
+    margin-left:0px!important;
+  }
 /* 分页 */
 .el-pagination.is-background .el-pager li:not(.disabled).active{
 	background-color: #00677F;
