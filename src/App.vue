@@ -70,10 +70,10 @@ body {
   opacity: 0;
 }
 #app .title{
-  font-size: 24px;
+  font-size: 20px;
   font-weight: bolder;
 }
-  #app .el-breadcrumb__item .el-breadcrumb__inner,#app .el-breadcrumb__item .el-breadcrumb__separator{
-    font-size: 18px;
-  }
+#app .el-breadcrumb__item .el-breadcrumb__inner,#app .el-breadcrumb__item .el-breadcrumb__separator{
+font-size: 16px;
+}
 </style>

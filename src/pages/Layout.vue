@@ -1,13 +1,10 @@
 <template>
 	<el-container>
 		<el-header id="headCon">
-			<!--<el-col :span="10" class="logo" :class="collapsed?'logo-collapse-width':'logo-width'">
-				{{collapsed?'':sysName}}
-			</el-col>-->
       <el-col :span="13" id="logo" class="clears">
         <img id="logoTag" class="fl" src="../assets/images/logo.png" alt="">
-        <img id="logoLine" class="fl" src="../assets/images/head1.png" alt="">
-        <span id="titles" class="fl">Control Tower</span>
+        <!-- <img id="logoLine" class="fl" src="../assets/images/head1.png" alt=""> -->
+        <span id="titles" class="fl">BIXI Control Tower</span>
       </el-col>
 			<el-col :span="6" class="userinfo">
 				<el-dropdown trigger="hover">
@@ -146,14 +143,15 @@ export default {
     width:300px;
     height: 40px;
     margin-top: 8px;
+    margin-right:30px;
   }
-  #logo #logoLine{
+/*  #logo #logoLine{
     width: 50px;
     height: 42px;
     margin-top: 12px;
     margin-right: 10px;
     margin: 8px 15px 0 30px;
-  }
+  }*/
   #titles{
     color: #fff;
     font-size: 36px;
