@@ -47,7 +47,7 @@ module.exports = {
     // Template for index.html
     env: require('./prod.env'),
     index: path.resolve(__dirname, '../dist/index.html'),
-    LoginAlone: path.resolve(__dirname, '../dist/alone.html'),
+    alone: path.resolve(__dirname, '../dist/aloneIndex.html'),
     // Paths
     assetsRoot: path.resolve(__dirname, '../dist'),
     assetsSubDirectory: 'static',

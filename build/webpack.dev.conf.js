@@ -59,8 +59,8 @@ const devWebpackConfig = merge(baseWebpackConfig, {
       chunks: ['app']
     }),
     new HtmlWebpackPlugin({
-      filename: 'alone.html',
-      template: 'alone.html',
+      filename: 'aloneIndex.html',
+      template: 'aloneIndex.html',
       inject: true,
       chunks: ['alone']
     }),

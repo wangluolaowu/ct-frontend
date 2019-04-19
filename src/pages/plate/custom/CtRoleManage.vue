@@ -19,21 +19,13 @@
          <el-table :data="userInfoList" style="width: 100%" border>
             <!--<el-table-column prop="id" label="id" >
             </el-table-column>-->
-             <el-table-column prop="role" label="角色" width="180">
+             <el-table-column prop="role" label="角色" >
             </el-table-column>
-             <el-table-column prop="description" label="描述" width="180">
+             <el-table-column prop="description" label="描述">
             </el-table-column>
-            <el-table-column prop="available"> 
+            <el-table-column prop="available" label="状态"> 
               <template slot-scope="scope">
-              <el-select placeholder="请设置状态" v-model="scope.row.available" :disabled="true">
-              <el-option
-                v-for="item in openStatus"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value" 
-              > 
-              </el-option>
-            </el-select>
+                 {{$Enum.getEnumSelectByValue(openStatus,scope.row.available)}}
             </template>
             </el-table-column>
              <!--第二步  开始进行修改和查询操作-->
@@ -75,7 +67,7 @@
                  <el-button v-if="isView" type="primary" @click.native="addSubmit">确 定</el-button>
              </span>
           </el-dialog>
-           <el-dialog title="角色-用户" :visible.sync="roleUserdialogVisible" width="50%" :close-on-click-modal="false">
+           <el-dialog title="角色-用户" :visible.sync="roleUserdialogVisible" width="60%" :close-on-click-modal="false">
               <el-transfer
                 filterable
                 :filter-method="filterMethod"
@@ -85,7 +77,7 @@
                 :data="data2" 
                 >
               </el-transfer>
-               <el-button class="transfer-footer" slot="right-footer" size="small" @click="createRoleUser">保存</el-button>
+               <el-button  type="primary" @click="createRoleUser">保存</el-button>
            </el-dialog>  
      </div>
   </template>
@@ -105,8 +97,9 @@
           openStatus: [],
           addFormReadOnly: true,
           dialogVisible: false,
-          roleUserdialogVisible: true,
+          roleUserdialogVisible: false,
           isView: true,
+          currentRoleId:'',
           addFormData: {
             id: '',
             role: '',
@@ -132,13 +125,12 @@
       },
   mounted: function () {
         this.loadData()
-        // this.generateData2()
+        this.generateData2()
         this.getSelectValues()
       },
       methods: {
-        getSelectValues() {
-          let Enum = EnumSelect()
-          this.openStatus = Enum.openStatus
+        getSelectValues() { 
+          this.openStatus = this.$Enum.EnumSelect().openStatus
         },
         generateData2 () {
           let that = this
@@ -185,9 +177,9 @@
           // this.addFormReadOnly = false;
         },
         checkDetail(rowData) {
-          this.addFormData = Object.assign({}, rowData)
+          this.currentRoleId = rowData.id
+          
           this.roleUserdialogVisible = true
-          //  this.addFormReadOnly = true;
         },
         modifyUser(rowData) {
           this.addFormData = Object.assign({}, rowData)

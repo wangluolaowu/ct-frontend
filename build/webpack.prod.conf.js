@@ -76,8 +76,8 @@ const webpackConfig = merge(baseWebpackConfig, {
       chunks: ['manifest', 'vendor', 'app']
     }),
     new HtmlWebpackPlugin({
-      filename: process.env.NODE_ENV === 'testing' ? 'alone.html' : config.build.alone,
-      template: 'alone.html',
+      filename: process.env.NODE_ENV === 'testing' ? 'aloneIndex.html' : config.build.alone,
+      template: 'aloneIndex.html',
       inject: true,
       minify: {
         removeComments: true,
@@ -117,12 +117,12 @@ const webpackConfig = merge(baseWebpackConfig, {
     // This instance extracts shared chunks from code splitted chunks and bundles them
     // in a separate chunk, similar to the vendor chunk
     // see: https://webpack.js.org/plugins/commons-chunk-plugin/#extra-async-commons-chunk
-    // new webpack.optimize.CommonsChunkPlugin({
-    // name: 'app',
-    // async: 'vendor-async',
-    // children: true,
-    // minChunks: 3
-    // }),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'app',
+      async: 'vendor-async',
+      children: true,
+      minChunks: 3
+    }),
 
     // copy custom static assets
     new CopyWebpackPlugin([

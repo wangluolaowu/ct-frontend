@@ -5,7 +5,7 @@
 </template>
 <script>
 export default {
-  name: 'Alones',
+  name: 'alone',
   data(){
 		return {
 			msg:'I am one'

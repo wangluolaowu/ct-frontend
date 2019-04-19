@@ -12,7 +12,7 @@ module.exports = {
   context: path.resolve(__dirname, '../'),
   entry: {
     app: './src/main.js',
-    alone: './src/alone.js'
+    alone: './src/alonemain.js'
   },
   output: {
     path: config.build.assetsRoot,
