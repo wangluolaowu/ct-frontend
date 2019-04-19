@@ -1,7 +1,7 @@
 <template>
   <div id="mainContainer">
-    <el-row :span="24" style="margin-bottom: 20px;">
-      <el-col :span="12">
+    <el-row :span="24" class='marginBottoms conMarginLeft'>
+      <el-col :span="8">
         <div class="block">
           <span class="demonstration">初始日期</span>
               <el-date-picker
@@ -14,7 +14,7 @@
               ></el-date-picker>
         </div>
       </el-col>
-      <el-col :span="12">
+      <el-col :span="8">
         <div class="block">
           <span class="demonstration">结束日期</span>
          <el-date-picker
@@ -27,13 +27,12 @@
               ></el-date-picker>
         </div>
       </el-col>
-    </el-row>
-    <el-row >
-      <el-col :span="12">
+      <el-col :span="6">
         <el-button type="primary" @click="researchBtn" style="display: inline-block;width:80px;">查找</el-button>
-        <el-button type="primary" @click="cancel" style="display: inline-block;width:80px;"> 取消</el-button>
+        <el-button type="info" @click="cancel" style="display: inline-block;width:80px;"> 取消</el-button>
       </el-col>
     </el-row>
+    
     <el-table :data="tableData" highlight-current-rowstyle="width: 100%" border v-loading="tableLoading">
       <el-table-column prop="ROW_ID" label="序号"></el-table-column>
       <el-table-column prop="BINWAVEID" label="波次号"></el-table-column>

@@ -26,7 +26,7 @@
                     </el-form-item>
                     <el-form-item class="fl" id="groupBtn">
                         <el-button type="primary" @click="confirm">确认</el-button>
-                        <el-button type="primary" :disabled = "cancelDisabled" @click="cancel">取消</el-button>
+                        <el-button type="info" :disabled = "cancelDisabled" @click="cancel">取消</el-button>
                     </el-form-item>
                     <el-form-item class="checkBoxGroup">
                      <el-checkbox v-model="search.submitAll"  @change="handleCheckAllChange">提交全部</el-checkbox>
@@ -401,8 +401,7 @@ export default {
     margin-bottom: 30px;
   }
   #groupBtn .el-button{
-    width: 85px;
-    height: 40px;
+  
     letter-spacing: 2px;
     font-size: 15px;
     margin-top: -10px;
@@ -420,8 +419,6 @@ export default {
   }
   /* 提交按钮样式 */
   .checkBoxGroup .el-button{
-    width: 80px;
-    height: 40px;
     text-align: center;
     margin-top:-10px;
     font-size: 15px;
@@ -445,11 +442,7 @@ export default {
     background: #026780;
     color: #ffffff;
   }
- .el-table th>.cell,.el-table .cell{
-    color: #000;
-    font-size: 15px;
-    text-align: center;
-  }
+
   .el-table th>.cell{
     font-weight: bold
   }

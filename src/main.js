@@ -17,6 +17,7 @@ import './assets/css/style.css'
 import Enum from './util/enum'
 import DateFormat from './util/date'
 import * as socketApi from './util/websocket'
+import './assets/css/bass.css'
 
 Vue.prototype.$Enum = Enum
 Vue.prototype.$DateFormat = DateFormat

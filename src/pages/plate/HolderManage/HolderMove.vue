@@ -1,6 +1,6 @@
 
 <template>
-  <div class="tableDate">
+  <div class="tableDate mainContainer">
     <div class="button" style="width:3%;float:right;">
       <P><el-button class="el-icon-plus" @click.prevent="addRow()"></el-button></P>
       <p><el-button class="el-icon-minus" @click.prevent="delData()"></el-button></p>

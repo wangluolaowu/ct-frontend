@@ -244,17 +244,17 @@
             </el-col>
             </el-row>
             <el-col :span="8">
-            <el-form-item >  
-                 <el-button type="primary" @click="confirm">确认</el-button>
-                 <el-button type="primary" @click="reset">清空</el-button>
-                 <el-button type="primary" @click="cancel">取消</el-button>
-            </el-form-item>
+              <el-form-item >  
+                   <el-button type="primary" @click="confirm">确认</el-button>
+                   <el-button type="info" @click="reset">清空</el-button>
+                   <el-button type="info" @click="cancel">取消</el-button>
+              </el-form-item>
             </el-col>
             <el-col :span="12">
-            <el-form-item>
-                 <el-checkbox v-model="searchPick.submitAll"  @change="handleCheckAllChangePICK">提交全部</el-checkbox>
-                 <el-button  type="primary" :disabled="downLoadDisabledPick" @click="SetDownloadFunc('PICK')">下载excel </el-button>
-            </el-form-item>
+              <el-form-item>
+                   <el-checkbox v-model="searchPick.submitAll"  @change="handleCheckAllChangePICK">提交全部</el-checkbox>
+                   <el-button  type="primary" :disabled="downLoadDisabledPick" @click="SetDownloadFunc('PICK')">下载excel </el-button>
+              </el-form-item>
             </el-col>
       </el-form>
       <el-table ref="multipleTable" :data="tableData.pick" tooltip-effect="dark" style="width: 100%" @selection-change="handleSelectionChangePick" border v-loading="tableLoadingPick">
@@ -500,8 +500,8 @@
         <el-col :span="8">
         <el-form-item>  
               <el-button type="primary" @click="confirmBIN">确认</el-button>
-              <el-button type="primary" @click="resetBIN">清空</el-button>
-              <el-button type="primary" @click="cancelBIN">取消</el-button>
+              <el-button type="info" @click="resetBIN">清空</el-button>
+              <el-button type="info" @click="cancelBIN">取消</el-button>
         </el-form-item>
         </el-col>
         <el-col :span="12">
@@ -687,8 +687,8 @@
         <el-col :span="12">
         <el-form-item>  
               <el-button type="primary" @click="confirmRELOC_PICKOUT">确认</el-button>
-              <el-button type="primary" @click="resetRELOC_PICKOUT">清空</el-button>
-              <el-button type="primary" @click="cancelRELOC_PICKOUT">取消</el-button>
+              <el-button type="info" @click="resetRELOC_PICKOUT">清空</el-button>
+              <el-button type="info" @click="cancelRELOC_PICKOUT">取消</el-button>
         </el-form-item>
         </el-col>
         <el-col :span="12">
@@ -805,8 +805,8 @@
        <el-col :span="12">
         <el-form-item>  
               <el-button type="primary" @click="confirmCALL_SHELF">确认</el-button>
-              <el-button type="primary" @click="resetCALL_SHELF">清空</el-button>
-              <el-button type="primary" @click="cancelCALL_SHELF">取消</el-button>
+              <el-button type="info" @click="resetCALL_SHELF">清空</el-button>
+              <el-button type="info" @click="cancelCALL_SHELF">取消</el-button>
         </el-form-item>
         </el-col>
        <el-col :span="12">
@@ -975,8 +975,8 @@
         <el-col :span="12">
         <el-form-item>  
               <el-button type="primary" @click="confirmSTOCK_TAKING">确认</el-button>
-              <el-button type="primary" @click="resetSTOCK_TAKING">清空</el-button>
-              <el-button type="primary" @click="cancelSTOCK_TAKING">取消</el-button>
+              <el-button type="info" @click="resetSTOCK_TAKING">清空</el-button>
+              <el-button type="info" @click="cancelSTOCK_TAKING">取消</el-button>
         </el-form-item>
           </el-col>
        <el-col :span="12">
@@ -1608,15 +1608,6 @@
             top: 30,
             right: 50
           },
-          dataZoom: [
-            {
-              type: 'inside',
-              show: true,
-              xAxisIndex: [0],
-              start: 5,
-              end: 20
-            }
-          ],
           xAxis: {
             axisLabel: {
               interval: 0,
@@ -1647,15 +1638,6 @@
             top: 30,
             right: 50
           },
-          dataZoom: [
-            {
-              type: 'inside', // inside,slider
-              show: true,
-              xAxisIndex: [0],
-              start: 5,
-              end: 20
-            }
-          ],
           xAxis: {
             axisLabel: {
               interval: 0,

@@ -1,0 +1,188 @@
+/* css中的公用样式 */
+html,body{
+	font-family: 'Microsoft yahei', sans-serif!important;
+}
+/* 每个页面最外层父元素 div标签的边距 */
+.mainContainer{
+	margin:20px auto 50px;
+}
+.conWidth{
+	width: 96%;
+	margin:20px auto 50px!important;
+}
+/*tab切换行距离下面内容的边距*/
+.marginBottoms{
+	margin-bottom: 20px;
+}
+/*表格头部与内容样式*/
+#app .has-gutter .cell,#app .el-table__body .cell,#alone .has-gutter .cell,#alone .el-table__body .cell{
+	font-size: 14px!important;
+	text-align: center!important;
+}
+#app .has-gutter .cell,#alone .has-gutter .cell{
+	color: #fff!important;
+}
+#app  .el-table th,#alone  .el-table th{
+	background-color: #989898;
+	height: 60px;
+	border: none;
+}
+
+.el-table--border::after, .el-table--group::after, .el-table::before{
+	background-color: #D8D8D8;
+}
+.el-table--border, .el-table--group{
+	border-color:  #D8D8D8;
+}
+.el-table--border td{
+	border-right: 1px solid #D8D8D8;
+	border-bottom:1px solid #D8D8D8;
+}
+.el-table__body .cell,.el-input__inner{
+	color: #222!important;
+	font-weight: normal!important;
+}
+input::-webkit-input-placeholder{
+    color:222!important;
+}
+input::-moz-placeholder{   /* Mozilla Firefox 19+ */
+    color:222!important;
+}
+input:-moz-placeholder{    /* Mozilla Firefox 4 to 18 */
+    color:222!important;
+}
+input:-ms-input-placeholder{  /* Internet Explorer 10-11 */ 
+    color:222!important;
+}
+/*内容宽度*/
+.textCenter{
+	margin: 0 auto;
+	width: 90%;
+}
+/*左右边距*/
+#app .marginAuto,#alone .marginAuto{
+	margin: 0 30px 0 40px;
+}
+/*两内容建的左边间距*/
+#app .marginLeft,#alone .marginLeft{
+	margin-left: 15px;
+}
+#app .formMargin,#alone .formMargin{
+	margin-right: 3px;
+	margin-left: 10px;
+}
+/*内容距离左边20px*/
+#app .conMarginLeft,#alone .conMarginLeft{
+	margin-left: 20px;
+}
+/*button中字间距*/
+#app .el-button,#alone .el-button{
+	letter-spacing:2;
+}
+
+/* 弹窗样式 */
+.el-dialog__body{
+	text-align: center!important;
+}
+
+/* 内容 */
+.el-main{
+	padding: 20px 16px;
+}
+/*头部信息*/
+#app .title,#alone .title{
+font-size: 20px;
+}
+/* 左边菜单栏 */
+.el-submenu__title{
+	height: 60px;
+	line-height: 60px;
+	background-color: #C8C8C8;
+	font-size: 18px;
+	padding-left: 27px;
+	box-sizing: border-box;
+	-o-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-ms-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+}
+.el-submenu__title:hover,.el-submenu__title:hover  .el-submenu__icon-arrow{
+	color: #fff!important;
+	background-color: #C8C8C8;
+}
+
+.el-menu-item,.el-submenu__icon-arrow{
+	font-size: 18px;
+}
+.el-submenu__icon-arrow{
+	color: #000!important;
+}
+/* 子菜单 */
+.el-menu-item.is-active{
+	color: #00677f;
+}
+
+.el-menu,.el-menu-item.is-active,.el-menu-item:hover{
+	background-color: #E6E6E6;
+}
+
+.el-aside, .el-main{
+	overflow: visible;
+}
+.el-menu-vertical-demo{
+	background-color: #C8C8C8;
+}
+
+#app .main,#alone .main{
+	margin-top: 20px;
+}
+#app .el-breadcrumb__item .el-breadcrumb__inner, #app .el-breadcrumb__item .el-breadcrumb__separator,.tabConOther > .h2, .tabConLast > .h2,#alone .el-breadcrumb__item .el-breadcrumb__inner, #alone .el-breadcrumb__item .el-breadcrumb__separator{
+	font-size: 16px;
+}
+#app #mainTabCon,#alone #mainTabCon{
+	margin: 20px auto 50px;
+}
+#app .tabOne,#alone .tabOne{
+	margin-top: 20px;
+}
+#app .tabTwo,#alone .tabTwo{
+	margin-top: 50px;
+}
+
+.el-main{
+	width:85%;
+}
+.el-form-item__content{
+	margin-right: 24px;
+}
+/* 按钮颜色 */
+.el-button--primary,.el-button--primary:focus{
+	 background: #00566A!important;
+	border-color: #00566A; 
+	
+}
+.el-button--primary:hover{
+	opacity: .8;
+	border-color:#00566A;
+}
+.el-button--primary.is-disabled, .el-button--primary.is-disabled:active, .el-button--primary.is-disabled:focus, .el-button--primary.is-disabled:hover{
+	background-color: #00677F;
+	border-color: #00677F;
+}
+.el-button{
+	min-width: 96px!important;
+	height: 34px!important;
+	font-size: 14px!important;
+}
+
+.el-main .formCon .el-form-item__content,.el-main .formCon .el-input{
+	width: 206px!important;
+}
+/* 分页 */
+.el-pagination.is-background .el-pager li:not(.disabled).active{
+	background-color: #00677F;
+}
+/* 分页样式 */
+#app .pagination,#alone .pagination{
+	text-align: right;
+}

@@ -106,18 +106,18 @@
              </el-col>
                </el-row>
                <el-row>
-                 <el-col :span="8">
-                 <el-form-item class="fl">
-                        <el-button type="primary" @click="confirm">确认</el-button>
-                        <el-button type="primary" :disabled = "cancelIsDisabled" @click="cancel">取消</el-button>
-                    </el-form-item>
-                 </el-col>
-                     <el-col :span="8">
+                  <el-col :span="8" class='formBtn'>
                     <el-form-item>
                        <el-checkbox v-model="search.submitAll"  @change="handleCheckAllChange">提交全部</el-checkbox>
                        <el-button type="primary" @click="submit" :disabled = "submitIsDisabled" >提交</el-button>
                     </el-form-item>
-                    </el-col>
+                  </el-col>
+                  <el-col :span="8">
+                  <el-form-item class="fl formGroupBtn">
+                    <el-button type="primary" @click="confirm">确认</el-button>
+                    <el-button type="info" :disabled = "cancelIsDisabled" @click="cancel">取消</el-button>
+                  </el-form-item>
+                 </el-col>
                 </el-row>
                </el-form>
                 <el-table ref="multipleTable" :data="tableData" tooltip-effect="dark" :row-class-name="tableRowClassName" style="width: 99.99%" border @selection-change="handleSelectionChange" v-loading="tableLoading">
@@ -153,7 +153,7 @@
         <!-- 搜索区域 -->
         <el-form :inline="true" class="demo-form-inline">
             <el-form-item>
-                <el-button type="primary" @click="showConfirmDialog">取消</el-button>
+                <el-button type="info" @click="showConfirmDialog">取消</el-button>
                 <el-button type="primary" @click="confirmAssign">任务分配</el-button>
             </el-form-item>
         </el-form>
@@ -467,6 +467,12 @@ export default {
 
   .el-table .success-row {
     background: #f0f9eb;
+  }
+  .formBtn .el-form-item__content{
+    margin-left:80px!important;
+  }
+  .formGroupBtn .el-form-item__content{
+    margin-left:0px!important;
   }
 </style>
 

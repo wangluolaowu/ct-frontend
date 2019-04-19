@@ -39,7 +39,7 @@ const routes = [
   {
     path: '/',
     component: Layout,
-    icon: 'el-icon-tickets',
+    icon: 'el-icon-setting',
     name: '看板',
     children: [
       {

@@ -2,7 +2,7 @@
   <div class="charingCon">
     <h4 class="h2">充电桩信息</h4>
     <el-table :data='tableData.list' highlight-current-row v-loading="tableLoading" style="width: 100%" border>
-      <el-table-column prop="chargePointId" label="充电桩编码">
+      <el-table-column prop="chargePointId" label="充电桩编码" min-width='120'>
       </el-table-column>
       <el-table-column prop="activeFlag" label="是否启用">
       </el-table-column>
@@ -20,9 +20,9 @@
       <el-table-column prop="externalDevice" label="充电信息">
       </el-table-column>
 
-      <el-table-column prop="chargingKidId" label="正在充电机器人编码" width="200">
+      <el-table-column prop="chargingKidId" label="正在充电机器人编码" min-width="200">
       </el-table-column>
-      <el-table-column prop="lastUpdateDate" label="最后更新日期" width="200">
+      <el-table-column prop="lastUpdateDate" label="最后更新日期" min-width="200">
         <template slot-scope="scope">
                 {{ $DateFormat.dateFormat(scope.row.lastUpdateDate,true) }}
             </template>

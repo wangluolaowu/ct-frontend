@@ -74,10 +74,10 @@ body {
   opacity: 0;
 }
 #alone .title{
-  font-size: 24px;
+  font-size: 20px;
   font-weight: bolder;
 }
   #alone .el-breadcrumb__item .el-breadcrumb__inner,#alone .el-breadcrumb__item .el-breadcrumb__separator{
-    font-size: 18px;
+    font-size: 16px;
   }
 </style>

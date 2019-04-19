@@ -1,6 +1,6 @@
 <template>
      <div class="mainCon">
-       <el-form :inline="true" class="demo-form-inline">
+       <el-form :inline="true" class="demo-form-inline conMarginLeft">
         <el-form-item label="工作站编号：">
           <el-select v-model="search.entityWorkstationId" @change="websocketToLogin" v-loading.fullscreen.lock="fullscreenLoading">
                   <el-option
@@ -139,7 +139,7 @@
  color: dimgrey;
 }
 .mainCon{
-  margin-top: 40px;
+  margin-top: 20px;
 }
 </style>
 <style>
