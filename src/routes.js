@@ -220,22 +220,22 @@ const routes = [
     children: [
       {
         path: '/holderManage/holderHomePage',
-        component: () => import('@/pages/plate/HolderManage/holderMove'),
+        component: () => import('@/pages/plate/holderManageNew/holderMove'),
         name: '货架主数据'
       },
       {
         path: '/holderManage/holderMoveContr',
-        component: () => import('@/pages/plate/HolderManage/holderMove'),
+        component: () => import('@/pages/plate/holderManageNew/holderMove'),
         name: '货架搬运'
       },
       {
         path: '/holderManage/holderSide',
-        component: () => import('@/pages/plate/HolderManage/holderMove'),
+        component: () => import('@/pages/plate/holderManageNew/holderMove'),
         name: '货位'
       },
       {
         path: '/holderManage/holderSideType',
-        component: () => import('@/pages/plate/HolderManage/holderMove'),
+        component: () => import('@/pages/plate/holderManageNew/holderMove'),
         name: '货架位类型'
       }
     ]
