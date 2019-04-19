@@ -21,7 +21,7 @@
   import qs from 'qs'
   import golbalData from '../util/baseData'
   export default {
-    name: 'loginAlone',
+    name: 'login',
     data () {
       return {
         axios,
@@ -90,7 +90,7 @@
             }).then((res) => {
               if (res.code === 'S') {
                 sessionStorage.setItem('token', res.token)
-                sessionStorage.setItem('user', this.ruleForm2.account)
+                sessionStorage.setItem('user', res.user)
                 this.$router.push({ path: '/' })
               }
             })
