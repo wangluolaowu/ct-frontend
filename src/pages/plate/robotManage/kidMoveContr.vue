@@ -88,7 +88,7 @@
           qs,
         tableData: [{
           rowNum: 1,
-          pi_kid_id: 0,
+          pi_kid_id: '',
           pi_pose_control_type: 'SIMPLE_MOVE',
           pi_dest_pos_x: '',
           pi_dest_pos_y: ''
@@ -150,7 +150,7 @@
       addRow () {
         var list = {
           rowNum: '',
-          pi_kid_id: 0,
+          pi_kid_id: '',
           pi_pose_control_type:'SIMPLE_MOVE',
           pi_dest_pos_x: this.pi_dest_pos_x,
           pi_dest_pos_y: this.pi_dest_pos_y}

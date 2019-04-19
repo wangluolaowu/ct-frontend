@@ -7,7 +7,7 @@
                     <el-input v-model="filters.role" placeholder="角色"></el-input>
                    </el-form-item>
                    <el-form-item>
-                     <el-button type="primary" v-on:click="getUsers">查询</el-button>
+                     <el-button type="primary" v-on:click="loadData">查询</el-button>
                   </el-form-item>
                  <el-form-item>
                      <el-button type="info" @click="addUser">新增</el-button>
@@ -125,8 +125,8 @@
       },
   mounted: function () {
         this.loadData()
-        this.generateData2()
-        this.getSelectValues()
+        //this.generateData2()
+        //this.getSelectValues()
       },
       methods: {
         getSelectValues() { 
@@ -148,9 +148,21 @@
             }
           })
         },
+        generateValue2 () {
+          let that = this
+          that.value2 = []
+          axios.post('custom/common/selectUserListByRoleId', {}).then((res) => {
+            if (res.errCode === 'S') {
+              res.data.result.forEach(function(c, index) {
+                that.value2.push(c.id)      
+              })  
+            }
+          })
+        },
         createRoleUser(val) {
           console.log('val=====' + val)
           console.log('value2===' + this.value2)
+          
         },
         filterMethod(query, item) {
           return item.pinyin.indexOf(query) > -1
@@ -161,9 +173,6 @@
             var _data = res.data.result
             this.userInfoList = _data
           })
-        },
-        getUsers() {
-          this.loadData()
         },
         addUser() {
           this.addFormData = {

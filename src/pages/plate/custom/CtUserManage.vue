@@ -7,7 +7,7 @@
                     <el-input v-model="filters.username" placeholder="姓名"></el-input>
                    </el-form-item>
                    <el-form-item>
-                     <el-button type="primary" v-on:click="getUsers">查询</el-button>
+                     <el-button type="primary" v-on:click="loadData">查询</el-button>
                   </el-form-item>
                  <el-form-item>
                      <el-button type="info" @click="addUser">新增</el-button>
@@ -19,17 +19,20 @@
          <el-table :data="userInfoList" style="width: 100%" border>
             <!--<el-table-column prop="id" label="id" >
             </el-table-column>-->
-            <el-table-column prop="firstName" label="FirstName" width="180">
+            <el-table-column prop="firstName" label="FirstName" >
             </el-table-column>
-             <el-table-column prop="lastName" label="LastName" width="180">
+             <el-table-column prop="lastName" label="LastName">
             </el-table-column>
-             <el-table-column prop="username" label="登录名" width="180">
+             <el-table-column prop="username" label="登录名" >
             </el-table-column>
-             <el-table-column prop="password" label="密码" width="180">
+             <el-table-column prop="password" label="密码" >
             </el-table-column>
-             <el-table-column prop="email" label="Email" width="180">
+             <el-table-column prop="email" label="Email" >
             </el-table-column>
             <el-table-column prop="state" label="状态">
+                <template slot-scope="scope">
+                {{$Enum.getEnumSelectByValue($Enum.EnumSelect().openStatus3,scope.row.state)}}
+                </template>
             </el-table-column>
              <!--第二步  开始进行修改和查询操作-->
              <el-table-column label="操作" align="center" min-width="100">
@@ -47,25 +50,37 @@
          </el-table>
           <!--新增界面-->
          <el-dialog title="记录" :visible.sync="dialogVisible" width="50%" :close-on-click-modal="false">
-             <el-form :model="addFormData" :rules="rules2" ref="addFormData" label-width="0px" class="demo-ruleForm login-container">
-                  <el-form-item prop="firstName">
-                    <el-input type="text" v-model="addFormData.firstName" auto-complete="off" placeholder="FirstName"></el-input>
+             <el-form :model="addFormData" :rules="rules2" ref="addFormData" label-width="150px" class="demo-ruleForm login-container">
+                  <el-form-item prop="firstName" label="FirstName">
+                    <el-input type="text" v-model="addFormData.firstName" placeholder="FirstName"></el-input>
                   </el-form-item>
-                   <el-form-item prop="lastName">
-                    <el-input type="text" v-model="addFormData.lastName" auto-complete="off" placeholder="LastName"></el-input>
+                   <el-form-item prop="lastName" label="LastName">
+                    <el-input type="text" v-model="addFormData.lastName"  placeholder="LastName"></el-input>
                   </el-form-item>
-                   <el-form-item prop="username">
-                    <el-input type="text" v-model="addFormData.username" auto-complete="off" placeholder="登录名"></el-input>
+                   <el-form-item prop="username" label="登录名">
+                    <el-input type="text" v-model="addFormData.username"  placeholder="登录名"></el-input>
                   </el-form-item>
-                   <el-form-item prop="password">
-                    <el-input type="password" v-model="addFormData.password" auto-complete="off" placeholder="密码"></el-input>
+                   <el-form-item prop="password" label="密码">
+                    <el-input type="password" v-model="addFormData.password" placeholder="密码"></el-input>
                   </el-form-item>
-                   <el-form-item prop="email">
-                    <el-input type="text" v-model="addFormData.email" auto-complete="off" placeholder="Email"></el-input>
+                   <el-form-item prop="email" label="Email">
+                    <el-input type="text" v-model="addFormData.email" placeholder="Email"></el-input>
                   </el-form-item>
-                <el-form-item prop="state">
-                     <el-input type="text" v-model="addFormData.state" auto-complete="off" placeholder="状态"></el-input>
+                 <el-row> 
+                   <el-col>
+                <el-form-item prop="state" label="状态" style="width:400px">
+                    <el-select placeholder="状态" v-model="addFormData.state">
+                        <el-option
+                            v-for="item in $Enum.EnumSelect().openStatus3"
+                            :key="item.value"
+                            :label="item.label"
+                            :value="item.value" 
+                        > 
+                        </el-option>
+                        </el-select>
                   </el-form-item>
+                   </el-col>
+                 </el-row>
              </el-form>
              <span slot="footer" class="dialog-footer">
                  <el-button @click.native="dialogVisible = false,addFormData={id:'',firstName:'',lastName:'',username:'',password:'',email:'',state:''}">取 消</el-button>
@@ -122,9 +137,6 @@
             var _data = res.data.result
             this.userInfoList = _data
           })
-        },
-        getUsers() {
-          this.loadData()
         },
         addUser() {
           this.addFormData = {
@@ -218,6 +230,7 @@
                   this.dialogVisible = false
                 })
               }
+               this.loadData()
             }
           })
         }
