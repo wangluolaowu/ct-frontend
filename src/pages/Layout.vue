@@ -24,7 +24,7 @@
                         unique-opened router v-show="!collapsed">
                     <div v-for="(item,index) in menuList" :key="index">
                         <el-submenu :index="index + ''" v-if="item.subMenuVoList.length > 0" :key="index">
-                            <template slot="title"><i :class="item.icon"></i>{{item.name}}</template>
+                            <template slot="title"><i :class="item.icon">{{item.icon}}</i>{{item.name}}</template>
                             <template v-for="child in item.subMenuVoList">
                               <el-menu-item :index="child.url" :key="child.url" :route="{'path':child.url}">{{child.name}}</el-menu-item>
                             </template>

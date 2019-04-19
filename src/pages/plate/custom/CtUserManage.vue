@@ -1,7 +1,7 @@
  <template>
-     <div>
+     <div class="mainContainer">
           <!--工具条-->
-         <el-col :span="24" class="toolbar" style="padding-bottom: 0px;">
+         <el-col :span="24" class="toolbar conMarginLeft" >
              <el-form :inline="true" :model="filters">
                 <el-form-item>
                     <el-input v-model="filters.username" placeholder="姓名"></el-input>
@@ -32,7 +32,7 @@
             <el-table-column prop="state" label="状态">
             </el-table-column>
              <!--第二步  开始进行修改和查询操作-->
-             <el-table-column label="操作" align="center" min-width="100">
+             <el-table-column label="操作" align="center" min-width="350">
  
                 <template slot-scope="scope">
  

@@ -3,7 +3,7 @@
     <div class="tabOne">
       <h4 class="h2">故障机器人清单</h4>
       <el-table :data='tableData.list' highlight-current-row v-loading="tableLoading" style="width: 100%" border>
-        <el-table-column prop="kidId" label="机器人编码">
+        <el-table-column prop="kidId" label="机器人编码" min-width='100'>
         </el-table-column>
         <el-table-column prop="batteryFaultCode" label="错误类型" width="200">
            <template slot-scope="scope" width="100%">
@@ -23,7 +23,7 @@
         </el-table-column>
         <el-table-column prop="holderId" label="货架编码">
         </el-table-column>
-        <el-table-column prop="batteryPower" label="电量（%）">
+        <el-table-column prop="batteryPower" label="电量（%）" min-width='100'>
         </el-table-column>
         <el-table-column prop="lastUpdateDate" label="最后更新日期" width="200">
           <template slot-scope="scope">

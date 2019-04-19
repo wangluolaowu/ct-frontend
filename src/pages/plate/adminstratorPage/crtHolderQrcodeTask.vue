@@ -1,5 +1,5 @@
  <template>
-     <div>
+     <div class="mainContainer">
          <h4 class="h2">Holder QRCode Check Task</h4>
          <el-form :label-position="labelPosition" label-width="150px" :model="filters" class="main">
                   <el-form-item label="Retcode">

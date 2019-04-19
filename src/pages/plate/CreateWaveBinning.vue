@@ -6,16 +6,15 @@
                
                 <!-- 搜索区域 -->
                 <el-form :inline="true" class="demo-form-inline">
-                 
-                    <el-form-item>
-                        <el-button type="primary"  :disabled = "cancelDisabled" @click="cancel">取消</el-button>
-                    </el-form-item>
-                     <el-form-item>
+                     <el-form-item class='formMargin'>
                      <el-checkbox v-model="search.submitAll"  @change="handleCheckAllChange">提交全部</el-checkbox>
                     </el-form-item>
                     <el-form-item>
                      <el-button type="primary" :disabled = "submitIsDisabled" @click="submit">提交</el-button>
                     </el-form-item> 
+                    <el-form-item>
+                        <el-button type="info"  :disabled = "cancelDisabled" @click="cancel">取消</el-button>
+                    </el-form-item>
                 </el-form>
                 <el-table ref="multipleTable" :data="tableData" tooltip-effect="dark" style="width: 100%" border @selection-change="handleSelectionChange" v-loading="tableLoading">
                     <el-table-column type="selection" width="55">

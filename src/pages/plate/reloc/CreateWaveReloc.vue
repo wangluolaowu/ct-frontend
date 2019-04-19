@@ -37,7 +37,7 @@
                   <el-col :span="8">
                 <el-form-item>
                       <el-button type="primary" :disabled = "submitIsDisabled" @click="submit">提交</el-button>
-                      <el-button type="primary" :disabled = "cancelIsDisabled" @click="cancel">取消</el-button>
+                      <el-button type="info" :disabled = "cancelIsDisabled" @click="cancel">取消</el-button>
                 </el-form-item>
                   </el-col>
                 </el-row>

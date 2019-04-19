@@ -9,40 +9,39 @@
           </el-tabs>
           <!-- 搜索区域 -->
           <el-form :inline="true" class="demo-form-inline">
-            <el-row :span="16">
+            <el-row :span="24">
               <el-col :span="8">
                 <el-form-item label="初始日期" prop>
-                <el-date-picker
-                v-model="search.startTime"
-                format="yyyy-MM-dd HH:mm:ss"
-                value-format="yyyy-MM-dd HH:mm:ss"
-                type="datetime"
-                placeholder="请选择初始日期"
-                @change="handleChangeTime"
-              ></el-date-picker>
+                  <el-date-picker
+                  v-model="search.startTime"
+                  format="yyyy-MM-dd HH:mm:ss"
+                  value-format="yyyy-MM-dd HH:mm:ss"
+                  type="datetime"
+                  placeholder="请选择初始日期"
+                  @change="handleChangeTime"
+                ></el-date-picker>
                 </el-form-item>
               </el-col>
               <el-col :span="8">
                 <el-form-item label="截止日期日期" prop>
                   <el-date-picker
-                v-model="search.endTime"
-                format="yyyy-MM-dd HH:mm:ss"
-                value-format="yyyy-MM-dd HH:mm:ss"
-                type="datetime"
-                placeholder="请选择完成日期"
-                 @change="handleChangeTime"
-              ></el-date-picker>
+                    v-model="search.endTime"
+                    format="yyyy-MM-dd HH:mm:ss"
+                    value-format="yyyy-MM-dd HH:mm:ss"
+                    type="datetime"
+                    placeholder="请选择完成日期"
+                     @change="handleChangeTime"
+                  ></el-date-picker>
                 </el-form-item>
               </el-col>
-            </el-row>
-            <el-row :span="24">
               <el-col :span="5">
                 <el-form-item>
                   <el-button type="primary" @click="confirm">查找</el-button>
-                  <el-button type="primary" @click="cancel">清空</el-button>
+                  <el-button type="info" @click="cancel">清空</el-button>
                 </el-form-item>
               </el-col>
             </el-row>
+            
           </el-form>
 
 

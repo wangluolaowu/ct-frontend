@@ -1,6 +1,6 @@
 
 <template>
- <div>
+ <div class="mainContainer">
   <el-form :inline="true" class="demo-form-inline" label-width="150px">
          <el-row>
           <el-col :span="8">
@@ -204,34 +204,34 @@
             </el-form-item>
             </el-col>
             </el-row>
-            <el-row>
-            <el-col :span=12>
-            <el-form-item>
-                <el-button type="primary" @click="confirm">确认</el-button>
-                 <el-button type="primary" @click="reset">清空</el-button>
-                 <el-button type="primary" :disabled="cancelDisabled" @click="cancel">取消</el-button>
-            </el-form-item>
-            </el-col>
-            <el-col :span=12>
-            <el-form-item>
-              <el-checkbox v-model="search.printAll" @change="handleCheckAllChange">打印全部</el-checkbox>
-            </el-form-item>
-            <el-form-item label="选择打印工作站：" >
-              <el-select v-model="search.wsId" >
-                <el-option
-                v-for="item in WS_ENTITY_WORKSTATION"
-                :key="item.value"
-                :label="item.lable"
-                :value="item.value" 
-                > 
-              </el-option>
-             </el-select>
-             </el-form-item>
-              <el-form-item >
-                <el-button type="primary" :disabled="submitIsDisabled" @click="toDoPrint">打印</el-button>
-            </el-form-item>
-            </el-col>
-            </el-row>
+            <el-row class='marginBottoms'>
+              <el-col :span='12' style='margin-left:40px;box-sizing:border-box;'>
+                <el-form-item>
+                  <el-checkbox v-model="search.printAll" @change="handleCheckAllChange">打印全部</el-checkbox>
+                </el-form-item>
+                <el-form-item label="选择打印工作站：" >
+                  <el-select v-model="search.wsId" >
+                    <el-option
+                    v-for="item in WS_ENTITY_WORKSTATION"
+                    :key="item.value"
+                    :label="item.lable"
+                    :value="item.value" 
+                    > 
+                  </el-option>
+                 </el-select>
+                 </el-form-item>
+                <el-form-item >
+                  <el-button type="primary" :disabled="submitIsDisabled" @click="toDoPrint">打印</el-button>
+                </el-form-item>
+              </el-col>
+              <el-col :span='9'>
+                <el-form-item>
+                    <el-button type="primary" @click="confirm">确认</el-button>
+                     <el-button type="info" @click="reset">清空</el-button>
+                     <el-button type="info" :disabled="cancelDisabled" @click="cancel">取消</el-button>
+                </el-form-item>
+              </el-col>
+          </el-row>
         </el-form>
 
         <el-table ref="multipleTable" :data="tableData" style="width: 100%" @selection-change="handleSelectionChange" border v-loading="tableLoading">

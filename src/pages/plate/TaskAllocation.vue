@@ -1,10 +1,10 @@
 <template>
   <div id="mainCon">
-    <el-row class="groupBtn">
-      <el-button type="primary" size="medium" @click="cancelBtn">取消</el-button>
+    <el-row class="groupBtn conMarginLeft">
       <el-button type="primary" size="medium" @click="deleteBtn">删除</el-button>
       <el-button type="primary" size="medium" @click="addBtn">增加</el-button>
       <el-button type="primary" size="medium" @click="tureBtn">确认</el-button>
+      <el-button type="info" size="medium" @click="cancelBtn">取消</el-button>
     </el-row>
     <el-table class="tabSelect" :data="tableData" highlight-current-row v-loading="tableLoading" style="width: 100%"
               border @select="tableSelectChange">
@@ -245,14 +245,12 @@ export default {
     color: dimgrey;
   }
   .tabSelect{
-    margin: 40px 0;
+    margin: 20px auto;
   }
   #mainCon{
-    margin: 40px 0 50px;
+    margin: 20px 0 50px;
   }
   #mainCon .groupBtn .el-button{
-    width: 180px;
-    height: 40px;
     letter-spacing: 2px;
     font-size: 15px;
     margin-right: 20px;

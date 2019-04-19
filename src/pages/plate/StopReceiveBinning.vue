@@ -1,21 +1,23 @@
 <template>
-     <el-form :inline="true" class="demo-form-inline">
-       <el-form-item label="工作站编号：">
-         <el-select v-model="search.entityWorkstationId" @change="getReceiveStatus" v-loading.fullscreen.lock="fullscreenLoading">
-                <el-option
-                v-for="item in WS_ENTITY_WORKSTATION"
-                :key="item.value"
-                :label="item.lable"
-                :value="item.value" 
-                > 
-              </el-option>
-          </el-select>
-        </el-form-item>    
-        <el-form-item>
-             <el-button type="primary" :disabled = "openIsDisabled"   @click="restReceive(1)">恢复接收任务</el-button>
-             <el-button type="primary" :disabled = "closeIsDisabled"  @click="restReceive(0)">停止接收任务</el-button>
-        </el-form-item>
-     </el-form>
+     <div class="mainContainer conMarginLeft">
+       <el-form :inline="true" class="demo-form-inline">
+         <el-form-item label="工作站编号：">
+           <el-select v-model="search.entityWorkstationId" @change="getReceiveStatus" v-loading.fullscreen.lock="fullscreenLoading">
+                  <el-option
+                  v-for="item in WS_ENTITY_WORKSTATION"
+                  :key="item.value"
+                  :label="item.lable"
+                  :value="item.value" 
+                  > 
+                </el-option>
+            </el-select>
+          </el-form-item>    
+          <el-form-item>
+               <el-button type="primary" :disabled = "openIsDisabled"   @click="restReceive(1)">恢复接收任务</el-button>
+               <el-button type="primary" :disabled = "closeIsDisabled"  @click="restReceive(0)">停止接收任务</el-button>
+          </el-form-item>
+       </el-form>
+     </div>
 </template>
 <script>
   import axios from '../../util/http'

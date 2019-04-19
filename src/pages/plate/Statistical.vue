@@ -244,17 +244,17 @@
             </el-col>
             </el-row>
             <el-col :span="8">
-            <el-form-item >  
-                 <el-button type="primary" @click="confirm">确认</el-button>
-                 <el-button type="info" @click="reset">清空</el-button>
-                 <el-button type="info" @click="cancel">取消</el-button>
-            </el-form-item>
+              <el-form-item >  
+                   <el-button type="primary" @click="confirm">确认</el-button>
+                   <el-button type="info" @click="reset">清空</el-button>
+                   <el-button type="info" @click="cancel">取消</el-button>
+              </el-form-item>
             </el-col>
             <el-col :span="12">
-            <el-form-item>
-                 <el-checkbox v-model="searchPick.submitAll"  @change="handleCheckAllChangePICK">提交全部</el-checkbox>
-                 <el-button  type="primary" :disabled="downLoadDisabledPick" @click="SetDownloadFunc('PICK')">下载excel </el-button>
-            </el-form-item>
+              <el-form-item>
+                   <el-checkbox v-model="searchPick.submitAll"  @change="handleCheckAllChangePICK">提交全部</el-checkbox>
+                   <el-button  type="primary" :disabled="downLoadDisabledPick" @click="SetDownloadFunc('PICK')">下载excel </el-button>
+              </el-form-item>
             </el-col>
       </el-form>
       <el-table ref="multipleTable" :data="tableData.pick" tooltip-effect="dark" style="width: 100%" @selection-change="handleSelectionChangePick" border v-loading="tableLoadingPick">

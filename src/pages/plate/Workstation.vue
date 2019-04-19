@@ -2,9 +2,9 @@
   <div class="workStation">
     <h4 class="h2">工作站信息</h4>
     <el-table :data='tableData.list' highlight-current-row v-loading="tableLoading" style="width: 100%" border>
-      <el-table-column prop="entityWorkstationId" label="工作站编码">
+      <el-table-column prop="entityWorkstationId" label="工作站编码" min-width='100'>
       </el-table-column>
-      <el-table-column prop="wallCount" label="播种墙数量">
+      <el-table-column prop="wallCount" label="播种墙数量" min-width='100'>
       </el-table-column>
       <el-table-column prop="userNum" v-model="isShow" label="是否在线">
       </el-table-column>
@@ -18,7 +18,7 @@
             {{$Enum.getEnumSelectByValue(WS_TYPE,scope.row.workstationType)}}
          </template>
       </el-table-column>
-      <el-table-column prop="lastUpdateDate" label="最后更新日期">
+      <el-table-column prop="lastUpdateDate" label="最后更新日期" min-width='200'>
          <template slot-scope="scope">
                 {{$DateFormat.dateFormat(scope.row.lastUpdateDate,true)}}
             </template>
