@@ -15,14 +15,14 @@ html,body{
 	margin-bottom: 20px;
 }
 /*表格头部与内容样式*/
-#app .has-gutter .cell,#app .el-table__body .cell{
+#app .has-gutter .cell,#app .el-table__body .cell,#alone .has-gutter .cell,#alone .el-table__body .cell{
 	font-size: 14px!important;
 	text-align: center!important;
 }
-#app .has-gutter .cell{
+#app .has-gutter .cell,#alone .has-gutter .cell{
 	color: #fff!important;
 }
-#app  .el-table th{
+#app  .el-table th,#alone  .el-table th{
 	background-color: #989898;
 	height: 60px;
 	border: none;
@@ -38,7 +38,7 @@ html,body{
 	border-right: 1px solid #D8D8D8;
 	border-bottom:1px solid #D8D8D8;
 }
-#app .el-table__body .cell,.el-input__inner{
+.el-table__body .cell,.el-input__inner{
 	color: #222!important;
 	font-weight: normal!important;
 }
@@ -60,35 +60,32 @@ input:-ms-input-placeholder{  /* Internet Explorer 10-11 */
 	width: 90%;
 }
 /*左右边距*/
-#app .marginAuto{
+#app .marginAuto,#alone .marginAuto{
 	margin: 0 30px 0 40px;
 }
 /*两内容建的左边间距*/
-#app .marginLeft{
+#app .marginLeft,#alone .marginLeft{
 	margin-left: 15px;
 }
-#app .formMargin{
+#app .formMargin,#alone .formMargin{
 	margin-right: 3px;
 	margin-left: 10px;
 }
 /*内容距离左边20px*/
-#app .conMarginLeft{
+#app .conMarginLeft,#alone .conMarginLeft{
 	margin-left: 20px;
 }
 /*button中字间距*/
-#app .el-button{
+#app .el-button,#alone .el-button{
 	letter-spacing:2;
 }
 /* 分页样式 */
-#app .pagination{
+#app .pagination,#alone .pagination{
 	text-align: right;
 }
 /* 弹窗样式 */
 .el-dialog__body{
 	text-align: center!important;
-}
-#app .tabCont{
-	/*margin-top: 20px;*/
 }
 
 /* 内容 */
@@ -96,7 +93,7 @@ input:-ms-input-placeholder{  /* Internet Explorer 10-11 */
 	padding: 20px 16px;
 }
 /*头部信息*/
-#app .title{
+#app .title,#alone .title{
 font-size: 20px;
 }
 /* 左边菜单栏 */
@@ -139,19 +136,19 @@ font-size: 20px;
 	background-color: #C8C8C8;
 }
 
-#app .main{
+#app .main,#alone .main{
 	margin-top: 20px;
 }
-#app .el-breadcrumb__item .el-breadcrumb__inner, #app .el-breadcrumb__item .el-breadcrumb__separator,.tabConOther > .h2, .tabConLast > .h2{
+#app .el-breadcrumb__item .el-breadcrumb__inner, #app .el-breadcrumb__item .el-breadcrumb__separator,.tabConOther > .h2, .tabConLast > .h2,#alone .el-breadcrumb__item .el-breadcrumb__inner, #alone .el-breadcrumb__item .el-breadcrumb__separator{
 	font-size: 16px;
 }
-#app #mainTabCon{
+#app #mainTabCon,#alone #mainTabCon{
 	margin: 20px auto 50px;
 }
-#app .tabOne{
+#app .tabOne,#alone .tabOne{
 	margin-top: 20px;
 }
-#app .tabTwo{
+#app .tabTwo,#alone .tabTwo{
 	margin-top: 50px;
 }
 
