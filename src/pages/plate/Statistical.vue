@@ -243,17 +243,15 @@
             </el-form-item>
             </el-col>
             </el-row>
-            <el-col :span="8">
-              <el-form-item >  
+            <el-col >
+              <el-form-item class='sublimtInfo'>
+                   <el-checkbox v-model="searchPick.submitAll"  @change="handleCheckAllChangePICK">提交全部</el-checkbox>
+                   <el-button  type="primary" :disabled="downLoadDisabledPick" @click="SetDownloadFunc('PICK')">下载excel </el-button>
+              </el-form-item>
+              <el-form-item class='buttonGroups'>  
                    <el-button type="primary" @click="confirm">确认</el-button>
                    <el-button type="info" @click="reset">清空</el-button>
                    <el-button type="info" @click="cancel">取消</el-button>
-              </el-form-item>
-            </el-col>
-            <el-col :span="12">
-              <el-form-item>
-                   <el-checkbox v-model="searchPick.submitAll"  @change="handleCheckAllChangePICK">提交全部</el-checkbox>
-                   <el-button  type="primary" :disabled="downLoadDisabledPick" @click="SetDownloadFunc('PICK')">下载excel </el-button>
               </el-form-item>
             </el-col>
       </el-form>
@@ -497,18 +495,16 @@
             </el-form-item>
         </el-col>
         </el-row>
-        <el-col :span="8">
-        <el-form-item>  
+        <el-col >
+          <el-form-item class='sublimtInfo'>    
+              <el-checkbox v-model="searchBIN.submitAll"  @change="handleCheckAllChangeBIN">提交全部</el-checkbox>
+              <el-button  type="primary" :disabled="downLoadDisabledBIN" @click="SetDownloadFunc('BIN')">下载excel </el-button>
+          </el-form-item>
+          <el-form-item class='buttonGroups'>  
               <el-button type="primary" @click="confirmBIN">确认</el-button>
               <el-button type="info" @click="resetBIN">清空</el-button>
               <el-button type="info" @click="cancelBIN">取消</el-button>
-        </el-form-item>
-        </el-col>
-        <el-col :span="12">
-        <el-form-item>    
-              <el-checkbox v-model="searchBIN.submitAll"  @change="handleCheckAllChangeBIN">提交全部</el-checkbox>
-              <el-button  type="primary" :disabled="downLoadDisabledBIN" @click="SetDownloadFunc('BIN')">下载excel </el-button>
-        </el-form-item>
+          </el-form-item>
         </el-col>
       </el-form>
       <el-table ref="multipleTableBIN" :data="tableData.BIN" height="500" style="width: 100%" @selection-change="handleSelectionChangeBIN" border v-loading="tableLoadingBIN">
@@ -685,17 +681,15 @@
         </el-row>
         <el-row>
         <el-col :span="12">
-        <el-form-item>  
-              <el-button type="primary" @click="confirmRELOC_PICKOUT">确认</el-button>
-              <el-button type="info" @click="resetRELOC_PICKOUT">清空</el-button>
-              <el-button type="info" @click="cancelRELOC_PICKOUT">取消</el-button>
-        </el-form-item>
-        </el-col>
-        <el-col :span="12">
-        <el-form-item>    
+          <el-form-item class='sublimtInfo'>    
                <el-checkbox v-model="searchRelocPickOut.submitAll"  @change="handleCheckAllChangeRelocPickOut">提交全部</el-checkbox>
               <el-button  type="primary" :disabled="downLoadDisabledRelocPickOut" @click="SetDownloadFunc('RELOC_PICKOUT')">下载excel </el-button>
-        </el-form-item>
+          </el-form-item>
+          <el-form-item class='buttonGroups'>  
+                <el-button type="primary" @click="confirmRELOC_PICKOUT">确认</el-button>
+                <el-button type="info" @click="resetRELOC_PICKOUT">清空</el-button>
+                <el-button type="info" @click="cancelRELOC_PICKOUT">取消</el-button>
+          </el-form-item>
         </el-col>
         </el-row>  
       </el-form>
@@ -972,19 +966,18 @@
         </el-col>
         </el-row>
         <el-row>
-        <el-col :span="12">
-        <el-form-item>  
-              <el-button type="primary" @click="confirmSTOCK_TAKING">确认</el-button>
-              <el-button type="info" @click="resetSTOCK_TAKING">清空</el-button>
-              <el-button type="info" @click="cancelSTOCK_TAKING">取消</el-button>
-        </el-form-item>
-          </el-col>
-       <el-col :span="12">
-        <el-form-item>
+        <el-col >
+          <el-form-item class='sublimtInfo'>
               <el-checkbox v-model="searchSTOCK_TAKING.submitAll"  @change="handleCheckAllChangeSTOCK_TAKING">提交全部</el-checkbox>
               <el-button  type="primary" :disabled="downLoadDisabledSTOCK_TAKING"   @click="SetDownloadFunc('STOCK_TAKING')">下载excel </el-button>
-        </el-form-item>
+          </el-form-item>
+          <el-form-item class='buttonGroups'>  
+                <el-button type="primary" @click="confirmSTOCK_TAKING">确认</el-button>
+                <el-button type="info" @click="resetSTOCK_TAKING">清空</el-button>
+                <el-button type="info" @click="cancelSTOCK_TAKING">取消</el-button>
+          </el-form-item>
         </el-col>
+      
         </el-row>
       </el-form>
       <el-table ref="multipleTableSTOCK_TAKING" :data="tableData.STOCK_TAKING" height="500" style="width: 100%" @selection-change="handleSelectionChangeSTOCK_TAKING" border v-loading="tableLoadingSTOCK_TAKING">
@@ -1712,10 +1705,17 @@
   .fr{
     float: right;
   }
+  .sublimtInfo{
+    display:inline-block;
+  }
+  
 </style>
 <style>
   .robotInfo .el-tabs__nav-wrap {
     width: 90%;
     margin: 0 auto;
+  }
+  .sublimtInfo .el-form-item__content{
+    margin-left:80px!important;
   }
 </style>
