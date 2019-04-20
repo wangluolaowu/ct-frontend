@@ -1,5 +1,5 @@
  <template>
-     <div class="mainContainer">
+     <div class="mainContainer alertMask">
           <!--工具条-->
          <el-col :span="24" class="toolbar conMarginLeft" >
              <el-form :inline="true" :model="filters">
@@ -29,9 +29,9 @@
             </template>
             </el-table-column>
              <!--第二步  开始进行修改和查询操作-->
-             <el-table-column label="操作" align="center" min-width="350">
+             <el-table-column label="操作" align="center" min-width="350" >
  
-                <template slot-scope="scope">
+                <template slot-scope="scope" class='handleBtn'>
  
                      <el-button type="text" @click="checkDetail(scope.row)">成员管理</el-button>
  
@@ -72,7 +72,7 @@
                  <el-button v-if="isView" type="primary" @click.native="addSubmit">确 定</el-button>
              </span>
           </el-dialog>
-           <el-dialog title="角色-用户" :visible.sync="roleUserdialogVisible" width="60%" :close-on-click-modal="false">
+           <el-dialog title="角色-用户" :visible.sync="roleUserdialogVisible" width="60%" :close-on-click-modal="false"  >
               <el-row>
                  <el-card style="min-height: 20px">          
                    <span>{{'当前角色:'+addFormData.role}}</span>
@@ -85,7 +85,7 @@
                 v-model="value2"
                 :titles="['可选用户','已选用户']"
                 :data="data2" 
-                >
+                id='maskDialog'>
               </el-transfer>
                <el-button  type="primary" @click="createRoleUser">保存</el-button>
            </el-dialog>  
@@ -297,4 +297,14 @@
      body {
          background: #DFE9FB;
      }
+     .el-transfer__buttons{
+       width:200px!important;
+       box-sizing:border-box;
+       -o-box-sizing:border-box;
+       padding:0;
+     }
+   .el-transfer__buttons  .el-transfer__button{
+      width:40px!important;
+      height:40px!important;
+    }
  </style>

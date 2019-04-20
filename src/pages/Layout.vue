@@ -16,7 +16,7 @@
           </el-dropdown-menu>
         </el-dropdown> -->
         <ul class="clears userinfoCon">
-          <li><img src="../assets/images/u549.png"  alt="" title="用户"><span>{{sysUserName}}</span></li>
+          <li><img src="../assets/images/u549.png"  alt="" title="用户"><span :title='sysUserName'>{{sysUserName}}</span></li>
           <!-- <li><i class="el-icon-edit"></i>{{sysUserName}}</li> -->
           <li  @click='changeLanguage'  title="切换语言"><img src="../assets/images/u547.png"  alt=""><span v-model='sysLanguage'>{{sysLanguage}}</span></li>
           <li  @click='logout'><img src="../assets/images/u545.png"  alt="" title="退出"><span>退出</span></li>
@@ -209,13 +209,13 @@ export default {
     min-width:1200px;
   }
   #logo{
-    width:680px;
+    min-width:680px;
   }
    #titles{
     width:350px;
    }
    .userinfoCon{
-    margin-right:20px;
+    min-width:400px;
    }
    .userinfoCon li{
      float:left;
@@ -232,6 +232,12 @@ export default {
    .userinfoCon li span{
      cursor:pointer;
      letter-spacing:1px;
+     overflow:hidden;
+     white-space: nowrap;
+    text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    -ms-text-overflow: ellipsis;
+    max-width:70px;
    }
    .userinfoCon li:last-child{
     margin-right:0px;

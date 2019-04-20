@@ -1611,10 +1611,18 @@
           },
           yAxis: {},
           series: [{
-            name: '订单',
+            name: '订单行',
             type: 'bar',
             data: dataTimeDoneValueListArg, // 需要填写的Y动态数据
-            barWidth: 20
+            barWidth: 15,
+            itemStyle:{
+              normal:{
+                color:'#5097AB',
+                lineStyle:{
+                  color:'#5097AB',
+                }
+              }
+            }
           }]
         })
       },
@@ -1641,10 +1649,18 @@
           },
           yAxis: {},
           series: [{
-            name: '订单',
+            name: '订单行',
             type: 'bar',
             data: dataTimePrintValueListArg, // 需要填写的Y动态数据
-            barWidth: 30
+            barWidth: 15,
+            itemStyle:{
+              normal:{
+                color:'#5097AB',
+                lineStyle:{
+                  color:'#5097AB',
+                }
+              }
+            }
           }]
         })
       }
