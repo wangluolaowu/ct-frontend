@@ -10,7 +10,7 @@
                      <el-button type="primary" v-on:click="getUsers">查询</el-button>
                   </el-form-item>
                  <el-form-item>
-                     <el-button type="primary" @click="addUser">新增</el-button>
+                     <el-button type="info" @click="addUser">新增</el-button>
                   </el-form-item>
             </el-form>
        </el-col>
