@@ -85,6 +85,7 @@ input:-ms-input-placeholder{  /* Internet Explorer 10-11 */
 
 }
 
+
 /* 内容 *
 .el-main{
 	padding: 20px 16px;
@@ -247,6 +248,6 @@ font-size: 20px;
 .el-input.is-active .el-input__inner, .el-input__inner:focus{
 	border-color:#00677F;
 }
-.el-transfer__button i, .el-transfer__button span{
-	font-size: 18px;
+.el-breadcrumb{
+	margin-right: 60px;
 }

@@ -34,10 +34,10 @@
                 <template slot-scope="scope" class='handleBtn'>
  
                      <el-button type="text" @click="checkDetail(scope.row)">成员管理</el-button>
- 
+                     <el-button type="text" @click="checkMenuDetail(scope.row)">菜单管理</el-button>
+                     <el-button type="text" @click="checkPermissionDetail(scope.row)">权限管理管理</el-button>
                      <el-button type="text" @click="modifyUser(scope.row)">修改</el-button>
-  
-                     <el-button type="text" @click="deleteUser(scope.row)">删除</el-button>
+                     <!--<el-button type="text" @click="deleteUser(scope.row)">删除</el-button>-->
                   </template>
              </el-table-column>
              <!--编辑与增加的页面-->
@@ -72,7 +72,7 @@
                  <el-button v-if="isView" type="primary" @click.native="addSubmit">确 定</el-button>
              </span>
           </el-dialog>
-           <el-dialog title="角色-用户" :visible.sync="roleUserdialogVisible" width="60%" :close-on-click-modal="false"  >
+           <el-dialog title="角色-用户" :visible.sync="roleUserdialogVisible" width="60%" :close-on-click-modal="false"  @close="loadData" >
               <el-row>
                  <el-card style="min-height: 20px">          
                    <span>{{'当前角色:'+addFormData.role}}</span>
@@ -88,7 +88,42 @@
                 id='maskDialog'>
               </el-transfer>
                <el-button  type="primary" @click="createRoleUser">保存</el-button>
+           </el-dialog> 
+            <el-dialog title="菜单-用户" :visible.sync="roleMenudialogVisible" width="60%" :close-on-click-modal="false"   @close="loadData">
+              <el-row>
+                 <el-card style="min-height: 20px">          
+                   <span>{{'当前角色:'+addFormData.role}}</span>
+                 </el-card>
+               </el-row>
+             <el-tree
+              :data="treeData"
+              show-checkbox
+              ref="tree"
+              highlight-current
+              node-key="id"
+              :default-expanded-keys="treeParentValue"
+              :default-checked-keys="treeValue"
+              :props="defaultProps">
+            </el-tree>
+               <el-button  type="primary" @click="createRoleMenu">保存</el-button>
            </el-dialog>  
+            <el-dialog title="角色-权限" :visible.sync="rolePermissiondialogVisible" width="60%" :close-on-click-modal="false"  @close="loadData" >
+              <el-row>
+                 <el-card style="min-height: 20px">          
+                   <span>{{'当前角色:'+addFormData.role}}</span>
+                 </el-card>
+               </el-row>
+              <el-transfer
+                filterable
+                :filter-method="filterMethod"
+                filter-placeholder="请输入用户名称"
+                v-model="permissionValue"
+                :titles="['可选用户','已选用户']"
+                :data="permissionData" 
+                id='maskDialog'>
+              </el-transfer>
+               <el-button  type="primary" @click="createPermissionUser">保存</el-button>
+           </el-dialog> 
      </div>
   </template>
   
@@ -102,12 +137,23 @@
         return {
           data2: [],
           value2: [],
+          treeValue:[],
+          treeParentValue:[],
+          treeData:[],
           pinyin: [],
+          permissionValue:[],
+          permissionData:[],
+          defaultProps: {
+          children: 'children',
+          label: 'label'
+           },
           userInfoList: [],
           openStatus: [],
           addFormReadOnly: true,
           dialogVisible: false,
           roleUserdialogVisible: false,
+          roleMenudialogVisible:false,
+          rolePermissiondialogVisible:false,
           isView: true,
           currentRoleId:'',
           addFormData: {
@@ -167,6 +213,73 @@
             }
           })
         },
+        getPermissionValue () {
+          this.permissionValue = []
+          this.permissionData = []
+          axios.post('custom/common/selectUserListByRoleId', qs.stringify({'ctRoleId':this.addFormData.id})).then((res) => {
+            if (res.errCode === 'S') {
+              if(res.data.result){
+                this.value2=res.data.result.map(item => { 
+                  return item.id
+               })
+              } 
+            }
+          })
+        },
+        getTreeValueAndData () {
+          this.treeValue = []
+          this.treeData = []
+          this.treeParentValue = []
+          axios.post('custom/common/selectTreeCtMenuList', qs.stringify({'ctRoleId':this.addFormData.id})).then((res) => {
+            if (res.errCode === 'S') {
+              if(res.data.resultTree){
+              this.treeData=res.data.resultTree.map(item => {
+                  let itemTemp = {}
+                  itemTemp.id = item.id
+                  itemTemp.label = item.name
+                  let children = item.subMenuVoList.map(childItem =>{
+                    let childItemTemp = {}
+                    childItemTemp.id = childItem.id
+                    childItemTemp.label = childItem.name
+                    return childItemTemp
+                  })
+                  itemTemp.children = children
+                  return itemTemp
+               })
+              } 
+              if(res.data.resultSelectTree){
+                 res.data.resultSelectTree.map(item => {
+                  this.treeParentValue.push(item.id)
+                  item.subMenuVoList.map(childItem =>{
+                     this.treeValue.push(childItem.id)                   
+                    return childItem
+                  })
+                  return item
+               })
+              }
+            }
+          })
+        },
+        createRoleMenu(){
+          let dataResult = {}
+           dataResult.roleId = this.addFormData.id
+           dataResult.menuIdList = JSON.stringify(this.$refs.tree.getCheckedKeys())
+           axios.post('custom/common/updateCtUserMenuInfo', qs.stringify(dataResult)).then((res) => {
+            if (res.errCode === 'S') {
+              this.$message({
+                      type: 'info',
+                      message: '提交成功'
+                    })
+            }else{
+               this.$message({
+                    type: 'info',
+                    message: `提交失败`
+                  })
+            }
+            this.roleMenudialogVisible = false
+            this.loadData()
+          })   
+        },
         createRoleUser(val) {
            let dataResult = {}
            dataResult.roleId = this.addFormData.id
@@ -207,6 +320,16 @@
           this.isView = true
           this.dialogVisible = true
           // this.addFormReadOnly = false;
+        },
+        checkPermissionDetail(rowData){
+          this.addFormData = Object.assign({}, rowData) 
+          this.get
+          this.rolePermissiondialogVisible = true
+        },
+        checkMenuDetail(rowData){
+          this.addFormData = Object.assign({}, rowData) 
+          this.getTreeValueAndData()
+          this.roleMenudialogVisible = true
         },
         checkDetail(rowData) {
           this.addFormData = Object.assign({}, rowData) 
@@ -298,7 +421,6 @@
          background: #DFE9FB;
      }
      .el-transfer__buttons{
-       width:200px!important;
        box-sizing:border-box;
        -o-box-sizing:border-box;
        padding:0;

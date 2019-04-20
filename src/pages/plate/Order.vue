@@ -580,13 +580,6 @@ export default {
           top: 30,
           right: 50
         },
-        dataZoom: [
-          {
-            type: 'inside',
-            show: true,
-            xAxisIndex: [0]
-          }
-        ],
         xAxis: {
           axisLabel: {
             interval: 0,
@@ -599,7 +592,15 @@ export default {
           name: '订单',
           type: 'bar',
           data: this.sum24ValueList, // 需要填写的Y动态数据
-          barWidth: 30
+          barWidth: 30,
+          itemStyle:{
+              normal:{
+                color:'#5097AB',
+                lineStyle:{
+                  color:'#5097AB',
+                }
+              }
+            }
         }]
       })
     }

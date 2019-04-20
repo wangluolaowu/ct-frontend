@@ -191,6 +191,16 @@ const routes = [
         path: '/custom/role',
         component: () => import('@/pages/plate/custom/CtRoleManage'),
         name: '角色管理'
+      },
+      {
+        path: '/custom/resource',
+        component: () => import('@/pages/plate/custom/CtResource'),
+        name: '资源管理'
+      },
+      {
+        path: '/custom/permssion',
+        component: () => import('@/pages/plate/custom/CtPermssion'),
+        name: '权限管理'
       }
     ]
   },

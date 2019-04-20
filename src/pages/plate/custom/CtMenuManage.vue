@@ -10,7 +10,7 @@
                      <el-button type="primary" v-on:click="getUsers">查询</el-button>
                   </el-form-item>
                  <el-form-item>
-                     <el-button type="primary" @click="addUser">新增</el-button>
+                     <el-button type="info" @click="addUser">新增</el-button>
                   </el-form-item>
             </el-form>
        </el-col>
@@ -71,24 +71,25 @@
       :visible.sync="dialogVisibleStart"
       width="90%" @close="loadData">
  <div class="tableDate mainContainer">
-    <div class="button" style="width:0.5%;float:right;">
-      <P><el-button class="el-icon-plus" @click.prevent="addRow()"></el-button></P>
-      <!--<p><el-button class="el-icon-minus" @click.prevent="delData()"></el-button></p>-->
-      <p><el-button type="el-icon-minus" :disabled="submitDisabled" @click.prevent="submit">提交</el-button></p>
-    </div>
+    
     <div class="table">
        <el-row>
             <el-card style="min-height: 20px">          
               <span>{{'当前菜单节点名称:'+addFormData.name}}</span>
             </el-card>
           </el-row>
+          <div class="button" style="width:8.5%;float:right;margin-top:60px;">
+            <P><el-button class="el-icon-plus" @click.prevent="addRow()" ></el-button></P>
+            <!--<p><el-button class="el-icon-minus" @click.prevent="delData()"></el-button></p>-->
+            <p><el-button type="el-icon-minus" :disabled="submitDisabled" @click.prevent="submit">提交</el-button></p>
+          </div>
        <el-table
         :data="tableData"
         ref="table"
         tooltip-effect="dark"
         border
         stripe
-        style="width: 95%"
+        style="width: 90%"
         @selection-change='selectRow'>
         <el-table-column type="selection" width="45" align="center"></el-table-column>
         <el-table-column label="序号"  type="index" width="40" align="center"></el-table-column>
