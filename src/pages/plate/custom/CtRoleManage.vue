@@ -25,7 +25,7 @@
             </el-table-column>
             <el-table-column prop="available" label="状态"> 
               <template slot-scope="scope">
-                 {{$Enum.getEnumSelectByValue(openStatus,scope.row.available)}}
+                 {{$Enum.getEnumSelectByValue($Enum.EnumSelect().openStatus,scope.row.available)}}
             </template>
             </el-table-column>
              <!--第二步  开始进行修改和查询操作-->
@@ -43,24 +43,29 @@
              <!--编辑与增加的页面-->
          </el-table>
           <!--新增界面-->
-         <el-dialog title="记录" :visible.sync="dialogVisible" width="50%" :close-on-click-modal="false">
-             <el-form :model="addFormData" :rules="rules2" ref="addFormData" label-width="0px" class="demo-ruleForm login-container">
-                  <el-form-item prop="role">
+         <el-dialog title="编辑" :visible.sync="dialogVisible" width="50%" :close-on-click-modal="false">
+             <el-form :model="addFormData" :rules="rules2" ref="addFormData" label-width="150px" class="demo-ruleForm login-container">
+                  <el-form-item prop="role" label="角色">
                     <el-input type="text" v-model="addFormData.role" auto-complete="off" placeholder="角色"></el-input>
                   </el-form-item>
-                   <el-form-item prop="description">
+                   <el-form-item prop="description" label="描述">
                     <el-input type="text" v-model="addFormData.description" auto-complete="off" placeholder="描述"></el-input>
                   </el-form-item>
-                  <el-form-item prop="available"> 
-                  <el-select placeholder="请设置状态" v-model="addFormData.available">
-                  <el-option
-                    v-for="item in openStatus"
-                    :key="item.value"
-                    :label="item.label"
-                    :value="item.value">
-                  </el-option>
-                </el-select>
-                </el-form-item>
+                   <el-row> 
+                   <el-col>
+                   <el-form-item label="状态" >
+                    <el-select placeholder="状态" v-model="addFormData.available">
+                        <el-option
+                            v-for="item in $Enum.EnumSelect().openStatus"
+                            :key="item.value"
+                            :label="item.label"
+                            :value="item.value" 
+                        > 
+                        </el-option>
+                        </el-select>
+                  </el-form-item>
+                   </el-col>
+                 </el-row>
              </el-form>
              <span slot="footer" class="dialog-footer">
                  <el-button @click.native="dialogVisible = false,addFormData={id:'',role:'',description:'',available:''}">取 消</el-button>
@@ -68,6 +73,11 @@
              </span>
           </el-dialog>
            <el-dialog title="角色-用户" :visible.sync="roleUserdialogVisible" width="60%" :close-on-click-modal="false">
+              <el-row>
+                 <el-card style="min-height: 20px">          
+                   <span>{{'当前角色:'+addFormData.role}}</span>
+                 </el-card>
+               </el-row>
               <el-transfer
                 filterable
                 :filter-method="filterMethod"
@@ -129,9 +139,6 @@
         //this.getSelectValues()
       },
       methods: {
-        getSelectValues() { 
-          this.openStatus = this.$Enum.EnumSelect().openStatus
-        },
         generateData2 () {
           let that = this
           that.data2 = []
@@ -149,20 +156,36 @@
           })
         },
         generateValue2 () {
-          let that = this
-          that.value2 = []
-          axios.post('custom/common/selectUserListByRoleId', {}).then((res) => {
+          this.value2 = []
+          axios.post('custom/common/selectUserListByRoleId', qs.stringify({'ctRoleId':this.addFormData.id})).then((res) => {
             if (res.errCode === 'S') {
-              res.data.result.forEach(function(c, index) {
-                that.value2.push(c.id)      
-              })  
+              if(res.data.result){
+                this.value2=res.data.result.map(item => { 
+                  return item.id
+               })
+              } 
             }
           })
         },
         createRoleUser(val) {
-          console.log('val=====' + val)
-          console.log('value2===' + this.value2)
-          
+           let dataResult = {}
+           dataResult.roleId = this.addFormData.id
+           dataResult.userIdList = JSON.stringify(this.value2)
+           axios.post('custom/common/updateCtUserRoleInfo', qs.stringify(dataResult)).then((res) => {
+            if (res.errCode === 'S') {
+              this.$message({
+                      type: 'info',
+                      message: '提交成功'
+                    })
+            }else{
+               this.$message({
+                    type: 'info',
+                    message: `提交失败`
+                  })
+            }
+            this.roleUserdialogVisible = false
+            this.loadData()
+          })   
         },
         filterMethod(query, item) {
           return item.pinyin.indexOf(query) > -1
@@ -186,8 +209,9 @@
           // this.addFormReadOnly = false;
         },
         checkDetail(rowData) {
-          this.currentRoleId = rowData.id
-          
+          this.addFormData = Object.assign({}, rowData) 
+          this.generateData2()
+          this.generateValue2()
           this.roleUserdialogVisible = true
         },
         modifyUser(rowData) {
