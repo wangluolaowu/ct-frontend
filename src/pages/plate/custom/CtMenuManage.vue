@@ -4,7 +4,7 @@
          <el-col :span="24" class="toolbar conMarginLeft" >
              <el-form :inline="true" :model="filters">
                 <el-form-item>
-                    <el-input v-model="filters.menuName" placeholder="姓名"></el-input>
+                    <el-input v-model="filters.name" placeholder="姓名"></el-input>
                    </el-form-item>
                    <el-form-item>
                      <el-button type="primary" v-on:click="getUsers">查询</el-button>
@@ -22,6 +22,9 @@
              <el-table-column prop="description" label="节点描述">
             </el-table-column>
              <el-table-column prop="available" label="节点状态" >
+               <template slot-scope="scope">
+                 {{$Enum.getEnumSelectByValue($Enum.EnumSelect().openStatus2,scope.row.available)}}
+            </template>
             </el-table-column>
              <!--第二步  开始进行修改和查询操作-->
              <el-table-column label="操作" align="center" min-width="350">
@@ -32,13 +35,13 @@
  
                      <el-button type="text" @click="modifyUser(scope.row)">修改</el-button>
   
-                     <el-button type="text" @click="deleteUser(scope.row)">删除</el-button>
+                     <!--<el-button type="text" @click="deleteUser(scope.row)">删除</el-button>-->
                   </template>
              </el-table-column>
              <!--编辑与增加的页面-->
          </el-table>
           <!--新增界面-->
-         <el-dialog title="记录" :visible.sync="dialogVisible" width="50%" :close-on-click-modal="false">
+         <el-dialog title="编辑" :visible.sync="dialogVisible" width="50%" :close-on-click-modal="false">
              <el-form :model="addFormData" :rules="rules2" ref="addFormData" label-width="150px" class="demo-ruleForm login-container">
                   <el-form-item prop="name" label="节点名称">
                     <el-input type="text" v-model="addFormData.name"  placeholder="节点名称"></el-input>
@@ -46,8 +49,16 @@
                    <el-form-item prop="description" label="节点描述">
                     <el-input type="text" v-model="addFormData.description"  placeholder="节点描述"></el-input>
                   </el-form-item>
-                   <el-form-item prop="name" label="节点状态">
-                    <el-input type="available" v-model="addFormData.available"  placeholder="节点状态"></el-input>
+                   <el-form-item prop="available" label="节点状态">
+                     <el-select placeholder="节点状态" v-model="addFormData.available">
+                        <el-option
+                            v-for="item in $Enum.EnumSelect().openStatus2"
+                            :key="item.value"
+                            :label="item.label"
+                            :value="item.value" 
+                        > 
+                        </el-option>
+                        </el-select>
                   </el-form-item>
              </el-form>
              <span slot="footer" class="dialog-footer">
@@ -56,33 +67,59 @@
              </span>
           </el-dialog>
            <el-dialog
-      title="提示"
+      title="编辑"
       :visible.sync="dialogVisibleStart"
-      width="90%">
+      width="90%" @close="loadData">
  <div class="tableDate mainContainer">
     <div class="button" style="width:0.5%;float:right;">
       <P><el-button class="el-icon-plus" @click.prevent="addRow()"></el-button></P>
-      <p><el-button class="el-icon-minus" @click.prevent="delData()"></el-button></p>
+      <!--<p><el-button class="el-icon-minus" @click.prevent="delData()"></el-button></p>-->
       <p><el-button type="el-icon-minus" :disabled="submitDisabled" @click.prevent="submit">提交</el-button></p>
     </div>
     <div class="table">
-      <el-table
+       <el-row>
+            <el-card style="min-height: 20px">          
+              <span>{{'当前菜单节点名称:'+addFormData.name}}</span>
+            </el-card>
+          </el-row>
+       <el-table
         :data="tableData"
         ref="table"
         tooltip-effect="dark"
         border
         stripe
-        style="width: 90%">
+        style="width: 95%"
+        @selection-change='selectRow'>
         <el-table-column type="selection" width="45" align="center"></el-table-column>
-        <el-table-column label="序号"  type="index" width="60" align="center"></el-table-column>
+        <el-table-column label="序号"  type="index" width="40" align="center"></el-table-column>
          <el-table-column prop="name" label="节点名称" width="180">
-            </el-table-column>
+            <template slot-scope="scope">
+            <el-input v-model="scope.row.name"></el-input>
+          </template>
+        </el-table-column>
         <el-table-column prop="description" label="节点描述">
-            </el-table-column>
+           <template slot-scope="scope">
+            <el-input v-model="scope.row.description"></el-input>
+          </template>
+        </el-table-column>
         <el-table-column prop="url" label="节点URL" >
-            </el-table-column>
+          <template slot-scope="scope">
+            <el-input v-model="scope.row.url"></el-input>
+          </template>
+        </el-table-column>
         <el-table-column prop="available" label="节点状态" >
-            </el-table-column>
+          <template slot-scope="scope">
+            <el-select placeholder="节点状态" v-model="scope.row.available">
+                        <el-option
+                            v-for="item in $Enum.EnumSelect().openStatus2"
+                            :key="item.value"
+                            :label="item.label"
+                            :value="item.value" 
+                        > 
+                        </el-option>
+                        </el-select>
+          </template>
+        </el-table-column>
       </el-table>
     </div>
     </div>
@@ -97,18 +134,27 @@
       name: 'home',
       data() {
         return {
+          qs,
+          axios,
           userInfoList: [],
           addFormReadOnly: true,
           dialogVisible: false,
           dialogVisibleStart:false,
           submitDisabled:true,
           isView: true,
-          tableData:[],
+          tableData: [{
+          rowNum: 1,
+          id:0,
+          name: '',
+          description: '',
+          url: '',
+          available:1
+        }],
+        selectlistRow: [],
           addFormData: {
             id: '',
             name: '',
             description: '',
-            url: '',
             available: ''
           },
           rules2: {
@@ -145,12 +191,9 @@
         addUser() {
           this.addFormData = {
             id: '',
-            firstName: '',
-            lastName: '',
-            username: '',
-            password: '',
-            email: '',
-            state: ''
+            name: '',
+            description: '',
+            available: ''
           }
           this.isView = true
           this.dialogVisible = true
@@ -159,8 +202,16 @@
         checkDetail(rowData) {
           this.addFormData = Object.assign({}, rowData)
           this.isView = false
+          this.getChildMenuList(rowData.id)
           this.dialogVisibleStart = true
           //  this.addFormReadOnly = true;
+        },
+        getChildMenuList(arg){
+          let param = {'parentId': arg}
+          axios.post('/custom/ctMenu/selectChildCtMenuListByParentId', qs.stringify(param)).then((res) => {
+            var _data = res.data.result
+            this.tableData = _data
+          })
         },
         modifyUser(rowData) {
           this.addFormData = Object.assign({}, rowData)
@@ -177,15 +228,25 @@
             this.submitDisabled=true
         }
       },
+       submit(){
+        let resultData = {}
+        resultData.result=JSON.stringify(this.selectlistRow)
+        resultData.parentId = this.addFormData.id
+        this.axios.post('/custom/ctMenu/insertChildCtMenu', qs.stringify(resultData)).then(res => {
+         if (res.errCode === 'S') {
+            this.dialogVisibleStart=false
+            this.loadData()
+         }
+       })
+      },  
       // 增加行
       addRow () {
         var list = {
           rowNum: '',
-          pi_kid_id: 0,
-          pi_holder_id: this.pi_holder_id,
-          pi_dest_pos_x: this.pi_dest_pos_x,
-          pi_dest_pos_y: this.pi_dest_pos_y,
-          pi_release_load_flag: this.pi_release_load_flag
+          name: this.name,
+          description: this.description,
+          url: this.url,
+          available:1
           }
           this.tableData.unshift(list)
       },

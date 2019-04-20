@@ -105,14 +105,7 @@
       return {
           axios,
           qs,
-        tableData: [{
-          rowNum: 1,
-          pi_kid_id: 0,
-          pi_holder_id: '',
-          pi_dest_pos_x: '',
-          pi_dest_pos_y: '',
-          pi_release_load_flag:1
-        }],
+        tableData: [],
         selectlistRow: [],
         PI_KID_ID:[],
         submitDisabled:true,
