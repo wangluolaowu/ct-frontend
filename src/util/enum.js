@@ -1,5 +1,5 @@
 const Enum = {
- 
+
 }
 Enum.EnumSelect = function() {
   let EnumObj = {}
@@ -354,14 +354,13 @@ Enum.EnumSelect = function() {
       {
         label: '旋转-360',
         value: 'SIMPLE_MOVE10'
-      } 
+      }
     ]
   }
   return EnumObj
 }
 
 Enum.getEnumSelectByValue = function(enumArray, enumKey) {
-
   if (enumKey === undefined || enumKey === null) {
     return ''
   }
