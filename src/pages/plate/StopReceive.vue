@@ -21,7 +21,7 @@
           
           <el-form-item>
               <el-button type="primary" :disabled = "openIsDisabled"   @click="restReceive(1)">恢复接收任务</el-button>
-              <el-button type="primary" :disabled = "closeIsDisabled"  @click="restReceive(0)">停止接收任务</el-button>
+              <el-button type="info" :disabled = "closeIsDisabled"  @click="restReceive(0)">停止接收任务</el-button>
           </el-form-item>
       </el-form>
      </div>

@@ -82,10 +82,10 @@ input:-ms-input-placeholder{  /* Internet Explorer 10-11 */
 
 /* 弹窗样式 */
 .el-dialog__body{
-	/* text-align: center!important; */
+
 }
 
-/* 内容 */
+/* 内容 *
 .el-main{
 	padding: 20px 16px;
 }
@@ -159,8 +159,8 @@ font-size: 20px;
 }
 /* 按钮颜色 */
 .el-button--primary,.el-button--primary:focus{
-	 background: #00566A!important;
-	border-color: #00566A; 
+	 background: #00677F;
+	border-color: #00677F; 
 	
 }
 .el-button--primary:hover{
@@ -168,8 +168,8 @@ font-size: 20px;
 	border-color:#00566A;
 }
 .el-button--primary.is-disabled, .el-button--primary.is-disabled:active, .el-button--primary.is-disabled:focus, .el-button--primary.is-disabled:hover{
-	background-color: #00677F;
-	border-color: #00677F;
+	background-color: #00566A;
+	border-color: #00566A;
 }
 .el-button{
 	min-width: 96px!important;
@@ -195,4 +195,58 @@ font-size: 20px;
 /* 分页样式 */
 #app .pagination,#alone .pagination{
 	text-align: right;
+}
+
+/* 选中字体与按钮，以及button颜色 */
+.el-checkbox__input.is-checked .el-checkbox__inner, .el-checkbox__input.is-indeterminate .el-checkbox__inner{
+	background-color: #00566A;
+	border-color: #00566A;
+}
+.el-tabs__active-bar{
+	background-color: #00566A;
+}
+.el-tabs__item.is-active,.el-tabs__item:hover,.el-checkbox__input.is-checked+.el-checkbox__label{
+	color: #00566A;
+}
+.el-checkbox__inner:hover,.el-checkbox__input.is-focus .el-checkbox__inner{
+	border-color:#00566A;
+}
+.el-button:hover{
+	/*color: #606266;*/
+	/*background: #fff;*/
+}
+.el-button--primary.is-active, .el-button--primary:active{
+	background: #00566A!important;
+	border-color:#00566A!important;
+}
+.el-button--primary:focus, .el-button--primary:hover{
+	background:#00677F;
+	border-color:#00677F;
+}
+/* .el-button:active{
+	color:#606266;
+	border-color:#dcdfe6;
+} */
+.el-select .el-input.is-focus .el-input__inner,.el-select .el-input__inner:focus{
+	border-color:#00677F;
+}
+.el-select-dropdown__item.selected,.el-transfer-panel__item:hover{
+	color: #00677F;
+}
+/*日期颜色*/
+.el-date-table td.today span,.el-button--text,.el-button--text:focus, .el-button--text:hover,.el-date-table tr>td:hover{
+	color: #00566A!important;
+}
+.el-date-table td.current:not(.disabled) span{
+	background-color: #00566A;
+}
+.el-button.is-plain:focus, .el-button.is-plain:hover{
+	border-color:#00677F;
+	color: #00677F;
+}
+.el-input.is-active .el-input__inner, .el-input__inner:focus{
+	border-color:#00677F;
+}
+.el-transfer__button i, .el-transfer__button span{
+	font-size: 18px;
 }

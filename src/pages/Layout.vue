@@ -209,13 +209,13 @@ export default {
     min-width:1200px;
   }
   #logo{
-    width:680px;
+    min-width:680px;
   }
    #titles{
     width:350px;
    }
    .userinfoCon{
-    margin-right:20px;
+    min-width:400px;
    }
    .userinfoCon li{
      float:left;
@@ -231,11 +231,13 @@ export default {
    }
    .userinfoCon li span{
      cursor:pointer;
-     letter-spacing:1px;     -ms-text-overflow: ellipsis;
-     text-overflow: ellipsis;
-     -o-text-overflow: ellipsis;
-     overflow: hidden;
+     letter-spacing:1px;
+     overflow:hidden;
      white-space: nowrap;
+    text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    -ms-text-overflow: ellipsis;
+    max-width:70px;
    }
   
    .userinfoCon li:last-child{
