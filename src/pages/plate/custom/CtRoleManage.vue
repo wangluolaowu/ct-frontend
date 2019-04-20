@@ -143,6 +143,7 @@
           pinyin: [],
           permissionValue:[],
           permissionData:[],
+          permissionPinyin:[],
           defaultProps: {
           children: 'children',
           label: 'label'
@@ -216,10 +217,19 @@
         getPermissionValue () {
           this.permissionValue = []
           this.permissionData = []
-          axios.post('custom/common/selectUserListByRoleId', qs.stringify({'ctRoleId':this.addFormData.id})).then((res) => {
+          this.permissionPinyin = []
+          axios.post('custom/common/selectRolePermissionList', qs.stringify({'ctRoleId':this.addFormData.id})).then((res) => {
             if (res.errCode === 'S') {
-              if(res.data.result){
-                this.value2=res.data.result.map(item => { 
+                res.data.result.forEach(function(c, index) {
+                this.permissionPinyin.push(c.name)
+                this.permissionData.push({
+                  key: c.id,
+                  label: c.name,
+                  pinyin: this.permissionPinyin[index]
+                })       
+              })
+              if(res.data.resultSelect){
+                this.permissionValue=res.data.resultSelect.map(item => { 
                   return item.id
                })
               } 
@@ -280,6 +290,26 @@
             this.loadData()
           })   
         },
+        createPermissionUser(){
+          let dataResult = {}
+           dataResult.roleId = this.addFormData.id
+           dataResult.permissionIdList = JSON.stringify(this.permissionValue)
+           axios.post('custom/common/updateRolePermission', qs.stringify(dataResult)).then((res) => {
+            if (res.errCode === 'S') {
+              this.$message({
+                      type: 'info',
+                      message: '提交成功'
+                    })
+            }else{
+               this.$message({
+                    type: 'info',
+                    message: `提交失败`
+                  })
+            }
+            this.roleMenudialogVisible = false
+            this.loadData()
+          })   
+        },
         createRoleUser(val) {
            let dataResult = {}
            dataResult.roleId = this.addFormData.id
@@ -323,7 +353,7 @@
         },
         checkPermissionDetail(rowData){
           this.addFormData = Object.assign({}, rowData) 
-          this.get
+          this.getPermissionValue()
           this.rolePermissiondialogVisible = true
         },
         checkMenuDetail(rowData){
