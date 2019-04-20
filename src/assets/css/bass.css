@@ -82,7 +82,7 @@ input:-ms-input-placeholder{  /* Internet Explorer 10-11 */
 
 /* 弹窗样式 */
 .el-dialog__body{
-	text-align: center!important;
+	/* text-align: center!important; */
 }
 
 /* 内容 */
