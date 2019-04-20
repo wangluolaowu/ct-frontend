@@ -4,39 +4,31 @@
          <el-col :span="24" class="toolbar conMarginLeft" >
              <el-form :inline="true" :model="filters">
                 <el-form-item>
-                    <el-input v-model="filters.username" placeholder="姓名"></el-input>
+                    <el-input v-model="filters.menuName" placeholder="姓名"></el-input>
                    </el-form-item>
                    <el-form-item>
                      <el-button type="primary" v-on:click="getUsers">查询</el-button>
                   </el-form-item>
                  <el-form-item>
-                     <el-button type="info" @click="addUser">新增</el-button>
+                     <el-button type="primary" @click="addUser">新增</el-button>
                   </el-form-item>
             </el-form>
        </el-col>
 
 
          <el-table :data="userInfoList" style="width: 100%" border>
-            <!--<el-table-column prop="id" label="id" >
-            </el-table-column>-->
-            <el-table-column prop="firstName" label="FirstName" width="180">
+            <el-table-column prop="name" label="节点名称" width="180">
             </el-table-column>
-             <el-table-column prop="lastName" label="LastName" width="180">
+             <el-table-column prop="description" label="节点描述">
             </el-table-column>
-             <el-table-column prop="username" label="登录名" width="180">
-            </el-table-column>
-             <el-table-column prop="password" label="密码" width="180">
-            </el-table-column>
-             <el-table-column prop="email" label="Email" width="180">
-            </el-table-column>
-            <el-table-column prop="state" label="状态">
+             <el-table-column prop="available" label="节点状态" >
             </el-table-column>
              <!--第二步  开始进行修改和查询操作-->
              <el-table-column label="操作" align="center" min-width="350">
  
                 <template slot-scope="scope">
  
-                     <el-button type="text" @click="checkDetail(scope.row)">查看详情</el-button>
+                     <el-button type="text" @click="checkDetail(scope.row)">子菜单管理</el-button>
  
                      <el-button type="text" @click="modifyUser(scope.row)">修改</el-button>
   
@@ -47,31 +39,54 @@
          </el-table>
           <!--新增界面-->
          <el-dialog title="记录" :visible.sync="dialogVisible" width="50%" :close-on-click-modal="false">
-             <el-form :model="addFormData" :rules="rules2" ref="addFormData" label-width="0px" class="demo-ruleForm login-container">
-                  <el-form-item prop="firstName">
-                    <el-input type="text" v-model="addFormData.firstName" auto-complete="off" placeholder="FirstName"></el-input>
+             <el-form :model="addFormData" :rules="rules2" ref="addFormData" label-width="150px" class="demo-ruleForm login-container">
+                  <el-form-item prop="name" label="节点名称">
+                    <el-input type="text" v-model="addFormData.name"  placeholder="节点名称"></el-input>
                   </el-form-item>
-                   <el-form-item prop="lastName">
-                    <el-input type="text" v-model="addFormData.lastName" auto-complete="off" placeholder="LastName"></el-input>
+                   <el-form-item prop="description" label="节点描述">
+                    <el-input type="text" v-model="addFormData.description"  placeholder="节点描述"></el-input>
                   </el-form-item>
-                   <el-form-item prop="username">
-                    <el-input type="text" v-model="addFormData.username" auto-complete="off" placeholder="登录名"></el-input>
-                  </el-form-item>
-                   <el-form-item prop="password">
-                    <el-input type="password" v-model="addFormData.password" auto-complete="off" placeholder="密码"></el-input>
-                  </el-form-item>
-                   <el-form-item prop="email">
-                    <el-input type="text" v-model="addFormData.email" auto-complete="off" placeholder="Email"></el-input>
-                  </el-form-item>
-                <el-form-item prop="state">
-                     <el-input type="text" v-model="addFormData.state" auto-complete="off" placeholder="状态"></el-input>
+                   <el-form-item prop="name" label="节点状态">
+                    <el-input type="available" v-model="addFormData.available"  placeholder="节点状态"></el-input>
                   </el-form-item>
              </el-form>
              <span slot="footer" class="dialog-footer">
-                 <el-button @click.native="dialogVisible = false,addFormData={id:'',firstName:'',lastName:'',username:'',password:'',email:'',state:''}">取 消</el-button>
+                 <el-button @click.native="dialogVisible = false,addFormData={id:'',name:'',description:'',available:''}">取 消</el-button>
                  <el-button v-if="isView" type="primary" @click.native="addSubmit">确 定</el-button>
              </span>
           </el-dialog>
+           <el-dialog
+      title="提示"
+      :visible.sync="dialogVisibleStart"
+      width="90%">
+ <div class="tableDate mainContainer">
+    <div class="button" style="width:0.5%;float:right;">
+      <P><el-button class="el-icon-plus" @click.prevent="addRow()"></el-button></P>
+      <p><el-button class="el-icon-minus" @click.prevent="delData()"></el-button></p>
+      <p><el-button type="el-icon-minus" :disabled="submitDisabled" @click.prevent="submit">提交</el-button></p>
+    </div>
+    <div class="table">
+      <el-table
+        :data="tableData"
+        ref="table"
+        tooltip-effect="dark"
+        border
+        stripe
+        style="width: 90%">
+        <el-table-column type="selection" width="45" align="center"></el-table-column>
+        <el-table-column label="序号"  type="index" width="60" align="center"></el-table-column>
+         <el-table-column prop="name" label="节点名称" width="180">
+            </el-table-column>
+        <el-table-column prop="description" label="节点描述">
+            </el-table-column>
+        <el-table-column prop="url" label="节点URL" >
+            </el-table-column>
+        <el-table-column prop="available" label="节点状态" >
+            </el-table-column>
+      </el-table>
+    </div>
+    </div>
+    </el-dialog>
      </div>
   </template>
   
@@ -85,15 +100,16 @@
           userInfoList: [],
           addFormReadOnly: true,
           dialogVisible: false,
+          dialogVisibleStart:false,
+          submitDisabled:true,
           isView: true,
+          tableData:[],
           addFormData: {
             id: '',
-            firstName: '',
-            lastName: '',
-            username: '',
-            password: '',
-            email: '',
-            state: ''
+            name: '',
+            description: '',
+            url: '',
+            available: ''
           },
           rules2: {
             username: [{
@@ -118,7 +134,7 @@
       methods: {
         loadData() {
           let param = {filter: this.filters.name}
-          axios.post('/custom/ctUser/selectCtUserList', qs.stringify(param)).then((res) => {
+          axios.post('/custom/ctMenu/selectCtMenuList', qs.stringify(param)).then((res) => {
             var _data = res.data.result
             this.userInfoList = _data
           })
@@ -143,7 +159,7 @@
         checkDetail(rowData) {
           this.addFormData = Object.assign({}, rowData)
           this.isView = false
-          this.dialogVisible = true
+          this.dialogVisibleStart = true
           //  this.addFormReadOnly = true;
         },
         modifyUser(rowData) {
@@ -152,7 +168,48 @@
           this.dialogVisible = true
           // this.addFormReadOnly = false;
         },
-        deleteUser(rowData) {
+              // 获取表格选中时的数据
+      selectRow (val) { 
+        this.selectlistRow = val
+        if(this.selectlistRow.length > 0){
+            this.submitDisabled=false
+        }else{
+            this.submitDisabled=true
+        }
+      },
+      // 增加行
+      addRow () {
+        var list = {
+          rowNum: '',
+          pi_kid_id: 0,
+          pi_holder_id: this.pi_holder_id,
+          pi_dest_pos_x: this.pi_dest_pos_x,
+          pi_dest_pos_y: this.pi_dest_pos_y,
+          pi_release_load_flag: this.pi_release_load_flag
+          }
+          this.tableData.unshift(list)
+      },
+      // 删除方法
+      // 删除选中行
+      delData () {
+        for (let i = 0; i < this.selectlistRow.length; i++) {
+          let val = this.selectlistRow
+          // 获取选中行的索引的方法
+          // 遍历表格中tableData数据和选中的val数据，比较它们的rowNum,相等则输出选中行的索引
+          // rowNum的作用主要是为了让每一行有一个唯一的数据，方便比较，可以根据个人的开发需求从后台传入特定的数据
+          val.forEach((val, index) => {
+            this.tableData.forEach((v, i) => {
+              if (val.rowNum === v.rowNum) {
+                // i 为选中的索引
+                this.tableData.splice(i, 1)
+              }
+            })
+          })
+        }
+        // 删除完数据之后清除勾选框
+        this.$refs.tableData.clearSelection()
+      },
+      deleteUser(rowData) {
           this.$alert('是否删除这条记录', '信息删除', {
             confirmButtonText: '确定',
             callback: action => {
@@ -186,7 +243,7 @@
               let result = {}
               result.result = JSON.stringify(param)
               if (param.id) {
-                axios.post('/custom/ctUser/updateCtUser', qs.stringify(result)).then((res) => {
+                axios.post('/custom/ctMenu/updateCtMenu', qs.stringify(result)).then((res) => {
                   if (res.errCode === 'S') {
                     this.$message({
                       type: 'info',
@@ -202,7 +259,7 @@
                   this.dialogVisible = false
                 })
               } else {
-                axios.post('/custom/ctUser/insertCtUser', qs.stringify(result)).then((res) => {
+                axios.post('/custom/ctMenu/insertCtMenu', qs.stringify(result)).then((res) => {
                   if (res.errCode === 'S') {
                     this.$message({
                       type: 'info',

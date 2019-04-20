@@ -18,7 +18,7 @@
         <ul class="clears userinfoCon">
           <li><img src="../assets/images/u549.png"  alt="" title="用户"><span :title="sysUserName">{{sysUserName}}</span></li>
           <!-- <li><i class="el-icon-edit"></i>{{sysUserName}}</li> -->
-          <li  @click='changeLanguage'  title="切换语言"><img src="../assets/images/u547.png"  alt=""><span v-model='sysLanguage'>{{sysLanguage}}</span></li>
+          <li  @click='changeLanguage'  title="切换语言"><img src="../assets/images/u547.png"  alt=""><span :title='sysLanguage'>{{sysLanguage}}</span></li>
           <li  @click='logout'><img src="../assets/images/u545.png"  alt="" title="退出"><span>退出</span></li>
         </ul>
 			</el-col>
