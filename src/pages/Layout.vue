@@ -231,8 +231,7 @@ export default {
    }
    .userinfoCon li span{
      cursor:pointer;
-     letter-spacing:1px;
-     -ms-text-overflow: ellipsis;
+     letter-spacing:1px;     -ms-text-overflow: ellipsis;
      text-overflow: ellipsis;
      -o-text-overflow: ellipsis;
      overflow: hidden;
