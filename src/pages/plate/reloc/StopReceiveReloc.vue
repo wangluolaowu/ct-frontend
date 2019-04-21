@@ -13,8 +13,8 @@
             </el-select>
           </el-form-item>    
           <el-form-item>
-               <el-button type="primary" :disabled = "openIsDisabled"   @click="restReceive(1)">恢复接收任务</el-button>
-               <el-button type="info" :disabled = "closeIsDisabled"  @click="restReceive(0)">停止接收任务</el-button>
+                <el-button  :type="openIsDisabledButton" :disabled = "openIsDisabled"   @click="restReceive(1)">恢复接收任务</el-button>
+              <el-button  :type="closeIsDisabledButton"  :disabled = "closeIsDisabled"  @click="restReceive(0)">停止接收任务</el-button>
           </el-form-item>
        </el-form>
      </div>
@@ -30,6 +30,8 @@
         fullscreenLoading: false,
         closeIsDisabled: false,
         openIsDisabled: false,
+         openIsDisabledButton:'',
+        closeIsDisabledButton:'',
         search: {
           entityWorkstationId: 1,
           extWorkstationType: 'RELOC',
@@ -56,12 +58,16 @@
       getConfigResult (res) {
       // 接收回调函数返回数据的方法
         if (res.errCode === 'S') {
-            if (res.data.result === 20) {
+             if (res.data.result === 20) {
               this.openIsDisabled = true
+              this.openIsDisabledButton="info"
               this.closeIsDisabled = false
+              this.closeIsDisabledButton="primary"
             } else {
               this.openIsDisabled = false
+              this.openIsDisabledButton="primary"
               this.closeIsDisabled = true
+              this.closeIsDisabledButton="info"
             }
         }
       },
@@ -95,13 +101,17 @@
         }).then((res) => {
           // console.log(res);
           if (res.errCode === 'S') {
-            if (status === 1) { // 恢复任务
-              that.openIsDisabled = true
-              that.closeIsDisabled = false
+             if (status === 1) { // 恢复任务
+              this.openIsDisabled = true
+              this.openIsDisabledButton="info"
+              this.closeIsDisabled = false
+              this.closeIsDisabledButton="primary"
             }
             if (status === 0) { // 停止任务
-              that.openIsDisabled = false
-              that.closeIsDisabled = true
+             this.openIsDisabled = false
+              this.openIsDisabledButton="primary"
+              this.closeIsDisabled = true
+              this.closeIsDisabledButton="info"
             }
           }
         })
@@ -115,12 +125,16 @@
         }).then((res) => {
           // console.log(res);
           if (res.errCode === 'S') {
-            if (res.data.result === 20) {
-              that.openIsDisabled = true
-              that.closeIsDisabled = false
+             if (res.data.result === 20) {
+              this.openIsDisabled = true
+              this.openIsDisabledButton="info"
+              this.closeIsDisabled = false
+              this.closeIsDisabledButton="primary"
             } else {
-              that.openIsDisabled = false
-              that.closeIsDisabled = true
+              this.openIsDisabled = false
+              this.openIsDisabledButton="primary"
+              this.closeIsDisabled = true
+              this.closeIsDisabledButton="info"
             }
           }
         })
