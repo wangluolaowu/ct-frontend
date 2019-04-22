@@ -33,8 +33,7 @@
  
                 <template slot-scope="scope" class='handleBtn'>
  
-                     <el-button type="text" @click="checkDetail(scope.row)">成员管理</el-button>
-                     <el-button type="text" @click="checkMenuDetail(scope.row)">菜单管理</el-button>
+                     <el-button type="text" @click="checkDetail(scope.row)">资源管理</el-button>
                      <el-button type="text" @click="modifyUser(scope.row)">修改</el-button>
                      <!--<el-button type="text" @click="deleteUser(scope.row)">删除</el-button>-->
                   </template>
@@ -101,9 +100,6 @@
         return {
           data2: [],
           value2: [],
-          treeValue:[],
-          treeParentValue:[],
-          treeData:[],
           pinyin: [],
           defaultProps: {
           children: 'children',
@@ -136,7 +132,7 @@
             }]
           },
           filters: {
-            role: ''
+            name: ''
           }
         }
       },
@@ -150,13 +146,13 @@
           let that = this
           that.data2 = []
           this.value2 = []
-          axios.post('custom/common/selectResourcePermissionList', {}).then((res) => {
+          axios.post('custom/common/selectResourcePermissionList', qs.stringify({'permissionId':this.addFormData.id})).then((res) => {
             if (res.errCode === 'S') {
               res.data.result.forEach(function(c, index) {
-                that.pinyin.push(c.name)
+                that.pinyin.push(c.description)
                 that.data2.push({
                   key: c.id,
-                  label: c.name,
+                  label: c.description,
                   pinyin: that.pinyin[index]
                 })       
               })  
@@ -171,9 +167,9 @@
         },
         createRoleUser(val) {
            let dataResult = {}
-           dataResult.roleId = this.addFormData.id
-           dataResult.permissionIdList = JSON.stringify(this.value2)
-           axios.post('custom/common/updateRolePermission', qs.stringify(dataResult)).then((res) => {
+           dataResult.permissionId = this.addFormData.id
+           dataResult.resourceIdList = JSON.stringify(this.value2)
+           axios.post('custom/common/updateResourcePermission', qs.stringify(dataResult)).then((res) => {
             if (res.errCode === 'S') {
               this.$message({
                       type: 'info',

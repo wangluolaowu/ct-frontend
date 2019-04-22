@@ -123,7 +123,7 @@
             }]
           },
           filters: {
-            name: ''
+            username: ''
           }
         }
       },
@@ -132,7 +132,7 @@
       },
       methods: {
         loadData() {
-          let param = {filter: this.filters.name}
+          let param = {'username': this.filters.username}
           axios.post('/custom/ctUser/selectCtUserList', qs.stringify(param)).then((res) => {
             var _data = res.data.result
             this.userInfoList = _data

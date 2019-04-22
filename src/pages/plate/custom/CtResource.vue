@@ -25,7 +25,7 @@
             </el-table-column>
             <el-table-column prop="available" label="状态">
                 <template slot-scope="scope">
-                {{$Enum.getEnumSelectByValue($Enum.EnumSelect().openStatus3,scope.row.available)}}
+                {{$Enum.getEnumSelectByValue($Enum.EnumSelect().openStatus,scope.row.available)}}
                 </template>
             </el-table-column>
              <!--第二步  开始进行修改和查询操作-->
@@ -56,7 +56,7 @@
                 <el-form-item prop="available" label="状态" style="width:400px">
                     <el-select placeholder="状态" v-model="addFormData.available">
                         <el-option
-                            v-for="item in $Enum.EnumSelect().openStatus3"
+                            v-for="item in $Enum.EnumSelect().openStatus"
                             :key="item.value"
                             :label="item.label"
                             :value="item.value" 

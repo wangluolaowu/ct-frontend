@@ -115,10 +115,10 @@
                </el-row>
               <el-transfer
                 filterable
-                :filter-method="filterMethod"
+                :filter-method="filterMethodPermission"
                 filter-placeholder="请输入用户名称"
                 v-model="permissionValue"
-                :titles="['可选用户','已选用户']"
+                :titles="['可选权限','已选权限']"
                 :data="permissionData" 
                 id='maskDialog'>
               </el-transfer>
@@ -215,17 +215,18 @@
           })
         },
         getPermissionValue () {
+          let that = this
           this.permissionValue = []
           this.permissionData = []
-          this.permissionPinyin = []
-          axios.post('custom/common/selectRolePermissionList', qs.stringify({'ctRoleId':this.addFormData.id})).then((res) => {
+          that.pinyin = []
+          axios.post('custom/common/selectRolePermissionList', qs.stringify({'roleId':this.addFormData.id})).then((res) => {
             if (res.errCode === 'S') {
                 res.data.result.forEach(function(c, index) {
-                this.permissionPinyin.push(c.name)
-                this.permissionData.push({
+                that.pinyin.push(c.name)
+                that.permissionData.push({
                   key: c.id,
                   label: c.name,
-                  pinyin: this.permissionPinyin[index]
+                  pinyin: that.pinyin[index]
                 })       
               })
               if(res.data.resultSelect){
@@ -240,7 +241,7 @@
           this.treeValue = []
           this.treeData = []
           this.treeParentValue = []
-          axios.post('custom/common/selectTreeCtMenuList', qs.stringify({'ctRoleId':this.addFormData.id})).then((res) => {
+          axios.post('custom/common/selectTreeCtMenuList', qs.stringify({'roleId':this.addFormData.id})).then((res) => {
             if (res.errCode === 'S') {
               if(res.data.resultTree){
               this.treeData=res.data.resultTree.map(item => {
@@ -306,7 +307,7 @@
                     message: `提交失败`
                   })
             }
-            this.roleMenudialogVisible = false
+            this.rolePermissiondialogVisible = false
             this.loadData()
           })   
         },
@@ -333,8 +334,11 @@
         filterMethod(query, item) {
           return item.pinyin.indexOf(query) > -1
         },
+        filterMethodPermission(query, item) {
+          return item.pinyin.indexOf(query) > -1
+        },
         loadData() {
-          let param = {filter: this.filters.role}
+          let param = {'role': this.filters.role}
           axios.post('custom/ctRole/selectCtRoleList', qs.stringify(param)).then((res) => {
             var _data = res.data.result
             this.userInfoList = _data

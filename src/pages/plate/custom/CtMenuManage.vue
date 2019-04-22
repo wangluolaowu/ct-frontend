@@ -4,13 +4,13 @@
          <el-col :span="24" class="toolbar conMarginLeft" >
              <el-form :inline="true" :model="filters">
                 <el-form-item>
-                    <el-input v-model="filters.name" placeholder="姓名"></el-input>
+                    <el-input v-model="filters.name" placeholder="节点名称"></el-input>
                    </el-form-item>
                    <el-form-item>
                      <el-button type="primary" v-on:click="getUsers">查询</el-button>
                   </el-form-item>
                  <el-form-item>
-                     <el-button type="info" @click="addUser">新增</el-button>
+                     <el-button type="primary" @click="addUser">新增</el-button>
                   </el-form-item>
             </el-form>
        </el-col>
@@ -149,7 +149,7 @@
           name: '',
           description: '',
           url: '',
-          available:1
+          available:''
         }],
         selectlistRow: [],
           addFormData: {
@@ -180,7 +180,7 @@
       },
       methods: {
         loadData() {
-          let param = {filter: this.filters.name}
+          let param = {'name': this.filters.name}
           axios.post('/custom/ctMenu/selectCtMenuList', qs.stringify(param)).then((res) => {
             var _data = res.data.result
             this.userInfoList = _data
