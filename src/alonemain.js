@@ -1,6 +1,8 @@
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
+
 import Vue from 'vue'
+import i18n from './i18n/i18n'
 import App from './Alone'
 import Element from 'element-ui'
 import axios from './util/http'
@@ -52,7 +54,9 @@ router.beforeEach((to, from, next) => {
   }
   next()
 })
+
 new Vue({
   router,
+  i18n,
   render: h => h(App)
 }).$mount('#alone')

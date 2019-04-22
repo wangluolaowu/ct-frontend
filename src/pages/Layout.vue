@@ -133,8 +133,12 @@ export default {
       console.log(that.sysLanguage);
       if (that.sysLanguage == '中文') {
         that.sysLanguage = 'English'
+        this.$i18n.locale='en'
+        //window.localStorage.setItem('lang', 'en')
       }else if(that.sysLanguage == 'English'){
         that.sysLanguage = '中文'
+        this.$i18n.locale='cn'
+        //window.localStorage.setItem('lang', 'cn')
       }
     }
   },

@@ -2,15 +2,16 @@
      <div class="mainContainer">
           <!--工具条-->
          <el-col :span="24" class="toolbar conMarginLeft" >
+           <span>{{$t('message.text')}}</span>
              <el-form :inline="true" :model="filters">
                 <el-form-item>
-                    <el-input v-model="filters.username" placeholder="姓名"></el-input>
+                    <el-input v-model="filters.username" :placeholder="$t('placeholder.enter')"></el-input>
                    </el-form-item>
                    <el-form-item>
-                     <el-button type="primary" v-on:click="loadData">查询</el-button>
+                     <el-button type="primary" v-on:click="loadData">{{$t("message.search")}}</el-button>
                   </el-form-item>
                  <el-form-item>
-                     <el-button type="info" @click="addUser">新增</el-button>
+                     <el-button type="info" @click="addUser">{{$t("message.add")}}</el-button>
                   </el-form-item>
             </el-form>
        </el-col>
