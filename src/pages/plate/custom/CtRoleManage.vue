@@ -241,6 +241,7 @@
           this.treeValue = []
           this.treeData = []
           this.treeParentValue = []
+          
           axios.post('custom/common/selectTreeCtMenuList', qs.stringify({'roleId':this.addFormData.id})).then((res) => {
             if (res.errCode === 'S') {
               if(res.data.resultTree){
