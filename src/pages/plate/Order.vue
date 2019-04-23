@@ -2,17 +2,17 @@
   <div class="mainOrder">
     <div id="mainTabCon">
       <div class="tabCon tabConOther">
-        <h4 class="h2">拣货V单汇总</h4>
+        <h4 class="h2">{{$t('message.msg1_01')}}</h4>
         <el-table :data='tableData.Vlist' highlight-current-row v-loading="tableLoadingVDT" style="width: 100%" border>
-          <el-table-column prop="inC" label="系统接收订单行总数" width="200"></el-table-column>
-          <el-table-column prop="waveC" label="当天已创建波次订单行"  width='200'></el-table-column>
-          <el-table-column prop="complC" label="当天已完成订单行" width="150"></el-table-column>
-          <el-table-column prop="uncomplC" label="当前未完成订单行" width="150"></el-table-column>
-          <el-table-column prop="comingC" label="正在进行中订单行"  width="200"></el-table-column>
-          <el-table-column prop="instantRaion" label="瞬时平均效率（行/人/分钟）" min-width='220'></el-table-column>
+          <el-table-column prop="inC" :label="$t('label.label1_01')" width="200"></el-table-column>
+          <el-table-column prop="waveC" :label="$t('label.label1_02')"  width='200'></el-table-column>
+          <el-table-column prop="complC" :label="$t('label.label1_03')" width="150"></el-table-column>
+          <el-table-column prop="uncomplC" :label="$t('label.label1_04')" width="150"></el-table-column>
+          <el-table-column prop="comingC" :label="$t('label.label1_05')"  width="200"></el-table-column>
+          <el-table-column prop="instantRaion" :label="$t('label.label1_06')" min-width='220'></el-table-column>
           <!--新添加字段-->
-           <el-table-column prop="complPercent" label="完成百分比" width="190"></el-table-column>
-          <el-table-column prop="forecastComplSecond"  label="预计完成时间" width="200">
+           <el-table-column prop="complPercent" :label="$t('label.label1_07')" width="190"></el-table-column>
+          <el-table-column prop="forecastComplSecond"  :label="$t('label.label1_08')" width="200">
             <template slot-scope="scope">
                 {{getDate(scope.row.forecastComplSecond,scope.row.uncomplC,scope.row.instantRaion)}}
             </template>
@@ -20,22 +20,22 @@
         </el-table>
       </div>
       <div class="tabConOther">
-        <h4 class="h2">拣货-V单</h4>
+        <h4 class="h2">{{$t('message.msg1_02')}}</h4>
         <el-table :data='tableData.VOrderList' highlight-current-row v-loading="tableLoadingVD" style="width: 100%" border>
-          <el-table-column prop="entityWorkstationId" label="工作站编号" min-width='100'></el-table-column>
-          <el-table-column prop="forecastWallCount" label="播种墙数量" min-width='100'></el-table-column>
-          <el-table-column prop="workstationStatus" label="工作状态" width="200">
+          <el-table-column prop="entityWorkstationId" :label="$t('label.label1_09')" min-width='100'></el-table-column>
+          <el-table-column prop="forecastWallCount" :label="$t('label.label1_10')" min-width='100'></el-table-column>
+          <el-table-column prop="workstationStatus" :label="$t('label.label1_11')" width="200">
             <template slot-scope="scope">
               {{$Enum.getEnumSelectByValue(WS_STATUS,scope.row.workstationStatus)}}
             </template>
           </el-table-column>
-          <el-table-column prop="complC" label="当天已完成订单行总数" width="180"></el-table-column>
-          <el-table-column prop="uncomplC" label="已分配且未完成的订单行数量" width="220" ></el-table-column>
-          <el-table-column prop="comingC" label="正在进行中订单行数量" width="160"></el-table-column>
-          <el-table-column prop="instantRaion" label="瞬时平均效率（行/人/分钟）" width="220"></el-table-column>
+          <el-table-column prop="complC" :label="$t('label.label1_12')" width="180"></el-table-column>
+          <el-table-column prop="uncomplC" :label="$t('label.label1_13')" width="220" ></el-table-column>
+          <el-table-column prop="comingC" :label="$t('label.label1_14')" width="160"></el-table-column>
+          <el-table-column prop="instantRaion" :label="$t('label.label1_06')" width="220"></el-table-column>
           <!--新添加字段-->
-          <el-table-column prop="complPercent" label="完成百分比" width="100"></el-table-column>
-          <el-table-column prop="forecastComplSecond" label="预计完成时间" width="200">
+          <el-table-column prop="complPercent" :label="$t('label.label1_07')" width="100"></el-table-column>
+          <el-table-column prop="forecastComplSecond" :label="$t('label.label1_08')" width="200">
              <template slot-scope="scope">
                 {{getDate(scope.row.forecastComplSecond,scope.row.uncomplC,scope.row.instantRaion)}}
             </template>
@@ -48,18 +48,18 @@
       </div>
 
       <div class="tabConOther">
-        <h4 class="h2">拣货-S单汇总</h4>
+        <h4 class="h2">{{$t('message.msg1_03')}}</h4>
         <el-table :data='tableData.SList' highlight-current-row v-loading="tableLoadingSDT" style="width: 100%" border>
-          <el-table-column prop="inC" label="系统接收订单行总数" width="190"></el-table-column>
-          <el-table-column prop="waveC" label="当天已创建波次订单行" min-width='200'></el-table-column>
-          <el-table-column prop="complC" label="当天已完成订单行"  min-width='200'></el-table-column>
+          <el-table-column prop="inC" :label="$t('label.label1_01')" width="190"></el-table-column>
+          <el-table-column prop="waveC" :label="$t('label.label1_02')" min-width='200'></el-table-column>
+          <el-table-column prop="complC" :label="$t('label.label1_03')"  min-width='200'></el-table-column>
 
-          <el-table-column prop="uncomplC" label="当前未完成订单行"  min-width='200'></el-table-column>
-          <el-table-column prop="comingC" label="正在进行中订单行" width="150"></el-table-column>
-          <el-table-column prop="instantRaion" label="瞬时平均效率（行/人/分钟）" width="220"></el-table-column>
+          <el-table-column prop="uncomplC" :label="$t('label.label1_04')"  min-width='200'></el-table-column>
+          <el-table-column prop="comingC" :label="$t('label.label1_05')" width="150"></el-table-column>
+          <el-table-column prop="instantRaion" :label="$t('label.label1_06')" width="220"></el-table-column>
           <!--新添加字段-->
-           <el-table-column prop="complPercent" label="完成百分比" width="100"></el-table-column>
-          <el-table-column prop="forecastComplSecond" label="预计完成时间" min-width='170'>
+           <el-table-column prop="complPercent" :label="$t('label.label1_07')" width="100"></el-table-column>
+          <el-table-column prop="forecastComplSecond" :label="$t('label.label1_08')" min-width='170'>
              <template slot-scope="scope">
                 {{getDate(scope.row.forecastComplSecond,scope.row.uncomplC,scope.row.instantRaion)}}
             </template>
@@ -67,23 +67,22 @@
         </el-table>
       </div>
       <div class="tabConOther">
-        <h4 class="h2">拣货-S单</h4>
+        <h4 class="h2">{{$t('message.msg1_04')}}</h4>
         <el-table :data='tableData.SOrderList' highlight-current-row v-loading="tableLoadingSD" border>
-          <el-table-column prop="entityWorkstationId" label="工作站编号"  min-width='100'></el-table-column>
-          <el-table-column prop="forecastWallCount" label="播种墙数量"  min-width='100'></el-table-column>
-          <el-table-column prop="workstationStatus" label="工作状态" width="200">
-             <template slot-scope="scope" width="100%">
-             {{$Enum.getEnumSelectByValue(WS_STATUS,scope.row.workstationStatus)}}
+          <el-table-column prop="entityWorkstationId" :label="$t('label.label1_09')" min-width='100'></el-table-column>
+          <el-table-column prop="forecastWallCount" :label="$t('label.label1_10')" min-width='100'></el-table-column>
+          <el-table-column prop="workstationStatus" :label="$t('label.label1_11')" width="200">
+            <template slot-scope="scope">
+              {{$Enum.getEnumSelectByValue(WS_STATUS,scope.row.workstationStatus)}}
             </template>
           </el-table-column>
-          <el-table-column prop="complC" label="当天已完成订单行总数" width="200"></el-table-column>
-
-          <el-table-column prop="uncomplC" label="已分配且未完成的订单行数量" width="220"></el-table-column>
-          <el-table-column prop="comingC" label="正在进行中订单行数量" width="180"></el-table-column>
-          <el-table-column prop="instantRaion" label="瞬时平均效率（行/人/分钟）" width="220"></el-table-column>
+          <el-table-column prop="complC" :label="$t('label.label1_12')" width="180"></el-table-column>
+          <el-table-column prop="uncomplC" :label="$t('label.label1_13')" width="220" ></el-table-column>
+          <el-table-column prop="comingC" :label="$t('label.label1_14')" width="160"></el-table-column>
+          <el-table-column prop="instantRaion" :label="$t('label.label1_06')" width="220"></el-table-column>
           <!--新添加字段-->
-          <el-table-column prop="complPercent" label="完成百分比" width="100"></el-table-column>
-          <el-table-column prop="forecastComplSecond" label="预计完成时间" width="200">
+          <el-table-column prop="complPercent" :label="$t('label.label1_07')" width="100"></el-table-column>
+          <el-table-column prop="forecastComplSecond" :label="$t('label.label1_08')" width="200">
              <template slot-scope="scope">
                 {{getDate(scope.row.forecastComplSecond,scope.row.uncomplC,scope.row.instantRaion)}}
             </template>
@@ -95,19 +94,19 @@
         </el-pagination>
       </div>
       <div class="tabConOther">
-        <h4 class="h2">上架订单汇总</h4>
+        <h4 class="h2">{{$t('message.msg1_05')}}</h4>
         <el-table :data='tableData.PutawayAllList' highlight-current-row v-loading="tableLoadingSJT" style="width: 100%" border>
-          <el-table-column prop="inC" label="系统接收订单行数量" width="200"></el-table-column>
-          <el-table-column prop="whiteWaveC" label="当天已创建波次订单行" width="180"></el-table-column>
-          <el-table-column prop="blueWaveC" label="蓝领已提交订单行" width="190"></el-table-column>
-          <el-table-column prop="blueUncomplC" label="蓝领已提交未完成订单行" width="190"></el-table-column>
-          <el-table-column prop="uncomplC" label="当前未完成订单行" width="140"></el-table-column>
-          <el-table-column prop="comingC" label="正在进行中订单行" width="145"></el-table-column>
-          <el-table-column prop="complC" label="当天已完成订单行" width="140"></el-table-column>
-          <el-table-column prop="instantRaion" label="瞬时平均效率（行/人/分钟）"  width="220"></el-table-column>
+          <el-table-column prop="inC" :label="$t('label.label1_01')" width="200"></el-table-column>
+          <el-table-column prop="whiteWaveC" :label="$t('label.label1_02')"  width="180"></el-table-column>
+          <el-table-column prop="blueWaveC" :label="$t('label.label1_15')"  width="190"></el-table-column>
+          <el-table-column prop="blueUncomplC" :label="$t('label.label1_16')" width="190"></el-table-column>
+          <el-table-column prop="uncomplC" :label="$t('label.label1_04')"  width="140"></el-table-column>
+          <el-table-column prop="comingC" :label="$t('label.label1_05')"  width="145"></el-table-column>
+          <el-table-column prop="complC" :label="$t('label.label1_03')"  width="140"></el-table-column>
+          <el-table-column prop="instantRaion" :label="$t('label.label1_06')"  width="220"></el-table-column>
           <!--新添加字段-->
-          <el-table-column prop="complPercent" label="完成百分比" width="100"></el-table-column>
-          <el-table-column prop="forecastComplSecond" label="预计完成时间" width="200">
+          <el-table-column prop="complPercent" :label="$t('label.label1_07')"  width="100"></el-table-column>
+          <el-table-column prop="forecastComplSecond" :label="$t('label.label1_08')" width="200">
              <template slot-scope="scope">
                 {{getDate(scope.row.forecastComplSecond,scope.row.uncomplC,scope.row.instantRaion)}}
             </template>
@@ -115,23 +114,23 @@
         </el-table>
       </div>
       <div class="tabConOther">
-        <h4 class="h2">上架</h4>
+        <h4 class="h2">{{$t('message.msg1_06')}}</h4>
         <el-table :data='tableData.PutawayList' highlight-current-row v-loading="tableLoadingSJ" style="width: 100%" border>
-          <el-table-column prop="entityWorkstationId" label="工作站编号" width="100"></el-table-column>
-          <el-table-column prop="workstationStatus" label="工作状态" width="200">
+          <el-table-column prop="entityWorkstationId" :label="$t('label.label1_09')" width="100"></el-table-column>
+          <el-table-column prop="workstationStatus" :label="$t('label.label1_11')" width="200">
              <template slot-scope="scope" width="100%">
               {{$Enum.getEnumSelectByValue(WS_STATUS,scope.row.workstationStatus)}}
             </template>
           </el-table-column>
-          <el-table-column prop="complC" label="当天已完成订单行总数" width="175"></el-table-column>
-          <el-table-column prop="dayWaveC" label="当天已提交订单行总数" width="175"></el-table-column>
-          <el-table-column prop="currWaveC" label="蓝领本次已提交订单行总数" width="190"></el-table-column>
-          <el-table-column prop="whiteUncomplC" label="蓝领已提交且未完成的订单行总数" width="230"></el-table-column>
-          <el-table-column prop="comingC" label="正在进行中订单行" width="160"></el-table-column>
-          <el-table-column prop="instantRaion" label="瞬时平均效率（行/人/分钟）" width="220"></el-table-column>
+          <el-table-column prop="complC" :label="$t('label.label1_12')" width="175"></el-table-column>
+          <el-table-column prop="dayWaveC" :label="$t('label.label1_17')" width="175"></el-table-column>
+          <el-table-column prop="currWaveC" :label="$t('label.label1_18')"  width="190"></el-table-column>
+          <el-table-column prop="whiteUncomplC" :label="$t('label.label1_19')"  width="230"></el-table-column>
+          <el-table-column prop="comingC" :label="$t('label.label1_05')"  width="160"></el-table-column>
+          <el-table-column prop="instantRaion" :label="$t('label.label1_06')"  width="220"></el-table-column>
           <!--新添加字段-->
-          <el-table-column prop="complPercent" label="完成百分比" width="100"></el-table-column>
-          <el-table-column prop="forecastComplSecond" label="预计完成时间" width="200">
+          <el-table-column prop="complPercent" :label="$t('label.label1_07')"  width="100"></el-table-column>
+          <el-table-column prop="forecastComplSecond" :label="$t('label.label1_08')"  width="200">
              <template slot-scope="scope">
                 {{getDate(scope.row.forecastComplSecond,scope.row.whiteUncomplC,scope.row.instantRaion)}}
             </template>
@@ -143,19 +142,19 @@
         </el-pagination>
       </div>
       <div class="tabConOther">
-        <h4 class="h2">调仓-拣出订单汇总</h4>
+        <h4 class="h2">{{$t('message.msg1_07')}}</h4>
         <!--新添加表格-->
         <el-table :data='tableData.TiaoCangAllList' highlight-current-row v-loading="tableLoadingTCT" style="width: 100%" border>
-           <el-table-column prop="inC" label="系统接收订单行总数" width="190"></el-table-column>
-          <el-table-column prop="waveC" label="当天已创建波次订单行"  min-width='180'></el-table-column>
-          <el-table-column prop="complC" label="当天已完成订单行"  min-width='180'></el-table-column>
+           <el-table-column prop="inC" :label="$t('label.label1_01')"  width="190"></el-table-column>
+          <el-table-column prop="waveC"  :label="$t('label.label1_02')"  min-width='180'></el-table-column>
+          <el-table-column prop="complC"  :label="$t('label.label1_03')"   min-width='180'></el-table-column>
 
-          <el-table-column prop="uncomplC" label="当天未完成订单行"  min-width='180'></el-table-column>
-          <el-table-column prop="comingC" label="正在进行中订单行" width="150"></el-table-column>
-          <el-table-column prop="instantRaion" label="瞬时平均效率（行/人/分钟）"  min-width='220'></el-table-column>
+          <el-table-column prop="uncomplC" :label="$t('label.label1_04')"  min-width='180'></el-table-column>
+          <el-table-column prop="comingC" :label="$t('label.label1_05')"  width="150"></el-table-column>
+          <el-table-column prop="instantRaion" :label="$t('label.label1_06')"   min-width='220'></el-table-column>
           <!--新添加字段-->
-           <el-table-column prop="complPercent" label="完成百分比" width="100"></el-table-column>
-          <el-table-column prop="forecastComplSecond" label="预计完成时间"  min-width='200'>
+           <el-table-column prop="complPercent" :label="$t('label.label1_07')"  width="100"></el-table-column>
+          <el-table-column prop="forecastComplSecond" :label="$t('label.label1_08')"   min-width='200'>
              <template slot-scope="scope">
                   {{getDate(scope.row.forecastComplSecond,scope.row.uncomplC,scope.row.instantRaion)}}
             </template>
@@ -163,22 +162,22 @@
         </el-table>
       </div>
       <div class="tabConOther">
-        <h4 class="h2">调仓-拣出订单</h4>
+        <h4 class="h2">{{$t('message.msg1_08')}}</h4>
         <el-table :data='tableData.TiaoCangLists' highlight-current-row v-loading="tableLoadingTC" border>
-          <el-table-column prop="entityWorkstationId" label="工作站编号"  min-width='100'></el-table-column>
-          <el-table-column prop="workstationStatus" label="工作状态"  min-width='100'>
+          <el-table-column prop="entityWorkstationId" :label="$t('label.label1_09')"   min-width='100'></el-table-column>
+          <el-table-column prop="workstationStatus" :label="$t('label.label1_11')"  min-width='100'>
              <template slot-scope="scope" width="100%">
               {{$Enum.getEnumSelectByValue(WS_STATUS,scope.row.workstationStatus)}}
             </template>
           </el-table-column>
-          <el-table-column prop="complC" label="当天已完成订单行总数"  min-width='200'></el-table-column>
+          <el-table-column prop="complC" :label="$t('label.label1_12')"  min-width='200'></el-table-column>
 
-          <el-table-column prop="uncomplC" label="已分配且未完成的订单行" width="220"></el-table-column>
-          <el-table-column prop="comingC" label="正在进行中订单行" width="180"></el-table-column>
-          <el-table-column prop="instantRaion" label="瞬时平均效率（行/人/分钟）" width="220"></el-table-column>
+          <el-table-column prop="uncomplC" :label="$t('label.label1_13')"  width="220"></el-table-column>
+          <el-table-column prop="comingC" :label="$t('label.label1_14')" width="180"></el-table-column>
+          <el-table-column prop="instantRaion" :label="$t('label.label1_06')"  width="220"></el-table-column>
           <!--新添加字段-->
-          <el-table-column prop="complPercent" label="完成百分比" width="100"></el-table-column>
-          <el-table-column prop="forecastComplSecond" label="预计完成时间" width="200">
+          <el-table-column prop="complPercent" :label="$t('label.label1_07')" width="100"></el-table-column>
+          <el-table-column prop="forecastComplSecond" :label="$t('label.label1_08')" width="200">
              <template slot-scope="scope">
                   {{getDate(scope.row.forecastComplSecond,scope.row.uncomplC,scope.row.instantRaion)}}
             </template>
@@ -190,18 +189,18 @@
         </el-pagination>
       </div>
        <div class="tabConOther">
-        <h4 class="h2">召唤货架汇总</h4>
+        <h4 class="h2">{{$t('message.msg1_09')}}</h4>
         <!--新添加表格-->
         <el-table :data='tableData.resultCallShelfSum' highlight-current-row v-loading="tableLoading" style="width: 100%" border>
-           <el-table-column prop="allCou" label="系统当天录入订单行总数" width="190"></el-table-column>
-          <el-table-column prop="complCou" label="当天已完成订单行"  min-width='150'></el-table-column>
+           <el-table-column prop="allCou" :label="$t('label.label1_01')"  width="190"></el-table-column>
+          <el-table-column prop="complCou" :label="$t('label.label1_03')"  min-width='150'></el-table-column>
 
-          <el-table-column prop="uncomplCou" label="当天未完成订单行"  min-width='150'></el-table-column>
-          <el-table-column prop="comingCou" label="正在进行中订单行"  min-width='150'></el-table-column>
-          <el-table-column prop="instantRaion" label="瞬时平均效率（行/人/分钟）" width="220"></el-table-column>
+          <el-table-column prop="uncomplCou" :label="$t('label.label1_04')"  min-width='150'></el-table-column>
+          <el-table-column prop="comingCou" :label="$t('label.label1_05')"  min-width='150'></el-table-column>
+          <el-table-column prop="instantRaion" :label="$t('label.label1_06')" width="220"></el-table-column>
           <!--新添加字段-->
-           <el-table-column prop="complPercent" label="完成百分比"  min-width='100'></el-table-column>
-          <el-table-column prop="forecastComplSecond" label="预计完成时间" width="200">
+           <el-table-column prop="complPercent" :label="$t('label.label1_07')"  min-width='100'></el-table-column>
+          <el-table-column prop="forecastComplSecond" :label="$t('label.label1_08')" width="200">
              <template slot-scope="scope">
                   {{getDate(scope.row.forecastComplSecond,scope.row.uncomplCou,scope.row.instantRaion)}}
             </template>
@@ -209,22 +208,22 @@
         </el-table>
       </div>
        <div class="tabConOther">
-        <h4 class="h2">召唤货架</h4>
+        <h4 class="h2">{{$t('message.msg1_10')}}</h4>
         <el-table :data='tableData.resultCallShelfInfoList' highlight-current-row v-loading="tableLoading" border>
-          <el-table-column prop="entityWorkstationId" label="工作站编号"  min-width='100'></el-table-column>
-          <el-table-column prop="workstationStatus" label="工作状态"  min-width='100'>
+          <el-table-column prop="entityWorkstationId" :label="$t('label.label1_09')"  min-width='100'></el-table-column>
+          <el-table-column prop="workstationStatus" :label="$t('label.label1_11')"  min-width='100'>
              <template slot-scope="scope" width="100%">
              {{$Enum.getEnumSelectByValue(WS_STATUS,scope.row.workstationStatus)}}
             </template>
           </el-table-column>
-          <el-table-column prop="complCou" label="当天已完成订单行总数"  min-width='200'></el-table-column>
+          <el-table-column prop="complCou" :label="$t('label.label1_12')"  min-width='200'></el-table-column>
 
-          <el-table-column prop="uncomplCou" label="已分配且未完成的订单行数量" width="220"></el-table-column>
-          <el-table-column prop="comingCou" label="正在进行中订单行数量" width="180"></el-table-column>
-          <el-table-column prop="instantRaion" label="瞬时平均效率（行/人/分钟）" width="220"></el-table-column>
+          <el-table-column prop="uncomplCou" :label="$t('label.label1_13')" width="220"></el-table-column>
+          <el-table-column prop="comingCou" :label="$t('label.label1_14')" width="180"></el-table-column>
+          <el-table-column prop="instantRaion" :label="$t('label.label1_06')" width="220"></el-table-column>
           <!--新添加字段-->
-          <el-table-column prop="complPercent" label="完成百分比"  min-width='100'></el-table-column>
-          <el-table-column prop="forecastComplSecond" label="预计完成时间" min-width='200'>
+          <el-table-column prop="complPercent" :label="$t('label.label1_07')"  min-width='100'></el-table-column>
+          <el-table-column prop="forecastComplSecond" :label="$t('label.label1_08')"  min-width='200'>
              <template slot-scope="scope">
                  {{getDate(scope.row.forecastComplSecond,scope.row.uncomplCou,scope.row.instantRaion)}}
             </template>
@@ -236,19 +235,19 @@
         </el-pagination>
       </div>
        <div class="tabConOther">
-        <h4 class="h2">盘点订单汇总</h4>
+        <h4 class="h2">{{$t('message.msg1_11')}}</h4>
         <!--新添加表格-->
         <el-table :data='tableData.resultStockSum' highlight-current-row v-loading="tableLoading" style="width: 100%" border>
-           <el-table-column prop="allCou" label="系统当天接收订单行总数" width="190"></el-table-column>
-          <el-table-column prop="wavedCou" label="当天已创建波次订单行" width="200"></el-table-column>
-          <el-table-column prop="complCou" label="当天已完成订单行"  min-width='150'></el-table-column>
+           <el-table-column prop="allCou" :label="$t('label.label1_01')"  width="190"></el-table-column>
+          <el-table-column prop="wavedCou" :label="$t('label.label1_02')"  width="200"></el-table-column>
+          <el-table-column prop="complCou" :label="$t('label.label1_03')"   min-width='150'></el-table-column>
 
-          <el-table-column prop="uncomplCou" label="当天未完成订单行"  min-width='150'></el-table-column>
-          <el-table-column prop="comingCou" label="正在进行中订单行"  min-width='150'></el-table-column>
-          <el-table-column prop="instantRaion" label="瞬时平均效率（行/人/分钟）" width="220"></el-table-column>
+          <el-table-column prop="uncomplCou" :label="$t('label.label1_04')" min-width='150'></el-table-column>
+          <el-table-column prop="comingCou" :label="$t('label.label1_05')"  min-width='150'></el-table-column>
+          <el-table-column prop="instantRaion" :label="$t('label.label1_06')"  width="220"></el-table-column>
           <!--新添加字段-->
-           <el-table-column prop="complPercent" label="完成百分比"  min-width='100'></el-table-column>
-          <el-table-column prop="forecastComplSecond" label="预计完成时间"  min-width='200'>
+           <el-table-column prop="complPercent" :label="$t('label.label1_07')"  min-width='100'></el-table-column>
+          <el-table-column prop="forecastComplSecond" :label="$t('label.label1_08')"   min-width='200'>
              <template slot-scope="scope">
                 {{getDate(scope.row.forecastComplSecond,scope.row.uncomplCou,scope.row.instantRaion)}}
             </template>
@@ -256,22 +255,22 @@
         </el-table>
       </div>
        <div class="tabConOther">
-        <h4 class="h2">盘点订单</h4>
+        <h4 class="h2">{{$t('message.msg1_12')}}</h4>
         <el-table :data='tableData.resultStockInfoList' highlight-current-row v-loading="tableLoading" border>
-          <el-table-column prop="entityWorkstationId" label="工作站编号" width="100"></el-table-column>
-          <el-table-column prop="workstationStatus" label="工作状态"  min-width='100'>
+          <el-table-column prop="entityWorkstationId" :label="$t('label.label1_09')"  width="100"></el-table-column>
+          <el-table-column prop="workstationStatus" :label="$t('label.label1_11')"  min-width='100'>
              <template slot-scope="scope" width="100%">
               {{$Enum.getEnumSelectByValue(WS_STATUS,scope.row.workstationStatus)}}
             </template>
           </el-table-column>
-          <el-table-column prop="complCou" label="当天已完成订单行总数"  min-width='200'></el-table-column>
+          <el-table-column prop="complCou" :label="$t('label.label1_12')"   min-width='200'></el-table-column>
 
-          <el-table-column prop="uncomplCou" label="已分配且未完成的订单行数量" width="220"></el-table-column>
-          <el-table-column prop="comingCou" label="正在进行中订单行数量" width="180"></el-table-column>
-          <el-table-column prop="instantRaion" label="瞬时平均效率（行/人/分钟）" width="220"></el-table-column>
+          <el-table-column prop="uncomplCou" :label="$t('label.label1_13')"  width="220"></el-table-column>
+          <el-table-column prop="comingCou" :label="$t('label.label1_14')"  width="180"></el-table-column>
+          <el-table-column prop="instantRaion" :label="$t('label.label1_06')"  width="220"></el-table-column>
           <!--新添加字段-->
-          <el-table-column prop="complPercent" label="完成百分比" min-width='100' ></el-table-column>
-          <el-table-column prop="forecastComplSecond" label="预计完成时间"  min-width='200'>
+          <el-table-column prop="complPercent" :label="$t('label.label1_07')"  min-width='100' ></el-table-column>
+          <el-table-column prop="forecastComplSecond" :label="$t('label.label1_08')"  min-width='200'>
              <template slot-scope="scope">
                  {{getDate(scope.row.forecastComplSecond,scope.row.uncomplCou,scope.row.instantRaion)}}
             </template>
@@ -287,15 +286,15 @@
       <div class="grid-content bg-purple-dark">
         <el-tabs id="topTitle" v-model="search.orderType" >
           <!--@tab-click="handleTabClick"-->
-          <el-tab-pane label="拣货S" name="S"></el-tab-pane>
-          <el-tab-pane label="拣货V" name="V"></el-tab-pane>
-          <el-tab-pane label="上架" name="S1"></el-tab-pane>
-          <el-tab-pane label="调仓-拣出" name="RELOC"></el-tab-pane>
-          <el-tab-pane label="调仓-召唤货架" name="S2"></el-tab-pane>
-          <el-tab-pane label="盘点" name="S3"></el-tab-pane>
+          <el-tab-pane :label="$t('message.msg1_04')"  name="S"></el-tab-pane>
+          <el-tab-pane :label="$t('message.msg1_02')" name="V"></el-tab-pane>
+          <el-tab-pane :label="$t('message.msg1_06')" name="S1"></el-tab-pane>
+          <el-tab-pane :label="$t('message.msg1_08')" name="RELOC"></el-tab-pane>
+          <el-tab-pane :label="$t('message.msg1_10')" name="S2"></el-tab-pane>
+          <el-tab-pane :label="$t('message.msg1_12')" name="S3"></el-tab-pane>
         </el-tabs>
         <div class="clears">
-          <h4 class="h2 fl">24小时订单完成统计</h4>
+          <h4 class="h2 fl">{{$t('message.msg1_13')}}</h4>
           <span class="fr">{{endTime24}}</span>
         </div>
         <div id="myChart" style="width: 100%;height: 400px;"></div>

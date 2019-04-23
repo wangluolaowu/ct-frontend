@@ -219,6 +219,21 @@ const routes = [
         path: '/robotManage/kidMoveContr',
         component: () => import('@/pages/plate/robotManage/kidMoveContr'),
         name: '动作控制'
+      },
+      {
+        path: '/robotManage/kidHomeData',
+        component: () => import('@/pages/plate/robotManage/kidHomeData'),
+        name: '机器人主数据'
+      },
+      {
+        path: '/robotManage/kidInfo',
+        component: () => import('@/pages/plate/robotManage/kidMoveContr'),
+        name: '机器人信息'
+      },
+      {
+        path: '/robotManage/errorMessage',
+        component: () => import('@/pages/plate/robotManage/kidMoveContr'),
+        name: '错误信息'
       }
     ]
   },
@@ -230,7 +245,7 @@ const routes = [
     children: [
       {
         path: '/holderManage/holderHomePage',
-        component: () => import('@/pages/plate/holderManageNew/holderMove'),
+        component: () => import('@/pages/plate/holderManageNew/holderHomeData'),
         name: '货架主数据'
       },
       {
@@ -247,6 +262,52 @@ const routes = [
         path: '/holderManage/holderSideType',
         component: () => import('@/pages/plate/holderManageNew/holderMove'),
         name: '货架位类型'
+      }
+    ]
+  },
+  {
+    path: '/',
+    component: Layout,
+    name: '充电桩管理',
+    icon: 'el-icon-service',
+    children: [
+      {
+        path: '/charageManage/homePage',
+        component: () => import('@/pages/plate/holderManageNew/holderMove'),
+        name: '充电桩主数据'
+      },
+      {
+        path: '/charageManage/changeContr',
+        component: () => import('@/pages/plate/holderManageNew/holderMove'),
+        name: '电池和充电管理'
+      },
+      {
+        path: '/charageManage/changeStatus',
+        component: () => import('@/pages/plate/holderManageNew/holderMove'),
+        name: '基本状态切换'
+      },
+      {
+        path: '/charageManage/errorMessage',
+        component: () => import('@/pages/plate/holderManageNew/holderMove'),
+        name: '错误信息'
+      }
+    ]
+  },
+  {
+    path: '/',
+    component: Layout,
+    name: '工作站管理',
+    icon: 'el-icon-service',
+    children: [
+      {
+        path: '/workstationManage/homePage',
+        component: () => import('@/pages/plate/holderManageNew/holderMove'),
+        name: '工作站主数据'
+      },
+      {
+        path: '/workstationManage/homePage',
+        component: () => import('@/pages/plate/holderManageNew/holderMove'),
+        name: '基础状态切换'
       }
     ]
   },
