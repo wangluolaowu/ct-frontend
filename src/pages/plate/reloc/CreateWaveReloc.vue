@@ -190,10 +190,10 @@ export default {
       })
     },
     tableRowClassName({row, rowIndex}) {
-        if (row.skuNumValidate === false || row.locNumValidate === false ) {
-          return 'warning-row'
+        if (row.skuNumValidate && row.skuNumValidate === true && row.locNumValidate === true) {
+          return ''
         } 
-        return 'success-row'
+        return 'warning-row'
       },
     beforeUpload (file, fileList) {
       this.tableLoading = true

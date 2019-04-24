@@ -106,21 +106,21 @@
              </el-col>
                </el-row>
                <el-row>
-                  <el-col :span="8" class='formBtn'>
-                    <el-form-item>
-                       <el-checkbox v-model="search.submitAll"  @change="handleCheckAllChange">提交全部</el-checkbox>
-                       <el-button type="primary" @click="submit" :disabled = "submitIsDisabled" >提交</el-button>
-                    </el-form-item>
-                  </el-col>
                   <el-col :span="8">
                   <el-form-item class="fl formGroupBtn">
                     <el-button type="primary" @click="confirm">确认</el-button>
                     <el-button type="info" :disabled = "cancelIsDisabled" @click="cancel">取消</el-button>
                   </el-form-item>
                  </el-col>
+                  <el-col :span="8" class='formBtn'>
+                    <el-form-item>
+                       <el-checkbox v-model="search.submitAll"  @change="handleCheckAllChange">提交全部</el-checkbox>
+                       <el-button type="primary" @click="submit" :disabled = "submitIsDisabled" >提交</el-button>
+                    </el-form-item>
+                  </el-col>
                 </el-row>
                </el-form>
-                <el-table ref="multipleTable" :data="tableData" tooltip-effect="dark" :row-class-name="tableRowClassName" style="width: 99.99%" border @selection-change="handleSelectionChange" v-loading="tableLoading">
+                <el-table ref="multipleTable" :data="tableData"  :row-class-name="tableRowClassName" style="width: 99.99%" border @selection-change="handleSelectionChange" v-loading="tableLoading">
                     <el-table-column type="selection" width="55">
                     </el-table-column>
                     <el-table-column prop="locNum" label="货位号" width="200">
@@ -251,10 +251,10 @@ export default {
       })
     },
     tableRowClassName({row, rowIndex}) {
-        if (row.skuNumValidate === false || row.locNumValidate === false ) {
-          return 'warning-row'
+        if (row.skuNumValidate && row.skuNumValidate === true && row.locNumValidate === true) {
+          return ''
         } 
-        return 'success-row'
+        return 'warning-row'
       },
     beforeUpload (file, fileList) {
       this.tableLoading = true

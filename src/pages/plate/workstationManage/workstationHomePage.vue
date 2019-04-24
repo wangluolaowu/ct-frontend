@@ -3,44 +3,68 @@
      <el-form class="demo-form-inline selectedCont clears" label-width="200px">
         <el-row>
         <el-col :span="8">
-            <el-form-item label="机器人编号" >
-              <el-input v-model="searchBIN.kidId" style="width:200px"></el-input>
+            <el-form-item label="工作站编号" >
+              <el-input v-model="searchBIN.entityWorkstationNum" style="width:200px"></el-input>
             </el-form-item>
         </el-col>
         <el-col :span="8">  
-            <el-form-item label="机器人服役历程" >
-              <el-input v-model="searchBIN.totalServiceMileage" style="width:200px"></el-input>
-            </el-form-item>
-        </el-col>   
-        </el-row>
-         <el-row>
-        <el-col :span="8">
-           <el-form-item label="机器人软件版本号" >
+            <el-form-item label="工作站客户端软件版本号" >
               <el-input v-model="searchBIN.softwareVersionNum" style="width:200px"></el-input>
-            </el-form-item>
-        </el-col>
-        <el-col :span="8">  
-            <el-form-item label="机器人MAC地址" >
-              <el-input v-model="searchBIN.macAddress" style="width:200px"></el-input>
-            </el-form-item>
-        </el-col>   
-        </el-row>
-       <el-row>
-        <el-col :span="8">
-           <el-form-item label="机器人设计版本号" >
-              <el-input v-model="searchBIN.designVersionNum" style="width:200px"></el-input>
-            </el-form-item>
-        </el-col>
-        <el-col :span="8">  
-            <el-form-item label="机器人IP地址" >
-              <el-input v-model="searchBIN.kidIpAddress" style="width:200px"></el-input>
             </el-form-item>
         </el-col>   
         </el-row>
         <el-row>
         <el-col :span="8">
-           <el-form-item label="机器人生产批次" >
+            <el-form-item label="工作站ID" >
+              <el-input v-model="searchBIN.entityWorkstationId" style="width:200px"></el-input>
+            </el-form-item>
+        </el-col>
+        <el-col :span="8">  
+            <el-form-item label="工作站生产批次" >
               <el-input v-model="searchBIN.mfgLotNum" style="width:200px"></el-input>
+            </el-form-item>
+        </el-col>   
+        </el-row>
+         <el-row>
+        <el-col :span="8">
+           <el-form-item label="工作站设计版本号" >
+              <el-input v-model="searchBIN.designVersionNum" style="width:200px"></el-input>
+            </el-form-item>
+        </el-col>
+        <el-col :span="8">
+           <el-form-item label="扫描枪型号" >
+              <el-input v-model="searchBIN.scanningGunModelNumber" style="width:200px"></el-input>
+            </el-form-item>
+        </el-col>
+        </el-row>
+       <el-row>
+        <el-col :span="8">
+           <el-form-item label="工作站服役时间" >
+              <el-input v-model="searchBIN.totalServiceMileage" style="width:200px"></el-input>
+            </el-form-item>
+        </el-col>
+        <el-col :span="8">  
+            <el-form-item label="工作站电脑MAC地址" >
+              <el-input v-model="searchBIN.macAddress" style="width:200px"></el-input>
+            </el-form-item>
+        </el-col>   
+        </el-row>
+        <el-row>
+        <el-col :span="8">
+           <el-form-item label="工作站IP地址" >
+              <el-input v-model="searchBIN.ipAddress" style="width:200px"></el-input>
+            </el-form-item>
+        </el-col>
+        <el-col :span="8">  
+            <el-form-item label="拍灯器个数" >
+              <el-input v-model="searchBIN.electronicTagsCount" style="width:200px"></el-input>
+            </el-form-item>
+        </el-col>   
+        </el-row>
+        <el-row>  
+        <el-col :span="8">
+           <el-form-item label="投影机型号" >
+              <el-input v-model="searchBIN.projectorModelNumber" style="width:200px"></el-input>
             </el-form-item>
         </el-col>
         <el-col :span="8">  
@@ -59,7 +83,7 @@
         </el-row>
         <el-row>
         <el-col :span="8">
-           <el-form-item label="机器人服役开始时间起始日期" >
+           <el-form-item label="工作站服役开始时间起始日期" >
                <el-date-picker
                 v-model="searchBIN.startTimeStartServiceDate"
                 format="yyyy-MM-dd HH:mm:ss"
@@ -72,7 +96,7 @@
             </el-form-item>
         </el-col>
         <el-col :span="8">  
-            <el-form-item label="机器人服役开始截止时间" >
+            <el-form-item label="工作站服役开始截止时间" >
                <el-date-picker
                 v-model="searchBIN.endTimeStartServiceDate"
                 format="yyyy-MM-dd HH:mm:ss"
@@ -158,24 +182,26 @@
          <el-table :data="userInfoList" style="width: 100%" border  height="500">
             <!--<el-table-column prop="id" label="id" >
             </el-table-column>-->
-            <el-table-column prop="kidId" label="机器人编码" fixed="left" >
+            <el-table-column prop="entityWorkstationId" label="工作站ID" fixed="left" >
             </el-table-column>
-             <el-table-column prop="softwareVersionNum" label="机器人软件版本号" width="200">
+            <el-table-column prop="entityWorkstationNum" label="工作站编号" width="200">
             </el-table-column>
-             <el-table-column prop="designVersionNum" label="机器人设计版本号" width="200">
+             <el-table-column prop="softwareVersionNum" label="工作站软件版本号" width="200">
             </el-table-column>
-             <el-table-column prop="mfgLotNum" label="机器人生产批次" width="200">
+             <el-table-column prop="designVersionNum" label="工作站设计版本号" width="200">
             </el-table-column>
-             <el-table-column prop="startServiceDate" label="机器人服役开始时间" width="200">
+             <el-table-column prop="mfgLotNum" label="工作站生产批次" width="200">
+            </el-table-column>
+             <el-table-column prop="startServiceDate" label="工作站服役开始时间" width="200">
                   <template slot-scope="scope">
                         {{$DateFormat.dateFormat(scope.row.startServiceDate,true)}}
                       </template>
             </el-table-column>
-             <el-table-column prop="totalServiceMileage" label="机器人服役里程" width="200">
+             <el-table-column prop="totalServiceMileage" label="工作站服役时长" width="200">
             </el-table-column>
-             <el-table-column prop="macAddress" label="机器人MAC地址" width="200">
+             <el-table-column prop="macAddress" label="工作站电脑MAC地址" width="200">
             </el-table-column>
-             <el-table-column prop="kidIpAddress" label="机器人IP地址" width="200">
+             <el-table-column prop="kidIpAddress" label="工作站电脑IP地址" width="200">
             </el-table-column>
              <el-table-column prop="latestMaintainDate" label="最近一次保养时间" width="200">
                   <template slot-scope="scope">
@@ -186,6 +212,12 @@
                   <template slot-scope="scope">
                         {{$DateFormat.dateFormat(scope.row.latestRepairDate,true)}}
                       </template>
+            </el-table-column>
+              <el-table-column prop="electronicTagsCount " label="拍灯器个数" width="200"> 
+            </el-table-column>
+              <el-table-column prop="projectorModelNumber " label="投影机型号" width="200"> 
+            </el-table-column>
+              <el-table-column prop="scanningGunModelNumber " label="扫描枪型号" width="200"> 
             </el-table-column>
              <el-table-column prop="descriptions " label="注释" width="200"> 
             </el-table-column>
@@ -210,19 +242,22 @@
           <!--新增界面-->
          <el-dialog title="记录" :visible.sync="dialogVisible" width="50%" :close-on-click-modal="false">
              <el-form :model="addFormData" :rules="rules2" ref="addFormData" label-width="150px" class="demo-ruleForm login-container">
-                  <el-form-item prop="kidId" label="机器人编码">
-                    <el-input type="text" v-model="addFormData.kidId" placeholder="机器人编码" :disabled="keyDisabled"></el-input>
+                  <el-form-item prop="entityWorkstationId" label="工作站ID">
+                    <el-input type="text" v-model="addFormData.entityWorkstationId" placeholder="工作站ID" :disabled="keyDisabled"></el-input>
                   </el-form-item>
-                   <el-form-item prop="softwareVersionNum" label="机器人软件版本号">
-                    <el-input type="text" v-model="addFormData.softwareVersionNum"  placeholder="机器人软件版本号"></el-input>
+                   <el-form-item prop="entityWorkstationNum" label="工作站编号">
+                    <el-input type="text" v-model="addFormData.entityWorkstationNum"  placeholder="工作站编号"></el-input>
                   </el-form-item>
-                   <el-form-item prop="designVersionNum" label="机器人设计版本号">
-                    <el-input type="text" v-model="addFormData.designVersionNum"  placeholder="机器人设计版本号"></el-input>
+                   <el-form-item prop="softwareVersionNum" label="工作站软件版本号">
+                    <el-input type="text" v-model="addFormData.softwareVersionNum"  placeholder="工作站软件版本号"></el-input>
                   </el-form-item>
-                   <el-form-item prop="mfgLotNum" label="机器人生产批次">
-                    <el-input type="text" v-model="addFormData.mfgLotNum" placeholder="机器人生产批次"></el-input>
+                   <el-form-item prop="designVersionNum" label="工作站设计版本号">
+                    <el-input type="text" v-model="addFormData.designVersionNum"  placeholder="工作站设计版本号"></el-input>
                   </el-form-item>
-                   <el-form-item prop="startServiceDate" label="机器人服役开始时间">
+                   <el-form-item prop="mfgLotNum" label="工作站生产批次" >
+                    <el-input type="text" v-model="addFormData.mfgLotNum" placeholder="工作站生产批次"></el-input>
+                  </el-form-item>
+                   <el-form-item prop="startServiceDate" label="工作站服役开始时间">
                     <el-date-picker
                         v-model="addFormData.startServiceDate"
                         format="yyyy-MM-dd HH:mm:ss"
@@ -233,14 +268,14 @@
                         @change="handleChangeTime"
                     ></el-date-picker>
                   </el-form-item>
-                  <el-form-item prop="totalServiceMileage" label="机器人服役里程">
-                    <el-input type="text" v-model="addFormData.totalServiceMileage" placeholder="机器人服役里程"></el-input>
+                  <el-form-item prop="totalServiceMileage" label="工作站服役时长">
+                    <el-input type="text" v-model="addFormData.totalServiceMileage" placeholder="工作站服役时长"></el-input>
                   </el-form-item>
-                  <el-form-item prop="macAddress" label="机器人MAC地址">
-                    <el-input type="text" v-model="addFormData.macAddress" placeholder="机器人MAC地址"></el-input>
+                  <el-form-item prop="macAddress" label="工作站电脑MAC地址">
+                    <el-input type="text" v-model="addFormData.macAddress" placeholder="工作站电脑MAC地址"></el-input>
                   </el-form-item>
-                  <el-form-item prop="kidIpAddress" label="机器人IP地址">
-                    <el-input type="text" v-model="addFormData.kidIpAddress" placeholder="机器人IP地址"></el-input>
+                  <el-form-item prop="kidIpAddress" label="工作站电脑IP地址">
+                    <el-input type="text" v-model="addFormData.kidIpAddress" placeholder="工作站电脑IP地址"></el-input>
                   </el-form-item>
                  <el-form-item prop="latestMaintainDate" label="最近一次保养时间">
                      <el-date-picker
@@ -264,12 +299,21 @@
                         @change="handleChangeTime"
                     ></el-date-picker>
                   </el-form-item>
+                  <el-form-item prop="electronicTagsCount " label="拍灯器个数">
+                    <el-input type="text" v-model="addFormData.electronicTagsCount" placeholder="拍灯器个数"></el-input>
+                  </el-form-item>
+                  <el-form-item prop="projectorModelNumber " label="投影机型号">
+                    <el-input type="text" v-model="addFormData.projectorModelNumber" placeholder="投影机型号"></el-input>
+                  </el-form-item>
+                  <el-form-item prop="scanningGunModelNumber " label="扫描枪型号">
+                    <el-input type="text" v-model="addFormData.scanningGunModelNumber" placeholder="扫描枪型号"></el-input>
+                  </el-form-item>
                     <el-form-item prop="descriptions " label="注释">
                     <el-input type="text" v-model="addFormData.descriptions" placeholder="注释"></el-input>
                   </el-form-item>
              </el-form>
              <span slot="footer" class="dialog-footer">
-                 <el-button @click.native="dialogVisible = false,addFormData={kidId:'',softwareVersionNum:'',designVersionNum:'',mfgLotNum:'',startServiceDate:'',totalServiceMileage:'',macAddress:'',kidIpAddress:'',latestMaintainDate:'',latestRepairDate:'',descriptions:''}">取 消</el-button>
+                 <el-button @click.native="dialogVisible = false,addFormData={entityWorkstationId:'',entityWorkstationNum:'',softwareVersionNum:'',designVersionNum:'',mfgLotNum:'',startServiceDate:'',totalServiceMileage:'',macAddress:'',kidIpAddress:'',latestMaintainDate:'',latestRepairDate:'',electronicTagsCount:'',projectorModelNumber:'',scanningGunModelNumber:'',descriptions:''}">取 消</el-button>
                  <el-button v-if="isView" type="primary" @click.native="addSubmit">确 定</el-button>
              </span>
           </el-dialog>
@@ -289,7 +333,8 @@
           keyDisabled:false,
           isView: true,
           addFormData: {
-            kidId:'',
+            entityWorkstationId:'',
+            entityWorkstationNum:'',
             softwareVersionNum:'',
             designVersionNum:'',
             mfgLotNum:'',
@@ -299,10 +344,14 @@
             kidIpAddress:'',
             latestMaintainDate:'',
             latestRepairDate:'',
+            electronicTagsCount:'',
+            projectorModelNumber:'',
+            scanningGunModelNumber:'',
             descriptions:''
           },
           searchBIN: {
-            kidId:'',
+            entityWorkstationId:'',
+            entityWorkstationNum:'',
             softwareVersionNum:'',
             designVersionNum:'',
             mfgLotNum:'',
@@ -312,6 +361,9 @@
             kidIpAddress:'',
             latestMaintainDate:'',
             latestRepairDate:'',
+            electronicTagsCount:'',
+            projectorModelNumber:'',
+            scanningGunModelNumber:'',
             startTimeStartServiceDate:'',
             endTimeStartServiceDate:'',
             startTimeLatestRepairDate:'',
@@ -350,7 +402,8 @@
         },
         restData(){
             this.searchBIN = {
-            kidId:'',
+            entityWorkstationId:'',
+            entityWorkstationNum:'',
             softwareVersionNum:'',
             designVersionNum:'',
             mfgLotNum:'',
@@ -360,6 +413,9 @@
             kidIpAddress:'',
             latestMaintainDate:'',
             latestRepairDate:'',
+            electronicTagsCount:'',
+            projectorModelNumber:'',
+            scanningGunModelNumber:'',
             startTimeStartServiceDate:'',
             endTimeStartServiceDate:'',
             startTimeLatestRepairDate:'',
@@ -370,7 +426,7 @@
         }, 
         loadData() {
           let param = {'params': JSON.stringify(this.searchBIN)}
-          axios.post('/robotManage/kidHomeData/selectKidsInfoBySearch', qs.stringify(param)).then((res) => {
+          axios.post('/workstationManage/homePage/selectWorkstationListBySearch', qs.stringify(param)).then((res) => {
             var _data = res.data.result
             this.userInfoList = _data
             this.searchBIN.totalRows = res.data.totalRows
@@ -378,7 +434,8 @@
         },
         add() {
           this.addFormData = {
-             kidId:'',
+             entityWorkstationId:'',
+            entityWorkstationNum:'',
             softwareVersionNum:'',
             designVersionNum:'',
             mfgLotNum:'',
@@ -388,11 +445,14 @@
             kidIpAddress:'',
             latestMaintainDate:'',
             latestRepairDate:'',
+            electronicTagsCount:'',
+            projectorModelNumber:'',
+            scanningGunModelNumber:'',
             descriptions:''
           }
           this.isView = true
           this.addType = true
-          this.keyDisabled = false
+          this.keyDisabled=false
           this.dialogVisible = true
           // this.addFormReadOnly = false;
         },
@@ -405,7 +465,7 @@
         modifyInfo(rowData) {
           this.addFormData = Object.assign({}, rowData)
           this.isView = true
-          this.keyDisabled = true
+          this.keyDisabled=true
           this.dialogVisible = true
           // this.addFormReadOnly = false;
         },
@@ -414,9 +474,9 @@
             confirmButtonText: '确定',
             callback: action => {
               var params = {
-                kidId: rowData.kidId
+                entityWorkstationId: rowData.entityWorkstationId
               }
-              axios.post('/robotManage/kidHomeData/deleteKidsInfo', qs.stringify(params)).then((res) => {
+              axios.post('/workstationManage/homePage/deleteWorkstationInfo', qs.stringify(params)).then((res) => {
                 console.info(res)
                 if (res.errCode === 'S') {
                   this.$message({
@@ -441,9 +501,9 @@
             if (valid) {
               let param = Object.assign({}, this.addFormData)
               let result = {}
-              result.result = JSON.stringify(param)   
+              result.params = JSON.stringify(param)   
               if (!this.addType) {
-                axios.post('/robotManage/kidHomeData/updateKidsInfo', qs.stringify(result)).then((res) => {
+                axios.post('/workstationManage/homePage/updateWorkstationInfo', qs.stringify(result)).then((res) => {
                   if (res.errCode === 'S') {
                     this.$message({
                       type: 'info',
@@ -459,7 +519,7 @@
                   this.dialogVisible = false
                 })
               } else {
-                axios.post('/robotManage/kidHomeData/insertKidsInfo', qs.stringify(result)).then((res) => {
+                axios.post('/workstationManage/homePage/insertWorkstationInfo', qs.stringify(result)).then((res) => {
                   if (res.errCode === 'S') {
                     this.$message({
                       type: 'info',

@@ -74,11 +74,11 @@
          <el-table :data="userInfoList" style="width: 100%" border  height="500">
             <!--<el-table-column prop="id" label="id" >
             </el-table-column>-->
-            <el-table-column prop="holderId" label="货架ID" fixed="left" >
+            <el-table-column prop="holderId" label="货架ID" fixed="left" width="200">
             </el-table-column>
              <el-table-column prop="holderNum" label="货架编码" width="200">
-             <el-table-column prop="holderModelNumber" label="货架类型" width="200">
             </el-table-column>
+             <el-table-column prop="holderModelNumber" label="货架类型" width="200">
             </el-table-column>
              <el-table-column prop="posX" label="当前坐标X" width="200">
             </el-table-column>
@@ -110,20 +110,29 @@
          <el-dialog title="记录" :visible.sync="dialogVisible" width="50%" :close-on-click-modal="false">
              <el-form :model="addFormData" :rules="rules2" ref="addFormData" label-width="150px" class="demo-ruleForm login-container">
                   <el-form-item prop="holderId" label="货架ID">
-                    <el-input type="text" v-model="addFormData.holderId" placeholder="机器人编码"></el-input>
+                    <el-input type="text" v-model="addFormData.holderId" placeholder="货架ID" :disabled="keyDisabled"></el-input>
                   </el-form-item>
-                   <el-form-item prop="softwareVersionNum" label="机器人软件版本号">
-                    <el-input type="text" v-model="addFormData.softwareVersionNum"  placeholder="机器人软件版本号"></el-input>
+                   <el-form-item prop="holderNum" label="货架编码">
+                    <el-input type="text" v-model="addFormData.holderNum"  placeholder="货架编码"></el-input>
                   </el-form-item>
-                   <el-form-item prop="designVersionNum" label="机器人设计版本号">
-                    <el-input type="text" v-model="addFormData.designVersionNum"  placeholder="机器人设计版本号"></el-input>
+                   <el-form-item prop="holderModelNumber" label="货架类型">
+                    <el-input type="text" v-model="addFormData.holderModelNumber"  placeholder="货架类型"></el-input>
                   </el-form-item>
-                   <el-form-item prop="mfgLotNum" label="机器人生产批次">
-                    <el-input type="text" v-model="addFormData.mfgLotNum" placeholder="机器人生产批次"></el-input>
+                   <el-form-item prop="posX" label="当前坐标X">
+                    <el-input type="text" v-model="addFormData.posX" placeholder="当前坐标X"></el-input>
+                  </el-form-item>
+                   <el-form-item prop="posY" label="当前坐标Y">
+                    <el-input type="text" v-model="addFormData.posY" placeholder="当前坐标Y"></el-input>
+                  </el-form-item>
+                   <el-form-item prop="grossWeight" label="毛重">
+                    <el-input type="text" v-model="addFormData.grossWeight" placeholder="毛重"></el-input>
+                  </el-form-item>
+                   <el-form-item prop="totalWeight" label="总重">
+                    <el-input type="text" v-model="addFormData.totalWeight" placeholder="总重"></el-input>
                   </el-form-item>
              </el-form>
              <span slot="footer" class="dialog-footer">
-                 <el-button @click.native="dialogVisible = false,addFormData={kidId:'',softwareVersionNum:'',designVersionNum:'',mfgLotNum:'',startServiceDate:'',totalServiceMileage:'',macAddress:'',kidIpAddress:'',latestMaintainDate:'',latestRepairDate:'',descriptions:''}">取 消</el-button>
+                 <el-button @click.native="dialogVisible = false,addFormData={holderId:'',holderNum:'',holderModelNumber:'',posX:'',posY:'',grossWeight:'',totalWeight:''}">取 消</el-button>
                  <el-button v-if="isView" type="primary" @click.native="addSubmit">确 定</el-button>
              </span>
           </el-dialog>
@@ -140,37 +149,25 @@
           userInfoList: [],
           addFormReadOnly: true,
           dialogVisible: false,
+          keyDisabled:false,
           isView: true,
           addFormData: {
-            kidId:'',
-            softwareVersionNum:'',
-            designVersionNum:'',
-            mfgLotNum:'',
-            startServiceDate:'',
-            totalServiceMileage:'',
-            macAddress:'',
-            kidIpAddress:'',
-            latestMaintainDate:'',
-            latestRepairDate:'',
-            descriptions:''
+            holderId:'',
+            holderNum:'',
+            holderModelNumber:'',
+            posX:'',
+            posY:'',
+            grossWeight:'',
+            totalWeight:''
           },
           searchBIN: {
-            kidId:'',
-            softwareVersionNum:'',
-            designVersionNum:'',
-            mfgLotNum:'',
-            startServiceDate:'',
-            totalServiceMileage:'',
-            macAddress:'',
-            kidIpAddress:'',
-            latestMaintainDate:'',
-            latestRepairDate:'',
-            startTimeStartServiceDate:'',
-            endTimeStartServiceDate:'',
-            startTimeLatestRepairDate:'',
-            endTimeLatestRepairDate:'',
-            startTimeLatestMaintainDate:'',
-            endTimeLatestMaintainDate:'',
+            holderId:'',
+            holderNum:'',
+            holderModelNumber:'',
+            posX:'',
+            posY:'',
+            grossWeight:'',
+            totalWeight:'',
             currentPage:1,
             pageSize:50,
             totalRows:-1
@@ -203,27 +200,18 @@
         },
         restData(){
             this.searchBIN = {
-            kidId:'',
-            softwareVersionNum:'',
-            designVersionNum:'',
-            mfgLotNum:'',
-            startServiceDate:'',
-            totalServiceMileage:'',
-            macAddress:'',
-            kidIpAddress:'',
-            latestMaintainDate:'',
-            latestRepairDate:'',
-            startTimeStartServiceDate:'',
-            endTimeStartServiceDate:'',
-            startTimeLatestRepairDate:'',
-            endTimeLatestRepairDate:'',
-            startTimeLatestMaintainDate:'',
-            endTimeLatestMaintainDate:''
+            holderId:'',
+            holderNum:'',
+            holderModelNumber:'',
+            posX:'',
+            posY:'',
+            grossWeight:'',
+            totalWeight:''
           }
         }, 
         loadData() {
           let param = {'params': JSON.stringify(this.searchBIN)}
-          axios.post('/robotManage/kidHomeData/selectKidsInfoBySearch', qs.stringify(param)).then((res) => {
+          axios.post('/holderManage/homePage/selectHolderListBySearch', qs.stringify(param)).then((res) => {
             var _data = res.data.result
             this.userInfoList = _data
             this.searchBIN.totalRows = res.data.totalRows
@@ -231,20 +219,17 @@
         },
         add() {
           this.addFormData = {
-             kidId:'',
-            softwareVersionNum:'',
-            designVersionNum:'',
-            mfgLotNum:'',
-            startServiceDate:'',
-            totalServiceMileage:'',
-            macAddress:'',
-            kidIpAddress:'',
-            latestMaintainDate:'',
-            latestRepairDate:'',
-            descriptions:''
+            holderId:'',
+            holderNum:'',
+            holderModelNumber:'',
+            posX:'',
+            posY:'',
+            grossWeight:'',
+            totalWeight:''
           }
           this.isView = true
           this.addType = true
+          this.keyDisabled = false
           this.dialogVisible = true
           // this.addFormReadOnly = false;
         },
@@ -257,6 +242,7 @@
         modifyInfo(rowData) {
           this.addFormData = Object.assign({}, rowData)
           this.isView = true
+          this.keyDisabled = true
           this.dialogVisible = true
           // this.addFormReadOnly = false;
         },
@@ -265,9 +251,9 @@
             confirmButtonText: '确定',
             callback: action => {
               var params = {
-                kidId: rowData.kidId
+                holderId: rowData.holderId
               }
-              axios.post('/robotManage/kidHomeData/deleteKidsInfo', qs.stringify(params)).then((res) => {
+              axios.post('/holderManage/homePage/deleteHolderInfo', qs.stringify(params)).then((res) => {
                 console.info(res)
                 if (res.errCode === 'S') {
                   this.$message({
@@ -294,7 +280,7 @@
               let result = {}
               result.result = JSON.stringify(param)   
               if (!this.addType) {
-                axios.post('/robotManage/kidHomeData/updateKidsInfo', qs.stringify(result)).then((res) => {
+                axios.post('/holderManage/homePage/updateHolderInfo', qs.stringify(result)).then((res) => {
                   if (res.errCode === 'S') {
                     this.$message({
                       type: 'info',
@@ -310,7 +296,7 @@
                   this.dialogVisible = false
                 })
               } else {
-                axios.post('/robotManage/kidHomeData/insertKidsInfo', qs.stringify(result)).then((res) => {
+                axios.post('/holderManage/homePage/insertHolderInfo', qs.stringify(result)).then((res) => {
                   if (res.errCode === 'S') {
                     this.$message({
                       type: 'info',

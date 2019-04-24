@@ -273,12 +273,12 @@ const routes = [
     children: [
       {
         path: '/charageManage/homePage',
-        component: () => import('@/pages/plate/holderManageNew/holderMove'),
+        component: () => import('@/pages/plate/charageManage/charageHomePage'),
         name: '充电桩主数据'
       },
       {
         path: '/charageManage/changeContr',
-        component: () => import('@/pages/plate/holderManageNew/holderMove'),
+        component: () => import('@/pages/plate/charageManage/charageChangeContr'),
         name: '电池和充电管理'
       },
       {
@@ -301,12 +301,12 @@ const routes = [
     children: [
       {
         path: '/workstationManage/homePage',
-        component: () => import('@/pages/plate/holderManageNew/holderMove'),
+        component: () => import('@/pages/plate/workstationManage/workstationHomePage'),
         name: '工作站主数据'
       },
       {
-        path: '/workstationManage/homePage',
-        component: () => import('@/pages/plate/holderManageNew/holderMove'),
+        path: '/workstationManage/changeStatus',
+        component: () => import('@/pages/plate/workstationManage/workstationChangeStatus'),
         name: '基础状态切换'
       }
     ]
