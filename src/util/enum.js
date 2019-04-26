@@ -48,6 +48,20 @@ Enum.EnumSelect = function() {
         value: 'N'
       }
     ],
+    workstation_status: [
+      {
+        label: '全部',
+        value: ''
+      },
+      {
+        label: '小工作站',
+        value: '1'
+      },
+      {
+        label: '大工作站',
+        value: '2'
+      }
+    ],
     WS_STATUS: [
       {
         label: 'INACTIVE',
@@ -354,6 +368,34 @@ Enum.EnumSelect = function() {
       {
         label: '旋转-360',
         value: 'SIMPLE_MOVE10'
+      }
+    ],
+    CHARGE_STATUS: [
+      {
+        label: '在充电',
+        value: 1
+      },
+      {
+        label: '未充电',
+        value: 2
+      }
+    ],
+    order_type: [
+      {
+        label: '全部',
+        value: ''
+      },
+      {
+        label: 'V',
+        value: 'V'
+      },
+      {
+        label: 'S',
+        value: 'S'
+      },
+      {
+        label: 'RELOC',
+        value: 'RELOC'
       }
     ]
   }

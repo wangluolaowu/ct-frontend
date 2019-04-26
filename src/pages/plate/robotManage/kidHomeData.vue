@@ -349,6 +349,9 @@
             this.loadData()
         },
         restData(){
+          let currentPageTemp = this.searchBIN.currentPage
+          let pageSizeTemp = this.searchBIN.pageSize
+          let totalRowsTemp = this.searchBIN.totalRows
             this.searchBIN = {
             kidId:'',
             softwareVersionNum:'',
@@ -365,7 +368,10 @@
             startTimeLatestRepairDate:'',
             endTimeLatestRepairDate:'',
             startTimeLatestMaintainDate:'',
-            endTimeLatestMaintainDate:''
+            endTimeLatestMaintainDate:'',
+             currentPage:currentPageTemp,
+             pageSize:pageSizeTemp,
+             totalRows:totalRowsTemp
           }
         }, 
         loadData() {

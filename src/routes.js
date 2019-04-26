@@ -260,7 +260,7 @@ const routes = [
       },
       {
         path: '/holderManage/holderSideType',
-        component: () => import('@/pages/plate/holderManageNew/holderMove'),
+        component: () => import('@/pages/plate/holderManageNew/holderSideType'),
         name: '货架位类型'
       }
     ]
@@ -283,12 +283,12 @@ const routes = [
       },
       {
         path: '/charageManage/changeStatus',
-        component: () => import('@/pages/plate/holderManageNew/holderMove'),
+        component: () => import('@/pages/plate/charageManage/changeStatus'),
         name: '基本状态切换'
       },
       {
         path: '/charageManage/errorMessage',
-        component: () => import('@/pages/plate/holderManageNew/holderMove'),
+        component: () => import('@/pages/plate/charageManage/changeStatus'),
         name: '错误信息'
       }
     ]
@@ -308,6 +308,24 @@ const routes = [
         path: '/workstationManage/changeStatus',
         component: () => import('@/pages/plate/workstationManage/workstationChangeStatus'),
         name: '基础状态切换'
+      }
+    ]
+  },
+  {
+    path: '/',
+    component: Layout,
+    name: '经销商管理',
+    icon: 'el-icon-service',
+    children: [
+      {
+        path: '/dealerManage/dealer',
+        component: () => import('@/pages/plate/dealerManage/dealer'),
+        name: '经销商'
+      },
+      {
+        path: '/dealerManage/route',
+        component: () => import('@/pages/plate/dealerManage/route'),
+        name: '路线'
       }
     ]
   },

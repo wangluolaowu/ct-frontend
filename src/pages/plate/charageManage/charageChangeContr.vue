@@ -3,75 +3,15 @@
      <el-form class="demo-form-inline selectedCont clears" label-width="200px">
         <el-row>
         <el-col :span="8">
-            <el-form-item label="充电桩ID" >
-              <el-input v-model="searchBIN.chargePointId" style="width:200px"></el-input>
+            <el-form-item prop="ruleId" label="规则编号" >
+              <el-input v-model="searchBIN.ruleId" style="width:200px"></el-input>
             </el-form-item>
         </el-col>
         <el-col :span="8">
-            <el-form-item label="充电桩编号" >
-              <el-input v-model="searchBIN.chargePointNum" style="width:200px"></el-input>
+            <el-form-item prop="rulePriority" label="规则优先级" >
+              <el-input v-model="searchBIN.rulePriority" style="width:200px"></el-input>
             </el-form-item>
         </el-col>
-        </el-row>
-        <el-row>
-        <el-col :span="8">
-            <el-form-item label="充电桩设计版本号" >
-              <el-input v-model="searchBIN.designVersionNum" style="width:200px"></el-input>
-            </el-form-item>
-        </el-col>
-        <el-col :span="8">  
-            <el-form-item label="充电桩生产批次" >
-              <el-input v-model="searchBIN.mfgLotNum" style="width:200px"></el-input>
-            </el-form-item>
-        </el-col>   
-        </el-row>
-       <el-row>
-        <el-col :span="8">
-           <el-form-item label="充电桩服役时长" >
-              <el-input v-model="searchBIN.totalServiceMileage" style="width:200px"></el-input>
-            </el-form-item>
-        </el-col>
-        <el-col :span="8">  
-            <el-form-item label="充电桩电脑MAC地址" >
-              <el-input v-model="searchBIN.macAddress" style="width:200px"></el-input>
-            </el-form-item>
-        </el-col>   
-        </el-row>
-        <el-row>
-        <el-col :span="8">
-           <el-form-item label="充电桩IP地址" >
-              <el-input v-model="searchBIN.ipAddress" style="width:200px"></el-input>
-            </el-form-item>
-        </el-col>
-        <el-col :span="8">  
-            <el-form-item label="额定电压范围" >
-              <el-input v-model="searchBIN.ratedVoltageRange" style="width:200px"></el-input>
-            </el-form-item>
-        </el-col>   
-        </el-row>
-        <el-row>
-        <el-col :span="8">
-           <el-form-item label="额定电流范围" >
-              <el-input v-model="searchBIN.ratedCurrentRange" style="width:200px"></el-input>
-            </el-form-item>
-        </el-col>
-        <el-col :span="8">  
-            <el-form-item label="当前电流范围" >
-              <el-input v-model="searchBIN.curtCurrentRange" style="width:200px"></el-input>
-            </el-form-item>
-        </el-col>   
-        </el-row>
-        <el-row>  
-        <el-col :span="8">
-           <el-form-item label="当前电压范围" >
-              <el-input v-model="searchBIN.curtVoltageRange" style="width:200px"></el-input>
-            </el-form-item>
-        </el-col>
-        <el-col :span="8">
-           <el-form-item label="当前最大电流" >
-              <el-input v-model="searchBIN.curtMaximumCurrent" style="width:200px"></el-input>
-            </el-form-item>
-        </el-col> 
         </el-row>
          <el-row>  
             <el-col :span="8">  
@@ -88,94 +28,10 @@
             </el-form-item>
         </el-col> 
         <el-col :span="8">
-            <el-form-item label="充电桩软件版本号" >
-              <el-input v-model="searchBIN.softwareVersionNum" style="width:200px"></el-input>
+            <el-form-item label="机器人编号">
+              <el-input v-model="searchBIN.kidId" style="width:200px"></el-input>
             </el-form-item>
         </el-col> 
-         </el-row>
-        <el-row>
-        <el-col :span="8">
-           <el-form-item label="充电桩服役开始时间起始日期" >
-               <el-date-picker
-                v-model="searchBIN.startTimeStartServiceDate"
-                format="yyyy-MM-dd HH:mm:ss"
-                value-format="yyyy-MM-dd HH:mm:ss"
-                type="datetime"
-                placeholder="请选择日期"
-                @change="handleChangeTime"
-                style="width:200px"
-              ></el-date-picker>
-            </el-form-item>
-        </el-col>
-        <el-col :span="8">  
-            <el-form-item label="充电桩服役开始截止时间" >
-               <el-date-picker
-                v-model="searchBIN.endTimeStartServiceDate"
-                format="yyyy-MM-dd HH:mm:ss"
-                value-format="yyyy-MM-dd HH:mm:ss"
-                type="datetime"
-                placeholder="请选择日期"
-                style="width:200px"
-                @change="handleChangeTime"
-              ></el-date-picker>
-            </el-form-item>
-        </el-col>
-        </el-row>
-         <el-row>
-        <el-col :span="8">
-           <el-form-item label="最近一次维修时间开始日期" >
-               <el-date-picker
-                v-model="searchBIN.startTimeLatestRepairDate"
-                format="yyyy-MM-dd HH:mm:ss"
-                value-format="yyyy-MM-dd HH:mm:ss"
-                type="datetime"
-                placeholder="请选择日期"
-                @change="handleChangeTime"
-                style="width:200px"
-              ></el-date-picker>
-            </el-form-item>
-        </el-col>
-        <el-col :span="8">  
-            <el-form-item label="最近一次维修时间截止日期" >
-               <el-date-picker
-                v-model="searchBIN.endTimeLatestRepairDate"
-                format="yyyy-MM-dd HH:mm:ss"
-                value-format="yyyy-MM-dd HH:mm:ss"
-                type="datetime"
-                placeholder="请选择日期"
-                style="width:200px"
-                @change="handleChangeTime"
-              ></el-date-picker>
-            </el-form-item>
-        </el-col>
-        </el-row>
-         <el-row>
-        <el-col :span="8">
-           <el-form-item label="最近一次保养时间开始日期" >
-               <el-date-picker
-                v-model="searchBIN.startTimeLatestMaintainDate"
-                format="yyyy-MM-dd HH:mm:ss"
-                value-format="yyyy-MM-dd HH:mm:ss"
-                type="datetime"
-                placeholder="请选择日期"
-                @change="handleChangeTime"
-                style="width:200px"
-              ></el-date-picker>
-            </el-form-item>
-        </el-col>
-        <el-col :span="8">  
-            <el-form-item label="最近一次保养时间截止日期" >
-               <el-date-picker
-                v-model="searchBIN.endTimeLatestMaintainDate"
-                format="yyyy-MM-dd HH:mm:ss"
-                value-format="yyyy-MM-dd HH:mm:ss"
-                type="datetime"
-                placeholder="请选择日期"
-                style="width:200px"
-                @change="handleChangeTime"
-              ></el-date-picker>
-            </el-form-item>
-        </el-col>
         </el-row>
         <el-row>
         <el-col :span="8" >
@@ -194,48 +50,23 @@
          <el-table :data="userInfoList" style="width: 100%" border  height="500">
             <!--<el-table-column prop="id" label="id" >
             </el-table-column>-->
-            <el-table-column prop="chargePointId" label="充电桩ID" fixed="left" >
+            <el-table-column prop="ruleId" label="规则编号" fixed="left" width="200">
             </el-table-column>
-            <el-table-column prop="chargePointNum" label="充电桩编号" fixed="left" >
+            <el-table-column prop="rulePriority" label="规则优先级" width="200">
             </el-table-column>
-             <el-table-column prop="softwareVersionNum" label="充电桩软件版本号" width="200">
+            <el-table-column prop="startTime" label="开始时间" width="200">
             </el-table-column>
-             <el-table-column prop="designVersionNum" label="充电桩设计版本号" width="200">
+             <el-table-column prop="endTime" label="结束时间" width="200">
             </el-table-column>
-             <el-table-column prop="mfgLotNum" label="充电桩生产批次" width="200">
+             <el-table-column prop="designVersionNum" label="启用时间" width="200">
             </el-table-column>
-             <el-table-column prop="startServiceDate" label="充电桩服役开始时间" width="200">
-                  <template slot-scope="scope">
-                        {{$DateFormat.dateFormat(scope.row.startServiceDate,true)}}
-                      </template>
+             <el-table-column prop="kidMinBatteryPower" label="最低电量(%)" width="200">
             </el-table-column>
-             <el-table-column prop="totalServiceMileage" label="充电桩服役时长" width="200">
+             <el-table-column prop="kidMaxBatteryPower" label="最高电量(%)" width="200">
             </el-table-column>
-             <el-table-column prop="macAddress" label="充电桩电脑MAC地址" width="200">
+             <el-table-column prop="kidId" label="机器人编号" width="200">
             </el-table-column>
-             <el-table-column prop="kidIpAddress" label="充电桩电脑IP地址" width="200">
-            </el-table-column>
-             <el-table-column prop="latestMaintainDate" label="最近一次保养时间" width="200">
-                  <template slot-scope="scope">
-                        {{$DateFormat.dateFormat(scope.row.latestMaintainDate,true)}}
-                      </template>
-            </el-table-column>
-             <el-table-column prop="latestRepairDate" label="最近一次维修时间" width="200">
-                  <template slot-scope="scope">
-                        {{$DateFormat.dateFormat(scope.row.latestRepairDate,true)}}
-                      </template>
-            </el-table-column>
-              <el-table-column prop="ratedVoltageRange " label="额定电压范围" width="200"> 
-            </el-table-column>
-              <el-table-column prop="curtVoltageRange " label="当前电压范围" width="200"> 
-            </el-table-column>
-              <el-table-column prop="ratedCurrentRange " label="额定电流范围" width="200"> 
-            </el-table-column>
-             <el-table-column prop="curtCurrentRange " label="当前电流范围" width="200"> 
-            </el-table-column>
-             <el-table-column prop="curtMaximumCurrent " label="当前最大电流" width="200"> 
-            </el-table-column>
-             <el-table-column prop="descriptions " label="注释" width="200"> 
+             <el-table-column prop="enableFlag" label="状态" width="200">
             </el-table-column>
              <!--第二步  开始进行修改和查询操作-->
              <el-table-column label="操作"  min-width="350" fixed="right">
@@ -258,84 +89,52 @@
           <!--新增界面-->
          <el-dialog title="记录" :visible.sync="dialogVisible" width="50%" :close-on-click-modal="false">
              <el-form :model="addFormData" :rules="rules2" ref="addFormData" label-width="150px" class="demo-ruleForm login-container">
-                  <el-form-item prop="chargePointId" label="充电桩ID"> 
-                    <el-input type="text" v-model="addFormData.chargePointId" placeholder="充电桩ID"></el-input>
+                  <el-form-item prop="ruleId" label="规则编号"> 
+                    <el-input type="text" v-model="addFormData.ruleId" placeholder="规则编号" :disabled="keyDisabled"></el-input>
                   </el-form-item>
-                   <el-form-item prop="chargePointNum" label="充电桩编号">
-                    <el-input type="text" v-model="addFormData.chargePointNum"  placeholder="充电桩编号"></el-input>
+                  <el-form-item prop="rulePriority" label="规则优先级"> 
+                    <el-input type="text" v-model="addFormData.rulePriority" placeholder="规则优先级" :disabled="keyDisabled"></el-input>
                   </el-form-item>
-                   <el-form-item prop="softwareVersionNum" label="充电桩软件版本号">
-                    <el-input type="text" v-model="addFormData.softwareVersionNum"  placeholder="充电桩软件版本号"></el-input>
+                   <el-form-item prop="startTime" label="开始时间">
+                      <template>
+                          <el-time-picker
+                            v-model="addFormData.startTime"
+                            :picker-options="{
+                              selectableRange: '00:00:00 - 23:59:59'
+                            }"
+                            placeholder="任意时间点" value-format="HH:mm:ss"   format="HH:mm:ss">
+                          </el-time-picker>
+                        </template>
                   </el-form-item>
-                   <el-form-item prop="designVersionNum" label="充电桩设计版本号">
-                    <el-input type="text" v-model="addFormData.designVersionNum"  placeholder="充电桩设计版本号"></el-input>
+                   <el-form-item prop="endTime" label="结束时间">
+                     <template>
+                          <el-time-picker
+                            v-model="addFormData.endTime"
+                            :picker-options="{
+                              selectableRange: '00:00:00 - 23:59:59'
+                            }"
+                            placeholder="任意时间点" value-format="HH:mm:ss"   format="HH:mm:ss">
+                          </el-time-picker>
+                        </template>
                   </el-form-item>
-                   <el-form-item prop="mfgLotNum" label="充电桩生产批次" >
-                    <el-input type="text" v-model="addFormData.mfgLotNum" placeholder="充电桩生产批次"></el-input>
+                   <el-form-item prop="designVersionNum" label="启用时间">
+                    <el-input type="text" v-model="addFormData.designVersionNum"  placeholder="启用时间"></el-input>
                   </el-form-item>
-                   <el-form-item prop="startServiceDate" label="充电桩服役开始时间">
-                    <el-date-picker
-                        v-model="addFormData.startServiceDate"
-                        format="yyyy-MM-dd HH:mm:ss"
-                        value-format="yyyy-MM-dd HH:mm:ss"
-                        type="datetime"
-                        placeholder="请选择日期"
-                        style="width:200px"
-                        @change="handleChangeTime"
-                    ></el-date-picker>
+                   <el-form-item prop="kidMinBatteryPower" label="最低电量(%)">
+                    <el-input type="text" v-model="addFormData.kidMinBatteryPower" placeholder="最低电量(%)"></el-input>
                   </el-form-item>
-                  <el-form-item prop="totalServiceMileage" label="充电桩服役时长">
-                    <el-input type="text" v-model="addFormData.totalServiceMileage" placeholder="充电桩服役时长"></el-input>
+                   <el-form-item prop="kidMaxBatteryPower" label="最高电量(%)">
+                     <el-input type="text" v-model="addFormData.kidMaxBatteryPower" placeholder="最低电量(%)"></el-input>
                   </el-form-item>
-                  <el-form-item prop="macAddress" label="充电桩电脑MAC地址">
-                    <el-input type="text" v-model="addFormData.macAddress" placeholder="充电桩电脑MAC地址"></el-input>
+                  <el-form-item prop="kidId" label="机器人编号">
+                    <el-input type="text" v-model="addFormData.kidId" placeholder="机器人编号"></el-input>
                   </el-form-item>
-                  <el-form-item prop="kidIpAddress" label="充电桩电脑IP地址">
-                    <el-input type="text" v-model="addFormData.kidIpAddress" placeholder="充电桩电脑IP地址"></el-input>
-                  </el-form-item>
-                 <el-form-item prop="latestMaintainDate" label="最近一次保养时间">
-                     <el-date-picker
-                        v-model="addFormData.latestMaintainDate"
-                        format="yyyy-MM-dd HH:mm:ss"
-                        value-format="yyyy-MM-dd HH:mm:ss"
-                        type="datetime"
-                        placeholder="请选择日期"
-                        style="width:200px"
-                        @change="handleChangeTime"
-                    ></el-date-picker>
-                  </el-form-item>
-                    <el-form-item prop="latestRepairDate" label="最近一次维修时间">
-                        <el-date-picker
-                        v-model="addFormData.latestRepairDate"
-                        format="yyyy-MM-dd HH:mm:ss"
-                        value-format="yyyy-MM-dd HH:mm:ss"
-                        type="datetime"
-                        placeholder="请选择日期"
-                        style="width:200px"
-                        @change="handleChangeTime"
-                    ></el-date-picker>
-                  </el-form-item>
-                  <el-form-item prop="ratedVoltageRange " label="额定电压范围"> 
-                    <el-input type="text" v-model="addFormData.ratedVoltageRange" placeholder="额定电压范围"></el-input>
-                  </el-form-item>
-                  <el-form-item prop="curtVoltageRange " label="当前电压范围">
-                    <el-input type="text" v-model="addFormData.curtVoltageRange" placeholder="当前电压范围"></el-input>
-                  </el-form-item>
-                  <el-form-item prop="ratedCurrentRange " label="额定电流范围">
-                    <el-input type="text" v-model="addFormData.ratedCurrentRange" placeholder="额定电流范围"></el-input>
-                  </el-form-item>
-                  <el-form-item prop="curtCurrentRange " label="当前电流范围">
-                    <el-input type="text" v-model="addFormData.curtCurrentRange" placeholder="扫描当前电流范围枪型号"></el-input>
-                  </el-form-item>
-                  <el-form-item prop="curtMaximumCurrent " label="当前最大电流">
-                    <el-input type="text" v-model="addFormData.curtMaximumCurrent" placeholder="当前最大电流"></el-input>
-                  </el-form-item>
-                    <el-form-item prop="descriptions " label="注释">
-                    <el-input type="text" v-model="addFormData.descriptions" placeholder="注释"></el-input>
+                  <el-form-item prop="enableFlag" label="状态">
+                    <el-input type="text" v-model="addFormData.enableFlag" placeholder="状态"></el-input>
                   </el-form-item>
              </el-form>
              <span slot="footer" class="dialog-footer">
-                 <el-button @click.native="dialogVisible = false,addFormData={chargePointId:'', chargePointNum:'',softwareVersionNum:'',designVersionNum:'',mfgLotNum:'',startServiceDate:'',totalServiceMileage:'',macAddress:'',kidIpAddress:'',latestMaintainDate:'',latestRepairDate:'',electronicTagsCount:'',projectorModelNumber:'',scanningGunModelNumber:'',ratedVoltageRange:'', curtVoltageRange:'', ratedCurrentRange:'', curtCurrentRange:'',  curtMaximumCurrent:'',descriptions:''}">取 消</el-button>
+                 <el-button @click.native="dialogVisible = false,addFormData={ruleId:'',rulePriority:'', startTime:'',endTime:'',designVersionNum:'',kidMinBatteryPower:'',kidMaxBatteryPower:'',kidId:'',enableFlag:''}">取 消</el-button>
                  <el-button v-if="isView" type="primary" @click.native="addSubmit">确 定</el-button>
              </span>
           </el-dialog>
@@ -352,55 +151,32 @@
           userInfoList: [],
           addFormReadOnly: true,
           dialogVisible: false,
+          keyDisabled:false,
           isView: true,
           addFormData: {
-             chargePointId:'', 
-             chargePointNum:'',
-             softwareVersionNum:'',
+             ruleId:'',
+             rulePriority:'',
+             startTime:'',
+             endTime:'',
              designVersionNum:'',
-             mfgLotNum:'',
-             startServiceDate:'',
-             totalServiceMileage:'',
-             macAddress:'',
-             kidIpAddress:'',
-             latestMaintainDate:'',
-             latestRepairDate:'',
-             electronicTagsCount:'',
-             projectorModelNumber:'',
-             scanningGunModelNumber:'',
-             ratedVoltageRange:'',
-              curtVoltageRange:'',
-               ratedCurrentRange:'',
-                curtCurrentRange:'', 
-                 curtMaximumCurrent,
-                 descriptions:''
+             kidMinBatteryPower:'',
+             kidMaxBatteryPower:'',
+             kidId:'',
+             enableFlag:''
           },
           searchBIN: {
-            chargePointId:'', 
-             chargePointNum:'',
-             softwareVersionNum:'',
+             ruleId:'',
+             rulePriority:'',
+             startTime:'',
+             endTime:'',
              designVersionNum:'',
-             mfgLotNum:'',
-             totalServiceMileage:'',
-             macAddress:'',
-             kidIpAddress:'',
-             electronicTagsCount:'',
-             projectorModelNumber:'',
-             scanningGunModelNumber:'',
-             ratedVoltageRange:'',
-              curtVoltageRange:'',
-               ratedCurrentRange:'',
-                curtCurrentRange:'', 
-                 curtMaximumCurrent:'',
-            startTimeStartServiceDate:'',
-            endTimeStartServiceDate:'',
-            startTimeLatestRepairDate:'',
-            endTimeLatestRepairDate:'',
-            startTimeLatestMaintainDate:'',
-            endTimeLatestMaintainDate:'',
-            currentPage:1,
-            pageSize:50,
-            totalRows:-1
+             kidMinBatteryPower:'',
+             kidMaxBatteryPower:'',
+             kidId:'',
+             enableFlag:'',
+             currentPage:1,
+             pageSize:50,
+             totalRows:-1
           },
           addType:false,
           rules2: {
@@ -429,34 +205,27 @@
             this.loadData()
         },
         restData(){
-            this.searchBIN = {
-            chargePointId:'', 
-             chargePointNum:'',
-             softwareVersionNum:'',
+          let currentPageTemp = this.searchBIN.currentPage
+          let pageSizeTemp = this.searchBIN.pageSize
+          let totalRowsTemp = this.searchBIN.totalRows
+          this.searchBIN = {
+             ruleId:'',
+             rulePriority:'',
+             startTime:'',
+             endTime:'',
              designVersionNum:'',
-             mfgLotNum:'',
-             totalServiceMileage:'',
-             macAddress:'',
-             kidIpAddress:'',
-             electronicTagsCount:'',
-             projectorModelNumber:'',
-             scanningGunModelNumber:'',
-             ratedVoltageRange:'',
-              curtVoltageRange:'',
-               ratedCurrentRange:'',
-                curtCurrentRange:'', 
-                 curtMaximumCurrent:'',
-            startTimeStartServiceDate:'',
-            endTimeStartServiceDate:'',
-            startTimeLatestRepairDate:'',
-            endTimeLatestRepairDate:'',
-            startTimeLatestMaintainDate:'',
-            endTimeLatestMaintainDate:''
+             kidMinBatteryPower:'',
+             kidMaxBatteryPower:'',
+             kidId:'',
+             enableFlag:'',
+             currentPage:currentPageTemp,
+             pageSize:pageSizeTemp,
+             totalRows:totalRowsTemp
           }
         }, 
         loadData() {
           let param = {'params': JSON.stringify(this.searchBIN)}
-          axios.post('/charageManage/homePage/selectCharageListBySearch', qs.stringify(param)).then((res) => {
+          axios.post('/charageManage/rules/selectCharageRulesListBySearch', qs.stringify(param)).then((res) => {
             var _data = res.data.result
             this.userInfoList = _data
             this.searchBIN.totalRows = res.data.totalRows
@@ -464,29 +233,19 @@
         },
         add() {
           this.addFormData = {
-             chargePointId:'', 
-             chargePointNum:'',
-             softwareVersionNum:'',
+             ruleId:'',
+             rulePriority:'',
+             startTime:'',
+             endTime:'',
              designVersionNum:'',
-             mfgLotNum:'',
-             startServiceDate:'',
-             totalServiceMileage:'',
-             macAddress:'',
-             kidIpAddress:'',
-             latestMaintainDate:'',
-             latestRepairDate:'',
-             electronicTagsCount:'',
-             projectorModelNumber:'',
-             scanningGunModelNumber:'',
-             ratedVoltageRange:'',
-              curtVoltageRange:'',
-               ratedCurrentRange:'',
-                curtCurrentRange:'', 
-                 curtMaximumCurrent:'',
-                 descriptions:''
+             kidMinBatteryPower:'',
+             kidMaxBatteryPower:'',
+             kidId:'',
+             enableFlag:''
           }
           this.isView = true
           this.addType = true
+          this.keyDisabled=false
           this.dialogVisible = true
           // this.addFormReadOnly = false;
         },
@@ -499,6 +258,7 @@
         modifyInfo(rowData) {
           this.addFormData = Object.assign({}, rowData)
           this.isView = true
+          this.keyDisabled=true
           this.dialogVisible = true
           // this.addFormReadOnly = false;
         },
@@ -507,9 +267,9 @@
             confirmButtonText: '确定',
             callback: action => {
               var params = {
-                chargePointId: rowData.chargePointId
+                ruleId: rowData.ruleId
               }
-              axios.post('/charageManage/homePage/deleteCharageInfo', qs.stringify(params)).then((res) => {
+              axios.post('/charageManage/rules/deleteCharageRulesInfo', qs.stringify(params)).then((res) => {
                 console.info(res)
                 if (res.errCode === 'S') {
                   this.$message({
@@ -536,7 +296,7 @@
               let result = {}
               result.params = JSON.stringify(param)   
               if (!this.addType) {
-                axios.post('/workstationManage/homePage/updateCharageInfo', qs.stringify(result)).then((res) => {
+                axios.post('/charageManage/rules/updateCharageRulesInfo', qs.stringify(result)).then((res) => {
                   if (res.errCode === 'S') {
                     this.$message({
                       type: 'info',
@@ -552,7 +312,7 @@
                   this.dialogVisible = false
                 })
               } else {
-                axios.post('/workstationManage/homePage/insertCharageInfo', qs.stringify(result)).then((res) => {
+                axios.post('/charageManage/rules/insertCharageRulesInfo', qs.stringify(result)).then((res) => {
                   if (res.errCode === 'S') {
                     this.$message({
                       type: 'info',
@@ -575,6 +335,7 @@
         }
       }
     }
+    
  </script>
  
  <style>

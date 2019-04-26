@@ -4,8 +4,8 @@ let baseURLTemp = ''
 let wsURLTemp = ''
 let loginUrlTemp = ''
 let HOST = process.env.HOST
-
-if (HOST === 'test') {
+console.log('HOST======' + HOST)
+if (HOST === 'test' || HOST === 'dev') {
   baseURLTemp = 'http://localhost:8080'
   wsURLTemp = 'ws://localhost:8080/pickManage/pickInfo/selectStopRestReceiveStatusExit'
   loginUrlTemp = 'http://localhost:8081/#/login'
