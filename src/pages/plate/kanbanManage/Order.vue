@@ -389,7 +389,7 @@ export default {
   methods: {
     getDate(data, unCou,instation) {
       if (data) {
-        return Math.floor(data / 60) + ':' + data % 60
+        return Math.floor(data / 60)
       } else {
         if(unCou && !instation){
           return '∞'   
