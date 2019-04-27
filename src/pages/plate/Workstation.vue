@@ -6,16 +6,21 @@
       </el-table-column>
       <el-table-column prop="wallCount" label="播种墙数量" min-width='100'>
       </el-table-column>
-      <el-table-column prop="userNum" v-model="isShow" label="是否在线">
-      </el-table-column>
-      <el-table-column prop="workstationStatus" label="工位状态" width="200">
-        <template slot-scope="scope" width="100%">
-          {{$Enum.getEnumSelectByValue(WS_STATUS,scope.row.workstationStatus)}}
+       <el-table-column prop="entityWorkstationStatus" v-model="isShow" label="是否激活">
+         <template slot-scope="scope" width="100%">
+          {{$Enum.getEnumSelectByValue(WS_STATUS,scope.row.entityWorkstationStatus)}}
          </template>
       </el-table-column>
-      <el-table-column prop="workstationType" label="工作类型" width="300">
+      <el-table-column prop="userNum" v-model="isShow" label="是否在线">
+      </el-table-column>  
+      <el-table-column prop="workstationType" label="任务类型" width="300">
          <template slot-scope="scope" width="100%">
             {{$Enum.getEnumSelectByValue(WS_TYPE,scope.row.workstationType)}}
+         </template>
+      </el-table-column>
+      <el-table-column prop="workstationStatus" label="是否接收任务" width="200">
+        <template slot-scope="scope" width="100%">
+          {{$Enum.getEnumSelectByValue(WS_STATUS,scope.row.workstationStatus)}}
          </template>
       </el-table-column>
       <el-table-column prop="lastUpdateDate" label="最后更新日期" min-width='200'>
@@ -63,12 +68,12 @@ export default {
           res.data.result.map(item => {
             if (item.lookupType === 'WS_STATUS') {
               item.value = item.lookupValueNum
-              item.label = item.lookupValueCode
+              item.label = item.meaning||item.lookupValueNum
               this.WS_STATUS.push(item)
             }
             if (item.lookupType === 'WS_TYPE') {
               item.value = item.lookupValueNum
-              item.label = item.lookupValueCode
+              item.label = item.meaning||item.lookupValueNum
               this.WS_TYPE.push(item)
             }
             return item

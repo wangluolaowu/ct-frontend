@@ -245,8 +245,8 @@
             </el-row>
             <el-col >
               <el-form-item class='sublimtInfo'>
-                   <el-checkbox v-model="searchPick.submitAll"  @change="handleCheckAllChangePICK">提交全部</el-checkbox>
-                   <el-button  type="primary" :disabled="downLoadDisabledPick" @click="SetDownloadFunc('PICK')">下载excel </el-button>
+                   <el-checkbox v-model="searchPick.submitAll"  @change="handleCheckAllChangePICK">导出全部</el-checkbox>
+                   <el-button  type="primary" :disabled="downLoadDisabledPick" @click="SetDownloadFunc('PICK')">导出excel </el-button>
               </el-form-item>
               <el-form-item class='buttonGroups'>  
                    <el-button type="primary" @click="confirm">确认</el-button>

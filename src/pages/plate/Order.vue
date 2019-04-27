@@ -374,7 +374,7 @@ export default {
   },
   // 页面加
   mounted () {
-    this.getTimeOut()
+    //this.getTimeOut()
     this.getSelectValues()
   },
   created () {
@@ -397,6 +397,22 @@ export default {
       }
     },
     getSelectValues() {
+       this.axios.get('common/enum/selectEnumList', {
+        params: 'test'
+      }).then((res) => {
+        if (res.errCode === 'S') {
+          res.data.result.map(item => {
+            if (item.lookupType === 'WS_STATUS') {
+              item.value = item.lookupValueNum
+              item.label = item.meaning||item.lookupValueNum
+              this.WS_STATUS.push(item)
+            }
+           
+            return item
+          })
+        }
+        this.getTimeOut()
+      })
       this.WS_STATUS = this.$Enum.EnumSelect().WS_STATUS
     },
     getTimeOut() {

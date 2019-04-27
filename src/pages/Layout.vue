@@ -86,6 +86,7 @@ export default {
   created() {
     // console.log(this.$router)
     this.http()
+    this.getSysLanguage()
   },
   methods: {
     // 获取用户菜单
@@ -126,6 +127,9 @@ export default {
       this.$refs.menuCollapsed.getElementsByClassName(
         'submenu-hook-' + i
       )[0].style.display = status ? 'block' : 'none'
+    },
+    getSysLanguage(){
+      this.sysLanguage = this.$i18n.locale === 'en'?'English':'中文'
     },
     changeLanguage(){
       //中英文切换
