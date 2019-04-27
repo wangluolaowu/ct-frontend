@@ -127,7 +127,7 @@
             {{$Enum.getEnumSelectByValue(TM_MOVE_TASK_RELEASE_LOAD,scope.row.releaseLoadFlag)}}
             </template>
         </el-table-column>
-        <el-table-column prop="chargePointId" :label="$t('label.label1_41')"  width="100">
+        <el-table-column prop="chargePointId" :label="$t('label.label1_42')"  width="100">
         </el-table-column>
         <el-table-column prop="wsId" :label="$t('label.label1_09')"  width="100">
         </el-table-column>
