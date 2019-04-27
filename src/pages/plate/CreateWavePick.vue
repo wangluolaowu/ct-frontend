@@ -90,8 +90,9 @@
         <!-- 搜索区域 -->
         <el-form :inline="true" class="demo-form-inline">
             <el-form-item label="系统预分配原因">
-                <el-input type="textarea" :rows="2" :disabled="true" v-model="dialog.systemReason">
-                </el-input>
+                <template>
+                        {{dialog.systemReason || '无'}}
+                </template>
             </el-form-item>
             <el-form-item label="手工分配原因">
                 <el-input type="textarea" :rows="2" placeholder="请输入内容" v-model="dialog.manualReason">

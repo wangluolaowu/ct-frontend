@@ -426,7 +426,6 @@ export default {
       this.getTiaoCangAllList()
       this.getTiaoCangLists()
       this.getStockCallShelfList()
-      this.getSum24()
     },
     getStockCallShelfList () { // 盘点，召唤货架信息
       let that = this
@@ -566,6 +565,8 @@ export default {
       this.getPutaway()
     }, // 切换
     getSum24(){
+      this.sum24KeyList = []
+      this.sum24ValueList = []
       this.axios.get('kanban/orderKanban/select24HDmlBinDeliveryVList', {
         params: this.PutawayListSearch
       }).then((res) => {

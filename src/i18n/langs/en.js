@@ -14,6 +14,9 @@ const en = {
     msg1_11: 'Stocktaking summary',
     msg1_12: 'Stocktaking',
     msg1_13: 'Order statistics 24H',
+    msg1_14: 'Robot alert list',
+    msg1_15: 'Abnormal executing task',
+    msg1_16: '载货机器人疑似故障信息',
     'mes': 'hello',
     'riqi': 'date',
     'text': 'Good good study, Day day up'
@@ -43,7 +46,22 @@ const en = {
     label1_16: 'Order submitted-unaccomplished',
     label1_17: 'Order submitted of today',
     label1_18: 'Order submitted of this batch',
-    label1_19: 'Order amount submitted-unaccomplished'
+    label1_19: 'Order amount submitted-unaccomplished',
+    label1_20: 'Robot ID',
+    label1_21: 'Error',
+    label1_22: 'Axle X',
+    label1_23: 'Axle Y',
+    label1_24: 'Status',
+    label1_25: 'Task ID',
+    label1_26: 'Shelf ID',
+    label1_27: 'Battery',
+    label1_28: 'Last update',
+    label1_29: 'Task type',
+    label1_30: 'Task status',
+    label1_31: 'Original axle X',
+    label1_32: 'Original axle Y',
+    label1_33: 'Current axle X',
+    label1_34: 'Current axle Y'
   },
   ...enLocale
 }

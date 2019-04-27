@@ -306,7 +306,7 @@
                         {{$DateFormat.dateFormat(scope.row.waveCreateDate,true)}}
                       </template>
             </el-table-column>
-             <el-table-column prop="lastUpdateDate" label="打印时间" width="200">
+             <el-table-column prop="lastUpdateDate" label="最后更新时间" width="200">
                <template slot-scope="scope">
                         {{$DateFormat.dateFormat(scope.row.lastUpdateDate,true)}}
                       </template>
