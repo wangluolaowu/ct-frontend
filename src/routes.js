@@ -44,27 +44,27 @@ const routes = [
     children: [
       {
         path: 'kanban/order',
-        component: () => import('@/pages/plate/Order'),
+        component: () => import('@/pages/plate/kanbanManage/Order'),
         name: '订单看板'
       },
       {
         path: 'kanban/robot',
-        component: () => import('@/pages/plate/RobotInfo'),
+        component: () => import('@/pages/plate/kanbanManage/RobotInfo'),
         name: '机器人信息'
       },
       {
         path: '/kanban/ws',
-        component: () => import('@/pages/plate/Workstation'),
+        component: () => import('@/pages/plate/kanbanManage/Workstation'),
         name: '工作站信息'
       },
       {
         path: '/kanban/charger',
-        component: () => import('@/pages/plate/Charging'),
+        component: () => import('@/pages/plate/kanbanManage/Charging'),
         name: '充电桩信息'
       },
       {
         path: '/kanban/stat',
-        component: () => import('@/pages/plate/Statistical'),
+        component: () => import('@/pages/plate/kanbanManage/Statistical'),
         name: '统计信息'
       }
     ]
@@ -77,27 +77,27 @@ const routes = [
     children: [
       {
         path: '/picking/task',
-        component: () => import('@/pages/plate/StopReceive'),
+        component: () => import('@/pages/plate/pickManage/StopReceive'),
         name: '停止恢复接收任务'
       },
       {
         path: '/picking/batch',
-        component: () => import('@/pages/plate/CreateWavePick'),
+        component: () => import('@/pages/plate/pickManage/CreateWavePick'),
         name: '创建波次'
       },
       {
         path: '/picking/taskRule',
-        component: () => import('@/pages/plate/TaskAllocation'),
+        component: () => import('@/pages/plate/pickManage/TaskAllocation'),
         name: '任务分配规则'
       },
       {
         path: '/picking/history',
-        component: () => import('@/pages/plate/CreatWaveMRecord'),
+        component: () => import('@/pages/plate/pickManage/CreatWaveMRecord'),
         name: '波次历史记录'
       },
       {
         path: '/picking/print',
-        component: () => import('@/pages/plate/ManualPrint'),
+        component: () => import('@/pages/plate/pickManage/ManualPrint'),
         name: '手动打印'
       }
     ]
@@ -110,17 +110,17 @@ const routes = [
     children: [
       {
         path: '/binning/task',
-        component: () => import('@/pages/plate/StopReceiveBinning'),
+        component: () => import('@/pages/plate/binManage/StopReceiveBinning'),
         name: '停止恢复接收任务'
       },
       {
         path: '/binning/batch',
-        component: () => import('@/pages/plate/CreateWaveBinning'),
+        component: () => import('@/pages/plate/binManage/CreateWaveBinning'),
         name: '创建波次'
       },
       {
         path: '/binning/history',
-        component: () => import('@/pages/plate/CreatWaveMRecordBinning'),
+        component: () => import('@/pages/plate/binManage/CreatWaveMRecordBinning'),
         name: '波次历史记录'
       }
     ]
