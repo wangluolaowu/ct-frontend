@@ -6,24 +6,24 @@
       </el-table-column>
       <el-table-column prop="wallCount" :label="$t('label.label1_10')"  min-width='100'>
       </el-table-column>
-       <el-table-column prop="entityWorkstationStatus" v-model="isShow" :label="$t('label.label1_41')" label="是否激活">
+       <el-table-column prop="entityWorkstationStatus" v-model="isShow" :label="$t('label.label1_43')">
          <template slot-scope="scope" width="100%">
           {{$Enum.getEnumSelectByValue(WS_STATUS,scope.row.entityWorkstationStatus)}}
          </template>
       </el-table-column>
-      <el-table-column prop="userNum" v-model="isShow" :label="$t('label.label1_41')" label="是否在线">
+      <el-table-column prop="userNum" v-model="isShow" :label="$t('label.label1_44')">
       </el-table-column>  
-      <el-table-column prop="workstationType" :label="$t('label.label1_41')" label="任务类型" width="300">
+      <el-table-column prop="workstationType" :label="$t('label.label1_29')" width="300">
          <template slot-scope="scope" width="100%">
             {{$Enum.getEnumSelectByValue(WS_TYPE,scope.row.workstationType)}}
          </template>
       </el-table-column>
-      <el-table-column prop="workstationStatus" :label="$t('label.label1_41')" label="是否接收任务" width="200">
+      <el-table-column prop="workstationStatus" :label="$t('label.label1_48')"  width="200">
         <template slot-scope="scope" width="100%">
           {{$Enum.getEnumSelectByValue(WS_STATUS,scope.row.workstationStatus)}}
          </template>
       </el-table-column>
-      <el-table-column prop="lastUpdateDate" :label="$t('label.label1_41')" label="最后更新日期" min-width='200'>
+      <el-table-column prop="lastUpdateDate" :label="$t('label.label1_28')" min-width='200'>
          <template slot-scope="scope">
                 {{$DateFormat.dateFormat(scope.row.lastUpdateDate,true)}}
             </template>
