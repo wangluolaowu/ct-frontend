@@ -375,9 +375,10 @@ export default {
   // 页面加
   mounted () {
     //this.getTimeOut()
-    this.getSelectValues()
+    
   },
   created () {
+     this.getSelectValues()
      this.interval=window.setInterval(() => {
      setTimeout(this.getTimeOut(), 0)
     }, 60000)
@@ -413,7 +414,6 @@ export default {
         }
         this.getTimeOut()
       })
-      this.WS_STATUS = this.$Enum.EnumSelect().WS_STATUS
     },
     getTimeOut() {
       this.getPutaway()
