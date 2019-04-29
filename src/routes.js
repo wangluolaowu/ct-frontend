@@ -76,12 +76,12 @@ const routes = [
     icon: 'el-icon-service',
     children: [
       {
-        path: '/picking/task',
+        path: '/picking/stopReceive',
         component: () => import('@/pages/plate/pickManage/StopReceive'),
         name: '停止恢复接收任务'
       },
       {
-        path: '/picking/batch',
+        path: '/picking/createBatch',
         component: () => import('@/pages/plate/pickManage/CreateWavePick'),
         name: '创建波次'
       },
@@ -91,7 +91,7 @@ const routes = [
         name: '任务分配规则'
       },
       {
-        path: '/picking/history',
+        path: '/picking/batchHistory',
         component: () => import('@/pages/plate/pickManage/CreatWaveMRecord'),
         name: '波次历史记录'
       },
@@ -109,17 +109,17 @@ const routes = [
     icon: 'el-icon-service',
     children: [
       {
-        path: '/binning/task',
+        path: '/binning/stopReceive',
         component: () => import('@/pages/plate/binManage/StopReceiveBinning'),
         name: '停止恢复接收任务'
       },
       {
-        path: '/binning/batch',
+        path: '/binning/createBatch',
         component: () => import('@/pages/plate/binManage/CreateWaveBinning'),
         name: '创建波次'
       },
       {
-        path: '/binning/history',
+        path: '/binning/batchHistory',
         component: () => import('@/pages/plate/binManage/CreatWaveMRecordBinning'),
         name: '波次历史记录'
       }
@@ -132,17 +132,17 @@ const routes = [
     icon: 'el-icon-service',
     children: [
       {
-        path: '/reloc/task',
+        path: '/relocManage/stopReceive',
         component: () => import('@/pages/plate/reloc/StopReceiveReloc'),
         name: '停止恢复接收任务'
       },
       {
-        path: '/reloc/batch',
+        path: '/relocManage/createBatch',
         component: () => import('@/pages/plate/reloc/CreateWaveReloc'),
         name: '创建波次'
       },
       {
-        path: '/reloc/history',
+        path: '/relocManage/batchHistory',
         component: () => import('@/pages/plate/reloc/CreatWaveMReloc'),
         name: '波次历史记录'
       }
@@ -155,17 +155,17 @@ const routes = [
     icon: 'el-icon-service',
     children: [
       {
-        path: '/reloc_out/task',
+        path: '/relocChecking/stopReceive',
         component: () => import('@/pages/plate/stock/StopReceiveStock'),
         name: '停止恢复接收任务'
       },
       {
-        path: '/reloc_out/batch',
+        path: '/relocChecking/createBatch',
         component: () => import('@/pages/plate/stock/CreateWaveStock'),
         name: '创建波次'
       },
       {
-        path: '/reloc_out/history',
+        path: '/relocChecking/batchHistory',
         component: () => import('@/pages/plate/stock/CreatWaveMRecordStock'),
         name: '波次历史记录'
       }
@@ -221,7 +221,7 @@ const routes = [
         name: '动作控制'
       },
       {
-        path: '/robotManage/kidHomeData',
+        path: '/robotManage/masterData',
         component: () => import('@/pages/plate/robotManage/kidHomeData'),
         name: '机器人主数据'
       },
@@ -244,22 +244,22 @@ const routes = [
     icon: 'el-icon-service',
     children: [
       {
-        path: '/holderManage/holderHomePage',
+        path: '/shelfManage/masterData',
         component: () => import('@/pages/plate/holderManageNew/holderHomeData'),
         name: '货架主数据'
       },
       {
-        path: '/holderManage/holderMoveContr',
+        path: '/shelfManage/shelfCarry',
         component: () => import('@/pages/plate/holderManageNew/holderMove'),
         name: '货架搬运'
       },
       {
-        path: '/holderManage/holderSide',
+        path: '/shelfManage/shelfLocation',
         component: () => import('@/pages/plate/holderManageNew/holderMove'),
         name: '货位'
       },
       {
-        path: '/holderManage/holderSideType',
+        path: '/shelfManage/shelfType',
         component: () => import('@/pages/plate/holderManageNew/holderSideType'),
         name: '货架位类型'
       }
@@ -272,22 +272,22 @@ const routes = [
     icon: 'el-icon-service',
     children: [
       {
-        path: '/charageManage/homePage',
+        path: '/chargeManage/masterData',
         component: () => import('@/pages/plate/charageManage/charageHomePage'),
         name: '充电桩主数据'
       },
       {
-        path: '/charageManage/changeContr',
+        path: '/chargeManage/batteryManage',
         component: () => import('@/pages/plate/charageManage/charageChangeContr'),
         name: '电池和充电管理'
       },
       {
-        path: '/charageManage/changeStatus',
+        path: '/chargeManage/changeStatus',
         component: () => import('@/pages/plate/charageManage/changeStatus'),
         name: '基本状态切换'
       },
       {
-        path: '/charageManage/errorMessage',
+        path: '/chargeManage/errorMessage',
         component: () => import('@/pages/plate/charageManage/changeStatus'),
         name: '错误信息'
       }
@@ -300,7 +300,7 @@ const routes = [
     icon: 'el-icon-service',
     children: [
       {
-        path: '/workstationManage/homePage',
+        path: '/workstationManage/masterData',
         component: () => import('@/pages/plate/workstationManage/workstationHomePage'),
         name: '工作站主数据'
       },
@@ -336,32 +336,32 @@ const routes = [
     icon: 'el-icon-service',
     children: [
       {
-        path: '/adminstratorPage/createSimpleMoveTask',
+        path: '/adminstratorPage/kidMoveTask',
         component: () => import('@/pages/plate/adminstratorPage/createSimpleMoveTask'),
         name: '小车移动任务'
       },
       {
-        path: '/adminstratorPage/createLoadMoveTask',
+        path: '/adminstratorPage/shelfMoveTask',
         component: () => import('@/pages/plate/adminstratorPage/createLoadMoveTask'),
         name: '托货架移动任务'
       },
       {
-        path: '/adminstratorPage/createChargeMoveTask',
+        path: '/adminstratorPage/chargeTask',
         component: () => import('@/pages/plate/adminstratorPage/createChargeMoveTask'),
         name: '充电任务'
       },
       {
-        path: '/adminstratorPage/crtFloorQrcodeTask',
+        path: '/adminstratorPage/floorQrcodeTask',
         component: () => import('@/pages/plate/adminstratorPage/crtFloorQrcodeTask'),
         name: '检查地图任务'
       },
       {
-        path: '/adminstratorPage/crtHolderQrcodeTask',
+        path: '/adminstratorPage/shelfCheckTask',
         component: () => import('@/pages/plate/adminstratorPage/crtHolderQrcodeTask'),
         name: '货架检查任务'
       },
       {
-        path: '/adminstratorPage/createKidTaskChange',
+        path: '/adminstratorPage/taskChange',
         component: () => import('@/pages/plate/adminstratorPage/createKidTaskChange'),
         name: '任务变更'
       }
