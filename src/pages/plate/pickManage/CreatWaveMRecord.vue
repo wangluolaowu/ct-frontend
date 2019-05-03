@@ -4,40 +4,38 @@
       <el-col :span="23" class="main">
         <div class="grid-content bg-purple-dark">
           <el-tabs v-model="search.orderType" @tab-click="handleTabClick">
-            <el-tab-pane label="订单类型S" name="S"></el-tab-pane>
-            <el-tab-pane label="订单类型V" name="V"></el-tab-pane>
+            <el-tab-pane :label="$t('label.label2_01')" name="S"></el-tab-pane>
+            <el-tab-pane :label="$t('label.label2_02')" name="V"></el-tab-pane>
           </el-tabs>
           <!-- 搜索区域 -->
           <el-form :inline="true" class="demo-form-inline">
             <el-row :span="24">
               <el-col :span="8">
-                <el-form-item label="初始日期" prop>
+                <el-form-item :label="$t('label.label2_13')" prop>
                   <el-date-picker
                   v-model="search.startTime"
                   format="yyyy-MM-dd HH:mm:ss"
                   value-format="yyyy-MM-dd HH:mm:ss"
                   type="datetime"
-                  placeholder="请选择初始日期"
                   @change="handleChangeTime"
                 ></el-date-picker>
                 </el-form-item>
               </el-col>
               <el-col :span="8">
-                <el-form-item label="截止日期日期" prop>
+                <el-form-item :label="$t('label.label2_14')" prop>
                   <el-date-picker
                     v-model="search.endTime"
                     format="yyyy-MM-dd HH:mm:ss"
                     value-format="yyyy-MM-dd HH:mm:ss"
                     type="datetime"
-                    placeholder="请选择完成日期"
                      @change="handleChangeTime"
                   ></el-date-picker>
                 </el-form-item>
               </el-col>
               <el-col :span="5">
                 <el-form-item>
-                  <el-button type="primary" @click="confirm">查找</el-button>
-                  <el-button type="info" @click="cancel">清空</el-button>
+                  <el-button type="primary" @click="confirm">{{$t('message.msg1_28')}}</el-button>
+                  <el-button type="info" @click="cancel">{{$t('message.msg1_29')}}</el-button>
                 </el-form-item>
               </el-col>
             </el-row>
@@ -50,8 +48,8 @@
        <el-row v-for="(tableDataItem, j) in this.dialogTableData" :key="j" width="100%">
          <div>
            <label>
-           <span style="line-height:3">{{'创建波次号: ' + (tableDataItem[0].orderWaveId || '') }}</span>
-           <span style="line-height:3">{{'创建波时间: ' + $DateFormat.dateFormat(tableDataItem[0].creatDate,true) }}</span>
+           <span style="line-height:3">{{$t('message.msg1_45') + ': ' + (tableDataItem[0].orderWaveId || '') }}</span>
+           <span style="line-height:3">{{$t('message.msg1_46') + ': ' + $DateFormat.dateFormat(tableDataItem[0].creatDate,true) }}</span>
            </label>
            </div>
         <el-row :gutter="10">
@@ -59,13 +57,13 @@
             <el-card style="min-height: 520px">
               <ul class="station-info">
                   <li>
-                      <label for="">工作站</label><span>{{i + 1}}</span>
+                      <label for="">{{$t('message.msg1_36')}}</label><span>{{i + 1}}</span>
                   </li>
                   <li>
-                      <label for="">订单总行数</label><span>{{item.orderListCount || ''}}</span>
+                      <label for="">{{$t('message.msg1_37')}}</label><span>{{item.orderListCount || ''}}</span>
                   </li>
                   <li>
-                      <label for="">播种墙</label><span>{{item.forecastWallCount || ''}}</span>
+                      <label for="">{{$t('message.msg1_39')}}</label><span>{{item.forecastWallCount || ''}}</span>
                   </li>
               </ul>
               <transition-group>            
@@ -79,7 +77,7 @@
                       <el-col :span="18" style="line-height:1.7">
                         <div>{{ 'route: ' + (element.route  || '') }}</div>
                         <div>{{ 'dealer: ' + (element.dealerCou  || '') }}</div>
-                        <div>{{ '订单行: ' + (element.orderLineCou || '') }}</div>                        
+                        <div>{{  $t('message.msg1_40') +': ' + (element.orderLineCou || '') }}</div>                        
                       </el-col>
                     </el-row>
                 </draggable>

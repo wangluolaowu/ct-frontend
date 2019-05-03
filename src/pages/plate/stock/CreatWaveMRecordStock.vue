@@ -1,45 +1,43 @@
 <template>
   <div id="mainContainer">
-    <el-row :span="24" class='conMarginLeft marginBottoms'>
-      <el-col style='width:320px;'>
-        <div class="block">
-          <span class="demonstration">初始日期</span>
-              <el-date-picker
-                v-model="search.startTime"
-                format="yyyy-MM-dd HH:mm:ss"
-                value-format="yyyy-MM-dd HH:mm:ss"
-                type="datetime"
-                placeholder="请选择初始日期"
-                @change="handleChangeTime"
-              ></el-date-picker>
-        </div>
-      </el-col>
-      <el-col style='width:320px;'>
-        <div class="block">
-          <span class="demonstration">结束日期</span>
-         <el-date-picker
-                v-model="search.endTime"
-                format="yyyy-MM-dd HH:mm:ss"
-                value-format="yyyy-MM-dd HH:mm:ss"
-                type="datetime"
-                placeholder="请选择完成日期"
-                 @change="handleChangeTime"
-              ></el-date-picker>
-        </div>
-      </el-col>
-      <el-col :span="6">
-        <el-button type="primary" @click="researchBtn" >查找</el-button>
-        <el-button type="info" @click="cancel" > 取消</el-button>
-      </el-col>
-    </el-row>
-    <el-row >
-      
-    </el-row>
+     <!-- 搜索区域 -->
+    <el-form :inline="true" class="demo-form-inline">
+            <el-row :span="24">
+              <el-col :span="8">
+                <el-form-item :label="$t('label.label2_13')">
+                  <el-date-picker
+                  v-model="search.startTime"
+                  format="yyyy-MM-dd HH:mm:ss"
+                  value-format="yyyy-MM-dd HH:mm:ss"
+                  type="datetime"
+                  @change="handleChangeTime"
+                ></el-date-picker>
+                </el-form-item>
+              </el-col>
+              <el-col :span="8">
+                <el-form-item :label="$t('label.label2_14')">
+                  <el-date-picker
+                    v-model="search.endTime"
+                    format="yyyy-MM-dd HH:mm:ss"
+                    value-format="yyyy-MM-dd HH:mm:ss"
+                    type="datetime"
+                     @change="handleChangeTime"
+                  ></el-date-picker>
+                </el-form-item>
+              </el-col>
+              <el-col :span="6">
+                <el-form-item>
+                  <el-button type="primary" @click="researchBtn" style="display: inline-block;width:80px;">{{$t('message.msg1_28')}}</el-button>
+                  <el-button type="info" @click="cancel" style="display: inline-block;width:80px;"> {{$t('message.msg1_30')}}</el-button>
+                </el-form-item>
+              </el-col>
+            </el-row>         
+    </el-form>
     <el-table :data="tableData" highlight-current-rowstyle="width: 100%" border v-loading="tableLoading">
-      <el-table-column prop="ROW_ID" label="序号"></el-table-column>
-      <el-table-column prop="WAVEID" label="波次号"></el-table-column>
-      <el-table-column prop="DEALERCOU" label="任务波次订单行总数"></el-table-column>
-      <el-table-column prop="CREATIONDATE" label="创建波次时间">
+      <el-table-column prop="ROW_ID" :label="$t('label.label1_86')" ></el-table-column>
+      <el-table-column prop="WAVEID" :label="$t('label.label3_01')" ></el-table-column>
+      <el-table-column prop="DEALERCOU" :label="$t('label.label3_02')" ></el-table-column>
+      <el-table-column prop="CREATIONDATE" :label="$t('label.label1_73')">
          <template slot-scope="scope">
                 {{$DateFormat.dateFormat(scope.row.CREATIONDATE,true)}}
             </template>

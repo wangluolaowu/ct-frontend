@@ -3,8 +3,8 @@
      <el-form class="demo-form-inline selectedCont clears" label-width="200px">
         <el-row>
         <el-col :span="8">
-            <el-form-item label="订单类型" >
-              <el-select placeholder="订单类型" v-model="searchBIN.orderType" style="width:200px">
+            <el-form-item :label="$t('label.label1_51')">
+              <el-select v-model="searchBIN.orderType" style="width:200px">
                         <el-option
                           v-for="item in $Enum.EnumSelect().order_type"
                           :key="item.value"
@@ -16,8 +16,8 @@
             </el-form-item>
         </el-col>
         <el-col :span="8">  
-            <el-form-item label="工作站模式" >
-               <el-select placeholder="工作站模式" v-model="searchBIN.wsWallSchema" style="width:200px">
+            <el-form-item :label="$t('label.label2_22')">
+               <el-select v-model="searchBIN.wsWallSchema" style="width:200px">
                         <el-option
                           v-for="item in $Enum.EnumSelect().workstation_status"
                           :key="item.value"
@@ -32,7 +32,7 @@
          <el-row>
         <el-col :span="8">
            <el-form-item label="ISP Dealer" >
-              <el-select placeholder="ISP Dealer" v-model="searchBIN.ispDealer" style="width:200px">
+              <el-select v-model="searchBIN.ispDealer" style="width:200px">
                         <el-option
                           v-for="item in $Enum.EnumSelect().Y_N_STATUS"
                           :key="item.value"
@@ -45,7 +45,7 @@
         </el-col>
         <el-col :span="8">  
             <el-form-item label="ICT Dealer" >
-              <el-select placeholder="ISP Dealer" v-model="searchBIN.ictDealer" style="width:200px">
+              <el-select v-model="searchBIN.ictDealer" style="width:200px">
                         <el-option
                           v-for="item in $Enum.EnumSelect().Y_N_STATUS"
                           :key="item.value"
@@ -59,13 +59,13 @@
         </el-row>
          <el-row>
         <el-col :span="8">
-           <el-form-item label="算法" >
+           <el-form-item :label="$t('label.label2_23')">
               <el-input v-model="searchBIN.algorithm" style="width:200px"></el-input>
             </el-form-item>
         </el-col>
         <el-col :span="8">  
-            <el-form-item label="状态" >
-               <el-select placeholder="状态" v-model="searchBIN.enableFlag" style="width:200px">
+            <el-form-item :label="$t('label.label1_24')">
+               <el-select v-model="searchBIN.enableFlag" style="width:200px">
                         <el-option
                           v-for="item in $Enum.EnumSelect().openStatus2"
                           :key="item.value"
@@ -79,8 +79,8 @@
         </el-row>
         <el-row>
         <el-col :span="8">  
-            <el-form-item label="页面大小" >
-             <el-select placeholder="页面大小" v-model="searchBIN.pageSize" style="width:200px">
+            <el-form-item :label="$t('label.label1_56')" >
+             <el-select  v-model="searchBIN.pageSize" style="width:200px">
                 <el-option
                 v-for="item in $Enum.EnumSelect().page_size"
                 :key="item.value"
@@ -95,13 +95,13 @@
         <el-row>
         <el-col :span="8" >
           <el-form-item class='buttonGroups'>  
-              <el-button type="primary" @click="loadData">查询</el-button>
-              <el-button type="primary" @click="restData">清空</el-button>
+              <el-button type="primary" @click="loadData">查询{{$t('message.msg1_28')}}</el-button>
+              <el-button type="primary" @click="restData">清空{{$t('message.msg1_29')}}</el-button>
           </el-form-item>
           </el-col>
           <el-col :span="8">
             <el-form-item>
-                <el-button type="primary" @click="add">新增</el-button>
+                <el-button type="primary" @click="add">新增{{$t('message.msg1_52')}}</el-button>
             </el-form-item>
           </el-col>
         </el-row>
@@ -109,11 +109,11 @@
          <el-table :data="userInfoList" style="width: 100%" border  height="500">
             <!--<el-table-column prop="id" label="id" >
             </el-table-column>-->
-             <el-table-column type="index" label="规则ID" width="200">
+             <el-table-column type="index" :label="$t('label.label2_24')" width="200">
             </el-table-column>
-             <el-table-column prop="ruleDesc" label="规则描述" width="200">
+             <el-table-column prop="ruleDesc"  :label="$t('label.label2_25')" width="200">
             </el-table-column>
-             <el-table-column prop="orderType" label="订单类型" width="200">
+             <el-table-column prop="orderType" :label="$t('label.label1_51')" width="200">
                 <template slot-scope="scope" width="100%">
                 {{$Enum.getEnumSelectByValue($Enum.EnumSelect().order_type,scope.row.orderType)}}
               </template>
@@ -128,28 +128,28 @@
                 {{$Enum.getEnumSelectByValue($Enum.EnumSelect().Y_N_STATUS,scope.row.ictDealer)}}
               </template>
             </el-table-column>
-             <el-table-column prop="wsWallSchema" label="工作站模式" width="200">
+             <el-table-column prop="wsWallSchema"  :label="$t('label.label2_22')" width="200">
                 <template slot-scope="scope" width="100%">
                 {{$Enum.getEnumSelectByValue($Enum.EnumSelect().workstation_status,scope.row.wsWallSchema)}}
               </template>
             </el-table-column>
-             <el-table-column prop="algorithm" label="算法" width="200">
+             <el-table-column prop="algorithm" :label="$t('label.label2_23')"  width="200">
             </el-table-column>
-            <el-table-column prop="enableFlag" label="状态" width="200">
+            <el-table-column prop="enableFlag" :label="$t('label.label1_24')" width="200">
                <template slot-scope="scope" width="100%">
                 {{$Enum.getEnumSelectByValue($Enum.EnumSelect().openStatus2,scope.row.enableFlag)}}
               </template>
             </el-table-column>
              <!--第二步  开始进行修改和查询操作-->
-             <el-table-column label="操作"  min-width="350" fixed="right">
+             <el-table-column :label="$t('label.msg1_53')"  min-width="350" fixed="right">
  
                 <template slot-scope="scope">
  
-                     <el-button type="text" @click="checkDetail(scope.row)">查看详情</el-button>
+                     <el-button type="text" @click="checkDetail(scope.row)">{{$t('message.msg1_54')}}</el-button>
  
-                     <el-button type="text" @click="modifyInfo(scope.row)">修改</el-button>
+                     <el-button type="text" @click="modifyInfo(scope.row)">{{$t('message.msg1_55')}}</el-button>
   
-                     <el-button type="text" @click="deleteInfo(scope.row)">删除</el-button>
+                     <el-button type="text" @click="deleteInfo(scope.row)">{{$t('message.msg1_56')}}</el-button>
                   </template>
              </el-table-column>
              <!--编辑与增加的页面-->
@@ -161,11 +161,11 @@
           <!--新增界面-->
          <el-dialog title="记录" :visible.sync="dialogVisible" width="50%" :close-on-click-modal="false">
              <el-form :model="addFormData"  ref="addFormData" label-width="150px" class="demo-ruleForm login-container">
-                  <el-form-item  prop="ruleDesc" label="规则描述">
-                    <el-input type="text" v-model="addFormData.ruleDesc" placeholder="规则描述" ></el-input>
+                  <el-form-item  prop="ruleDesc" :label="$t('label.label2_25')">
+                    <el-input type="text" v-model="addFormData.ruleDesc" ></el-input>
                   </el-form-item>
-                   <el-form-item prop="orderType" label="订单类型">
-                     <el-select placeholder="订单类型" v-model="addFormData.orderType" style="width:200px">
+                   <el-form-item prop="orderType" :label="$t('label.label1_51')">
+                     <el-select  v-model="addFormData.orderType" style="width:200px">
                         <el-option
                           v-for="item in $Enum.EnumSelect().order_type"
                           :key="item.value"
@@ -197,8 +197,8 @@
                        </el-option>
                     </el-select>
                   </el-form-item>
-                   <el-form-item  prop="wsWallSchema" label="工作站模式">
-                     <el-select placeholder="工作站模式" v-model="addFormData.wsWallSchema" style="width:200px">
+                   <el-form-item  prop="wsWallSchema" :label="$t('label.label2_22')">
+                     <el-select  v-model="addFormData.wsWallSchema" style="width:200px">
                         <el-option
                           v-for="item in $Enum.EnumSelect().workstation_status"
                           :key="item.value"
@@ -208,11 +208,11 @@
                        </el-option>
                     </el-select>
                   </el-form-item>
-                  <el-form-item  prop="algorithm" label="算法">
-                       <el-input type="text" v-model="addFormData.algorithm" placeholder="算法" ></el-input>
+                  <el-form-item  prop="algorithm" :label="$t('label.label2_23')">
+                       <el-input type="text" v-model="addFormData.algorithm" ></el-input>
                   </el-form-item>
-                  <el-form-item  prop="enableFlag" label="状态">
-                    <el-select placeholder="状态" v-model="addFormData.enableFlag" style="width:200px">
+                  <el-form-item  prop="enableFlag" :label="$t('label.label1_24')">
+                    <el-select v-model="addFormData.enableFlag" style="width:200px">
                         <el-option
                           v-for="item in $Enum.EnumSelect().openStatus2"
                           :key="item.value"

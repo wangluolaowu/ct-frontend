@@ -303,4 +303,5 @@
       width:40px!important;
       height:40px!important;
     }
+
  </style>

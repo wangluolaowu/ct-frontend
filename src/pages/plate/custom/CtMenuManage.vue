@@ -17,6 +17,8 @@
 
 
          <el-table :data="userInfoList" style="width: 100%" border>
+            <el-table-column type="index" label="序号" width="180">
+            </el-table-column>
             <el-table-column prop="name" label="节点名称" width="180">
             </el-table-column>
              <el-table-column prop="description" label="节点描述">
@@ -34,7 +36,15 @@
                      <el-button type="text" @click="checkDetail(scope.row)">子菜单管理</el-button>
  
                      <el-button type="text" @click="modifyUser(scope.row)">修改</el-button>
-  
+                     <el-button
+                      size="mini"
+                      :disabled="scope.$index===0"
+                      @click="moveUp(scope.$index,scope.row)"><i class="el-icon-arrow-up"></i></el-button>
+                    <el-button
+                      size="mini"
+                      :disabled="scope.$index===(userInfoList.length-1)"
+                      @click="moveDown(scope.$index,scope.row)"><i class="el-icon-arrow-down"></i></el-button>
+                      <!--<el-button type="info" size="mini" round v-if="scope.$index===0">默认</el-button>-->
                      <!--<el-button type="text" @click="deleteUser(scope.row)">删除</el-button>-->
                   </template>
              </el-table-column>
@@ -92,7 +102,9 @@
         style="width: 90%"
         @selection-change='selectRow'>
         <el-table-column type="selection" width="45" align="center"></el-table-column>
-        <el-table-column label="序号"  type="index" width="40" align="center"></el-table-column>
+        <el-table-column label="序号"  width="40" align="center">
+          <template slot-scope="scope"> <span>{{scope.$index + 1}} </span> </template>
+        </el-table-column>
          <el-table-column prop="name" label="节点名称" width="180">
             <template slot-scope="scope">
             <el-input v-model="scope.row.name"></el-input>
@@ -121,6 +133,20 @@
                         </el-select>
           </template>
         </el-table-column>
+        <el-table-column label="操作" align="center" min-width="200">
+                <template slot-scope="scope">
+                     <el-button
+                      size="mini"
+                      :disabled="scope.$index===0"
+                      @click="moveUpChild(scope.$index,scope.row)"><i class="el-icon-arrow-up"></i></el-button>
+                    <el-button
+                      size="mini"
+                      :disabled="scope.$index===(tableData.length-1)"
+                      @click="moveDownChild(scope.$index,scope.row)"><i class="el-icon-arrow-down"></i></el-button>
+                      <!--<el-button type="info" size="mini" round v-if="scope.$index===0">默认</el-button>-->
+                     <!--<el-button type="text" @click="deleteUser(scope.row)">删除</el-button>-->
+                  </template>
+             </el-table-column>
       </el-table>
     </div>
     </div>
@@ -178,12 +204,95 @@
   mounted: function () {
         this.loadData()
       },
-      methods: {
+      methods: { //上移
+      moveUp(index,row){
+        var that = this;
+        console.log('上移',index,row);
+        console.log(that.userInfoList[index]);
+        if (index > 0) {
+          let upDate = that.userInfoList[index - 1];
+          that.userInfoList.splice(index - 1, 1);
+          that.userInfoList.splice(index,0, upDate);
+          let result = []
+          that.userInfoList[index].menuIndex=index
+          that.userInfoList[index-1].menuIndex=index+1
+          result.push(that.userInfoList[index])
+          result.push(that.userInfoList[index-1])
+          this.updateIndex(result);
+        } else {
+          alert('已经是第一条，不可上移');
+        }
+      }, //下移
+      moveDown(index,row){
+          var that = this;
+          console.log('下移',index,row);
+          if ((index + 1) === that.userInfoList.length){
+            alert('已经是最后一条，不可下移');
+          } else {
+            console.log(index);
+            let downDate = that.userInfoList[index + 1];
+            that.userInfoList.splice(index + 1, 1);
+            that.userInfoList.splice(index,0, downDate);
+            let result = []
+            that.userInfoList[index].menuIndex=index+2
+            that.userInfoList[index+1].menuIndex=index+1
+            result.push(that.userInfoList[index])
+            result.push(that.userInfoList[index+1])
+            this.updateIndex(result);
+          }
+        },
+        moveUpChild(index,row){
+        var that = this;
+        console.log('上移',index,row);
+        console.log(that.tableData[index]);
+        let menuIndex = index
+        if (index > 0) {
+          let upDate = that.tableData[index - 1];
+          that.tableData.splice(index - 1, 1);
+          that.tableData.splice(index,0, upDate);
+          let result = []
+          that.tableData[index].menuIndex=menuIndex+1
+          that.tableData[index-1].menuIndex=menuIndex
+          result.push(that.tableData[index])
+          result.push(that.tableData[index-1])
+          this.updateIndex(result);
+        } else {
+          alert('已经是第一条，不可上移');
+        }
+      }, //下移
+      moveDownChild(index,row){
+          var that = this;
+          console.log('下移',index,row);
+          let menuIndex = index+1
+          if ((index + 1) === that.tableData.length){
+            alert('已经是最后一条，不可下移');
+          } else {
+            console.log(index);
+            let downDate = that.tableData[index + 1];
+            that.tableData.splice(index + 1, 1);
+            that.tableData.splice(index,0, downDate);
+            let result = []
+            that.tableData[index].menuIndex=menuIndex
+            that.tableData[index+1].menuIndex=menuIndex+1
+            result.push(that.tableData[index])
+            result.push(that.tableData[index+1])
+            this.updateIndex(result);
+          }
+        },
         loadData() {
           let param = {'name': this.filters.name}
           axios.post('/custom/ctMenu/selectCtMenuList', qs.stringify(param)).then((res) => {
             var _data = res.data.result
             this.userInfoList = _data
+          })
+        },
+        updateIndex(result) {
+          let param = {'result': JSON.stringify(result)}
+          console.log('result========' + JSON.stringify(param))
+          axios.post('/custom/ctMenu/insertChildCtMenu', qs.stringify(param)).then((res) => {
+            if (res.errCode === 'S') {
+              //this.loadData()
+            }
           })
         },
         getUsers() {
@@ -220,7 +329,7 @@
           this.dialogVisible = true
           // this.addFormReadOnly = false;
         },
-              // 获取表格选中时的数据
+       // 获取表格选中时的数据
       selectRow (val) { 
         this.selectlistRow = val
         if(this.selectlistRow.length > 0){
@@ -247,7 +356,7 @@
           name: this.name,
           description: this.description,
           url: this.url,
-          available:1
+          available:"1"
           }
           this.tableData.unshift(list)
       },

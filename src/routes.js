@@ -201,6 +201,16 @@ const routes = [
         path: '/custom/permssion',
         component: () => import('@/pages/plate/custom/CtPermssion'),
         name: '权限管理'
+      },
+      {
+        path: '/custom/clientUser',
+        component: () => import('@/pages/plate/custom/clientUser'),
+        name: '客户端用户管理'
+      },
+      {
+        path: '/custom/mapUser',
+        component: () => import('@/pages/plate/custom/mapUser'),
+        name: '地图用户管理'
       }
     ]
   },
@@ -227,7 +237,7 @@ const routes = [
       },
       {
         path: '/robotManage/kidInfo',
-        component: () => import('@/pages/plate/robotManage/kidMoveContr'),
+        component: () => import('@/pages/plate/robotManage/kidInfo'),
         name: '机器人信息'
       },
       {
@@ -255,7 +265,7 @@ const routes = [
       },
       {
         path: '/shelfManage/shelfLocation',
-        component: () => import('@/pages/plate/holderManageNew/holderMove'),
+        component: () => import('@/pages/plate/holderManageNew/shelfLocation'),
         name: '货位'
       },
       {

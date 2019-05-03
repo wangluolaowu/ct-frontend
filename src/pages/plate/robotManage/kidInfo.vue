@@ -85,7 +85,119 @@
                         :total="list1Search.totalRows">
     </el-pagination>
     </div>
-
+    <div class="tabOne tabTwo">
+      <h4 class="h2">{{$t('message.msg1_16')}}</h4>
+      <el-table :data='tableData.list2' highlight-current-row v-loading="tableLoading" style="width: 100%" border>
+        <el-table-column prop="kidIncharge" :label="$t('label.label1_20')" width="100">
+        </el-table-column>
+        <el-table-column prop="taskId" :label="$t('label.label1_25')" width="85">
+        </el-table-column>
+        <el-table-column prop="taskType" :label="$t('label.label1_29')" width="200">
+           <template slot-scope="scope" width="100%">
+             {{$Enum.getEnumSelectByValue(KM_KID_TASK_TYPE,scope.row.tasktType)}}
+            </template>
+        </el-table-column>
+        <el-table-column prop="taskStatus" :label="$t('label.label1_30')" width="200">
+          <template slot-scope="scope" width="100%">
+             {{$Enum.getEnumSelectByValue(KM_KID_TASK_STATUS,scope.row.taskStatus)}}
+            </template>
+        </el-table-column>
+        <el-table-column prop="srcPosX" :label="$t('label.label1_31')"  width="100">
+        </el-table-column>
+        <el-table-column prop="srcPosY" :label="$t('label.label1_32')"  width="100">
+        </el-table-column>
+        <el-table-column prop="posX" :label="$t('label.label1_33')"  width="100">
+        </el-table-column>
+        <el-table-column prop="posY" :label="$t('label.label1_34')"  width="100">
+        </el-table-column>
+        <el-table-column prop="destPosX" :label="$t('label.label1_35')"  width="100">
+        </el-table-column>
+        <el-table-column prop="destPosY" :label="$t('label.label1_36')"  width="100">
+        </el-table-column>
+        <el-table-column prop="destObjectSide" :label="$t('label.label1_39')" width="160">
+        </el-table-column>
+        <el-table-column prop="destObjectDirection" :label="$t('label.label1_38')" width="175">
+        </el-table-column>
+        <el-table-column prop="objectGrossWeight" :label="$t('label.label1_40')"  width="100">
+        </el-table-column>
+        <el-table-column prop="objectId" :label="$t('label.label1_26')" width="100">
+        </el-table-column>
+        <el-table-column prop="releaseLoadFlag" :label="$t('label.label1_41')"  width="200">
+          <template slot-scope="scope" width="100%">
+            {{$Enum.getEnumSelectByValue(TM_MOVE_TASK_RELEASE_LOAD,scope.row.releaseLoadFlag)}}
+            </template>
+        </el-table-column>
+        <el-table-column prop="chargePointId" :label="$t('label.label1_42')"  width="100">
+        </el-table-column>
+        <el-table-column prop="wsId" :label="$t('label.label1_09')"  width="100">
+        </el-table-column>
+        <el-table-column prop="creationDate" :label="$t('label.label1_37')" width="200">
+           <template slot-scope="scope">
+                {{$DateFormat.dateFormat(scope.row.creationDate,true)}}
+            </template>
+        </el-table-column>
+        <el-table-column prop="lastUpdateDate" :label="$t('label.label1_28')" width="200">
+           <template slot-scope="scope">
+                {{$DateFormat.dateFormat(scope.row.lastUpdateDate,true)}}
+            </template>
+        </el-table-column>
+      </el-table>
+      <el-pagination v-if="list2Search.totalRows>0" class="pagination" background @current-change="list2SearchHandleCurrentChange"
+                        :current-page.sync="list2Search.currentPage" :page-size="list2Search.pageSize" :page-sizes="[list2Search.pageSize]" layout="total, sizes, prev, pager, next, jumper"
+                        :total="list2Search.totalRows">
+    </el-pagination>
+    </div>
+    <div class="tabOne tabTwo">
+      <h4 class="h2">{{$t('message.msg1_65')}}</h4>
+      <el-table :data='tableData.list3' highlight-current-row v-loading="tableLoading" style="width: 100%" border>
+        <el-table-column prop="kidId" :label="$t('label.label1_20')" width="100">
+        </el-table-column>
+        <el-table-column prop="taskId" :label="$t('label.label1_25')" width="85">
+        </el-table-column>
+        <el-table-column prop="taskType" :label="$t('label.label1_29')" width="200">
+           <template slot-scope="scope" width="100%">
+             {{$Enum.getEnumSelectByValue(KM_KID_TASK_TYPE,scope.row.tasktType)}}
+            </template>
+        </el-table-column>
+        <el-table-column prop="kidStatus" :label="$t('label.label1_95')" width="200">
+        </el-table-column>
+        <el-table-column prop="taskStatus" :label="$t('label.label1_30')" width="200">
+          <template slot-scope="scope" width="100%">
+             {{$Enum.getEnumSelectByValue(KM_KID_TASK_STATUS,scope.row.taskStatus)}}
+            </template>
+        </el-table-column>
+        <el-table-column prop="srcPosX" :label="$t('label.label1_31')"  width="100">
+        </el-table-column>
+        <el-table-column prop="srcPosY" :label="$t('label.label1_32')"  width="100">
+        </el-table-column>
+        <el-table-column prop="posX" :label="$t('label.label1_33')"  width="100">
+        </el-table-column>
+        <el-table-column prop="posY" :label="$t('label.label1_34')"  width="100">
+        </el-table-column>
+        <el-table-column prop="destPosX" :label="$t('label.label1_35')"  width="100">
+        </el-table-column>
+        <el-table-column prop="destPosY" :label="$t('label.label1_36')"  width="100">
+        </el-table-column>
+        <el-table-column prop="holderId" :label="$t('label.label1_26')" width="100">
+        </el-table-column>
+        <el-table-column prop="wsId" :label="$t('label.label1_09')"  width="100">
+        </el-table-column>
+        <el-table-column prop="creationDate" :label="$t('label.label1_37')" width="200">
+           <template slot-scope="scope">
+                {{$DateFormat.dateFormat(scope.row.creationDate,true)}}
+            </template>
+        </el-table-column>
+        <el-table-column prop="lastUpdateDate" :label="$t('label.label1_28')" width="200">
+           <template slot-scope="scope">
+                {{$DateFormat.dateFormat(scope.row.lastUpdateDate,true)}}
+            </template>
+        </el-table-column>
+      </el-table>
+      <el-pagination v-if="list3Search.totalRows>0" class="pagination" background @current-change="list2SearchHandleCurrentChange"
+                        :current-page.sync="list3Search.currentPage" :page-size="list3Search.pageSize" :page-sizes="[list3Search.pageSize]" layout="total, sizes, prev, pager, next, jumper"
+                        :total="list3Search.totalRows">
+    </el-pagination>
+    </div>
   </div>
 </template>
 <script>
@@ -119,6 +231,11 @@ export default {
         totalRows: -1,
         pageSize: -1,
         currentPage: 1
+      },
+      list3Search: {
+        totalRows: -1,
+        pageSize: -1,
+        currentPage: 1
       }
 
     }
@@ -127,6 +244,7 @@ export default {
     this.getPostOne()
     this.getPostTwo()
     this.getPostThree()
+    this.getPostFour()
     this.getSelectValues()
   },
   methods: {
@@ -176,6 +294,17 @@ export default {
         // console.log(res);
         if (res.errCode === 'S') {
           that.tableData.list2 = res.data.result
+        }
+      })
+    },
+    getPostFour () {
+      let that = this
+      this.axios.get('robotManage/kidInfo/selectKidsStatusInfoBySearch', {
+        params: that.list3Search
+      }).then((res) => {
+        // console.log(res);
+        if (res.errCode === 'S') {
+          that.tableData.list3 = res.data.result
         }
       })
     },

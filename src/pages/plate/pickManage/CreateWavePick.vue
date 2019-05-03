@@ -4,33 +4,34 @@
         <el-col :span="23" class="main">
             <div class="grid-content bg-purple-dark">
                 <el-tabs id="topTitle" v-model="search.orderType" @tab-click="handleTabClick">
-                    <el-tab-pane label="订单类型S" name="S"></el-tab-pane>
-                    <el-tab-pane label="订单类型V" name="V"></el-tab-pane>
+                    <el-tab-pane :label="$t('label.label2_01')" name="S"></el-tab-pane>
+                    <el-tab-pane :label="$t('label.label2_02')" name="V"></el-tab-pane>
+                    <el-tab-pane :label="$t('label.label2_03')" name="U"></el-tab-pane>
                 </el-tabs>
                 <!-- 搜索区域 -->
                 <el-form :inline="true" class="demo-form-inline selectedCont clears">
                     <el-form-item class="fl" label="ISP dealer：">
-                        <el-select placeholder="所属平台" v-model="search.ispDealer">
-                            <el-option label="全部" value=""></el-option>
-                            <el-option label="是" value="Y"></el-option>
-                            <el-option label="否" value="N"></el-option>
+                        <el-select  v-model="search.ispDealer">
+                            <el-option :label="$t('label.label2_04')" value=""></el-option>
+                            <el-option :label="$t('label.label2_05')" value="Y"></el-option>
+                            <el-option :label="$t('label.label2_06')" value="N"></el-option>
                             <!-- <el-option :label="item.platformName" :key="item.clientType" :value="item.clientType" v-for="item in platformTypeList"></el-option> -->
                         </el-select>
                     </el-form-item>
                     <el-form-item class="fl" label="ICT dealer：">
-                        <el-select placeholder="所属平台" v-model="search.ictDealer">
-                            <el-option label="全部" value=""></el-option>
-                            <el-option label="是" value="Y"></el-option>
-                            <el-option label="否" value="N"></el-option>
+                        <el-select  v-model="search.ictDealer">
+                            <el-option :label="$t('label.label2_04')" value=""></el-option>
+                            <el-option :label="$t('label.label2_05')" value="Y"></el-option>
+                            <el-option :label="$t('label.label2_06')" value="N"></el-option>
                         </el-select>
                     </el-form-item>
                     <el-form-item class="fl" id="groupBtn">
-                        <el-button type="primary" @click="confirm">确认</el-button>
-                        <el-button type="info" :disabled = "cancelDisabled" @click="cancel">取消</el-button>
+                        <el-button type="primary" @click="confirm">{{$t('message.msg1_28')}}</el-button>
+                        <el-button type="info" :disabled = "cancelDisabled" @click="cancel">{{$t('message.msg1_30')}}</el-button>
                     </el-form-item>
                     <el-form-item class="checkBoxGroup">
-                     <el-checkbox v-model="search.submitAll"  @change="handleCheckAllChange">提交全部</el-checkbox>
-                     <el-button type="primary" @click="submit" :disabled = "submitIsDisabled" >提交</el-button>
+                     <el-checkbox v-model="search.submitAll"  @change="handleCheckAllChange">{{$t('message.msg1_33')}}</el-checkbox>
+                     <el-button type="primary" @click="submit" :disabled = "submitIsDisabled" >{{$t('message.msg1_34')}}</el-button>
                     </el-form-item>
                     <!--<el-form-item>
                        <el-button type="primary" @click="submit" :disabled = "submitIsDisabled" >提交</el-button>
@@ -40,41 +41,41 @@
                 <el-table ref="multipleTable" :data="tableData" tooltip-effect="dark" style="width: 100%" border @selection-change="handleSelectionChange" v-loading="tableLoading">
                     <el-table-column type="selection" width="55">
                     </el-table-column>
-                    <el-table-column prop="dealerAccount" label="客户编码" width="100">
+                    <el-table-column prop="dealerAccount" :label="$t('label.label1_67')" width="100">
                     </el-table-column>
-                    <el-table-column prop="custName" label="客户名称" width="200">
+                    <el-table-column prop="custName" :label="$t('label.label1_68')"  width="200">
                     </el-table-column>
-                    <el-table-column prop="wip" label="WIP号" width="100">
+                    <el-table-column prop="wip" :label="$t('label.label1_52')"  width="100">
                     </el-table-column>
-                    <el-table-column prop="wipLine" label="WIP订单行" width="100">
+                    <el-table-column prop="wipLine" :label="$t('label.label1_54')"  width="100">
                     </el-table-column>
-                    <el-table-column prop="pickTicketNum" label="备货标签" width="200">
+                    <el-table-column prop="pickTicketNum" :label="$t('label.label2_07')" width="200">
                     </el-table-column>
-                    <el-table-column prop="route" label="路线" width="50">
+                    <el-table-column prop="route" :label="$t('label.label1_50')" width="50">
                     </el-table-column>
-                     <el-table-column prop="subRoute" label="子路线" width="100">
+                     <el-table-column prop="subRoute" :label="$t('label.label2_08')"  width="100">
                     </el-table-column>
-                    <el-table-column prop="orderType" label="订单类型" width="100">
+                    <el-table-column prop="orderType" :label="$t('label.label1_51')" width="100">
                     </el-table-column>
-                    <el-table-column prop="locNum" label="货架位" width="100">
+                    <el-table-column prop="locNum" :label="$t('label.label2_09')" width="100">
                     </el-table-column>
-                    <el-table-column prop="skuNum" label="零件号码" width="200">
+                    <el-table-column prop="skuNum" :label="$t('label.label1_70')"  width="200">
                     </el-table-column>
-                    <el-table-column prop="skuName" label="零件描述" width="200">
+                    <el-table-column prop="skuName" :label="$t('label.label1_78')"  width="200">
                     </el-table-column>
-                    <el-table-column prop="qty" label="数量" width="100">
+                    <el-table-column prop="qty" :label="$t('label.label1_80')" width="100">
                     </el-table-column>
-                    <el-table-column  prop="ispDealer"  label="ISP经销商" width="100">
+                    <el-table-column  prop="ispDealer"  :label="$t('label.label1_57')"  width="100">
                       <template slot-scope="scope" width="100%">
                          {{$Enum.getEnumSelectByValue(Y_N_STATUS,scope.row.ispDealer)}}
                     </template>
                     </el-table-column>
-                    <el-table-column prop="ictDealer" label="ICT经销商" width="100">
+                    <el-table-column prop="ictDealer" :label="$t('label.label1_58')"  width="100">
                        <template slot-scope="scope" width="100%">
                           {{$Enum.getEnumSelectByValue(Y_N_STATUS,scope.row.ictDealer)}}
                     </template>
                     </el-table-column>
-                    <el-table-column prop="creationDate" label="导入时间" width="200">
+                    <el-table-column prop="creationDate" :label="$t('label.label1_72')" width="200">
                       <template slot-scope="scope">
                         {{$DateFormat.dateFormat(scope.row.creationDate,true)}}
                       </template>
@@ -86,21 +87,21 @@
         </el-col>
     </el-row>
     <!-- 弹层start -->
-    <el-dialog title="任务分配" :visible.sync="isShowDialog" width="90%" @close='closeConfirmReject'>
+    <el-dialog :title="$t('label.label2_10')" :visible.sync="isShowDialog" width="90%" @close='closeConfirmReject'>
         <!-- 搜索区域 -->
         <el-form :inline="true" class="demo-form-inline">
-            <el-form-item label="系统预分配原因">
+            <el-form-item :label="$t('label.label2_11')">
                 <template>
                         {{dialog.systemReason || '无'}}
                 </template>
             </el-form-item>
-            <el-form-item label="手工分配原因">
-                <el-input type="textarea" :rows="2" placeholder="请输入内容" v-model="dialog.manualReason">
+            <el-form-item :label="$t('label.label2_12')">
+                <el-input type="textarea" :rows="2"  v-model="dialog.manualReason">
                 </el-input>
             </el-form-item>
             <el-form-item>
-                <el-button type="info" @click="showConfirmDialog">取消</el-button>
-                <el-button type="primary" @click="confirmAssign">任务分配</el-button>
+                <el-button type="info" @click="showConfirmDialog">{{$t('message.msg1_30')}}</el-button>
+                <el-button type="primary" @click="confirmAssign">{{$t('message.msg1_35')}}</el-button>
             </el-form-item>
         </el-form>
         <el-row :gutter="10">
@@ -108,16 +109,16 @@
             <el-card style="min-height: 520px">
               <ul class="station-info">
                   <li>
-                      <label for="">工作站</label><span>{{item.wsid}}</span>
+                      <label for="">{{$t('message.msg1_36')}}</label><span>{{'&#12288;' + item.wsid}}</span>
                   </li>
                   <li>
-                      <label for="">订单总行数</label><span>{{item.orderListCount}}</span>
+                      <label for="">{{$t('message.msg1_37')}}</label><span>{{'&#12288;' +item.orderListCount}}</span>
                   </li>
                   <li>
-                      <label for="">路线总数</label><span>{{item.routeListCount}}</span>
+                      <label for="">{{$t('message.msg1_38')}}</label><span>{{'&#12288;' +item.routeListCount}}</span>
                   </li>
                   <li>
-                      <label for="">播种墙</label><span>{{item.forecastWallCount}}</span>
+                      <label for="">{{$t('message.msg1_39')}}</label><span>{{'&#12288;' +item.forecastWallCount}}</span>
                   </li>
               </ul>
               <transition-group>            
@@ -131,7 +132,7 @@
                       <el-col :span="18" style="line-height:1.7">
                         <div>{{ 'route: ' + (element.route  || '') }}</div>
                         <div>{{ 'dealer: ' + (element.dealerCou  || '') }}</div>
-                        <div>{{ '订单行: ' + (element.lineCou || '') }}</div>                        
+                        <div>{{ $t('message.msg1_40') +': ' + (element.lineCou || '') }}</div>                        
                       </el-col>
                     </el-row>
                 </draggable>
@@ -140,13 +141,13 @@
           </el-col>
         </el-row>
         </el-dialog>
-        <el-dialog width="30%" title="提示" :visible.sync="isShowInnerConfirmDialog"  append-to-body>
-            <p class="dialog-text">确认全部取消么？</p>
-            <el-button @click="isShowInnerConfirmDialog = false">取 消</el-button>
-            <el-button type="primary" @click="confirmReject">确认</el-button>
+        <el-dialog width="30%" :title="$t('message.msg1_41')" :visible.sync="isShowInnerConfirmDialog"  append-to-body>
+            <p class="dialog-text">{{$t('message.msg1_42')}}</p>
+            <el-button @click="isShowInnerConfirmDialog = false">{{$t('message.msg1_30')}}</el-button>
+            <el-button type="primary" @click="confirmReject">{{$t('message.msg1_28')}}</el-button>
         </el-dialog>
-        <el-dialog width="30%" title="已提交完成" :visible.sync="isShowOkDialog" append-to-body @close='confirmShowOkDialog'>
-            <p class="dialog-text">调配任务已完成</p>
+        <el-dialog width="30%" :title="$t('message.msg1_43')" :visible.sync="isShowOkDialog" append-to-body @close='confirmShowOkDialog'>
+            <p class="dialog-text">{{$t('message.msg1_44')}}</p>
             <el-button type="primary" @click="confirmShowOkDialog"> OK</el-button>
         </el-dialog>
     <!-- 弹层end -->
@@ -252,6 +253,8 @@ export default {
       this.isShowOkDialog = false
       this.isShowDialog = false
       this.getTableData()
+      this.dialog.systemReason = ''
+      this.dialog.manualReason = ''
     },
     confirmAssign () {
       let dataResult = {}
@@ -276,6 +279,7 @@ export default {
           this.isShowOkDialog = true // 弹出层 分配成功
         }
       })
+
     },
     submit () {
       this.submitIsDisabled = true

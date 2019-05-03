@@ -7,8 +7,8 @@
               <el-row>
                 <el-col :span="8">
               <el-form-item >
-                    <el-tooltip class="item" effect="dark" content="下载数据集模板" placement="bottom">
-                        <el-button icon="yx-download3" @click="SetDownloadFunc">下载excel模板 </el-button>
+                    <el-tooltip class="item" effect="dark" :content="$t('message.msg1_57')" placement="bottom">
+                        <el-button icon="yx-download3" @click="SetDownloadFunc">{{$t('message.msg1_58')}} </el-button>
                     </el-tooltip>
               </el-form-item>
                 </el-col>
@@ -25,8 +25,8 @@
                 :limit="3"
                 :on-exceed="handleExceed"
                 :file-list="fileList">
-                <el-tooltip class="item" effect="dark" content="只能上传xls,xlsx文件，且不超过500kb" placement="bottom">
-                        <el-button size="small" icon="yx-download3">点击上传</el-button>
+                <el-tooltip class="item" effect="dark" :content="$t('message.msg1_59')" placement="bottom">
+                        <el-button size="small" icon="yx-download3">{{$t('message.msg1_60')}}</el-button>
                     </el-tooltip>
                 <span slot="tip" class="el-upload__tip"></span>
               </el-upload> 
@@ -36,15 +36,15 @@
                 <el-row>
                   <el-col :span="8">
                 <el-form-item>
-                      <el-button type="primary" :disabled = "submitIsDisabled" @click="submit">提交</el-button>
-                      <el-button type="info" :disabled = "cancelIsDisabled" @click="cancel">取消</el-button>
+                      <el-button type="primary" :disabled = "submitIsDisabled" @click="submit">{{$t('message.msg1_34')}}</el-button>
+                      <el-button type="info" :disabled = "cancelIsDisabled" @click="cancel">{{$t('message.msg1_30')}}</el-button>
                 </el-form-item>
                   </el-col>
                 </el-row>
                 <el-row>
                  <el-card style="min-height: 20px">          
-                   <span>{{'系统查询总数:'+tableTotalRows}}</span>
-                   <span>{{'当前选择总数:'+tableSelectRows}}</span>
+                   <span>{{$t('message.msg1_61') + ':'+tableTotalRows}}</span>
+                   <span>{{$t('message.msg1_62') + ':'+tableSelectRows}}</span>
                  </el-card>
                </el-row>
                </el-form>
@@ -52,15 +52,15 @@
                 <el-table ref="multipleTable" :data="tableData" :row-class-name="tableRowClassName" tooltip-effect="dark" style="width: 100%" border @selection-change="handleSelectionChange" v-loading="tableLoading">
                     <el-table-column type="selection" width="55">
                     </el-table-column>
-                    <el-table-column prop="locNum" label="Bin位号">
+                    <el-table-column prop="locNum" :label="$t('label.label4_01')">
                     </el-table-column>
-                    <el-table-column prop="skuNum" label="零件编码">
+                    <el-table-column prop="skuNum" :label="$t('label.label1_70')">
                     </el-table-column>
-                    <el-table-column prop="skuName" label="零件描述">
+                    <el-table-column prop="skuName" :label="$t('label.label1_78')">
                     </el-table-column>
-                    <el-table-column prop="skuQty" label="数量" width="100">
+                    <el-table-column prop="skuQty" :label="$t('label.label1_80')" width="100">
                     </el-table-column>
-                    <el-table-column prop="creationDate" label="导入时间">
+                    <el-table-column prop="creationDate" :label="$t('label.label1_72')">
                       <template slot-scope="scope">
                          {{$DateFormat.dateFormat(scope.row.creationDate,true)}}
                      </template>
@@ -72,21 +72,21 @@
         </el-col>
     </el-row>
     <!-- 弹层start -->
-    <el-dialog title="任务分配" :visible.sync="isShowDialog" width="90%" @close='closeConfirmReject'>
+    <el-dialog :title="$t(message.msg1_35)" :visible.sync="isShowDialog" width="90%" @close='closeConfirmReject'>
         <!-- 搜索区域 -->
         <el-form :inline="true" class="demo-form-inline">
-            <el-form-item label="系统预分配原因">
+            <el-form-item :label="$t('label.label2_11')">
                 <template>
                         {{dialog.systemReason || '无'}}
                 </template>
             </el-form-item>
-            <el-form-item label="手工分配原因">
-                <el-input type="textarea" :rows="2" placeholder="请输入内容" v-model="dialog.manualReason">
+            <el-form-item :label="$t('label.label2_12')">
+                <el-input type="textarea" :rows="2"  v-model="dialog.manualReason">
                 </el-input>
             </el-form-item>
             <el-form-item>
-                <el-button type="primary" @click="showConfirmDialog">取消</el-button>
-                <el-button type="primary" @click="confirmAssign">任务分配</el-button>
+                <el-button type="primary" @click="showConfirmDialog">{{$t('message.msg1_30')}}</el-button>
+                <el-button type="primary" @click="confirmAssign">{{$t('message.msg1_35')}}</el-button>
             </el-form-item>
         </el-form>
         <el-row :gutter="10">
@@ -94,10 +94,10 @@
             <el-card style="min-height: 520px">
               <ul class="station-info">
                   <li>
-                      <label for="">工作站</label><span>{{item.wsid}}</span>
+                      <label for="">{{$t('message.msg1_36')}}</label><span>{{'&#12288;' +item.wsid}}</span>
                   </li>
                   <li>
-                      <label for="">订单总行数</label><span>{{item.orderListCount}}</span>
+                      <label for="">{{$t('message.msg1_37')}}</label><span>{{'&#12288;' +item.orderListCount}}</span>
                   </li>
               </ul>
               <transition-group>            
@@ -109,8 +109,8 @@
                       :key="index">
                       <el-col :span="6"> <div style="margin-top:3px">{{index + 1}}、</div></el-col>
                       <el-col :span="18" style="line-height:1.7">
-                        <div>{{ '货架数量: ' + (element.holderCou  || '') }}</div>
-                        <div>{{ 'Bin位数量: ' + (element.locCou || '') }}</div>                        
+                        <div>{{ $t('message.msg1_63') + ': ' + (element.holderCou  || '') }}</div>
+                        <div>{{ $t('message.msg1_64') + ': ' + (element.locCou || '') }}</div>                        
                       </el-col>
                     </el-row>
                 </draggable>
@@ -119,13 +119,13 @@
           </el-col>
         </el-row>
         </el-dialog>
-        <el-dialog width="30%" title="提示" :visible.sync="isShowInnerConfirmDialog"  append-to-body>
-            <p class="dialog-text">确认全部取消么？</p>
-            <el-button @click="isShowInnerConfirmDialog = false">取 消</el-button>
-            <el-button type="primary" @click="confirmReject">确认</el-button>
+        <el-dialog width="30%" :title="$t('message.msg1_41')" :visible.sync="isShowInnerConfirmDialog"  append-to-body>
+            <p class="dialog-text">{{$t('message.msg1_42')}}</p>
+            <el-button @click="isShowInnerConfirmDialog = false">{{$t('message.msg1_30')}}</el-button>
+            <el-button type="primary" @click="confirmReject">{{$t('message.msg1_28')}}</el-button>
         </el-dialog>
-        <el-dialog width="30%" title="已提交完成" :visible.sync="isShowOkDialog" append-to-body>
-            <p class="dialog-text">调配任务已完成</p>
+        <el-dialog width="30%" :title="$t('message.msg1_43')" :visible.sync="isShowOkDialog" append-to-body>
+            <p class="dialog-text">{{$t('message.msg1_44')}}</p>
             <el-button type="primary" @click="confirmShowOkDialog"> OK</el-button>
         </el-dialog>
     <!-- 弹层end -->
@@ -272,6 +272,8 @@ export default {
       this.tableTotalRows = 0
       this.tableSelectRows = 0
       this.getTableData()
+      this.dialog.systemReason = ''
+      this.dialog.manualReason = ''
     },
     confirmAssign () {
       let dataResult = {}

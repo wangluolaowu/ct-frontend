@@ -4,26 +4,26 @@
   <el-form :inline="true" class="demo-form-inline" label-width="130px">
          <el-row>
           <el-col :span="8">
-            <el-form-item label="订单状态">
-                <el-select placeholder="完成" v-model="search.dmlOrderStatus" style="width:200px">
-                    <el-option label="全部" value=""></el-option>
-                    <el-option label="手工打印" value="2"></el-option>
-                    <el-option label="完成" value="3"></el-option>
-                    <el-option label="不在途" value="5"></el-option>   
+            <el-form-item  :label="$t('label.label1_49')">
+                <el-select  v-model="search.dmlOrderStatus" style="width:200px">
+                    <el-option :label="$t('label.label2_04')"  value=""></el-option>
+                    <el-option :label="$t('label.label2_15')"  value="2"></el-option>
+                    <el-option :label="$t('label.label2_16')"  value="3"></el-option>
+                    <el-option :label="$t('label.label2_17')"  value="5"></el-option>   
                 </el-select>
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="路线" >
+            <el-form-item :label="$t('label.label1_50')">
               <el-input v-model="search.attribute10" style="width:200px"></el-input>
             </el-form-item>
           </el-col>
          </el-row>
          <el-row>
           <el-col :span="8">
-            <el-form-item label="订单类型">
-                <el-select placeholder="订单类型" v-model="search.attribute09" style="width:200px">
-                    <el-option label="全部" value=""></el-option>
+            <el-form-item :label="$t('label.label1_51')" >
+                <el-select v-model="search.attribute09" style="width:200px">
+                    <el-option :label="$t('label.label2_04')" value=""></el-option>
                     <el-option label="S" value="S"></el-option>
                     <el-option label="V" value="V"></el-option>
                 </el-select>
@@ -31,32 +31,32 @@
             </el-col>
             
              <el-col :span="8">
-              <el-form-item label="WIP号" >
+              <el-form-item  :label="$t('label.label1_52')">
                  <el-input v-model="search.attribute03" style="width:200px"></el-input>
             </el-form-item>
              </el-col>
          </el-row>
          <el-row>
               <el-col :span="8">
-             <el-form-item label="客户">
+             <el-form-item :label="$t('label.label1_53')">
                <el-input v-model="search.attribute07" style="width:200px"></el-input>
             </el-form-item>
             </el-col>
              <el-col :span="8">
-            <el-form-item label="WIP订单行" >
+            <el-form-item :label="$t('label.label1_54')">
                  <el-input v-model="search.attribute04" style="width:200px"></el-input>
             </el-form-item>
              </el-col>
          </el-row>
          <el-row>
             <el-col :span="8">
-            <el-form-item label="货位">
+            <el-form-item  :label="$t('label.label1_55')">
                 <el-input v-model="search.locNum" style="width:200px"></el-input>
             </el-form-item>
             </el-col>
              <el-col :span="8">  
-            <el-form-item label="页面大小" >
-              <el-select placeholder="页面大小" v-model="search.pageSize" style="width:200px">
+            <el-form-item :label="$t('label.label1_56')">
+              <el-select  v-model="search.pageSize" style="width:200px">
                 <el-option
                 v-for="item in $Enum.EnumSelect().page_size"
                 :key="item.value"
@@ -70,8 +70,8 @@
          </el-row>
          <el-row>
          <el-col :span="8">
-            <el-form-item label="ISP经销商">
-                <el-select placeholder="ISP经销商" v-model="search.attribute19" style="width:200px">
+            <el-form-item  :label="$t('label.label1_57')">
+                <el-select v-model="search.attribute19" style="width:200px">
                 <el-option
                 v-for="item in Y_N_STATUS"
                 :key="item.value"
@@ -83,8 +83,8 @@
             </el-form-item>
             </el-col>
             <el-col :span="8">
-            <el-form-item label="ICT经销商">
-                 <el-select placeholder="ICT经销商" v-model="search.attribute18" style="width:200px">
+            <el-form-item :label="$t('label.label1_58')">
+                 <el-select  v-model="search.attribute18" style="width:200px">
                 <el-option
                 v-for="item in Y_N_STATUS"
                 :key="item.value"
@@ -97,108 +97,100 @@
             </el-col>
          </el-row>
          <el-row>
-            <el-col :span="8">
-           <el-form-item label="下单初始日期" >
+          <el-col :span="8">
+           <el-form-item :label="$t('label.label1_59')">
               <el-date-picker
                 v-model="search.startTimeCreateDt"
                 format="yyyy-MM-dd HH:mm:ss"
                 value-format="yyyy-MM-dd HH:mm:ss"
                 type="datetime"
-                placeholder="请选择完成日期"
                 @change="handleChangeTime"
                 style="width:200px"
               ></el-date-picker>
             </el-form-item>
             </el-col>
             <el-col :span="8">
-            <el-form-item label="下单截止日期" >
+            <el-form-item :label="$t('label.label1_60')">
               <el-date-picker
                 v-model="search.endTimeCreateDt"
                 format="yyyy-MM-dd HH:mm:ss"
                 value-format="yyyy-MM-dd HH:mm:ss"
                 type="datetime"
-                placeholder="请选择完成日期"
                 style="width:200px"
               ></el-date-picker>
             </el-form-item>
             </el-col>
          </el-row>
          <el-row>
-                 <el-col :span="8">
-           <el-form-item label="创建波次初始日期" >
+          <el-col :span="8">
+           <el-form-item :label="$t('label.label1_61')" >
               <el-date-picker
                 v-model="search.startTimeWaveCreateDate"
                 format="yyyy-MM-dd HH:mm:ss"
                 value-format="yyyy-MM-dd HH:mm:ss"
                 type="datetime"
-                placeholder="请选择完成日期"
                 @change="handleChangeTime"
                 style="width:200px"
               ></el-date-picker>
             </el-form-item>
             </el-col>
             <el-col :span="8">
-            <el-form-item label="创建波次截止日期" >
+            <el-form-item  :label="$t('label.label1_62')">
               <el-date-picker
                 v-model="search.endTimeWaveCreateDate"
                 format="yyyy-MM-dd HH:mm:ss"
                 value-format="yyyy-MM-dd HH:mm:ss"
                 type="datetime"
-                placeholder="请选择完成日期"
                 style="width:200px"
               ></el-date-picker>
             </el-form-item>
             </el-col>
          </el-row>
          <el-row>
-                 <el-col :span="8">
-           <el-form-item label="打印初始日期" >
+         <el-col :span="8">
+           <el-form-item :label="$t('label.label2_18')" >
               <el-date-picker
                 v-model="search.startTimeLastUpdateDate"
                 format="yyyy-MM-dd HH:mm:ss"
                 value-format="yyyy-MM-dd HH:mm:ss"
                 type="datetime"
-                placeholder="请选择完成日期"
                 @change="handleChangeTime"
                 style="width:200px"
               ></el-date-picker>
             </el-form-item>
             </el-col>
             <el-col :span="8">
-            <el-form-item label="打印截止日期" >
+            <el-form-item  :label="$t('label.label2_19')" >
               <el-date-picker
                 v-model="search.endTimeLastUpdateDate"
                 format="yyyy-MM-dd HH:mm:ss"
                 value-format="yyyy-MM-dd HH:mm:ss"
                 type="datetime"
-                placeholder="请选择完成日期"
                 style="width:200px"
               ></el-date-picker>
             </el-form-item>
             </el-col>
          </el-row>
          <el-row>
-                 <el-col :span="8">
-           <el-form-item label="导入初始日期" >
+          <el-col :span="8">
+           <el-form-item :label="$t('label.label1_65')">
               <el-date-picker
                 v-model="search.startTimeOrderInDate"
                 format="yyyy-MM-dd HH:mm:ss"
                 value-format="yyyy-MM-dd HH:mm:ss"
                 type="datetime"
-                placeholder="请选择完成日期"
                 @change="handleChangeTime"
                 style="width:200px"
               ></el-date-picker>
             </el-form-item>
             </el-col>
             <el-col :span="8">
-            <el-form-item label="导入截止日期" >
+            <el-form-item  :label="$t('label.label1_66')">
               <el-date-picker
                 v-model="search.endTimeOrderInDate"
                 format="yyyy-MM-dd HH:mm:ss"
                 value-format="yyyy-MM-dd HH:mm:ss"
                 type="datetime"
-                placeholder="请选择完成日期"
                 style="width:200px"
               ></el-date-picker>
             </el-form-item>
@@ -207,18 +199,18 @@
             <el-row>
               <el-col :span='20' style="margin-left:200px">
                 <el-form-item>
-                    <el-button type="primary" @click="confirm">确认</el-button>
-                     <el-button type="info" @click="reset">清空</el-button>
-                     <el-button type="info" :disabled="cancelDisabled" @click="cancel">取消</el-button>
+                    <el-button type="primary" @click="confirm">{{$t('message.msg1_28')}}</el-button>
+                     <el-button type="info" @click="reset">{{$t('message.msg1_29')}}</el-button>
+                     <el-button type="info" :disabled="cancelDisabled" @click="cancel">{{$t('message.msg1_30')}}</el-button>
                 </el-form-item>
               </el-col>
           </el-row>
           <el-row>
             <el-col :span='20' style="margin-left:300px">
                <el-form-item>
-                  <el-checkbox v-model="search.printAll" @change="handleCheckAllChange">打印全部</el-checkbox>
+                  <el-checkbox v-model="search.printAll" @change="handleCheckAllChange">{{$t('message.msg1_47')}}</el-checkbox>
                 </el-form-item>
-                <el-form-item label="选择打印工作站：" >
+                <el-form-item :label="$t('label.label2_20')" >
                   <el-select v-model="search.wsId" >
                     <el-option
                     v-for="item in WS_ENTITY_WORKSTATION"
@@ -230,7 +222,7 @@
                  </el-select>
                  </el-form-item>
                 <el-form-item >
-                  <el-button type="primary" :disabled="submitIsDisabled" @click="toDoPrint">打印</el-button>
+                  <el-button type="primary" :disabled="submitIsDisabled" @click="toDoPrint">{{$t('message.msg1_48')}}</el-button>
                 </el-form-item>
               </el-col>
           </el-row>
@@ -239,55 +231,55 @@
         <el-table ref="multipleTable" :data="tableData" style="width: 100%" @selection-change="handleSelectionChange" border v-loading="tableLoading">
             <el-table-column type="selection" width="55">
             </el-table-column>
-            <el-table-column prop="attribute07" label="客户编码" width="100">
+            <el-table-column prop="attribute07"  :label="$t('label.label1_67')" width="100">
             </el-table-column>
-            <el-table-column prop="attribute08" label="客户名称"  width="100">
+            <el-table-column prop="attribute08"  :label="$t('label.label1_68')"  width="100">
             </el-table-column>
-            <el-table-column prop="attribute03" label="WIP号"  width="100">
+            <el-table-column prop="attribute03"  :label="$t('label.label1_52')"  width="100">
             </el-table-column>
-            <el-table-column prop="attribute04" label="WIP订单行"  width="100">
+            <el-table-column prop="attribute04"  :label="$t('label.label1_54')"  width="100">
             </el-table-column>
-            <el-table-column prop="attribute01" label="拣货标签"  width="100">
+            <el-table-column prop="attribute01"  :label="$t('label.label2_21')"  width="100">
             </el-table-column>
-            <el-table-column prop="attribute10" label="路线"  width="100">
+            <el-table-column prop="attribute10"  :label="$t('label.label1_50')" width="100">
             </el-table-column>
-            <el-table-column prop="attribute09" label="订单类型"  width="100">
+            <el-table-column prop="attribute09" :label="$t('label.label1_51')"  width="100">
             </el-table-column>
-            <el-table-column prop="locNum" label="货位"  width="100">
+            <el-table-column prop="locNum" :label="$t('label.label1_55')" width="100">
             </el-table-column>
-            <el-table-column prop="skuNum" label="零件编码"  width="100">
+            <el-table-column prop="skuNum" :label="$t('label.label1_70')" width="100">
             </el-table-column>
-            <el-table-column prop="createDtVar" label="下单时间" width="150">
+            <el-table-column prop="createDtVar"  :label="$t('label.label1_71')" width="150">
                <template slot-scope="scope">
                         {{$DateFormat.dateFormat(scope.row.createDtVar,true)}}
                       </template>
             </el-table-column>
-            <el-table-column prop="attribute19" label="ISP经销商" width="200"> 
+            <el-table-column prop="attribute19" :label="$t('label.label1_57')" width="200"> 
               <template slot-scope="scope" width="100%">
                 {{$Enum.getEnumSelectByValue(Y_N_STATUS,scope.row.attribute19)}}
               </template>
             </el-table-column>
-            <el-table-column prop="attribute18" label="ICT经销商" width="200">
+            <el-table-column prop="attribute18"  :label="$t('label.label1_58')" width="200">
                <template slot-scope="scope" width="100%">
                   {{$Enum.getEnumSelectByValue(Y_N_STATUS,scope.row.attribute18)}}
               </template>
             </el-table-column>
-            <el-table-column prop="dmlOrderStatus" label="订单状态" width="200">
+            <el-table-column prop="dmlOrderStatus" :label="$t('label.label1_49')" width="200">
               <template slot-scope="scope" width="100%">
                 {{$Enum.getEnumSelectByValue(DML_PICK_ORDER_STATUS,scope.row.dmlOrderStatus)}}
               </template>
             </el-table-column>
-            <el-table-column prop="orderInDate" label="导入时间" width="150">
+            <el-table-column prop="orderInDate" :label="$t('label.label1_72')" width="150">
                <template slot-scope="scope">
                         {{$DateFormat.dateFormat(scope.row.orderInDate,true)}}
                       </template>
             </el-table-column>
-             <el-table-column prop="waveCreateDate" label="创建波次时间" width="200">
+             <el-table-column prop="waveCreateDate" :label="$t('label.label1_73')" width="200">
                <template slot-scope="scope">
                         {{$DateFormat.dateFormat(scope.row.waveCreateDate,true)}}
                       </template>
             </el-table-column>
-             <el-table-column prop="lastUpdateDate" label="最后更新时间" width="200">
+             <el-table-column prop="lastUpdateDate" :label="$t('label.label1_28')"  width="200">
                <template slot-scope="scope">
                         {{$DateFormat.dateFormat(scope.row.lastUpdateDate,true)}}
                       </template>
@@ -297,9 +289,9 @@
                         :current-page.sync="search.currentPage" :page-size="search.pageSize" :page-sizes="[search.pageSize]" layout="total, sizes, prev, pager, next, jumper"
                         :total="totalRows">
           </el-pagination>
-           <el-dialog width="30%" title="提示" :visible.sync="isShowInnerConfirmDialog" append-to-body @close="closeDialog">
-            <p class="dialog-text">打印成功</p>
-            <el-button type="primary" @click="confirmReject">确认</el-button>
+           <el-dialog width="30%"  :title="$t('label.msg1_41')" :visible.sync="isShowInnerConfirmDialog" append-to-body @close="closeDialog">
+            <p class="dialog-text">{{$t('message.msg1_49')}}</p>
+            <el-button type="primary" @click="confirmReject">{{$t('message.msg1_28')}}</el-button>
         </el-dialog>
  </div>    
 </template>

@@ -269,6 +269,9 @@
                   return item
                })
               }
+              console.log('111=======' +  JSON.stringify(this.treeValue))
+              console.log('222=======' +  JSON.stringify(this.treeData))
+              console.log('333=======' +  JSON.stringify(this.treeParentValue))
             }
           })
         },
@@ -463,5 +466,12 @@
    .el-transfer__buttons  .el-transfer__button{
       width:40px!important;
       height:40px!important;
+    }
+    .el-transfer-panel{
+        width: 300px;
+        height: 500px;
+    }
+    .el-transfer-panel__list.is-filterable{
+        height: 400px;
     }
  </style>

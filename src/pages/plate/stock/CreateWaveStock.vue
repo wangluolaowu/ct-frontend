@@ -7,8 +7,8 @@
               <el-row>
                 <el-col :span="8">
               <el-form-item >
-                    <el-tooltip class="item" effect="dark" content="下载数据集模板" placement="bottom">
-                        <el-button icon="yx-download3" @click="SetDownloadFunc">下载excel模板 </el-button>
+                    <el-tooltip class="item" effect="dark" :content="$t('message.msg1_57')"  placement="bottom">
+                        <el-button icon="yx-download3" @click="SetDownloadFunc">{{$t('message.msg1_58')}}</el-button>
                     </el-tooltip>
               </el-form-item>
                 </el-col>
@@ -25,8 +25,8 @@
                 :limit="3"
                 :on-exceed="handleExceed"
                 :file-list="fileList">
-                 <el-tooltip class="item" effect="dark" content="只能上传xls,xlsx文件，且不超过500kb" placement="bottom">
-                        <el-button size="small" icon="yx-download3">点击上传</el-button>
+                 <el-tooltip class="item" effect="dark" :content="$t('message.msg1_59')" placement="bottom">
+                        <el-button size="small" icon="yx-download3">{{$t('message.msg1_60')}}</el-button>
                     </el-tooltip>
                 <span slot="tip" class="el-upload__tip"></span>
               </el-upload>
@@ -35,37 +35,37 @@
               </el-row>
               <el-row>
                 <el-col :span="8">
-                 <el-form-item label="货位号" >
+                 <el-form-item :label="$t('label.label1_83')">
                  <el-input v-model="search.locNum" style="width:200px"></el-input>
                 </el-form-item>
                 </el-col>
                  <el-col :span="8">
-                 <el-form-item label="盘点次数" >
+                 <el-form-item :label="$t('label.label1_90')">
                  <el-input v-model="search.noOfCount" style="width:200px"></el-input>
                 </el-form-item>
                  </el-col>
               </el-row>
                <el-row>
                 <el-col :span="8">
-                 <el-form-item label="零件编码" >
+                 <el-form-item :label="$t('label.label1_70')">
                  <el-input v-model="search.skuNum" style="width:200px"></el-input>
                 </el-form-item>
                  </el-col>
                   <el-col :span="8">
-                 <el-form-item label="用户ID" >
+                 <el-form-item  :label="$t('label.label1_91')">
                  <el-input v-model="search.rfdcUserId" style="width:200px"></el-input>
                 </el-form-item>
                    </el-col>
               </el-row>
               <el-row>
                 <el-col :span="8">
-                 <el-form-item label="任务页" >
+                 <el-form-item :label="$t('label.label1_92')">
                  <el-input v-model="search.page" style="width:200px"></el-input>
                 </el-form-item>
                 </el-col>
                 <el-col :span="8">  
-            <el-form-item label="页面大小" >
-              <el-select placeholder="页面大小" v-model="search.pageSize" style="width:200px">
+            <el-form-item  :label="$t('label.label1_56')">
+              <el-select  v-model="search.pageSize" style="width:200px">
                 <el-option
                 v-for="item in $Enum.EnumSelect().page_size"
                 :key="item.value"
@@ -79,26 +79,24 @@
                  </el-row>
                   <el-row>
                   <el-col :span="8">
-           <el-form-item label="初始日期" >
+           <el-form-item  :label="$t('label.label2_13')">
               <el-date-picker
                 v-model="search.startTime"
                 format="yyyy-MM-dd HH:mm:ss"
                 value-format="yyyy-MM-dd HH:mm:ss"
                 type="datetime"
-                placeholder="请选择初始日期"
                 @change="handleChangeTime"
                 style="width:200px"
               ></el-date-picker>
             </el-form-item>
             </el-col>
              <el-col :span="8">
-            <el-form-item label="截止日期" >
+            <el-form-item :label="$t('label.label2_14')" >
               <el-date-picker
                 v-model="search.endTime"
                 format="yyyy-MM-dd HH:mm:ss"
                 value-format="yyyy-MM-dd HH:mm:ss"
                 type="datetime"
-                placeholder="请选择完成日期"
                  @change="handleChangeTime"
                  style="width:200px"
               ></el-date-picker>
@@ -108,14 +106,14 @@
                <el-row>
                   <el-col :span="8">
                   <el-form-item class="fl formGroupBtn">
-                    <el-button type="primary" @click="confirm">确认</el-button>
-                    <el-button type="info" :disabled = "cancelIsDisabled" @click="cancel">取消</el-button>
+                    <el-button type="primary" @click="confirm">{{$t('message.msg1_28')}}</el-button>
+                    <el-button type="info" :disabled = "cancelIsDisabled" @click="cancel">{{$t('message.msg1_30')}}</el-button>
                   </el-form-item>
                  </el-col>
                   <el-col :span="8" class='formBtn'>
                     <el-form-item>
-                       <el-checkbox v-model="search.submitAll"  @change="handleCheckAllChange">提交全部</el-checkbox>
-                       <el-button type="primary" @click="submit" :disabled = "submitIsDisabled" >提交</el-button>
+                       <el-checkbox v-model="search.submitAll"  @change="handleCheckAllChange">{{$t('message.msg1_33')}}</el-checkbox>
+                       <el-button type="primary" @click="submit" :disabled = "submitIsDisabled" >{{$t('message.msg1_34')}}</el-button>
                     </el-form-item>
                   </el-col>
                 </el-row>
@@ -123,21 +121,21 @@
                 <el-table ref="multipleTable" :data="tableData"  :row-class-name="tableRowClassName" style="width: 99.99%" border @selection-change="handleSelectionChange" v-loading="tableLoading">
                     <el-table-column type="selection" width="55">
                     </el-table-column>
-                    <el-table-column prop="locNum" label="货位号" width="200">
+                    <el-table-column prop="locNum" :label="$t('label.label1_83') " width="200">
                     </el-table-column>
-                    <el-table-column prop="skuNum" label="零件编码" width="200">
+                    <el-table-column prop="skuNum"  :label="$t('label.label1_70')"  width="200">
                     </el-table-column>
-                    <el-table-column prop="page" label="任务页"  width="100"> 
+                    <el-table-column prop="page" :label="$t('label.label1_92')"  width="100"> 
                     </el-table-column>
-                    <el-table-column prop="binQty" label="盘点数量" width="100">
+                    <el-table-column prop="binQty" :label="$t('label.label1_93')"  width="100">
                     </el-table-column>
-                    <el-table-column prop="noOfCount" label="盘点次数"  width="100">
+                    <el-table-column prop="noOfCount" :label="$t('label.label1_90')"  width="100">
                     </el-table-column>
-                     <el-table-column prop="countBy" label="盘点用户"  width="100">
+                     <el-table-column prop="countBy" :label="$t('label.label1_94')" width="100">
                     </el-table-column>
-                     <el-table-column prop="rfdcUserId" label="用户ID"  width="100">
+                     <el-table-column prop="rfdcUserId"  :label="$t('label.label1_91')" width="100">
                     </el-table-column>
-                    <el-table-column prop="creationDate" label="导入时间" width="200">
+                    <el-table-column prop="creationDate"  :label="$t('label.label1_72')" width="200">
                       <template slot-scope="scope">
                          {{$DateFormat.dateFormat(scope.row.creationDate,true)}}
                      </template>
@@ -149,38 +147,38 @@
         </el-col>
     </el-row>
     <!-- 弹层start -->
-    <el-dialog title="任务分配" :visible.sync="isShowDialog" width="90%" @close='closeConfirmReject'>
+    <el-dialog :title="$t(message.msg1_35)" :visible.sync="isShowDialog" width="90%" @close='closeConfirmReject'>
         <!-- 搜索区域 -->
         <el-form :inline="true" class="demo-form-inline">
             <el-form-item>
-                <el-button type="info" @click="showConfirmDialog">取消</el-button>
-                <el-button type="primary" @click="confirmAssign">任务分配</el-button>
+                <el-button type="info" @click="showConfirmDialog">{{$t('message.msg1_30')}}</el-button>
+                <el-button type="primary" @click="confirmAssign">{{$t('message.msg1_35')}}</el-button>
             </el-form-item>
         </el-form>
         <el-row >
              <el-table ref="multipleTableDialog" :data="tableDataDialog" tooltip-effect="dark" style="width: 100%" border>
-                    <el-table-column prop="RFDCUSERID" label="用户ID">
+                    <el-table-column prop="RFDCUSERID" :label="$t('label.label1_91')">
                     </el-table-column>
-                    <el-table-column prop="COUNTBY" label="用户名">
+                    <el-table-column prop="COUNTBY"  :label="$t('label.label4_02')">
                     </el-table-column>
-                    <el-table-column prop="SKUNUM" label="配件编号数量">
+                    <el-table-column prop="SKUNUM" :label="$t('label.label4_03')">
                     </el-table-column>
-                    <el-table-column prop="BINQTY" label="配件数量">
+                    <el-table-column prop="BINQTY"  :label="$t('label.label4_04')">
                     </el-table-column>
-                    <el-table-column prop="PAGE" label="任务页数量">
+                    <el-table-column prop="PAGE"  :label="$t('label.label4_05')">
                     </el-table-column>
                 </el-table>
                 <el-pagination v-if="totalRowsDialog>0" class="pagination" background @current-change="handleCurrentChangeDialog" :current-page.sync="currentPageDialog" :page-size="pageSizeDialog" :page-sizes="[pageSizeDialog]" layout="total, sizes, prev, pager, next, jumper" :total="totalRowsDialog">
                 </el-pagination>
         </el-row>
         </el-dialog>
-        <el-dialog width="30%" title="提示" :visible.sync="isShowInnerConfirmDialog"  append-to-body>
-            <p class="dialog-text">确认全部取消么？</p>
-            <el-button @click="isShowInnerConfirmDialog = false">取 消</el-button>
-            <el-button type="primary" @click="confirmReject">确认</el-button>
+        <el-dialog width="30%" :title="$t('message.msg1_41')" :visible.sync="isShowInnerConfirmDialog"  append-to-body>
+            <p class="dialog-text">{{$t('message.msg1_42')}}</p>
+            <el-button @click="isShowInnerConfirmDialog = false">{{$t('message.msg1_30')}}</el-button>
+            <el-button type="primary" @click="confirmReject">{{$t('message.msg1_28')}}</el-button>
         </el-dialog>
-        <el-dialog width="30%" title="已提交完成" :visible.sync="isShowOkDialog" append-to-body>
-            <p class="dialog-text">调配任务已完成</p>
+        <el-dialog width="30%" :title="$t('message.msg1_43')" :visible.sync="isShowOkDialog" append-to-body>
+            <p class="dialog-text">{{$t('message.msg1_44')}}</p>
             <el-button type="primary" @click="confirmShowOkDialog"> OK</el-button>
         </el-dialog>
     <!-- 弹层end -->

@@ -7,13 +7,13 @@
                 <!-- 搜索区域 -->
                 <el-form :inline="true" class="demo-form-inline">
                      <el-form-item class='formMargin'>
-                     <el-checkbox v-model="search.submitAll"  @change="handleCheckAllChange">提交全部</el-checkbox>
+                     <el-checkbox v-model="search.submitAll"  @change="handleCheckAllChange">{{$t(message.msg1_33)}}</el-checkbox>
                     </el-form-item>
                     <el-form-item>
-                     <el-button type="primary" :disabled = "submitIsDisabled" @click="submit">提交</el-button>
+                     <el-button type="primary" :disabled = "submitIsDisabled" @click="submit">{{$t(message.msg1_34)}}</el-button>
                     </el-form-item> 
                     <el-form-item>
-                        <el-button type="info"  :disabled = "cancelDisabled" @click="cancel">取消</el-button>
+                        <el-button type="info"  :disabled = "cancelDisabled" @click="cancel">{{$t(message.msg1_30)}}</el-button>
                     </el-form-item>
                 </el-form>
                 <el-table ref="multipleTable" :data="tableData" tooltip-effect="dark" style="width: 100%" border @selection-change="handleSelectionChange" v-loading="tableLoading">
@@ -21,30 +21,30 @@
                     </el-table-column>
                     <el-table-column prop="binGrn" label="GRN" width="150">
                     </el-table-column>
-                    <el-table-column prop="skuNum" label="零件编码" width="150">
+                    <el-table-column prop="skuNum" :label="$t('label.label1_70')" width="150">
                     </el-table-column>
-                    <el-table-column prop="binPartDesc" label="零件描述" width="200">
+                    <el-table-column prop="binPartDesc" :label="$t('label.label1_78')" width="200">
                     </el-table-column>
-                    <el-table-column prop="binWip" label="WIP号" width="100">
+                    <el-table-column prop="binWip" :label="$t('label.label1_52')"  width="100">
                     </el-table-column>
-                    <el-table-column prop="binWipLine" label="WIP订单行" width="100">
+                    <el-table-column prop="binWipLine" :label="$t('label.label1_54')"  width="100">
                     </el-table-column>
-                    <el-table-column prop="binOrdNo" label="订单号">
+                    <el-table-column prop="binOrdNo" :label="$t('label.label1_74')" >
                     </el-table-column>
-                    <el-table-column prop="binOrdLine" label="订单行">
+                    <el-table-column prop="binOrdLine" :label="$t('label.label1_79')" >
                     </el-table-column>
-                    <el-table-column prop="binQty" label="数量">
+                    <el-table-column prop="binQty" :label="$t('label.label1_80')" >
                     </el-table-column>
-                    <el-table-column prop="locNum" label="货架位">
+                    <el-table-column prop="locNum" :label="$t('label.label2_09')" >
                     </el-table-column>
-                    <el-table-column prop="binTicketNum" label="上货标签号" width="200">
+                    <el-table-column prop="binTicketNum" :label="$t('label.label3_03')" width="200">
                     </el-table-column>
-                    <el-table-column prop="lastUpdateDate" label="上货标签打印时间" width="200">
+                    <el-table-column prop="lastUpdateDate" :label="$t('label.label1_81')" width="200">
                        <template slot-scope="scope">
                             {{$DateFormat.dateFormat(scope.row.lastUpdateDate,true)}}
                       </template>
                     </el-table-column>
-                    <el-table-column prop="creationDate" label="导入时间" width="200">
+                    <el-table-column prop="creationDate" :label="$t('label.label1_72')" width="200">
                        <template slot-scope="scope">
                             {{$DateFormat.dateFormat(scope.row.creationDate,true)}}
                       </template>
@@ -56,26 +56,26 @@
         </el-col>
     </el-row>
     <!-- 弹层start -->
-    <el-dialog title="任务分配" :visible.sync="isShowDialog" width="90%" @close="closeConfirmReject">
+    <el-dialog :title="$t(message.msg1_35)" :visible.sync="isShowDialog" width="90%" @close="closeConfirmReject">
         <!-- 搜索区域 -->
         <el-form :inline="true" class="demo-form-inline">
-            <el-form-item label="订单总数">
+            <el-form-item :label="$t('label.label3_04')">
                 <span>{{dialog.systemReason}}</span>
             </el-form-item>
             <el-form-item>
-                <el-button type="primary" @click="showConfirmDialog">取消</el-button>
-                <el-button type="primary" @click="confirmAssign">任务分配</el-button>
+                <el-button type="primary" @click="showConfirmDialog">{{$t(message.msg1_30)}}</el-button>
+                <el-button type="primary" @click="confirmAssign">{{$t(message.msg1_35)}}</el-button>
             </el-form-item>
         </el-form>
         </el-dialog>
-        <el-dialog width="30%" title="提示" :visible.sync="isShowInnerConfirmDialog" append-to-body>
-            <p class="dialog-text">确认全部取消么？</p>
-            <el-button @click="isShowInnerConfirmDialog = false">取 消</el-button>
-            <el-button type="primary" @click="confirmReject">确认</el-button>
+        <el-dialog width="30%" :title="$t(message.msg1_41)" :visible.sync="isShowInnerConfirmDialog" append-to-body>
+            <p class="dialog-text">{{$t(message.msg1_42)}}</p>
+            <el-button @click="isShowInnerConfirmDialog = false">{{$t(message.msg1_30)}}</el-button>
+            <el-button type="primary" @click="confirmReject">{{$t(message.msg1_28)}}</el-button>
         </el-dialog>
-        <el-dialog width="30%" title="已提交完成" :visible.sync="isShowOkDialog" append-to-body @close="confirmShowOkDialog">
-            <p class="dialog-text">调配任务已完成</p>
-            <el-button type="primary" @click="confirmShowOkDialog"> 确定</el-button>
+        <el-dialog width="30%" :title="$t(message.msg1_43)" :visible.sync="isShowOkDialog" append-to-body @close="confirmShowOkDialog">
+            <p class="dialog-text">{{$t(message.msg1_44)}}</p>
+            <el-button type="primary" @click="confirmShowOkDialog"> {{$t(message.msg1_28)}}</el-button>
         </el-dialog>
     <!-- 弹层end -->
 </div>

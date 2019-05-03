@@ -1,7 +1,7 @@
 <template>
      <div class="mainContainer">
        <el-form :inline="true" class="demo-form-inline conMarginLeft">
-         <el-form-item label="工作站编号：">
+         <el-form-item :label="$t('label.label1_09')" >
            <el-select v-model="search.entityWorkstationId" @change="getReceiveStatus" v-loading.fullscreen.lock="fullscreenLoading">
                   <el-option
                   v-for="item in WS_ENTITY_WORKSTATION"
@@ -13,8 +13,8 @@
             </el-select>
           </el-form-item>    
           <el-form-item>
-                <el-button  :type="openIsDisabledButton" :disabled = "openIsDisabled"   @click="restReceive(1)">恢复接收任务</el-button>
-              <el-button  :type="closeIsDisabledButton"  :disabled = "closeIsDisabled"  @click="restReceive(0)">停止接收任务</el-button>
+                <el-button  :type="openIsDisabledButton" :disabled = "openIsDisabled"   @click="restReceive(1)">{{$t('message.msg1_50')}}</el-button>
+              <el-button  :type="closeIsDisabledButton"  :disabled = "closeIsDisabled"  @click="restReceive(0)">{{$t('message.msg1_51')}}</el-button>
           </el-form-item>
        </el-form>
      </div>

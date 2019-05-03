@@ -97,10 +97,10 @@
          <el-dialog title="编辑" :visible.sync="dialogVisible" width="50%" :close-on-click-modal="false">
              <el-form :model="addFormData" :rules="rules2" ref="addFormData" label-width="150px" class="demo-ruleForm login-container">
                    <el-form-item prop="chargePointNum" label="充电桩编号">
-                    <el-input type="text" v-model="addFormData.chargePointNum"  placeholder="充电桩编号" :disabled="true"></el-input>
+                    <el-input type="text" v-model="addFormData.chargePointNum"  placeholder="充电桩编号" :disabled="keyDisabled"></el-input>
                   </el-form-item>
                    <el-form-item prop="chargeStatus" label="充电桩状态">
-                      <el-select placeholder="充电桩状态" v-model="addFormData.chargeStatus" style="width:200px" :disabled="true">
+                      <el-select placeholder="充电桩状态" v-model="addFormData.chargeStatus" style="width:200px" :disabled="keyDisabled">
                             <el-option
                             v-for="item in $Enum.EnumSelect().CHARGE_STATUS"
                             :key="item.value"
@@ -141,6 +141,7 @@
           addFormReadOnly: true,
           dialogVisible: false,
           isView: true,
+          keyDisabled:false,
           addFormData: {
             chargePointNum:'',
             chargeStatus:'',
@@ -207,6 +208,7 @@
             activeFlag:''
           }
           this.isView = true
+          this.keyDisabled= false
           this.dialogVisible = true
           // this.addFormReadOnly = false;
         },
@@ -214,6 +216,7 @@
         modifyInfo(rowData) {
           this.addFormData = Object.assign({}, rowData)
           this.isView = true
+          this.keyDisabled= true
           this.dialogVisible = true
           // this.addFormReadOnly = false;
         },
