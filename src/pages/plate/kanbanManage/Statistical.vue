@@ -7,6 +7,7 @@
         <el-tabs id="topTitle" v-model="search.orderType" @tab-click="handleTabClick">
           <el-tab-pane :label="$t('message.msg1_04')" name="S"></el-tab-pane>
           <el-tab-pane :label="$t('message.msg1_02')" name="V"></el-tab-pane>
+           <el-tab-pane :label="$t('message.msg1_66')" name="U"></el-tab-pane>
           <el-tab-pane :label="$t('message.msg1_06')"  name="BIN"></el-tab-pane>
           <el-tab-pane :label="$t('message.msg1_08')"  name="RELOC"></el-tab-pane>
           <el-tab-pane :label="$t('message.msg1_10')"  name="CALL_SHELF"></el-tab-pane>
@@ -1525,6 +1526,10 @@
       },
       getMychartData () {
         let that = this
+        let dataTimeDonekeyListTemp = []
+        let dataTimeDoneValueListTemp = []
+         let dataTimePrintkeyListTemp = []
+          let dataTimePrintValueListTemp = []
         this.axios.get('kanban/orderSum/select30DayHDmlBinDeliveryVList', {
           params: that.search
         }).then((res) => {
@@ -1536,8 +1541,8 @@
             if(i === res.data.resultDone.length-1){
               this.endTimeDone = item.LAST_UPDATE_DATE
             }
-            this.dataTimeDonekeyList.push(item.LAST_UPDATE_DATE)
-            this.dataTimeDoneValueList.push(item.COU)
+            dataTimeDonekeyListTemp.push(item.LAST_UPDATE_DATE)
+            dataTimeDoneValueListTemp.push(item.COU)
           })
            res.data.resultPrint.map((item,i) => {
             if(i === 0){
@@ -1546,11 +1551,11 @@
             if(i === res.data.resultDone.length-1){
               this.endTimePrint = item.LAST_UPDATE_DATE
             }
-            this.dataTimePrintkeyList.push(item.LAST_UPDATE_DATE)
-            this.dataTimePrintValueList.push(item.COU)
+            dataTimePrintkeyListTemp.push(item.LAST_UPDATE_DATE)
+            dataTimePrintValueListTemp.push(item.COU)
           })
-          this.drawLine(this.dataTimeDonekeyList,this.dataTimeDoneValueList)
-          this.drawLineTwo(this.dataTimePrintkeyList,this.dataTimePrintValueList)
+          this.drawLine(dataTimeDonekeyListTemp,dataTimeDoneValueListTemp)
+          this.drawLineTwo(dataTimePrintkeyListTemp,dataTimePrintValueListTemp)
          }
         })
           
@@ -1558,6 +1563,7 @@
       // 统计图
       drawLine (dataTimeDonekeyListArg,dataTimeDoneValueListArg) {
         let mychart = echarts.init(document.getElementById('myChart'))
+        mychart.clear()
         mychart.setOption({
           tooltip: {
             trigger: 'axis',
@@ -1596,6 +1602,7 @@
       },
       drawLineTwo (dataTimePrintkeyListArg,dataTimePrintValueListArg) {
         let mychartss = echarts.init(document.getElementById('myChart2'))
+         mychartss.clear()
         mychartss.setOption({
           tooltip: {
             trigger: 'axis',

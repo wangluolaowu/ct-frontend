@@ -194,9 +194,14 @@
          <el-table :data="userInfoList" style="width: 100%" border  height="500">
             <!--<el-table-column prop="id" label="id" >
             </el-table-column>-->
-            <el-table-column prop="chargePointId" label="充电桩ID" fixed="left" width="200">
+            <el-table-column prop="chargePointId" label="充电桩ID"  width="200">
             </el-table-column>
             <el-table-column prop="chargePointNum" label="充电桩编号" width="200">
+            </el-table-column>
+            <el-table-column prop="chargePointType" label="充电桩类型" width="200">
+              <template slot-scope="scope" width="100%">
+                {{$Enum.getEnumSelectByValue(CS_CHARGE_POINT_TYPE,scope.row.chargePointType)}}
+              </template>
             </el-table-column>
              <el-table-column prop="softwareVersionNum" label="充电桩软件版本号" width="200">
             </el-table-column>
@@ -263,6 +268,17 @@
                   </el-form-item>
                    <el-form-item prop="chargePointNum" label="充电桩编号">
                     <el-input type="text" v-model="addFormData.chargePointNum"  placeholder="充电桩编号"></el-input>
+                  </el-form-item>
+                   <el-form-item prop="chargePointType" label="充电桩类型">
+                     <el-select placeholder="充电桩类型" v-model="addFormData.chargePointType" style="width:200px" >
+                            <el-option
+                            v-for="item in CS_CHARGE_POINT_TYPE"
+                            :key="item.value"
+                            :label="item.label"
+                            :value="item.value" 
+                            > 
+                        </el-option>
+                      </el-select>
                   </el-form-item>
                    <el-form-item prop="softwareVersionNum" label="充电桩软件版本号">
                     <el-input type="text" v-model="addFormData.softwareVersionNum"  placeholder="充电桩软件版本号"></el-input>
@@ -335,7 +351,7 @@
                   </el-form-item>
              </el-form>
              <span slot="footer" class="dialog-footer">
-                 <el-button @click.native="dialogVisible = false,addFormData={chargePointId:'', chargePointNum:'',softwareVersionNum:'',designVersionNum:'',mfgLotNum:'',startServiceDate:'',totalServiceMileage:'',macAddress:'',kidIpAddress:'',latestMaintainDate:'',latestRepairDate:'',electronicTagsCount:'',projectorModelNumber:'',scanningGunModelNumber:'',ratedVoltageRange:'', curtVoltageRange:'', ratedCurrentRange:'', curtCurrentRange:'',  curtMaximumCurrent:'',descriptions:''}">取 消</el-button>
+                 <el-button @click.native="dialogVisible = false,addFormData={chargePointId:'', chargePointNum:'',chargePointType:'',softwareVersionNum:'',designVersionNum:'',mfgLotNum:'',startServiceDate:'',totalServiceMileage:'',macAddress:'',kidIpAddress:'',latestMaintainDate:'',latestRepairDate:'',electronicTagsCount:'',projectorModelNumber:'',scanningGunModelNumber:'',ratedVoltageRange:'', curtVoltageRange:'', ratedCurrentRange:'', curtCurrentRange:'',  curtMaximumCurrent:'',descriptions:''}">取 消</el-button>
                  <el-button v-if="isView" type="primary" @click.native="addSubmit">确 定</el-button>
              </span>
           </el-dialog>
@@ -350,6 +366,7 @@
       data() {
         return {
           userInfoList: [],
+          CS_CHARGE_POINT_TYPE:[],
           addFormReadOnly: true,
           dialogVisible: false,
           keyDisabled:false,
@@ -369,6 +386,7 @@
              electronicTagsCount:'',
              projectorModelNumber:'',
              scanningGunModelNumber:'',
+             chargePointType:'',
              ratedVoltageRange:'',
               curtVoltageRange:'',
                ratedCurrentRange:'',
@@ -419,9 +437,26 @@
         }
       },
   mounted: function () {
-        this.loadData()
+        this.getEnumSelectValues()
       },
       methods: {
+        getEnumSelectValues() {
+          axios.get('common/enum/selectEnumList', {
+            params: 'test'
+          }).then((res) => {
+            if (res.errCode === 'S') {
+              res.data.result.map(item => {
+                if (item.lookupType === 'CS_CHARGE_POINT_TYPE') {
+                  item.value = item.lookupValueNum
+                  item.label = item.meaning||item.lookupValueNum
+                  this.CS_CHARGE_POINT_TYPE.push(item)
+                }
+                return item
+              })
+            }
+            this.loadData()
+          })
+        },
         handleChangeTime(){
 
         },
@@ -450,10 +485,12 @@
                ratedCurrentRange:'',
                 curtCurrentRange:'', 
                  curtMaximumCurrent:'',
+                  chargePointType:'',
             startTimeStartServiceDate:'',
             endTimeStartServiceDate:'',
             startTimeLatestRepairDate:'',
             endTimeLatestRepairDate:'',
+            
             startTimeLatestMaintainDate:'',
             endTimeLatestMaintainDate:'',
             currentPage:currentPageTemp,
@@ -483,6 +520,7 @@
              latestMaintainDate:'',
              latestRepairDate:'',
              electronicTagsCount:'',
+              chargePointType:'',
              projectorModelNumber:'',
              scanningGunModelNumber:'',
              ratedVoltageRange:'',

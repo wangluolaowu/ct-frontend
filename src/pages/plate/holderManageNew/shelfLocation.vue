@@ -87,7 +87,7 @@
          <el-dialog title="记录" :visible.sync="dialogVisible" width="50%" :close-on-click-modal="false">
              <el-form :model="addFormData"  ref="addFormData" label-width="150px" class="demo-ruleForm login-container">
                    <el-form-item prop="locationNum" label="货位编号">
-                    <el-input type="text" v-model="addFormData.locationNum" ></el-input>
+                    <el-input type="text" v-model="addFormData.locationNum" :disabled="true"></el-input>
                   </el-form-item>
                    <el-form-item prop="holderModelNumber" label="货位类型">
                     <el-input type="text" v-model="addFormData.locationTypeCode"  ></el-input>
@@ -100,7 +100,7 @@
                   </el-form-item>
              </el-form>
              <span slot="footer" class="dialog-footer">
-                 <el-button @click.native="dialogVisible = false,addFormData={holderId:'',locationNum:'',locationTypeCode:'',holderNum:'',warehouseArea:''}">取 消</el-button>
+                 <el-button @click.native="dialogVisible = false,addFormData={locationId:'',locationNum:'',locationTypeCode:'',holderNum:'',warehouseArea:''}">取 消</el-button>
                  <el-button v-if="isView" type="primary" @click.native="addSubmit">确 定</el-button>
              </span>
           </el-dialog>
@@ -124,14 +124,14 @@
           tableDataDialog:[],
           isView: true,
           addFormData: {
-            holderId:'',
+            locationId:'',
             locationNum:'',
             locationTypeCode:'',
             holderNum:'',
             warehouseArea:''
           },
           searchBIN: {
-            holderId:'',
+            locationId:'',
             locationNum:'',
             locationTypeCode:'',
             holderNum:'',
@@ -187,7 +187,7 @@
           let pageSizeTemp = this.searchBIN.pageSize
           let totalRowsTemp = this.searchBIN.totalRows
           this.searchBIN = {
-            holderId:'',
+            locationId:'',
             locationNum:'',
             locationTypeCode:'',
             holderNum:'',

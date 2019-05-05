@@ -18,10 +18,12 @@ import './assets/js/common/element-ui/index.css'
 import './assets/css/style.css'
 import './assets/css/bass.css'
 import Enum from './util/enum'
+import ELTable from './util/table'
 import DateFormat from './util/date'
 import * as socketApi from './util/websocket'
 
 Vue.prototype.$Enum = Enum
+Vue.prototype.$ELTable = ELTable
 Vue.prototype.$DateFormat = DateFormat
 Vue.prototype.$socketApi = socketApi
 
