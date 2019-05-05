@@ -11,6 +11,7 @@ import promise from 'es6-promise'
 // import Vuex from "vuex";
 // Vue.use(Vuex);
 import VueRouter from 'vue-router'
+import ELTable from './util/table'
 import routes from './routes'
 import 'element-ui/lib/theme-chalk/index.css'
 import './assets/framework/css/global.css'
@@ -18,12 +19,12 @@ import './assets/js/common/element-ui/index.css'
 import './assets/css/style.css'
 import './assets/css/bass.css'
 import Enum from './util/enum'
-import ELTable from './util/table'
+
 import DateFormat from './util/date'
 import * as socketApi from './util/websocket'
 
-Vue.prototype.$Enum = Enum
 Vue.prototype.$ELTable = ELTable
+Vue.prototype.$Enum = Enum
 Vue.prototype.$DateFormat = DateFormat
 Vue.prototype.$socketApi = socketApi
 

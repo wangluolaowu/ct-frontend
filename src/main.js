@@ -1,6 +1,7 @@
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
+import ELTable from './util/table'
 import i18n from './i18n/i18n'
 import App from './App'
 import Element from 'element-ui'
@@ -16,13 +17,12 @@ import './assets/framework/css/global.css'
 import './assets/js/common/element-ui/index.css'
 import './assets/css/style.css'
 import Enum from './util/enum'
-import ELTable from './util/table'
 import DateFormat from './util/date'
 import * as socketApi from './util/websocket'
 import './assets/css/bass.css'
 
-Vue.prototype.$Enum = Enum
 Vue.prototype.$ELTable = ELTable
+Vue.prototype.$Enum = Enum
 Vue.prototype.$DateFormat = DateFormat
 Vue.prototype.$socketApi = socketApi
 
