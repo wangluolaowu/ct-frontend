@@ -311,5 +311,4 @@
     .el-transfer-panel__list.is-filterable{
         height: 600px;
     }
-
  </style>
