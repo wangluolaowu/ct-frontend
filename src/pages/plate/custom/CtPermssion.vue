@@ -70,7 +70,7 @@
                  <el-button v-if="isView" type="primary" @click.native="addSubmit">确 定</el-button>
              </span>
           </el-dialog>
-           <el-dialog title="权限-资源" :visible.sync="roleUserdialogVisible" width="60%" :close-on-click-modal="false"  @close="loadData" >
+           <el-dialog title="权限-资源" :visible.sync="roleUserdialogVisible" width="90%" :close-on-click-modal="false"  @close="loadData" >
               <el-row>
                  <el-card style="min-height: 20px">          
                    <span>{{'当前权限:'+addFormData.name + '   ' + addFormData.permission}}</span>
@@ -302,6 +302,14 @@
    .el-transfer__buttons  .el-transfer__button{
       width:40px!important;
       height:40px!important;
+    }
+
+    .el-transfer-panel{
+        width: 600px;
+        height: 600px;
+    }
+    .el-transfer-panel__list.is-filterable{
+        height: 600px;
     }
 
  </style>
