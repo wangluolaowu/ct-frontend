@@ -7,13 +7,13 @@
                 <!-- 搜索区域 -->
                 <el-form :inline="true" class="demo-form-inline">
                      <el-form-item class='formMargin'>
-                     <el-checkbox v-model="search.submitAll"  @change="handleCheckAllChange">{{$t(message.msg1_33)}}</el-checkbox>
+                     <el-checkbox v-model="search.submitAll"  @change="handleCheckAllChange">{{$t('message.msg1_33')}}</el-checkbox>
                     </el-form-item>
                     <el-form-item>
-                     <el-button type="primary" :disabled = "submitIsDisabled" @click="submit">{{$t(message.msg1_34)}}</el-button>
+                     <el-button :type="submitIsDisabledButton" :disabled = "submitIsDisabled" @click="submit">{{$t('message.msg1_34')}}</el-button>
                     </el-form-item> 
                     <el-form-item>
-                        <el-button type="info"  :disabled = "cancelDisabled" @click="cancel">{{$t(message.msg1_30)}}</el-button>
+                        <el-button :type="cancelDisabledButton"  :disabled = "cancelDisabled" @click="cancel">{{$t('message.msg1_30')}}</el-button>
                     </el-form-item>
                 </el-form>
                 <el-table ref="multipleTable" :data="tableData" tooltip-effect="dark" style="width: 100%" border @selection-change="handleSelectionChange" v-loading="tableLoading">
@@ -56,26 +56,26 @@
         </el-col>
     </el-row>
     <!-- 弹层start -->
-    <el-dialog :title="$t(message.msg1_35)" :visible.sync="isShowDialog" width="90%" @close="closeConfirmReject">
+    <el-dialog :title="$t('message.msg1_35')" :visible.sync="isShowDialog" width="90%" @close="closeConfirmReject">
         <!-- 搜索区域 -->
         <el-form :inline="true" class="demo-form-inline">
             <el-form-item :label="$t('label.label3_04')">
                 <span>{{dialog.systemReason}}</span>
             </el-form-item>
             <el-form-item>
-                <el-button type="primary" @click="showConfirmDialog">{{$t(message.msg1_30)}}</el-button>
-                <el-button type="primary" @click="confirmAssign">{{$t(message.msg1_35)}}</el-button>
+                <el-button type="primary" @click="showConfirmDialog">{{$t('message.msg1_30')}}</el-button>
+                <el-button type="primary" @click="confirmAssign">{{$t('message.msg1_35')}}</el-button>
             </el-form-item>
         </el-form>
         </el-dialog>
-        <el-dialog width="30%" :title="$t(message.msg1_41)" :visible.sync="isShowInnerConfirmDialog" append-to-body>
-            <p class="dialog-text">{{$t(message.msg1_42)}}</p>
-            <el-button @click="isShowInnerConfirmDialog = false">{{$t(message.msg1_30)}}</el-button>
-            <el-button type="primary" @click="confirmReject">{{$t(message.msg1_28)}}</el-button>
+        <el-dialog width="30%" :title="$t('message.msg1_41')" :visible.sync="isShowInnerConfirmDialog" append-to-body>
+            <p class="dialog-text">{{$t('message.msg1_42')}}</p>
+            <el-button @click="isShowInnerConfirmDialog = false">{{$t('message.msg1_30')}}</el-button>
+            <el-button type="primary" @click="confirmReject">{{$t('message.msg1_28')}}</el-button>
         </el-dialog>
-        <el-dialog width="30%" :title="$t(message.msg1_43)" :visible.sync="isShowOkDialog" append-to-body @close="confirmShowOkDialog">
-            <p class="dialog-text">{{$t(message.msg1_44)}}</p>
-            <el-button type="primary" @click="confirmShowOkDialog"> {{$t(message.msg1_28)}}</el-button>
+        <el-dialog width="30%" :title="$t('message.msg1_43')" :visible.sync="isShowOkDialog" append-to-body @close="confirmShowOkDialog">
+            <p class="dialog-text">{{$t('message.msg1_44')}}</p>
+            <el-button type="primary" @click="confirmShowOkDialog"> {{$t('message.msg1_28')}}</el-button>
         </el-dialog>
     <!-- 弹层end -->
 </div>
@@ -90,6 +90,8 @@ export default {
     return {
       axios,
       draggable,
+      submitIsDisabledButton:'info',
+      cancelDisabledButton:'info',
       drag: false,
       search: { // 查询参数
         orderType: 'S',
@@ -134,9 +136,13 @@ export default {
       if (arr.length > 0 || this.submitAll) {
         this.submitIsDisabled = false
         this.cancelDisabled = false
+        this.submitIsDisabledButton = 'primary'
+        this.cancelDisabledButton = 'primary'
       } else {
         this.submitIsDisabled = true
         this.cancelDisabled = true
+        this.submitIsDisabledButton = 'info'
+        this.cancelDisabledButton = 'info'
       }
       console.log(this.sendStr)
     }, // 点击是否全部提交
@@ -145,9 +151,13 @@ export default {
       if (e || this.sendStr.length > 0) {
         this.submitIsDisabled = false
         this.cancelDisabled = false
+        this.submitIsDisabledButton = 'primary'
+        this.cancelDisabledButton = 'primary'
       } else {
         this.submitIsDisabled = true
         this.cancelDisabled = true
+        this.submitIsDisabledButton = 'info'
+        this.cancelDisabledButton = 'info'
       }
     }, // 关闭弹层
     closeConfirmReject () {
@@ -212,6 +222,8 @@ export default {
     },
     submit () {
       this.submitIsDisabled = true
+      this.submitIsDisabledButton = 'info'
+      this.cancelDisabledButton = 'info'
       this.tableLoading = true
       this.axios.get('binningManage/binningInfo/createDmlBinReviewId', {
         params: {
@@ -224,6 +236,8 @@ export default {
           this.submitSelect()
         } else {
           this.submitIsDisabled = false
+          this.submitIsDisabledButton = 'primary'
+          this.cancelDisabledButton = 'primary'
           this.tableLoading = false
         }
       })

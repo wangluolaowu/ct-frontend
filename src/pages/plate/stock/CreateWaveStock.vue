@@ -105,15 +105,15 @@
                </el-row>
                <el-row>
                   <el-col :span="8">
-                  <el-form-item class="fl formGroupBtn">
+                  <el-form-item >
                     <el-button type="primary" @click="confirm">{{$t('message.msg1_28')}}</el-button>
-                    <el-button type="info" :disabled = "cancelIsDisabled" @click="cancel">{{$t('message.msg1_30')}}</el-button>
+                    <el-button :type="cancelIsDisabledButton" :disabled = "cancelIsDisabled" @click="cancel">{{$t('message.msg1_30')}}</el-button>
                   </el-form-item>
                  </el-col>
-                  <el-col :span="8" class='formBtn'>
+                  <el-col :span="12" >
                     <el-form-item>
                        <el-checkbox v-model="search.submitAll"  @change="handleCheckAllChange">{{$t('message.msg1_33')}}</el-checkbox>
-                       <el-button type="primary" @click="submit" :disabled = "submitIsDisabled" >{{$t('message.msg1_34')}}</el-button>
+                       <el-button :type="submitIsDisabledButton" @click="submit" :disabled = "submitIsDisabled" >{{$t('message.msg1_34')}}</el-button>
                     </el-form-item>
                   </el-col>
                 </el-row>
@@ -147,7 +147,7 @@
         </el-col>
     </el-row>
     <!-- 弹层start -->
-    <el-dialog :title="$t(message.msg1_35)" :visible.sync="isShowDialog" width="90%" @close='closeConfirmReject'>
+    <el-dialog :title="$t('message.msg1_35')" :visible.sync="isShowDialog" width="90%" @close='closeConfirmReject'>
         <!-- 搜索区域 -->
         <el-form :inline="true" class="demo-form-inline">
             <el-form-item>
@@ -197,6 +197,8 @@ export default {
       axios,
       draggable,
       drag: false,
+      cancelIsDisabledButton:'info',
+      submitIsDisabledButton:'info',
       search: {
         locNum: '',
         noOfCount: '',
@@ -291,9 +293,13 @@ export default {
       if (arr.length > 0 || this.submitAll) {
         this.cancelIsDisabled = false
         this.submitIsDisabled = false
+        this.cancelIsDisabledButton = 'primary'
+        this.submitIsDisabledButton = 'primary'
       } else {
         this.cancelIsDisabled = true
         this.submitIsDisabled = true
+        this.cancelIsDisabledButton = 'info'
+        this.submitIsDisabledButton = 'info'
       }
     }, // 关闭弹层
     closeConfirmReject () {
@@ -362,6 +368,8 @@ export default {
     },
     submit () {
       this.submitIsDisabled = true
+      this.cancelIsDisabledButton = 'info'
+      this.submitIsDisabledButton = 'info'
       this.tableLoading = true
       let dataResult = {}   
       dataResult.submitAll = this.search.submitAll
@@ -376,10 +384,14 @@ export default {
           this.updateOk = false
           this.isShowDialog = true
           this.submitIsDisabled = false
+          this.cancelIsDisabledButton = 'primary'
+          this.submitIsDisabledButton = 'primary'
           this.tableLoading = false
         } else {
           this.submitIsDisabled = false
           this.tableLoading = false
+          this.cancelIsDisabledButton = 'primary'
+          this.submitIsDisabledButton = 'primary'
           this.$message.warning('提交失败')
           this.handleCheckAllChange (false) 
           this.getTableData()
@@ -391,9 +403,13 @@ export default {
       if (e || this.sendStr.length > 0) {
         this.cancelIsDisabled = false
         this.submitIsDisabled = false
+        this.cancelIsDisabledButton = 'primary'
+        this.submitIsDisabledButton = 'primary'
       } else {
         this.cancelIsDisabled = true
         this.submitIsDisabled = true
+        this.cancelIsDisabledButton = 'info'
+        this.submitIsDisabledButton = 'info'
       }
     },
     confirm: function () {

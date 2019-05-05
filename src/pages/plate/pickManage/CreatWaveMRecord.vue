@@ -6,7 +6,7 @@
           <el-tabs v-model="search.orderType" @tab-click="handleTabClick">
             <el-tab-pane :label="$t('label.label2_01')" name="S"></el-tab-pane>
             <el-tab-pane :label="$t('label.label2_02')" name="V"></el-tab-pane>
-            <el-tab-pane :label="$t('label.msg1_66')" name="U"></el-tab-pane>
+            <el-tab-pane :label="$t('label.label2_03')" name="U"></el-tab-pane>
           </el-tabs>
           <!-- 搜索区域 -->
           <el-form :inline="true" class="demo-form-inline">

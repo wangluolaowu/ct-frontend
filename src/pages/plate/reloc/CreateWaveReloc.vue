@@ -5,14 +5,14 @@
             <div class="grid-content bg-purple-dark">
             <el-form class="demo-form-inline">
               <el-row>
-                <el-col :span="8">
+                <el-col :span="5">
               <el-form-item >
                     <el-tooltip class="item" effect="dark" :content="$t('message.msg1_57')" placement="bottom">
                         <el-button icon="yx-download3" @click="SetDownloadFunc">{{$t('message.msg1_58')}} </el-button>
                     </el-tooltip>
               </el-form-item>
                 </el-col>
-                <el-col :span="8">
+                <el-col :span="5">
               <el-form-item>
              <el-upload
                 class="upload-demo"
@@ -32,12 +32,14 @@
               </el-upload> 
               </el-form-item>
                 </el-col>
-              </el-row>
-                <el-row>
-                  <el-col :span="8">
+                  <el-col :span="5">
                 <el-form-item>
-                      <el-button type="primary" :disabled = "submitIsDisabled" @click="submit">{{$t('message.msg1_34')}}</el-button>
-                      <el-button type="info" :disabled = "cancelIsDisabled" @click="cancel">{{$t('message.msg1_30')}}</el-button>
+                      <el-button :type="submitIsDisabledButton" :disabled = "submitIsDisabled" @click="submit">{{$t('message.msg1_34')}}</el-button>
+                </el-form-item>
+                  </el-col>
+                    <el-col :span="5">
+                <el-form-item>
+                      <el-button :type="cancelIsDisabledButton" :disabled = "cancelIsDisabled" @click="cancel">{{$t('message.msg1_30')}}</el-button>
                 </el-form-item>
                   </el-col>
                 </el-row>
@@ -72,7 +74,7 @@
         </el-col>
     </el-row>
     <!-- 弹层start -->
-    <el-dialog :title="$t(message.msg1_35)" :visible.sync="isShowDialog" width="90%" @close='closeConfirmReject'>
+    <el-dialog :title="$t('message.msg1_35')" :visible.sync="isShowDialog" width="90%" @close='closeConfirmReject'>
         <!-- 搜索区域 -->
         <el-form :inline="true" class="demo-form-inline">
             <el-form-item :label="$t('label.label2_11')">
@@ -143,6 +145,8 @@ export default {
     return {
       axios,
       draggable,
+      submitIsDisabledButton:'info',
+      cancelIsDisabledButton:'info',
       drag: false,
       search: { // 查询参数
         orderType: 'RELOC',
@@ -233,9 +237,13 @@ export default {
       if (arr.length > 0) {
         this.cancelIsDisabled = false
         this.submitIsDisabled = false
+        this.submitIsDisabledButton = 'primary'
+        this.cancelIsDisabledButton = 'primary'
       } else {
         this.cancelIsDisabled = true
         this.submitIsDisabled = true
+        this.submitIsDisabledButton = 'info'
+        this.cancelIsDisabledButton = 'info'
       }
     }, // 关闭弹层
     closeConfirmReject () {
@@ -320,11 +328,15 @@ export default {
           this.$message.warning('提交成功')
         }
         this.submitIsDisabled = false
+        this.submitIsDisabledButton = 'primary'
+        this.cancelIsDisabledButton = 'primary'
         this.tableLoading = false
       })
     },
     submit () {
       this.submitIsDisabled = true
+      this.submitIsDisabledButton = 'info'
+      this.cancelIsDisabledButton = 'info'
       this.tableLoading = true
       let dataResult = {}
       console.log('JSON.stringify(this.sendStr)==========' + JSON.stringify(this.sendStr))
@@ -347,9 +359,13 @@ export default {
           this.isShowDialog = true
           this.$message.warning('提交成功')
           this.submitIsDisabled = false
+          this.submitIsDisabledButton = 'primary'
+          this.cancelIsDisabledButton = 'primary'
           this.tableLoading = false
         } else {
           this.submitIsDisabled = false
+          this.submitIsDisabledButton = 'primary'
+          this.cancelIsDisabledButton = 'primary'
           this.tableLoading = false
           this.$message.warning('提交失败')
           this.tableTotalRows = 0

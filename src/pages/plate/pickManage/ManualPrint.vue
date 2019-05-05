@@ -197,20 +197,28 @@
             </el-col>
             </el-row>
             <el-row>
-              <el-col :span='20' style="margin-left:200px">
+              <el-col :span='3'>
                 <el-form-item>
                     <el-button type="primary" @click="confirm">{{$t('message.msg1_28')}}</el-button>
-                     <el-button type="info" @click="reset">{{$t('message.msg1_29')}}</el-button>
-                     <el-button type="info" :disabled="cancelDisabled" @click="cancel">{{$t('message.msg1_30')}}</el-button>
                 </el-form-item>
               </el-col>
-          </el-row>
-          <el-row>
-            <el-col :span='20' style="margin-left:300px">
-               <el-form-item>
-                  <el-checkbox v-model="search.printAll" @change="handleCheckAllChange">{{$t('message.msg1_47')}}</el-checkbox>
+              <el-col :span='3' >
+                <el-form-item>
+                     <el-button type="primary" @click="reset">{{$t('message.msg1_29')}}</el-button>
                 </el-form-item>
-                <el-form-item :label="$t('label.label2_20')" >
+              </el-col>
+              <el-col :span='3'>
+                <el-form-item>
+                     <el-button :type="cancelDisabledButton" :disabled="cancelDisabled" @click="cancel">{{$t('message.msg1_30')}}</el-button>
+                </el-form-item>
+              </el-col>
+              <el-col :span='3'>
+                <el-form-item>
+                      <el-checkbox v-model="search.printAll" @change="handleCheckAllChange">{{$t('message.msg1_47')}}</el-checkbox>
+                </el-form-item>
+              </el-col>
+              <el-col :span='12'>
+                 <el-form-item :label="$t('label.label2_20')" >
                   <el-select v-model="search.wsId" >
                     <el-option
                     v-for="item in WS_ENTITY_WORKSTATION"
@@ -222,7 +230,7 @@
                  </el-select>
                  </el-form-item>
                 <el-form-item >
-                  <el-button type="primary" :disabled="submitIsDisabled" @click="toDoPrint">{{$t('message.msg1_48')}}</el-button>
+                  <el-button  :type="submitIsDisabledButton" :disabled="submitIsDisabled" @click="toDoPrint">{{$t('message.msg1_48')}}</el-button>
                 </el-form-item>
               </el-col>
           </el-row>
@@ -337,6 +345,8 @@ export default {
       Y_N_STATUS: [],
       submitIsDisabled:true,
       cancelDisabled:true,
+      cancelDisabledButton:'info',
+      submitIsDisabledButton:'info',
       WS_ENTITY_WORKSTATION:[]
     }
   },
@@ -422,9 +432,13 @@ export default {
       if (e || this.sendStr.length > 0) {
         this.submitIsDisabled = false
         this.cancelDisabled = false
+        this.cancelDisabledButton = 'primary'
+        this.submitIsDisabledButton = 'primary'
       } else {
         this.submitIsDisabled = true
         this.cancelDisabled = true
+        this.cancelDisabledButton = 'info'
+        this.submitIsDisabledButton = 'info'
       }
     },
     getTableData () {
@@ -454,12 +468,16 @@ export default {
       })
       this.submitIsDisabled = true
       this.cancelDisabled = true
+      this.cancelDisabledButton = 'info'
+      this.submitIsDisabledButton = 'info'
     },
     confirmReject() {
       this.isShowInnerConfirmDialog = false
       this.getTableData()
       this.submitIsDisabled = true
       this.cancelDisabled = true
+      this.cancelDisabledButton = 'info'
+      this.submitIsDisabledButton = 'info'
       this.handleCheckAllChange(false)
     },
     handleSelectionChange (val) {
@@ -471,9 +489,13 @@ export default {
        if (this.search.printAll || this.sendStr.length > 0) {
         this.submitIsDisabled = false
         this.cancelDisabled = false
+        this.cancelDisabledButton = 'primary'
+        this.submitIsDisabledButton = 'primary'
       } else {
         this.submitIsDisabled = true
         this.cancelDisabled = true
+        this.cancelDisabledButton = 'info'
+        this.submitIsDisabledButton = 'info'
       }
       console.log(this.sendStr)
     }

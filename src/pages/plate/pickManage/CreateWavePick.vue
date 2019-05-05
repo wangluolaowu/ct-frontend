@@ -9,7 +9,9 @@
                     <el-tab-pane :label="$t('label.label2_03')" name="U"></el-tab-pane>
                 </el-tabs>
                 <!-- 搜索区域 -->
-                <el-form :inline="true" class="demo-form-inline selectedCont clears">
+                <el-form  class="demo-form-inline selectedCont clears" label-width="180px">
+                   <el-row>
+                     <el-col :span="8">
                     <el-form-item class="fl" label="ISP dealer：">
                         <el-select  v-model="search.ispDealer">
                             <el-option :label="$t('label.label2_04')" value=""></el-option>
@@ -18,6 +20,8 @@
                             <!-- <el-option :label="item.platformName" :key="item.clientType" :value="item.clientType" v-for="item in platformTypeList"></el-option> -->
                         </el-select>
                     </el-form-item>
+                     </el-col>
+                     <el-col :span="8">
                     <el-form-item class="fl" label="ICT dealer：">
                         <el-select  v-model="search.ictDealer">
                             <el-option :label="$t('label.label2_04')" value=""></el-option>
@@ -25,14 +29,30 @@
                             <el-option :label="$t('label.label2_06')" value="N"></el-option>
                         </el-select>
                     </el-form-item>
-                    <el-form-item class="fl" id="groupBtn">
+                     </el-col>
+                    </el-row>
+                    <el-row>
+                      <el-col :span="5">
+                    <el-form-item class="fl" >
                         <el-button type="primary" @click="confirm">{{$t('message.msg1_28')}}</el-button>
-                        <el-button type="info" :disabled = "cancelDisabled" @click="cancel">{{$t('message.msg1_30')}}</el-button>
                     </el-form-item>
-                    <el-form-item class="checkBoxGroup">
+                      </el-col>
+                         <el-col :span="5">
+                    <el-form-item class="fl" >
+                        <el-button :type="cancelDisabledButton" :disabled = "cancelDisabled" @click="cancel">{{$t('message.msg1_30')}}</el-button>
+                    </el-form-item>
+                      </el-col>
+                       <el-col :span="3">
+                    <el-form-item>
                      <el-checkbox v-model="search.submitAll"  @change="handleCheckAllChange">{{$t('message.msg1_33')}}</el-checkbox>
-                     <el-button type="primary" @click="submit" :disabled = "submitIsDisabled" >{{$t('message.msg1_34')}}</el-button>
                     </el-form-item>
+                      </el-col>
+                      <el-col :span="8">
+                    <el-form-item>
+                     <el-button :type="submitIsDisabledButton" @click="submit" :disabled = "submitIsDisabled" >{{$t('message.msg1_34')}}</el-button>
+                    </el-form-item>
+                      </el-col>
+                    </el-row>
                     <!--<el-form-item>
                        <el-button type="primary" @click="submit" :disabled = "submitIsDisabled" >提交</el-button>
                     </el-form-item>-->
@@ -41,41 +61,41 @@
                 <el-table ref="multipleTable" :data="tableData" tooltip-effect="dark" style="width: 100%" border @selection-change="handleSelectionChange" v-loading="tableLoading">
                     <el-table-column type="selection" width="55">
                     </el-table-column>
-                    <el-table-column prop="dealerAccount" :label="$t('label.label1_67')" width="100">
+                    <el-table-column prop="dealerAccount" :label="$t('label.label1_67')" min-width="100" >
                     </el-table-column>
-                    <el-table-column prop="custName" :label="$t('label.label1_68')"  width="200">
+                    <el-table-column prop="custName" :label="$t('label.label1_68')"  min-width="200" >
                     </el-table-column>
-                    <el-table-column prop="wip" :label="$t('label.label1_52')"  width="100">
+                    <el-table-column prop="wip" :label="$t('label.label1_52')"  min-width="100">
                     </el-table-column>
-                    <el-table-column prop="wipLine" :label="$t('label.label1_54')"  width="100">
+                    <el-table-column prop="wipLine" :label="$t('label.label1_54')"  min-width="100">
                     </el-table-column>
-                    <el-table-column prop="pickTicketNum" :label="$t('label.label2_07')" width="200">
+                    <el-table-column prop="pickTicketNum" :label="$t('label.label2_07')" min-width="200">
                     </el-table-column>
-                    <el-table-column prop="route" :label="$t('label.label1_50')" width="50">
+                    <el-table-column prop="route" :label="$t('label.label1_50')" min-width="50">
                     </el-table-column>
-                     <el-table-column prop="subRoute" :label="$t('label.label2_08')"  width="100">
+                     <el-table-column prop="subRoute" :label="$t('label.label2_08')"  min-width="100">
                     </el-table-column>
-                    <el-table-column prop="orderType" :label="$t('label.label1_51')" width="100">
+                    <el-table-column prop="orderType" :label="$t('label.label1_51')" min-width="100">
                     </el-table-column>
-                    <el-table-column prop="locNum" :label="$t('label.label2_09')" width="100">
+                    <el-table-column prop="locNum" :label="$t('label.label2_09')" min-width="100">
                     </el-table-column>
-                    <el-table-column prop="skuNum" :label="$t('label.label1_70')"  width="200">
+                    <el-table-column prop="skuNum" :label="$t('label.label1_70')"  min-width="200">
                     </el-table-column>
-                    <el-table-column prop="skuName" :label="$t('label.label1_78')"  width="200">
+                    <el-table-column prop="skuName" :label="$t('label.label1_78')"  min-width="200">
                     </el-table-column>
-                    <el-table-column prop="qty" :label="$t('label.label1_80')" width="100">
+                    <el-table-column prop="qty" :label="$t('label.label1_80')" min-width="100">
                     </el-table-column>
-                    <el-table-column  prop="ispDealer"  :label="$t('label.label1_57')"  width="100">
+                    <el-table-column  prop="ispDealer"  :label="$t('label.label1_57')"  min-width="100">
                       <template slot-scope="scope" width="100%">
                          {{$Enum.getEnumSelectByValue(Y_N_STATUS,scope.row.ispDealer)}}
                     </template>
                     </el-table-column>
-                    <el-table-column prop="ictDealer" :label="$t('label.label1_58')"  width="100">
+                    <el-table-column prop="ictDealer" :label="$t('label.label1_58')"  min-width="100">
                        <template slot-scope="scope" width="100%">
                           {{$Enum.getEnumSelectByValue(Y_N_STATUS,scope.row.ictDealer)}}
                     </template>
                     </el-table-column>
-                    <el-table-column prop="creationDate" :label="$t('label.label1_72')" width="200">
+                    <el-table-column prop="creationDate" :label="$t('label.label1_72')" min-width="200">
                       <template slot-scope="scope">
                         {{$DateFormat.dateFormat(scope.row.creationDate,true)}}
                       </template>
@@ -166,6 +186,8 @@ export default {
       axios,
       draggable,
       drag: false,
+      cancelDisabledButton:'info',
+      submitIsDisabledButton:'info',
       search: { // 查询参数
         orderType: 'S',
         ispDealer: '',
@@ -216,9 +238,13 @@ export default {
       if (arr.length > 0 || this.submitAll) {
         this.submitIsDisabled = false
         this.cancelDisabled = false
+        this.cancelDisabledButton ='primary'
+        this.submitIsDisabledButton ='primary'
       } else {
         this.submitIsDisabled = true
         this.cancelDisabled = true
+         this.cancelDisabledButton ='info'
+        this.submitIsDisabledButton ='info'
       }
       console.log(this.sendStr)
     }, // 关闭弹层
@@ -283,6 +309,8 @@ export default {
     },
     submit () {
       this.submitIsDisabled = true
+      this.cancelDisabledButton ='info'
+      this.submitIsDisabledButton ='info'
       this.tableLoading = true
       let dataResult = {}
       dataResult.idList = this.sendStr
@@ -306,6 +334,8 @@ export default {
           this.getTableData()
         }
         this.submitIsDisabled = false
+        this.cancelDisabledButton ='primary'
+        this.submitIsDisabledButton ='primary'
         this.handleCheckAllChange(false)
         this.tableLoading = false
       })
@@ -315,9 +345,13 @@ export default {
       if (e || this.sendStr.length > 0) {
         this.submitIsDisabled = false
         this.cancelDisabled = false
+        this.cancelDisabledButton ='primary'
+        this.submitIsDisabledButton ='primary'
       } else {
         this.submitIsDisabled = true
         this.cancelDisabled = true
+        this.cancelDisabledButton ='info'
+        this.submitIsDisabledButton ='info'
       }
     },
     confirm: function () {
