@@ -58,35 +58,39 @@
         </el-col>   
         </el-row>
         <el-row>
-        <el-col :span="8" >
-          <el-form-item class='buttonGroups'>  
-              <el-button type="primary" @click="loadData">查询</el-button>
-              <el-button type="primary" @click="restData">清空</el-button>
+        <el-col :span="5" >
+          <el-form-item>  
+              <el-button type="primary" @click="loadData">查询</el-button> 
           </el-form-item>
           </el-col>
-          <el-col :span="8">
+           <el-col :span="5">
+            <el-form-item>
+                <el-button type="primary" @click="restData">清空</el-button>
+            </el-form-item>
+          </el-col>
+          <el-col :span="5">
             <el-form-item>
                 <el-button type="primary" @click="add">新增</el-button>
             </el-form-item>
           </el-col>
         </el-row>
       </el-form>
-         <el-table :data="userInfoList" style="width: 100%" border  height="500">
+         <el-table :data="userInfoList" style="width: 100%" border  min-height="100">
             <!--<el-table-column prop="id" label="id" >
             </el-table-column>-->
-            <el-table-column prop="holderId" label="货架ID" fixed="left" width="200">
+            <el-table-column prop="holderId" label="货架ID" min-width="200">
             </el-table-column>
-             <el-table-column prop="holderNum" label="货架编码" width="200">
+             <el-table-column prop="holderNum" label="货架编码" min-width="200">
             </el-table-column>
-             <el-table-column prop="holderModelNumber" label="货架类型" width="200">
+             <el-table-column prop="holderModelNumber" label="货架类型" min-width="200">
             </el-table-column>
-             <el-table-column prop="posX" label="当前坐标X" width="200">
+             <el-table-column prop="posX" label="当前坐标X" min-width="200">
             </el-table-column>
-             <el-table-column prop="posY" label="当前坐标Y" width="200">
+             <el-table-column prop="posY" label="当前坐标Y" min-width="200">
             </el-table-column>
-             <el-table-column prop="grossWeight" label="毛重" width="200">
+             <el-table-column prop="grossWeight" label="毛重" min-width="200">
             </el-table-column>
-             <el-table-column prop="totalWeight" label="总重" width="200">
+             <el-table-column prop="totalWeight" label="总重" min-width="200">
             </el-table-column>
              <!--第二步  开始进行修改和查询操作-->
              <el-table-column label="操作"  min-width="350" fixed="right">

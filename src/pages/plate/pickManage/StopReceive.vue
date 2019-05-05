@@ -16,6 +16,7 @@
             <el-select  v-model="search.extWorkstationType" @change="websocketToLogin" v-loading.fullscreen.lock="fullscreenLoading">
                   <el-option label="V" value="V"></el-option>
                   <el-option label="S" value="S"></el-option>
+                  <el-option label="U" value="U"></el-option>
               </el-select>
           </el-form-item>
           

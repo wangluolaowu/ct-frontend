@@ -166,58 +166,62 @@
         </el-col>
         </el-row>
         <el-row>
-        <el-col :span="8" >
-          <el-form-item class='buttonGroups'>  
+        <el-col :span="5" >
+          <el-form-item >  
               <el-button type="primary" @click="loadData">查询</el-button>
-              <el-button type="primary" @click="restData">清空</el-button>
           </el-form-item>
           </el-col>
-          <el-col :span="8">
+           <el-col :span="5">
+            <el-form-item>
+                   <el-button type="primary" @click="restData">清空</el-button>
+            </el-form-item>
+          </el-col>
+          <el-col :span="5">
             <el-form-item>
                 <el-button type="primary" @click="add">新增</el-button>
             </el-form-item>
           </el-col>
         </el-row>
       </el-form>
-         <el-table :data="userInfoList" style="width: 100%" border  height="500">
+         <el-table :data="userInfoList" style="width: 100%" border  min-height="100">
             <!--<el-table-column prop="id" label="id" >
             </el-table-column>-->
-            <el-table-column prop="entityWorkstationId" label="工作站ID" fixed="left" >
+            <el-table-column prop="entityWorkstationId" label="工作站ID" min-width="200" >
             </el-table-column>
-            <el-table-column prop="entityWorkstationNum" label="工作站编号" width="200">
+            <el-table-column prop="entityWorkstationNum" label="工作站编号" min-width="200">
             </el-table-column>
-             <el-table-column prop="softwareVersionNum" label="工作站软件版本号" width="200">
+             <el-table-column prop="softwareVersionNum" label="工作站软件版本号" min-width="200">
             </el-table-column>
-             <el-table-column prop="designVersionNum" label="工作站设计版本号" width="200">
+             <el-table-column prop="designVersionNum" label="工作站设计版本号" min-width="200">
             </el-table-column>
-             <el-table-column prop="mfgLotNum" label="工作站生产批次" width="200">
+             <el-table-column prop="mfgLotNum" label="工作站生产批次" min-width="200">
             </el-table-column>
-             <el-table-column prop="startServiceDate" label="工作站服役开始时间" width="200">
+             <el-table-column prop="startServiceDate" label="工作站服役开始时间" min-width="200">
                   <template slot-scope="scope">
                         {{$DateFormat.dateFormat(scope.row.startServiceDate,true)}}
                       </template>
             </el-table-column>
-             <el-table-column prop="totalServiceMileage" label="工作站服役时长" width="200">
+             <el-table-column prop="totalServiceMileage" label="工作站服役时长" min-width="200">
             </el-table-column>
-             <el-table-column prop="macAddress" label="工作站电脑MAC地址" width="200">
+             <el-table-column prop="macAddress" label="工作站电脑MAC地址" min-width="200">
             </el-table-column>
-             <el-table-column prop="kidIpAddress" label="工作站电脑IP地址" width="200">
+             <el-table-column prop="ipAddress" label="工作站电脑IP地址" min-width="200">
             </el-table-column>
-             <el-table-column prop="latestMaintainDate" label="最近一次保养时间" width="200">
+             <el-table-column prop="latestMaintainDate" label="最近一次保养时间" min-width="200">
                   <template slot-scope="scope">
                         {{$DateFormat.dateFormat(scope.row.latestMaintainDate,true)}}
                       </template>
             </el-table-column>
-             <el-table-column prop="latestRepairDate" label="最近一次维修时间" width="200">
+             <el-table-column prop="latestRepairDate" label="最近一次维修时间" min-width="200">
                   <template slot-scope="scope">
                         {{$DateFormat.dateFormat(scope.row.latestRepairDate,true)}}
                       </template>
             </el-table-column>
-              <el-table-column prop="electronicTagsCount " label="拍灯器个数" width="200"> 
+              <el-table-column prop="electronicTagsCount " label="拍灯器个数" min-width="200"> 
             </el-table-column>
-              <el-table-column prop="projectorModelNumber " label="投影机型号" width="200"> 
+              <el-table-column prop="projectorModelNumber " label="投影机型号" min-width="200"> 
             </el-table-column>
-              <el-table-column prop="scanningGunModelNumber " label="扫描枪型号" width="200"> 
+              <el-table-column prop="scanningGunModelNumber " label="扫描枪型号" min-width="200"> 
             </el-table-column>
              <el-table-column prop="descriptions " label="注释" width="200"> 
             </el-table-column>
@@ -274,8 +278,8 @@
                   <el-form-item prop="macAddress" label="工作站电脑MAC地址">
                     <el-input type="text" v-model="addFormData.macAddress" placeholder="工作站电脑MAC地址"></el-input>
                   </el-form-item>
-                  <el-form-item prop="kidIpAddress" label="工作站电脑IP地址">
-                    <el-input type="text" v-model="addFormData.kidIpAddress" placeholder="工作站电脑IP地址"></el-input>
+                  <el-form-item prop="ipAddress" label="工作站电脑IP地址">
+                    <el-input type="text" v-model="addFormData.ipAddress" placeholder="工作站电脑IP地址"></el-input>
                   </el-form-item>
                  <el-form-item prop="latestMaintainDate" label="最近一次保养时间">
                      <el-date-picker
@@ -313,7 +317,7 @@
                   </el-form-item>
              </el-form>
              <span slot="footer" class="dialog-footer">
-                 <el-button @click.native="dialogVisible = false,addFormData={entityWorkstationId:'',entityWorkstationNum:'',softwareVersionNum:'',designVersionNum:'',mfgLotNum:'',startServiceDate:'',totalServiceMileage:'',macAddress:'',kidIpAddress:'',latestMaintainDate:'',latestRepairDate:'',electronicTagsCount:'',projectorModelNumber:'',scanningGunModelNumber:'',descriptions:''}">取 消</el-button>
+                 <el-button @click.native="dialogVisible = false,addFormData={entityWorkstationId:'',entityWorkstationNum:'',softwareVersionNum:'',designVersionNum:'',mfgLotNum:'',startServiceDate:'',totalServiceMileage:'',macAddress:'',ipAddress:'',latestMaintainDate:'',latestRepairDate:'',electronicTagsCount:'',projectorModelNumber:'',scanningGunModelNumber:'',descriptions:''}">取 消</el-button>
                  <el-button v-if="isView" type="primary" @click.native="addSubmit">确 定</el-button>
              </span>
           </el-dialog>
@@ -341,7 +345,7 @@
             startServiceDate:'',
             totalServiceMileage:'',
             macAddress:'',
-            kidIpAddress:'',
+            ipAddress:'',
             latestMaintainDate:'',
             latestRepairDate:'',
             electronicTagsCount:'',
@@ -358,7 +362,7 @@
             startServiceDate:'',
             totalServiceMileage:'',
             macAddress:'',
-            kidIpAddress:'',
+            ipAddress:'',
             latestMaintainDate:'',
             latestRepairDate:'',
             electronicTagsCount:'',
@@ -413,7 +417,7 @@
             startServiceDate:'',
             totalServiceMileage:'',
             macAddress:'',
-            kidIpAddress:'',
+            ipAddress:'',
             latestMaintainDate:'',
             latestRepairDate:'',
             electronicTagsCount:'',
@@ -448,7 +452,7 @@
             startServiceDate:'',
             totalServiceMileage:'',
             macAddress:'',
-            kidIpAddress:'',
+            ipAddress:'',
             latestMaintainDate:'',
             latestRepairDate:'',
             electronicTagsCount:'',

@@ -93,20 +93,24 @@
         </el-col>   
         </el-row>
         <el-row>
-        <el-col :span="8" >
-          <el-form-item class='buttonGroups'>  
-              <el-button type="primary" @click="loadData">查询{{$t('message.msg1_28')}}</el-button>
-              <el-button type="primary" @click="restData">清空{{$t('message.msg1_29')}}</el-button>
+        <el-col :span="4">
+          <el-form-item >  
+              <el-button type="primary" @click="loadData">{{$t('message.msg1_28')}}</el-button>   
           </el-form-item>
           </el-col>
-          <el-col :span="8">
-            <el-form-item>
-                <el-button type="primary" @click="add">新增{{$t('message.msg1_52')}}</el-button>
+          <el-col :span="4">
+          <el-form-item >  
+              <el-button type="primary" @click="restData">{{$t('message.msg1_29')}}</el-button>    
+          </el-form-item>
+          </el-col>
+          <el-col :span="4">
+            <el-form-item >
+              <el-button type="primary" @click="add">{{$t('message.msg1_52')}}</el-button>
             </el-form-item>
           </el-col>
         </el-row>
       </el-form>
-         <el-table :data="userInfoList" style="width: 100%" border  height="500">
+         <el-table :data="userInfoList" style="width: 100%" border  min-height="200">
             <!--<el-table-column prop="id" label="id" >
             </el-table-column>-->
              <el-table-column type="index" :label="$t('label.label2_24')" width="200">
@@ -167,7 +171,7 @@
                    <el-form-item prop="orderType" :label="$t('label.label1_51')">
                      <el-select  v-model="addFormData.orderType" style="width:200px">
                         <el-option
-                          v-for="item in $Enum.EnumSelect().order_type"
+                          v-for="item in $Enum.EnumSelect().order_type2"
                           :key="item.value"
                           :label="item.label"
                           :value="item.value" 
@@ -176,9 +180,9 @@
                     </el-select>
                   </el-form-item>
                    <el-form-item prop="ispDealer" label="ISP Dealer">
-                     <el-select placeholder="ISP Dealer" v-model="addFormData.ispDealer" style="width:200px">
+                     <el-select v-model="addFormData.ispDealer" style="width:200px">
                         <el-option
-                          v-for="item in $Enum.EnumSelect().Y_N_STATUS"
+                          v-for="item in $Enum.EnumSelect().Y_N_STATUS2"
                           :key="item.value"
                           :label="item.label"
                           :value="item.value" 
@@ -187,9 +191,9 @@
                     </el-select>
                   </el-form-item>
                    <el-form-item prop="ictDealer" label="ICT Dealer">
-                     <el-select placeholder="ISP Dealer" v-model="addFormData.ictDealer" style="width:200px">
+                     <el-select  v-model="addFormData.ictDealer" style="width:200px">
                         <el-option
-                          v-for="item in $Enum.EnumSelect().Y_N_STATUS"
+                          v-for="item in $Enum.EnumSelect().Y_N_STATUS2"
                           :key="item.value"
                           :label="item.label"
                           :value="item.value" 
@@ -200,7 +204,7 @@
                    <el-form-item  prop="wsWallSchema" :label="$t('label.label2_22')">
                      <el-select  v-model="addFormData.wsWallSchema" style="width:200px">
                         <el-option
-                          v-for="item in $Enum.EnumSelect().workstation_status"
+                          v-for="item in $Enum.EnumSelect().workstation_status2"
                           :key="item.value"
                           :label="item.label"
                           :value="item.value" 

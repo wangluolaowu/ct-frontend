@@ -41,20 +41,24 @@
         </el-col>   
         </el-row>
         <el-row>
-        <el-col :span="8" >
-          <el-form-item class='buttonGroups'>  
-              <el-button type="primary" @click="loadData">查询</el-button>
-              <el-button type="primary" @click="restData">清空</el-button>
+        <el-col :span="5" >
+          <el-form-item >  
+              <el-button type="primary" @click="loadData">查询</el-button> 
           </el-form-item>
           </el-col>
-          <el-col :span="8">
+           <el-col :span="5">
+            <el-form-item>
+                  <el-button type="primary" @click="restData">清空</el-button>
+            </el-form-item>
+          </el-col>
+          <el-col :span="5">
             <el-form-item>
                 <el-button type="primary" @click="add">新增</el-button>
             </el-form-item>
           </el-col>
         </el-row>
       </el-form>
-         <el-table :data="userInfoList" style="width: 100%" border  height="500">
+         <el-table :data="userInfoList" style="width: 100%" border  min-height="100">
             <!--<el-table-column prop="id" label="id" >
             </el-table-column>-->
              <el-table-column prop="typeCode" label="货位类型" width="200">

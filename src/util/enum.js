@@ -48,11 +48,31 @@ Enum.EnumSelect = function() {
         value: 'N'
       }
     ],
+    Y_N_STATUS2: [
+      {
+        label: '是',
+        value: 'Y'
+      },
+      {
+        label: '否',
+        value: 'N'
+      }
+    ],
     workstation_status: [
       {
         label: '全部',
         value: ''
       },
+      {
+        label: '小工作站',
+        value: '1'
+      },
+      {
+        label: '大工作站',
+        value: '2'
+      }
+    ],
+    workstation_status2: [
       {
         label: '小工作站',
         value: '1'
@@ -392,6 +412,28 @@ Enum.EnumSelect = function() {
       {
         label: 'S',
         value: 'S'
+      },
+      {
+        label: 'U',
+        value: 'U'
+      },
+      {
+        label: 'RELOC',
+        value: 'RELOC'
+      }
+    ],
+    order_type2: [
+      {
+        label: 'V',
+        value: 'V'
+      },
+      {
+        label: 'S',
+        value: 'S'
+      },
+      {
+        label: 'U',
+        value: 'U'
       },
       {
         label: 'RELOC',

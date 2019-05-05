@@ -178,20 +178,24 @@
         </el-col>
         </el-row>
         <el-row>
-        <el-col :span="8" >
-          <el-form-item class='buttonGroups'>  
+        <el-col :span="5" >
+          <el-form-item >  
               <el-button type="primary" @click="loadData">查询</el-button>
-              <el-button type="primary" @click="restData">清空</el-button>
           </el-form-item>
           </el-col>
-          <el-col :span="8">
+          <el-col :span="5">
+            <el-form-item>
+               <el-button type="primary" @click="restData">清空</el-button>
+            </el-form-item>
+          </el-col>
+          <el-col :span="5">
             <el-form-item>
                 <el-button type="primary" @click="add">新增</el-button>
             </el-form-item>
           </el-col>
         </el-row>
       </el-form>
-         <el-table :data="userInfoList" style="width: 100%" border  height="500">
+         <el-table :data="userInfoList" style="width: 100%" border  min-height="100">
             <!--<el-table-column prop="id" label="id" >
             </el-table-column>-->
             <el-table-column prop="chargePointId" label="充电桩ID"  width="200">
@@ -218,7 +222,7 @@
             </el-table-column>
              <el-table-column prop="macAddress" label="充电桩电脑MAC地址" width="200">
             </el-table-column>
-             <el-table-column prop="kidIpAddress" label="充电桩电脑IP地址" width="200">
+             <el-table-column prop="ipAddress" label="充电桩电脑IP地址" width="200">
             </el-table-column>
              <el-table-column prop="latestMaintainDate" label="最近一次保养时间" width="200">
                   <template slot-scope="scope">
@@ -306,8 +310,8 @@
                   <el-form-item prop="macAddress" label="充电桩电脑MAC地址">
                     <el-input type="text" v-model="addFormData.macAddress" placeholder="充电桩电脑MAC地址"></el-input>
                   </el-form-item>
-                  <el-form-item prop="kidIpAddress" label="充电桩电脑IP地址">
-                    <el-input type="text" v-model="addFormData.kidIpAddress" placeholder="充电桩电脑IP地址"></el-input>
+                  <el-form-item prop="ipAddress" label="充电桩电脑IP地址">
+                    <el-input type="text" v-model="addFormData.ipAddress" placeholder="充电桩电脑IP地址"></el-input>
                   </el-form-item>
                  <el-form-item prop="latestMaintainDate" label="最近一次保养时间">
                      <el-date-picker
@@ -351,7 +355,7 @@
                   </el-form-item>
              </el-form>
              <span slot="footer" class="dialog-footer">
-                 <el-button @click.native="dialogVisible = false,addFormData={chargePointId:'', chargePointNum:'',chargePointType:'',softwareVersionNum:'',designVersionNum:'',mfgLotNum:'',startServiceDate:'',totalServiceMileage:'',macAddress:'',kidIpAddress:'',latestMaintainDate:'',latestRepairDate:'',electronicTagsCount:'',projectorModelNumber:'',scanningGunModelNumber:'',ratedVoltageRange:'', curtVoltageRange:'', ratedCurrentRange:'', curtCurrentRange:'',  curtMaximumCurrent:'',descriptions:''}">取 消</el-button>
+                 <el-button @click.native="dialogVisible = false,addFormData={chargePointId:'', chargePointNum:'',chargePointType:'',softwareVersionNum:'',designVersionNum:'',mfgLotNum:'',startServiceDate:'',totalServiceMileage:'',macAddress:'',ipAddress:'',latestMaintainDate:'',latestRepairDate:'',electronicTagsCount:'',projectorModelNumber:'',scanningGunModelNumber:'',ratedVoltageRange:'', curtVoltageRange:'', ratedCurrentRange:'', curtCurrentRange:'',  curtMaximumCurrent:'',descriptions:''}">取 消</el-button>
                  <el-button v-if="isView" type="primary" @click.native="addSubmit">确 定</el-button>
              </span>
           </el-dialog>
@@ -380,7 +384,7 @@
              startServiceDate:'',
              totalServiceMileage:'',
              macAddress:'',
-             kidIpAddress:'',
+             ipAddress:'',
              latestMaintainDate:'',
              latestRepairDate:'',
              electronicTagsCount:'',
@@ -402,7 +406,7 @@
              mfgLotNum:'',
              totalServiceMileage:'',
              macAddress:'',
-             kidIpAddress:'',
+             ipAddress:'',
              electronicTagsCount:'',
              projectorModelNumber:'',
              scanningGunModelNumber:'',
@@ -476,7 +480,7 @@
              mfgLotNum:'',
              totalServiceMileage:'',
              macAddress:'',
-             kidIpAddress:'',
+             ipAddress:'',
              electronicTagsCount:'',
              projectorModelNumber:'',
              scanningGunModelNumber:'',
@@ -516,7 +520,7 @@
              startServiceDate:'',
              totalServiceMileage:'',
              macAddress:'',
-             kidIpAddress:'',
+             ipAddress:'',
              latestMaintainDate:'',
              latestRepairDate:'',
              electronicTagsCount:'',

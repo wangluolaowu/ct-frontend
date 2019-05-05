@@ -50,37 +50,41 @@
           </el-col>   
         </el-row>
         <el-row>
-        <el-col :span="8" >
-          <el-form-item class='buttonGroups'>  
+        <el-col :span="5" >
+          <el-form-item>  
               <el-button type="primary" @click="loadData">查询</el-button>
-              <el-button type="primary" @click="restData">清空</el-button>
           </el-form-item>
           </el-col>
-          <el-col :span="8">
+          <el-col :span="5">
+            <el-form-item>
+                 <el-button type="primary" @click="restData">清空</el-button>
+            </el-form-item>
+          </el-col>
+          <!--<el-col :span="8">
             <el-form-item>
                 <el-button type="primary" @click="add">新增</el-button>
             </el-form-item>
-          </el-col>
+          </el-col>-->
         </el-row>
       </el-form>
          <el-table :data="userInfoList" style="width: 100%" border >
             <!--<el-table-column prop="id" label="id" >
             </el-table-column>-->
-            <el-table-column prop="chargePointNum" label="充电桩编号" width="200">
+            <el-table-column prop="chargePointNum" label="充电桩编号" min-width="200">
             </el-table-column>
-             <el-table-column prop="chargeStatus" label="充电桩状态" width="200">
+             <el-table-column prop="chargeStatus" label="充电桩状态" min-width="200">
                  <template slot-scope="scope" width="100%">
                 {{$Enum.getEnumSelectByValue($Enum.EnumSelect().CHARGE_STATUS,scope.row.chargeStatus)}}
               </template>
             </el-table-column>
-             <el-table-column prop="activeFlag" label="充电桩启停状态" width="200">
+             <el-table-column prop="activeFlag" label="充电桩启停状态" min-width="200">
                 <template slot-scope="scope" width="100%">
                 {{$Enum.getEnumSelectByValue($Enum.EnumSelect().openStatus3,scope.row.activeFlag)}}
               </template>
             </el-table-column>
             
              <!--第二步  开始进行修改和查询操作-->
-             <el-table-column label="操作"  min-width="350" fixed="right">
+             <el-table-column label="操作"  min-width="250" fixed="right">
  
                 <template slot-scope="scope">
  

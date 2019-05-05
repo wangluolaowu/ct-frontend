@@ -34,39 +34,46 @@
         </el-col> 
         </el-row>
         <el-row>
-        <el-col :span="8" >
-          <el-form-item class='buttonGroups'>  
+        <el-col :span="5" >
+          <el-form-item >  
               <el-button type="primary" @click="loadData">查询</el-button>
-              <el-button type="primary" @click="restData">清空</el-button>
           </el-form-item>
           </el-col>
-          <el-col :span="8">
+          <el-col :span="5">
+            <el-form-item>
+                  <el-button type="primary" @click="restData">清空</el-button>
+            </el-form-item>
+          </el-col>
+          <el-col :span="5">
             <el-form-item>
                 <el-button type="primary" @click="add">新增</el-button>
             </el-form-item>
           </el-col>
         </el-row>
       </el-form>
-         <el-table :data="userInfoList" style="width: 100%" border  height="500">
+         <el-table :data="userInfoList" style="width: 100%" border  min-height="100">
             <!--<el-table-column prop="id" label="id" >
             </el-table-column>-->
-            <el-table-column prop="ruleId" label="规则编号" fixed="left" width="200">
+            <el-table-column prop="ruleId" label="规则编号"  min-width="200">
             </el-table-column>
-            <el-table-column prop="rulePriority" label="规则优先级" width="200">
+            <el-table-column prop="rulePriority" label="规则优先级" min-width="200">
             </el-table-column>
-            <el-table-column prop="startTime" label="开始时间" width="200">
+            <el-table-column prop="startTime" label="开始时间" min-width="200">
             </el-table-column>
-             <el-table-column prop="endTime" label="结束时间" width="200">
+             <el-table-column prop="endTime" label="结束时间" min-width="200">
             </el-table-column>
-             <el-table-column prop="designVersionNum" label="启用时间" width="200">
+             <el-table-column prop="designVersionNum" label="启用时间" min-width="200">
             </el-table-column>
-             <el-table-column prop="kidMinBatteryPower" label="最低电量(%)" width="200">
+             <el-table-column prop="kidMinBatteryPower" label="最低电量(%)" min-width="200">
             </el-table-column>
-             <el-table-column prop="kidMaxBatteryPower" label="最高电量(%)" width="200">
+             <el-table-column prop="kidMaxBatteryPower" label="最高电量(%)" min-width="200">
             </el-table-column>
-             <el-table-column prop="kidId" label="机器人编号" width="200">
+             <el-table-column prop="kidId" label="机器人编号" min-width="200">
             </el-table-column>
-             <el-table-column prop="enableFlag" label="状态" width="200">
+             <el-table-column prop="enableFlag" label="状态" min-width="200">
+               <template slot-scope="scope" width="100%">
+                {{$Enum.getEnumSelectByValue($Enum.EnumSelect().openStatus3,scope.row.enableFlag)}}
+              </template>
             </el-table-column>
              <!--第二步  开始进行修改和查询操作-->
              <el-table-column label="操作"  min-width="350" fixed="right">
@@ -93,7 +100,7 @@
                     <el-input type="text" v-model="addFormData.ruleId" placeholder="规则编号" :disabled="keyDisabled"></el-input>
                   </el-form-item>
                   <el-form-item prop="rulePriority" label="规则优先级"> 
-                    <el-input type="text" v-model="addFormData.rulePriority" placeholder="规则优先级" :disabled="keyDisabled"></el-input>
+                    <el-input type="text" v-model="addFormData.rulePriority" placeholder="规则优先级" ></el-input>
                   </el-form-item>
                    <el-form-item prop="startTime" label="开始时间">
                       <template>
@@ -130,7 +137,15 @@
                     <el-input type="text" v-model="addFormData.kidId" placeholder="机器人编号"></el-input>
                   </el-form-item>
                   <el-form-item prop="enableFlag" label="状态">
-                    <el-input type="text" v-model="addFormData.enableFlag" placeholder="状态"></el-input>
+                    <el-select placeholder="状态" v-model="addFormData.enableFlag" style="width:200px" >
+                      <el-option
+                      v-for="item in $Enum.EnumSelect().openStatus3"
+                      :key="item.value"
+                      :label="item.label"
+                      :value="item.value" 
+                      > 
+                  </el-option>
+                  </el-select>
                   </el-form-item>
              </el-form>
              <span slot="footer" class="dialog-footer">

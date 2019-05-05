@@ -58,29 +58,33 @@
         </el-col>   
         </el-row>
         <el-row>
-        <el-col :span="8" >
-          <el-form-item class='buttonGroups'>  
+        <el-col :span="5" >
+          <el-form-item >  
               <el-button type="primary" @click="loadData">查询</el-button>
-              <el-button type="primary" @click="restData">清空</el-button>
           </el-form-item>
           </el-col>
-          <el-col :span="8">
+           <el-col :span="5">
+            <el-form-item>
+                   <el-button type="primary" @click="restData">清空</el-button>
+            </el-form-item>
+          </el-col>
+          <el-col :span="5">
             <el-form-item>
                 <el-button type="primary" @click="add">新增</el-button>
             </el-form-item>
           </el-col>
         </el-row>
       </el-form>
-         <el-table :data="userInfoList" style="width: 100%" border  height="500">
+         <el-table :data="userInfoList" style="width: 100%" border  min-height="100">
             <!--<el-table-column prop="id" label="id" >
             </el-table-column>-->
-             <el-table-column prop="dealerCode" label="经销商代码" width="200" fixed="left">
+             <el-table-column prop="dealerCode" label="经销商代码" min-width="200">
             </el-table-column>
-             <el-table-column prop="dealerName" label="客户名称" width="200">
+             <el-table-column prop="dealerName" label="客户名称" min-width="200">
             </el-table-column>
-             <el-table-column prop="route" label="路线" width="200">
+             <el-table-column prop="route" label="路线" min-width="200">
             </el-table-column>
-             <el-table-column prop="subRoute" label="子路线" width="200">
+             <el-table-column prop="subRoute" label="子路线" min-width="200">
             </el-table-column>
              <!--第二步  开始进行修改和查询操作-->
              <el-table-column label="操作"  min-width="350" fixed="right">
