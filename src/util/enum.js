@@ -4,6 +4,34 @@ const Enum = {
 Enum.EnumSelect = function() {
   let EnumObj = {}
   EnumObj = {
+    enable_flag: [
+      {
+        label: '锁点',
+        value: 0
+      },
+      {
+        label: '正常点',
+        value: 1
+      }
+    ],
+    direction_limit: [
+      {
+        label: 'x+',
+        value: 8
+      },
+      {
+        label: 'x-',
+        value: 4
+      },
+      {
+        label: 'y+',
+        value: 2
+      },
+      {
+        label: 'y-',
+        value: 1
+      }
+    ],
     openStatus: [
       {
         label: '开启',

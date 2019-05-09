@@ -374,6 +374,11 @@ const routes = [
         path: '/adminstratorPage/taskChange',
         component: () => import('@/pages/plate/adminstratorPage/createKidTaskChange'),
         name: '任务变更'
+      },
+      {
+        path: '/adminstratorPage/mapChange',
+        component: () => import('@/pages/plate/adminstratorPage/mapChange'),
+        name: '地图编辑'
       }
     ]
   }

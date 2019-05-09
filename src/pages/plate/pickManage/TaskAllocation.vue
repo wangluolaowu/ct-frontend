@@ -229,7 +229,7 @@
              </el-form>
              <span slot="footer" class="dialog-footer">
                  <el-button @click.native="dialogVisible = false,addFormData={ruleId:'',ruleDesc:'',orderType:'',ispDealer:'',ictDealer:'',wsWallSchema:'',algorithm:'',enableFlag:''}">取 消</el-button>
-                 <el-button v-if="isView" type="primary" @click.native="addSubmit">确 定</el-button>
+                 <el-button v-if="isView" type="primary" @click.native="addSubmit">{{$t('message.msg1_68')}}</el-button>
              </span>
           </el-dialog>
       </div>

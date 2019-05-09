@@ -26,6 +26,7 @@
                     <el-option :label="$t('label.label2_04')" value=""></el-option>
                     <el-option label="S" value="S"></el-option>
                     <el-option label="V" value="V"></el-option>
+                    <el-option label="U" value="U"></el-option>
                 </el-select>
             </el-form-item>
             </el-col>

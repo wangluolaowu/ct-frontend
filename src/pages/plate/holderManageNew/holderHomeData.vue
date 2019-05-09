@@ -84,6 +84,8 @@
             </el-table-column>
              <el-table-column prop="holderModelNumber" label="货架类型" min-width="200">
             </el-table-column>
+            <el-table-column prop="holderModelNumber" label="货架类型" min-width="200">
+            </el-table-column>
              <el-table-column prop="posX" label="当前坐标X" min-width="200">
             </el-table-column>
              <el-table-column prop="posY" label="当前坐标Y" min-width="200">
@@ -101,7 +103,7 @@
  
                      <el-button type="text" @click="modifyInfo(scope.row)">修改</el-button>
   
-                     <el-button type="text" @click="deleteInfo(scope.row)">删除</el-button>
+                     <!--<el-button type="text" @click="deleteInfo(scope.row)">删除</el-button>-->
                   </template>
              </el-table-column>
              <!--编辑与增加的页面-->
