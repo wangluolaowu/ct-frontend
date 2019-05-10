@@ -37,7 +37,7 @@
             </el-table-column>
              <el-table-column prop="directionLimit" label="directionLimit" min-width='150'>
                   <template slot-scope="scope">
-                {{$Enum.getEnumSelectByValue($Enum.EnumSelect().direction_limit,scope.row.directionLimit)}}
+                {{$Enum.getEnumSelectByValue(MD_MAP_DIRECTION_LIMIT,scope.row.directionLimit)}}
                 </template>
             </el-table-column>
             <el-table-column prop="noloadForbidden" label="noloadForbidden" min-width='150'>
@@ -92,7 +92,7 @@
                      <el-form-item label="Direction Limit"> 
                    <el-select v-model="addFormData.directionLimit">
                     <el-option
-                            v-for="item in $Enum.EnumSelect().direction_limit"
+                            v-for="item in MD_MAP_DIRECTION_LIMIT"
                             :key="item.value"
                             :label="item.label"
                             :value="item.value" 
@@ -180,7 +180,8 @@
             pageSize:50
           },
           totalRows:-1,
-          MAP_FUNCTION_AREA:[]
+          MAP_FUNCTION_AREA:[],
+          MD_MAP_DIRECTION_LIMIT:[]
         }
       },
   mounted: function () {
@@ -197,6 +198,11 @@
                     item.value = item.lookupValueNum
                     item.label = item.meaning||item.lookupValueNum
                     this.MAP_FUNCTION_AREA.push(item)
+                    }
+                    if (item.lookupType === 'MD_MAP_DIRECTION_LIMIT') {
+                    item.value = item.lookupValueNum
+                    item.label = item.meaning||item.lookupValueNum
+                    this.MD_MAP_DIRECTION_LIMIT.push(item)
                     }
                     return item
                 })

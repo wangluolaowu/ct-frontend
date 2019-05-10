@@ -27,7 +27,7 @@
         </el-row>
        <el-row>
         <el-col :span="8">
-           <el-form-item label="毛重" >
+           <el-form-item label="货架净重" >
               <el-input v-model="searchBIN.grossWeight" style="width:200px"></el-input>
             </el-form-item>
         </el-col>
@@ -84,13 +84,16 @@
             </el-table-column>
              <el-table-column prop="holderModelNumber" label="货架类型" min-width="200">
             </el-table-column>
-            <el-table-column prop="holderModelNumber" label="货架类型" min-width="200">
+            <el-table-column prop="activeFlag" label="货架状态" min-width="200">
+               <template slot-scope="scope" width="100%">
+                {{$Enum.getEnumSelectByValue($Enum.EnumSelect().openStatus3,scope.row.activeFlag)}}
+              </template>
             </el-table-column>
              <el-table-column prop="posX" label="当前坐标X" min-width="200">
             </el-table-column>
              <el-table-column prop="posY" label="当前坐标Y" min-width="200">
             </el-table-column>
-             <el-table-column prop="grossWeight" label="毛重" min-width="200">
+             <el-table-column prop="grossWeight" label="货架净重" min-width="200">
             </el-table-column>
              <el-table-column prop="totalWeight" label="总重" min-width="200">
             </el-table-column>
@@ -124,21 +127,32 @@
                    <el-form-item prop="holderModelNumber" label="货架类型">
                     <el-input type="text" v-model="addFormData.holderModelNumber"  placeholder="货架类型"></el-input>
                   </el-form-item>
+                   <el-form-item prop="activeFlag" label="货架状态">
+                    <el-select  v-model="addFormData.activeFlag" style="width:200px">
+                        <el-option
+                        v-for="item in $Enum.EnumSelect().openStatus3"
+                        :key="item.value"
+                        :label="item.label"
+                        :value="item.value" 
+                        > 
+                      </el-option>
+                    </el-select>
+                  </el-form-item>
                    <el-form-item prop="posX" label="当前坐标X">
                     <el-input type="text" v-model="addFormData.posX" placeholder="当前坐标X" :disabled="true"></el-input>
                   </el-form-item>
                    <el-form-item prop="posY" label="当前坐标Y">
                     <el-input type="text" v-model="addFormData.posY" placeholder="当前坐标Y" :disabled="true"></el-input>
                   </el-form-item>
-                   <el-form-item prop="grossWeight" label="毛重">
-                    <el-input type="text" v-model="addFormData.grossWeight" placeholder="毛重"></el-input>
+                   <el-form-item prop="grossWeight" label="货架净重">
+                    <el-input type="text" v-model="addFormData.grossWeight" placeholder="货架净重"></el-input>
                   </el-form-item>
                    <el-form-item prop="totalWeight" label="总重">
                     <el-input type="text" v-model="addFormData.totalWeight" placeholder="总重" :disabled="true"></el-input>
                   </el-form-item>
              </el-form>
              <span slot="footer" class="dialog-footer">
-                 <el-button @click.native="dialogVisible = false,addFormData={holderId:'',holderNum:'',holderModelNumber:'',posX:'',posY:'',grossWeight:'',totalWeight:''}">取 消</el-button>
+                 <el-button @click.native="dialogVisible = false,addFormData={holderId:'',holderNum:'',holderModelNumber:'',posX:'',posY:'',grossWeight:'',totalWeight:'',activeFlag:''}">取 消</el-button>
                  <el-button v-if="isView" type="primary" @click.native="addSubmit">确 定</el-button>
              </span>
           </el-dialog>
@@ -235,7 +249,8 @@
             posX:'',
             posY:'',
             grossWeight:'',
-            totalWeight:''
+            totalWeight:'',
+            activeFlag:''
           },
           searchBIN: {
             holderId:'',
@@ -245,6 +260,7 @@
             posY:'',
             grossWeight:'',
             totalWeight:'',
+            activeFlag:'',
             currentPage:1,
             pageSize:50,
             totalRows:-1
@@ -318,6 +334,7 @@
             posY:'',
             grossWeight:'',
             totalWeight:'',
+            activeFlag:'',
             currentPage:currentPageTemp,
             pageSize:pageSizeTemp,
             totalRows:totalRowsTemp
