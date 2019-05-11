@@ -4,13 +4,13 @@
          <el-col :span="24" class="toolbar conMarginLeft" >
              <el-form :inline="true" :model="filters">
                 <el-form-item>
-                    <el-input v-model="filters.name" placeholder="权限"></el-input>
+                    <el-input v-model="filters.name" :placeholder="$t('label.label10_08')" ></el-input>
                    </el-form-item>
                    <el-form-item>
-                     <el-button type="primary" v-on:click="loadData">查询</el-button>
+                     <el-button type="primary" v-on:click="loadData">{{$t('message.msg1_68')}}</el-button>
                   </el-form-item>
                  <el-form-item>
-                     <el-button type="primary" @click="addUser">新增</el-button>
+                     <el-button type="primary" @click="addUser">{{$t('message.msg1_52')}}</el-button>
                   </el-form-item>
             </el-form>
        </el-col>
@@ -19,40 +19,40 @@
          <el-table :data="userInfoList" style="width: 100%" border>
             <!--<el-table-column prop="id" label="id" >
             </el-table-column>-->
-             <el-table-column prop="name" label="权限名称" >
+             <el-table-column prop="name" :label="$t('label.label10_08')" >
             </el-table-column>
-             <el-table-column prop="permission" label="权限">
+             <el-table-column prop="permission"  :label="$t('label.label10_09')">
             </el-table-column>
-            <el-table-column prop="available" label="状态"> 
+            <el-table-column prop="available"  :label="$t('label.label1_24')"> 
               <template slot-scope="scope">
                  {{$Enum.getEnumSelectByValue($Enum.EnumSelect().openStatus,scope.row.available)}}
             </template>
             </el-table-column>
              <!--第二步  开始进行修改和查询操作-->
-             <el-table-column label="操作" align="center" min-width="350" >
+             <el-table-column :label="$t('message.msg1_53')" align="center" min-width="350" >
  
                 <template slot-scope="scope" class='handleBtn'>
  
-                     <el-button type="text" @click="checkDetail(scope.row)">资源管理</el-button>
-                     <el-button type="text" @click="modifyUser(scope.row)">修改</el-button>
+                     <el-button type="text" @click="checkDetail(scope.row)">{{$t('message.msg1_77')}}</el-button>
+                     <el-button type="text" @click="modifyUser(scope.row)">{{$t('message.msg1_55')}}</el-button>
                      <!--<el-button type="text" @click="deleteUser(scope.row)">删除</el-button>-->
                   </template>
              </el-table-column>
              <!--编辑与增加的页面-->
          </el-table>
           <!--新增界面-->
-         <el-dialog title="编辑" :visible.sync="dialogVisible" width="50%" :close-on-click-modal="false">
+         <el-dialog :title="$t('message.msg1_75')" :visible.sync="dialogVisible" width="50%" :close-on-click-modal="false">
              <el-form :model="addFormData" :rules="rules2" ref="addFormData" label-width="150px" class="demo-ruleForm login-container">
-                  <el-form-item prop="name" label="权限名称">
-                    <el-input type="text" v-model="addFormData.name" auto-complete="off" placeholder="权限名称"></el-input>
+                  <el-form-item prop="name"  :label="$t('label.label10_08')">
+                    <el-input type="text" v-model="addFormData.name" auto-complete="off" ></el-input>
                   </el-form-item>
-                   <el-form-item prop="permission" label="权限">
-                    <el-input type="text" v-model="addFormData.permission" auto-complete="off" placeholder="权限"></el-input>
+                   <el-form-item prop="permission"  :label="$t('label.label10_09')">
+                    <el-input type="text" v-model="addFormData.permission" auto-complete="off" ></el-input>
                   </el-form-item>
                    <el-row> 
                    <el-col>
-                   <el-form-item label="状态" >
-                    <el-select placeholder="状态" v-model="addFormData.available">
+                   <el-form-item :label="$t('label.label1_24')">
+                    <el-select  v-model="addFormData.available">
                         <el-option
                             v-for="item in $Enum.EnumSelect().openStatus"
                             :key="item.value"
@@ -66,26 +66,26 @@
                  </el-row>
              </el-form>
              <span slot="footer" class="dialog-footer">
-                 <el-button @click.native="dialogVisible = false,addFormData={id:'',name:'',permission:'',available:''}">取 消</el-button>
-                 <el-button v-if="isView" type="primary" @click.native="addSubmit">确 定</el-button>
+                 <el-button @click.native="dialogVisible = false,addFormData={id:'',name:'',permission:'',available:''}">{{$t('message.msg1_30')}}</el-button>
+                 <el-button v-if="isView" type="primary" @click.native="addSubmit">{{$t('message.msg1_28')}}</el-button>
              </span>
           </el-dialog>
-           <el-dialog title="权限-资源" :visible.sync="roleUserdialogVisible" width="90%" :close-on-click-modal="false"  @close="loadData" >
+           <el-dialog  :title="$t('message.label10_10')" :visible.sync="roleUserdialogVisible" width="90%" :close-on-click-modal="false"  @close="loadData" >
               <el-row>
                  <el-card style="min-height: 20px">          
-                   <span>{{'当前权限:'+addFormData.name + '   ' + addFormData.permission}}</span>
+                   <span>{{$t('label.label10_11')+addFormData.name + '   ' + addFormData.permission}}</span>
                  </el-card>
                </el-row>
               <el-transfer
                 filterable
                 :filter-method="filterMethod"
-                filter-placeholder="请输入资源名称"
+                :filter-placeholder="$t('label.label10_12')"
                 v-model="value2"
-                :titles="['可选资源','已选资源']"
+                :titles="[$t('label.label10_13'),$t('label.label10_14')]"
                 :data="data2" 
                 id='maskDialog'>
               </el-transfer>
-               <el-button  type="primary" @click="createRoleUser">保存</el-button>
+               <el-button  type="primary" @click="createRoleUser">{{$t('message.msg1_28')}}</el-button>
            </el-dialog> 
      </div>
   </template>
