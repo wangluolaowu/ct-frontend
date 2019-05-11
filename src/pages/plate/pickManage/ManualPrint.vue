@@ -298,7 +298,7 @@
                         :current-page.sync="search.currentPage" :page-size="search.pageSize" :page-sizes="[search.pageSize]" layout="total, sizes, prev, pager, next, jumper"
                         :total="totalRows">
           </el-pagination>
-           <el-dialog width="30%"  :title="$t('label.msg1_41')" :visible.sync="isShowInnerConfirmDialog" append-to-body @close="closeDialog">
+           <el-dialog width="30%"  :title="$t('message.msg1_41')" :visible.sync="isShowInnerConfirmDialog" append-to-body @close="closeDialog">
             <p class="dialog-text">{{$t('message.msg1_49')}}</p>
             <el-button type="primary" @click="confirmReject">{{$t('message.msg1_28')}}</el-button>
         </el-dialog>

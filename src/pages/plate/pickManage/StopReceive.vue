@@ -41,7 +41,7 @@
         openIsDisabledButton:'',
         closeIsDisabledButton:'',
         search: {
-          entityWorkstationId: 1,
+          entityWorkstationId: '',
           extWorkstationType: 'S',
           activeType: '',
           workstationType: 2
@@ -90,7 +90,10 @@
           params: this.search
         }).then((res) => {
           if (res.errCode === 'S') {
-            this.WS_ENTITY_WORKSTATION = res.data.result.map(item => {
+            this.WS_ENTITY_WORKSTATION = res.data.result.map((item, j)=> {
+              if(j === 0){
+                this.search.entityWorkstationId = item.entityWorkstationId
+              }
               item.value = item.entityWorkstationId
               item.lable = item.entityWorkstationId
               return item
