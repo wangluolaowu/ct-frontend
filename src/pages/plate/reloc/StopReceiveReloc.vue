@@ -14,8 +14,8 @@
           </el-form-item> 
           <el-form-item :label="$t('label.label1_51')" >
             <el-select  v-model="search.extWorkstationType" @change="websocketToLogin" v-loading.fullscreen.lock="fullscreenLoading">
-                  <el-option label="RELOC " value="RELOC"></el-option>
-                  <el-option label="CALL_SHELF" value="CALL_SHELF"></el-option>
+                  <el-option :label="$t('label.label1_96')" value="RELOC"></el-option>
+                  <el-option :label="$t('label.label1_97')" value="CALL_SHELF"></el-option>
               </el-select>
           </el-form-item>   
           <el-form-item>

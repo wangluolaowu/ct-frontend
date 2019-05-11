@@ -24,7 +24,7 @@
           </div>
           <div id="myChart" style="width: 100%;height: 400px;"></div>
         </div>
-        <div class="canvasOne">
+        <div class="canvasOne" v-if="isShowDialog">
           <div class="clears">
             <h4 class="h2 fl">{{$t('message.msg1_21')}}</h4>
             <div class="fr">
@@ -1007,6 +1007,7 @@
         tableLoadingSTOCK_TAKING:false,
         tableLoadingRELOC_PICKOUT:false,
         tableLoadingCALL_SHELF:false,
+        isShowDialog:false,
         tableData: {
           pick: [],
           BIN:[],
@@ -1524,6 +1525,12 @@
         this.dataTimeDoneValueList=[]
         this.dataTimePrintkeyList=[]
         this.dataTimePrintValueList=[]
+        let orderType = this.search.orderType
+        if(orderType === "S" || orderType === "V" || orderType === "U"  ){
+          this.isShowDialog = true
+        }else{
+          this.isShowDialog = false
+        }
       },
       getMychartData () {
         let that = this
