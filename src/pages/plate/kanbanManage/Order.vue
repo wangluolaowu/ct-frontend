@@ -94,7 +94,7 @@
       </div>
      <div class="tabCon tabConOther">
         <h4 class="h2">{{$t('message.msg1_67')}}</h4>
-        <el-table :data='tableData.Ulist' highlight-current-row  style="width: 100%" border>
+        <el-table :data='tableData.USUMlist' highlight-current-row  style="width: 100%" border>
           <el-table-column prop="inC" :label="$t('label.label1_01')" min-width="200" :render-header="$ELTable.labelHead"></el-table-column>
           <el-table-column prop="waveC" :label="$t('label.label1_02')"  min-width='200' :render-header="$ELTable.labelHead"></el-table-column>
           <el-table-column prop="complC" :label="$t('label.label1_03')" min-width="150" :render-header="$ELTable.labelHead"></el-table-column>
@@ -378,7 +378,7 @@ export default {
         VOrderList: [],
         SList: [],
         SOrderList: [],
-        UList: [],
+        USUMlist:[],
         UOrderList: [],
         PutawayAllList: [],
         PutawayList: [],
@@ -499,7 +499,7 @@ export default {
           that.tableData.resultStockInfoList = res.data.resultStockInfoList
           that.tableData.resultCallShelfSum = res.data.resultCallShelfSum
           that.tableData.resultCallShelfInfoList = res.data.resultCallShelfInfoList
-          that.tableData.UList = res.data.resultUSum
+          that.tableData.USUMlist = res.data.resultUSum
           that.tableData.UOrderList = res.data.resultUInfoList
         }
       })
