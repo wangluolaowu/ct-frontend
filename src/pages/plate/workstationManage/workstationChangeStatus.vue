@@ -3,73 +3,73 @@
      <el-form class="demo-form-inline selectedCont clears" label-width="200px">
         <el-row>
         <el-col :span="8">
-            <el-form-item label="工作站编号" >
+            <el-form-item :label="$t('label.label1_09')">
               <el-input v-model="searchBIN.entityWorkstationNum" style="width:200px"></el-input>
             </el-form-item>
         </el-col>
         <el-col :span="8">  
-            <el-form-item label="工作站客户端软件版本号" >
+            <el-form-item  :label="$t('label.label7_01')" >
               <el-input v-model="searchBIN.softwareVersionNum" style="width:200px"></el-input>
             </el-form-item>
         </el-col>   
         </el-row>
         <el-row>
         <el-col :span="8">
-            <el-form-item label="工作站ID" >
+            <el-form-item :label="$t('label.label7_02')">
               <el-input v-model="searchBIN.entityWorkstationId" style="width:200px"></el-input>
             </el-form-item>
         </el-col>
         <el-col :span="8">  
-            <el-form-item label="工作站生产批次" >
+            <el-form-item :label="$t('label.label7_03')" >
               <el-input v-model="searchBIN.mfgLotNum" style="width:200px"></el-input>
             </el-form-item>
         </el-col>   
         </el-row>
          <el-row>
         <el-col :span="8">
-           <el-form-item label="工作站设计版本号" >
+           <el-form-item  :label="$t('label.label7_04')">
               <el-input v-model="searchBIN.designVersionNum" style="width:200px"></el-input>
             </el-form-item>
         </el-col>
         <el-col :span="8">
-           <el-form-item label="扫描枪型号" >
+           <el-form-item  :label="$t('label.label7_05')">
               <el-input v-model="searchBIN.scanningGunModelNumber" style="width:200px"></el-input>
             </el-form-item>
         </el-col>
         </el-row>
        <el-row>
         <el-col :span="8">
-           <el-form-item label="工作站服役时间" >
+           <el-form-item :label="$t('label.label7_06')">
               <el-input v-model="searchBIN.totalServiceMileage" style="width:200px"></el-input>
             </el-form-item>
         </el-col>
         <el-col :span="8">  
-            <el-form-item label="工作站电脑MAC地址" >
+            <el-form-item  :label="$t('label.label7_06')">
               <el-input v-model="searchBIN.macAddress" style="width:200px"></el-input>
             </el-form-item>
         </el-col>   
         </el-row>
         <el-row>
         <el-col :span="8">
-           <el-form-item label="工作站IP地址" >
+           <el-form-item  :label="$t('label.label7_08')">
               <el-input v-model="searchBIN.ipAddress" style="width:200px"></el-input>
             </el-form-item>
         </el-col>
         <el-col :span="8">  
-            <el-form-item label="拍灯器个数" >
+            <el-form-item  :label="$t('label.label7_09')">
               <el-input v-model="searchBIN.electronicTagsCount" style="width:200px"></el-input>
             </el-form-item>
         </el-col>   
         </el-row>
         <el-row>  
         <el-col :span="8">
-           <el-form-item label="投影机型号" >
+           <el-form-item :label="$t('label.label7_10')">
               <el-input v-model="searchBIN.projectorModelNumber" style="width:200px"></el-input>
             </el-form-item>
         </el-col>
         <el-col :span="8">  
-            <el-form-item label="页面大小" >
-             <el-select placeholder="页面大小" v-model="searchBIN.pageSize" style="width:200px">
+            <el-form-item  :label="$t('label.label1_56')">
+             <el-select  v-model="searchBIN.pageSize" style="width:200px">
                 <el-option
                 v-for="item in $Enum.EnumSelect().page_size"
                 :key="item.value"
@@ -83,26 +83,24 @@
         </el-row>
         <el-row>
         <el-col :span="8">
-           <el-form-item label="工作站服役开始时间起始日期" >
+           <el-form-item :label="$t('label.label7_11')">
                <el-date-picker
                 v-model="searchBIN.startTimeStartServiceDate"
                 format="yyyy-MM-dd HH:mm:ss"
                 value-format="yyyy-MM-dd HH:mm:ss"
                 type="datetime"
-                placeholder="请选择日期"
                 @change="handleChangeTime"
                 style="width:200px"
               ></el-date-picker>
             </el-form-item>
         </el-col>
         <el-col :span="8">  
-            <el-form-item label="工作站服役开始截止时间" >
+            <el-form-item  :label="$t('label.label7_12')">
                <el-date-picker
                 v-model="searchBIN.endTimeStartServiceDate"
                 format="yyyy-MM-dd HH:mm:ss"
                 value-format="yyyy-MM-dd HH:mm:ss"
                 type="datetime"
-                placeholder="请选择日期"
                 style="width:200px"
                 @change="handleChangeTime"
               ></el-date-picker>
@@ -111,26 +109,24 @@
         </el-row>
          <el-row>
         <el-col :span="8">
-           <el-form-item label="最近一次维修时间开始日期" >
+           <el-form-item  :label="$t('label.label5_10')">
                <el-date-picker
                 v-model="searchBIN.startTimeLatestRepairDate"
                 format="yyyy-MM-dd HH:mm:ss"
                 value-format="yyyy-MM-dd HH:mm:ss"
                 type="datetime"
-                placeholder="请选择日期"
                 @change="handleChangeTime"
                 style="width:200px"
               ></el-date-picker>
             </el-form-item>
         </el-col>
         <el-col :span="8">  
-            <el-form-item label="最近一次维修时间截止日期" >
+            <el-form-item  :label="$t('label.label5_11')">
                <el-date-picker
                 v-model="searchBIN.endTimeLatestRepairDate"
                 format="yyyy-MM-dd HH:mm:ss"
                 value-format="yyyy-MM-dd HH:mm:ss"
                 type="datetime"
-                placeholder="请选择日期"
                 style="width:200px"
                 @change="handleChangeTime"
               ></el-date-picker>
@@ -139,26 +135,24 @@
         </el-row>
          <el-row>
         <el-col :span="8">
-           <el-form-item label="最近一次保养时间开始日期" >
+           <el-form-item  :label="$t('label.label5_12')">
                <el-date-picker
                 v-model="searchBIN.startTimeLatestMaintainDate"
                 format="yyyy-MM-dd HH:mm:ss"
                 value-format="yyyy-MM-dd HH:mm:ss"
                 type="datetime"
-                placeholder="请选择日期"
                 @change="handleChangeTime"
                 style="width:200px"
               ></el-date-picker>
             </el-form-item>
         </el-col>
         <el-col :span="8">  
-            <el-form-item label="最近一次保养时间截止日期" >
+            <el-form-item  :label="$t('label.label5_13')">
                <el-date-picker
                 v-model="searchBIN.endTimeLatestMaintainDate"
                 format="yyyy-MM-dd HH:mm:ss"
                 value-format="yyyy-MM-dd HH:mm:ss"
                 type="datetime"
-                placeholder="请选择日期"
                 style="width:200px"
                 @change="handleChangeTime"
               ></el-date-picker>
@@ -168,13 +162,13 @@
         <el-row>
         <el-col :span="8" >
           <el-form-item class='buttonGroups'>  
-              <el-button type="primary" @click="loadData">查询</el-button>
-              <el-button type="primary" @click="restData">清空</el-button>
+              <el-button type="primary" @click="loadData">{{$t('message.msg1_76')}}</el-button>
+              <el-button type="primary" @click="restData">{{$t('message.msg1_29')}}</el-button>
           </el-form-item>
           </el-col>
           <el-col :span="8">
             <el-form-item>
-                <el-button type="primary" @click="add">新增</el-button>
+                <el-button type="primary" @click="add">{{$t('message.msg1_52')}}</el-button>
             </el-form-item>
           </el-col>
         </el-row>
@@ -182,55 +176,55 @@
          <el-table :data="userInfoList" style="width: 100%" border  height="500">
             <!--<el-table-column prop="id" label="id" >
             </el-table-column>-->
-            <el-table-column prop="entityWorkstationId" label="工作站ID" fixed="left" >
+            <el-table-column prop="entityWorkstationId" :label="$t('label.label7_02')" width="200">
             </el-table-column>
-            <el-table-column prop="entityWorkstationNum" label="工作站编号" width="200">
+            <el-table-column prop="entityWorkstationNum" :label="$t('label.label1_09')" width="200">
             </el-table-column>
-             <el-table-column prop="softwareVersionNum" label="工作站软件版本号" width="200">
+             <el-table-column prop="softwareVersionNum" :label="$t('label.label7_01')" width="200">
             </el-table-column>
-             <el-table-column prop="designVersionNum" label="工作站设计版本号" width="200">
+             <el-table-column prop="designVersionNum" :label="$t('label.label7_04')" width="200">
             </el-table-column>
-             <el-table-column prop="mfgLotNum" label="工作站生产批次" width="200">
+             <el-table-column prop="mfgLotNum" :label="$t('label.label7_03')" width="200">
             </el-table-column>
-             <el-table-column prop="startServiceDate" label="工作站服役开始时间" width="200">
+             <el-table-column prop="startServiceDate" :label="$t('label.label7_06')" width="200">
                   <template slot-scope="scope">
                         {{$DateFormat.dateFormat(scope.row.startServiceDate,true)}}
                       </template>
             </el-table-column>
-             <el-table-column prop="totalServiceMileage" label="工作站服役时长" width="200">
+             <el-table-column prop="totalServiceMileage" :label="$t('label.label7_13')" width="200">
             </el-table-column>
-             <el-table-column prop="macAddress" label="工作站电脑MAC地址" width="200">
+             <el-table-column prop="macAddress" :label="$t('label.label7_07')" width="200">
             </el-table-column>
-             <el-table-column prop="kidIpAddress" label="工作站电脑IP地址" width="200">
+             <el-table-column prop="kidIpAddress" :label="$t('label.label7_08')" width="200">
             </el-table-column>
-             <el-table-column prop="latestMaintainDate" label="最近一次保养时间" width="200">
+             <el-table-column prop="latestMaintainDate" :label="$t('label.label5_15')" width="200">
                   <template slot-scope="scope">
                         {{$DateFormat.dateFormat(scope.row.latestMaintainDate,true)}}
                       </template>
             </el-table-column>
-             <el-table-column prop="latestRepairDate" label="最近一次维修时间" width="200">
+             <el-table-column prop="latestRepairDate" :label="$t('label.label5_16')" width="200">
                   <template slot-scope="scope">
                         {{$DateFormat.dateFormat(scope.row.latestRepairDate,true)}}
                       </template>
             </el-table-column>
-              <el-table-column prop="electronicTagsCount " label="拍灯器个数" width="200"> 
+              <el-table-column prop="electronicTagsCount " :label="$t('label.label7_09')" width="200"> 
             </el-table-column>
-              <el-table-column prop="projectorModelNumber " label="投影机型号" width="200"> 
+              <el-table-column prop="projectorModelNumber " :label="$t('label.label7_10')" width="200"> 
             </el-table-column>
-              <el-table-column prop="scanningGunModelNumber " label="扫描枪型号" width="200"> 
+              <el-table-column prop="scanningGunModelNumber " :label="$t('label.label7_05')" width="200"> 
             </el-table-column>
-             <el-table-column prop="descriptions " label="注释" width="200"> 
+             <el-table-column prop="descriptions " :label="$t('label.label5_17')"  width="200"> 
             </el-table-column>
              <!--第二步  开始进行修改和查询操作-->
              <el-table-column label="操作"  min-width="350" fixed="right">
  
                 <template slot-scope="scope">
  
-                     <el-button type="text" @click="checkDetail(scope.row)">查看详情</el-button>
+                     <el-button type="text" @click="checkDetail(scope.row)">{{$t('message.msg1_54')}}</el-button>
  
-                     <el-button type="text" @click="modifyInfo(scope.row)">修改</el-button>
+                     <el-button type="text" @click="modifyInfo(scope.row)">{{$t('message.msg1_55')}}</el-button>
   
-                     <el-button type="text" @click="deleteInfo(scope.row)">删除</el-button>
+                     <el-button type="text" @click="deleteInfo(scope.row)">{{$t('message.msg1_56')}}</el-button>
                   </template>
              </el-table-column>
              <!--编辑与增加的页面-->
@@ -240,81 +234,78 @@
                         :total="searchBIN.totalRows">
           </el-pagination>
           <!--新增界面-->
-         <el-dialog title="记录" :visible.sync="dialogVisible" width="50%" :close-on-click-modal="false">
+         <el-dialog :title="$t('message.msg1_75')" :visible.sync="dialogVisible" width="50%" :close-on-click-modal="false">
              <el-form :model="addFormData" :rules="rules2" ref="addFormData" label-width="150px" class="demo-ruleForm login-container">
-                  <el-form-item prop="entityWorkstationId" label="工作站ID">
-                    <el-input type="text" v-model="addFormData.entityWorkstationId" placeholder="工作站ID" :disabled="keyDisabled"></el-input>
+                  <el-form-item prop="entityWorkstationId" :label="$t('label.label7_02')">
+                    <el-input type="text" v-model="addFormData.entityWorkstationId" :disabled="keyDisabled"></el-input>
                   </el-form-item>
-                   <el-form-item prop="entityWorkstationNum" label="工作站编号">
-                    <el-input type="text" v-model="addFormData.entityWorkstationNum"  placeholder="工作站编号"></el-input>
+                   <el-form-item prop="entityWorkstationNum"  :label="$t('label.label1_09')">
+                    <el-input type="text" v-model="addFormData.entityWorkstationNum"  ></el-input>
                   </el-form-item>
-                   <el-form-item prop="softwareVersionNum" label="工作站软件版本号">
-                    <el-input type="text" v-model="addFormData.softwareVersionNum"  placeholder="工作站软件版本号"></el-input>
+                   <el-form-item prop="softwareVersionNum"  :label="$t('label.label7_01')">
+                    <el-input type="text" v-model="addFormData.softwareVersionNum"  ></el-input>
                   </el-form-item>
-                   <el-form-item prop="designVersionNum" label="工作站设计版本号">
-                    <el-input type="text" v-model="addFormData.designVersionNum"  placeholder="工作站设计版本号"></el-input>
+                   <el-form-item prop="designVersionNum"  :label="$t('label.label7_04')">
+                    <el-input type="text" v-model="addFormData.designVersionNum" ></el-input>
                   </el-form-item>
-                   <el-form-item prop="mfgLotNum" label="工作站生产批次" >
-                    <el-input type="text" v-model="addFormData.mfgLotNum" placeholder="工作站生产批次"></el-input>
+                   <el-form-item prop="mfgLotNum"  :label="$t('label.label7_03')" >
+                    <el-input type="text" v-model="addFormData.mfgLotNum" ></el-input>
                   </el-form-item>
-                   <el-form-item prop="startServiceDate" label="工作站服役开始时间">
+                   <el-form-item prop="startServiceDate"  :label="$t('label.label7_06')">
                     <el-date-picker
                         v-model="addFormData.startServiceDate"
                         format="yyyy-MM-dd HH:mm:ss"
                         value-format="yyyy-MM-dd HH:mm:ss"
                         type="datetime"
-                        placeholder="请选择日期"
                         style="width:200px"
                         @change="handleChangeTime"
                     ></el-date-picker>
                   </el-form-item>
-                  <el-form-item prop="totalServiceMileage" label="工作站服役时长">
-                    <el-input type="text" v-model="addFormData.totalServiceMileage" placeholder="工作站服役时长"></el-input>
+                  <el-form-item prop="totalServiceMileage"  :label="$t('label.label7_13')">
+                    <el-input type="text" v-model="addFormData.totalServiceMileage" ></el-input>
                   </el-form-item>
-                  <el-form-item prop="macAddress" label="工作站电脑MAC地址">
-                    <el-input type="text" v-model="addFormData.macAddress" placeholder="工作站电脑MAC地址"></el-input>
+                  <el-form-item prop="macAddress"  :label="$t('label.label7_07')">
+                    <el-input type="text" v-model="addFormData.macAddress" ></el-input>
                   </el-form-item>
-                  <el-form-item prop="kidIpAddress" label="工作站电脑IP地址">
-                    <el-input type="text" v-model="addFormData.kidIpAddress" placeholder="工作站电脑IP地址"></el-input>
+                  <el-form-item prop="kidIpAddress"  :label="$t('label.label7_08')">
+                    <el-input type="text" v-model="addFormData.kidIpAddress" ></el-input>
                   </el-form-item>
-                 <el-form-item prop="latestMaintainDate" label="最近一次保养时间">
+                 <el-form-item prop="latestMaintainDate"  :label="$t('label.label5_15')">
                      <el-date-picker
                         v-model="addFormData.latestMaintainDate"
                         format="yyyy-MM-dd HH:mm:ss"
                         value-format="yyyy-MM-dd HH:mm:ss"
                         type="datetime"
-                        placeholder="请选择日期"
                         style="width:200px"
                         @change="handleChangeTime"
                     ></el-date-picker>
                   </el-form-item>
-                    <el-form-item prop="latestRepairDate" label="最近一次维修时间">
+                    <el-form-item prop="latestRepairDate"  :label="$t('label.label5_16')">
                         <el-date-picker
                         v-model="addFormData.latestRepairDate"
                         format="yyyy-MM-dd HH:mm:ss"
                         value-format="yyyy-MM-dd HH:mm:ss"
                         type="datetime"
-                        placeholder="请选择日期"
                         style="width:200px"
                         @change="handleChangeTime"
                     ></el-date-picker>
                   </el-form-item>
-                  <el-form-item prop="electronicTagsCount " label="拍灯器个数">
-                    <el-input type="text" v-model="addFormData.electronicTagsCount" placeholder="拍灯器个数"></el-input>
+                  <el-form-item prop="electronicTagsCount "  :label="$t('label.label7_09')">
+                    <el-input type="text" v-model="addFormData.electronicTagsCount" ></el-input>
                   </el-form-item>
-                  <el-form-item prop="projectorModelNumber " label="投影机型号">
-                    <el-input type="text" v-model="addFormData.projectorModelNumber" placeholder="投影机型号"></el-input>
+                  <el-form-item prop="projectorModelNumber "  :label="$t('label.label7_10')">
+                    <el-input type="text" v-model="addFormData.projectorModelNumber"></el-input>
                   </el-form-item>
-                  <el-form-item prop="scanningGunModelNumber " label="扫描枪型号">
-                    <el-input type="text" v-model="addFormData.scanningGunModelNumber" placeholder="扫描枪型号"></el-input>
+                  <el-form-item prop="scanningGunModelNumber "  :label="$t('label.label7_05')">
+                    <el-input type="text" v-model="addFormData.scanningGunModelNumber" ></el-input>
                   </el-form-item>
-                    <el-form-item prop="descriptions " label="注释">
-                    <el-input type="text" v-model="addFormData.descriptions" placeholder="注释"></el-input>
+                    <el-form-item prop="descriptions " :label="$t('label.label5_17')">
+                    <el-input type="text" v-model="addFormData.descriptions" ></el-input>
                   </el-form-item>
              </el-form>
              <span slot="footer" class="dialog-footer">
                  <el-button @click.native="dialogVisible = false,addFormData={entityWorkstationId:'',entityWorkstationNum:'',softwareVersionNum:'',designVersionNum:'',mfgLotNum:'',startServiceDate:'',totalServiceMileage:'',macAddress:'',kidIpAddress:'',latestMaintainDate:'',latestRepairDate:'',electronicTagsCount:'',projectorModelNumber:'',scanningGunModelNumber:'',descriptions:''}">取 消</el-button>
-                 <el-button v-if="isView" type="primary" @click.native="addSubmit">确 定</el-button>
+                 <el-button v-if="isView" type="primary" @click.native="addSubmit">{{$t('message.msg1_28')}}</el-button>
              </span>
           </el-dialog>
      </div>
