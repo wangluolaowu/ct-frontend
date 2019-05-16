@@ -161,16 +161,20 @@
         </el-row>
         <el-row>
         <el-col :span="8" >
-          <el-form-item class='buttonGroups'>  
+          <el-form-item >  
               <el-button type="primary" @click="loadData">{{$t('message.msg1_76')}}</el-button>
-              <el-button type="primary" @click="restData">{{$t('message.msg1_29')}}</el-button>
           </el-form-item>
           </el-col>
           <el-col :span="8">
+            <el-form-item >
+                   <el-button type="primary" @click="restData">{{$t('message.msg1_29')}}</el-button>
+            </el-form-item>
+          </el-col>
+          <!--<el-col :span="8">
             <el-form-item>
                 <el-button type="primary" @click="add">{{$t('message.msg1_52')}}</el-button>
             </el-form-item>
-          </el-col>
+          </el-col>-->
         </el-row>
       </el-form>
          <el-table :data="userInfoList" style="width: 100%" border  height="500">
@@ -224,7 +228,7 @@
  
                      <el-button type="text" @click="modifyInfo(scope.row)">{{$t('message.msg1_55')}}</el-button>
   
-                     <el-button type="text" @click="deleteInfo(scope.row)">{{$t('message.msg1_56')}}</el-button>
+                     <!--<el-button type="text" @click="deleteInfo(scope.row)">{{$t('message.msg1_56')}}</el-button>-->
                   </template>
              </el-table-column>
              <!--编辑与增加的页面-->

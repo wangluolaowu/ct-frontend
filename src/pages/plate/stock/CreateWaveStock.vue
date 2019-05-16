@@ -118,24 +118,27 @@
                   </el-col>
                 </el-row>
                </el-form>
-                <el-table ref="multipleTable" :data="tableData"  :row-class-name="tableRowClassName" style="width: 99.99%" border @selection-change="handleSelectionChange" v-loading="tableLoading">
-                    <el-table-column type="selection" width="55">
+                <el-table ref="multipleTable" :data="tableData"  :row-class-name="tableRowClassName" style="width: 99.99%" border @selection-change="handleSelectionChange" v-loading="tableLoading"
+                element-loading-text="拼命加载中"
+                element-loading-spinner="el-icon-loading"
+                element-loading-background="rgba(0, 0, 0, 0.5)">
+                    <el-table-column type="selection" min-width="55">
                     </el-table-column>
-                    <el-table-column prop="locNum" :label="$t('label.label1_83') " width="200">
+                    <el-table-column prop="locNum" :label="$t('label.label1_83') " min-width="200">
                     </el-table-column>
-                    <el-table-column prop="skuNum"  :label="$t('label.label1_70')"  width="200">
+                    <el-table-column prop="skuNum"  :label="$t('label.label1_70')"  min-width="200">
                     </el-table-column>
-                    <el-table-column prop="page" :label="$t('label.label1_92')"  width="100"> 
+                    <el-table-column prop="page" :label="$t('label.label1_92')"  min-width="100"> 
                     </el-table-column>
-                    <el-table-column prop="binQty" :label="$t('label.label1_93')"  width="100">
+                    <el-table-column prop="binQty" :label="$t('label.label1_93')"  min-width="100">
                     </el-table-column>
-                    <el-table-column prop="noOfCount" :label="$t('label.label1_90')"  width="100">
+                    <el-table-column prop="noOfCount" :label="$t('label.label1_90')"  min-width="100">
                     </el-table-column>
-                     <el-table-column prop="countBy" :label="$t('label.label1_94')" width="100">
+                     <el-table-column prop="countBy" :label="$t('label.label1_94')" min-width="100">
                     </el-table-column>
-                     <el-table-column prop="rfdcUserId"  :label="$t('label.label1_91')" width="100">
+                     <el-table-column prop="rfdcUserId"  :label="$t('label.label1_91')" min-width="100">
                     </el-table-column>
-                    <el-table-column prop="creationDate"  :label="$t('label.label1_72')" width="200">
+                    <el-table-column prop="creationDate"  :label="$t('label.label1_72')" min-width="200">
                       <template slot-scope="scope">
                          {{$DateFormat.dateFormat(scope.row.creationDate,true)}}
                      </template>
@@ -257,7 +260,6 @@ export default {
         return 'warning-row'
       },
     beforeUpload (file, fileList) {
-      this.tableLoading = true
       let fd = new FormData()
       fd.append('file', file)
       this.axios.post('stock/createWave/reportExcelTemplate', fd).then(res => {
@@ -268,7 +270,6 @@ export default {
         } else {
           this.$message.warning('文件导入失败')
         }
-        this.tableLoading = false
       })
     },
     handleRemove(file, fileList) {
@@ -434,6 +435,7 @@ export default {
       this.search.currentPage = 1
     },
     getTableData () { // 创建波次查询列表
+      this.tableLoading = true
       let that = this
       this.axios.get('stock/createWave/selectMainStockInfoList', {
         params: that.search
@@ -442,7 +444,9 @@ export default {
           that.tableData = res.data.result
           that.totalRows = res.data.totalRows
         }
+          this.tableLoading = false
       })
+    
     },
     getTableDataDialog () { // 创建波次查询列表
       let that = this
