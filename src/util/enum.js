@@ -86,6 +86,16 @@ Enum.EnumSelect = function() {
         value: 0
       }
     ],
+    openStatus4: [
+      {
+        label: '停用',
+        value: 10
+      },
+      {
+        label: '启用',
+        value: 20
+      }
+    ],
     openStatus2: [
       {
         label: '开启',
