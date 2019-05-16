@@ -4,7 +4,7 @@
     <div class="button" style="width:3%;float:right;">
       <P><el-button class="el-icon-plus" @click.prevent="addRow()"></el-button></P>
       <p><el-button class="el-icon-minus" @click.prevent="delData()"></el-button></p>
-      <p><el-button type="el-icon-minus" :disabled="submitDisabled" @click.prevent="submit">提交</el-button></p>
+      <p><el-button type="el-icon-minus" :disabled="submitDisabled" @click.prevent="submit">{{$t('message.msg1_34')}}</el-button></p>
     </div>
     <div class="table">
       <el-table
@@ -16,10 +16,10 @@
         style="width: 95%"
         @selection-change='selectRow'>
         <el-table-column type="selection" width="45" align="center"></el-table-column>
-        <el-table-column label="序号"  type="index" width="60" align="center"></el-table-column>
-        <el-table-column  label="机器人编码" align="center">
+        <el-table-column  :label="$t('label.label1_86')" type="index" width="60" align="center"></el-table-column>
+        <el-table-column   :label="$t('label.label1_20')" align="center">
           <template slot-scope="scope">
-               <el-select placeholder="机器人编码" v-model="scope.row.pi_kid_id">
+               <el-select  v-model="scope.row.pi_kid_id">
                 <el-option
                 v-for="item in PI_KID_ID"
                 :key="item.value"
@@ -30,9 +30,9 @@
            </el-select>
           </template>
         </el-table-column>
-         <el-table-column  label="货架编码" align="center">
+         <el-table-column  :label="$t('label.label8_02')" align="center">
           <template slot-scope="scope">
-               <el-select placeholder="货架编码" v-model="scope.row.pi_holder_id">
+               <el-select  v-model="scope.row.pi_holder_id">
                 <el-option
                 v-for="item in PI_HOLDER_ID"
                 :key="item.VALUE"
@@ -43,9 +43,9 @@
            </el-select>
           </template>
         </el-table-column>
-        <el-table-column label="动作类型">
+        <el-table-column :label="$t('label.label5_19')">
           <template slot-scope="scope">
-             <el-select placeholder="动作类型" v-model="scope.row.pi_release_load_flag">
+             <el-select v-model="scope.row.pi_release_load_flag">
                <el-option
                     v-for="item in $Enum.EnumSelect().TM_MOVE_TASK_RELEASE_LOAD"
                     :key="item.value"
@@ -56,19 +56,19 @@
            </el-select>
           </template>
         </el-table-column>
-        <el-table-column label="目标位置X">
+        <el-table-column  :label="$t('label.label1_35')">
           <template slot-scope="scope">
             <el-input v-model="scope.row.pi_dest_pos_x"></el-input>
           </template>
         </el-table-column>
-        <el-table-column prop="name" label="目标位置Y">
+        <el-table-column prop="name"  :label="$t('label.label1_36')">
           <template slot-scope="scope">
             <el-input v-model="scope.row.pi_dest_pos_y"></el-input>
           </template>
         </el-table-column>
       </el-table>
       <el-dialog
-      title="提示"
+      :title="$t('message.msg1_41')"
       :visible.sync="dialogVisibleStart"
       width="40%" @close="confirm">
        <el-table
@@ -76,20 +76,20 @@
         border
         :row-class-name="tableRowClassName"
         style="width: 95%" @close='confirm'>
-         <el-table-column prop="pi_kid_id" label="机器人编码" align="center">
+         <el-table-column prop="pi_kid_id"  :label="$t('label.label1_20')" align="center">
         </el-table-column>
-         <el-table-column prop="pi_holder_id" label="货架编码" align="center">
+         <el-table-column prop="pi_holder_id"  :label="$t('label.label1_26')" align="center">
            <template slot-scope="scope">
              {{$Enum.getEnumSelectByValue(PI_HOLDER_ID,scope.row.pi_holder_id)}}
           </template>
         </el-table-column>
-        <el-table-column prop="isSucess" label="是否成功" align="center">
+        <el-table-column prop="isSucess"  :label="$t('label.label5_20')" align="center">
         </el-table-column>
-        <el-table-column prop="po_retmsg" label="错误描述" align="center">
+        <el-table-column prop="po_retmsg"  :label="$t('label.label5_21')" align="center">
         </el-table-column>
        </el-table>
       <span slot="footer" class="dialog-footer">
-          <el-button type="primary" @click="confirm">确 定</el-button>
+          <el-button type="primary" @click="confirm">{{$t('message.msg1_28')}}</el-button>
          </span>
     </el-dialog>
     </div>

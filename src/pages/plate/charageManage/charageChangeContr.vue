@@ -3,20 +3,20 @@
      <el-form class="demo-form-inline selectedCont clears" label-width="200px">
         <el-row>
         <el-col :span="8">
-            <el-form-item prop="ruleId" label="规则编号" >
+            <el-form-item prop="ruleId" :label="$t('label.label9_03')" >
               <el-input v-model="searchBIN.ruleId" style="width:200px"></el-input>
             </el-form-item>
         </el-col>
         <el-col :span="8">
-            <el-form-item prop="rulePriority" label="规则优先级" >
+            <el-form-item prop="rulePriority" :label="$t('label.label9_04')">
               <el-input v-model="searchBIN.rulePriority" style="width:200px"></el-input>
             </el-form-item>
         </el-col>
         </el-row>
          <el-row>  
             <el-col :span="8">  
-            <el-form-item label="页面大小" >
-             <el-select placeholder="页面大小" v-model="searchBIN.pageSize" style="width:200px">
+            <el-form-item  :label="$t('label.label1_56')">
+             <el-select  v-model="searchBIN.pageSize" style="width:200px">
                 <el-option
                 v-for="item in $Enum.EnumSelect().page_size"
                 :key="item.value"
@@ -28,7 +28,7 @@
             </el-form-item>
         </el-col> 
         <el-col :span="8">
-            <el-form-item label="机器人编号">
+            <el-form-item  :label="$t('label.label5_01')">
               <el-input v-model="searchBIN.kidId" style="width:200px"></el-input>
             </el-form-item>
         </el-col> 
@@ -36,17 +36,17 @@
         <el-row>
         <el-col :span="5" >
           <el-form-item >  
-              <el-button type="primary" @click="loadData">查询</el-button>
+              <el-button type="primary" @click="loadData">{{$t('message.msg1_68')}}</el-button>
           </el-form-item>
           </el-col>
           <el-col :span="5">
             <el-form-item>
-                  <el-button type="primary" @click="restData">清空</el-button>
+                  <el-button type="primary" @click="restData">{{$t('message.msg1_30')}}</el-button>
             </el-form-item>
           </el-col>
           <el-col :span="5">
             <el-form-item>
-                <el-button type="primary" @click="add">新增</el-button>
+                <el-button type="primary" @click="add">{{$t('message.msg1_52')}}</el-button>
             </el-form-item>
           </el-col>
         </el-row>
@@ -54,37 +54,37 @@
          <el-table :data="userInfoList" style="width: 100%" border  min-height="100">
             <!--<el-table-column prop="id" label="id" >
             </el-table-column>-->
-            <el-table-column prop="ruleId" label="规则编号"  min-width="200">
+            <el-table-column prop="ruleId"  :label="$t('label.label9_03')" min-width="200">
             </el-table-column>
-            <el-table-column prop="rulePriority" label="规则优先级" min-width="200">
+            <el-table-column prop="rulePriority"  :label="$t('label.label9_04')" min-width="200">
             </el-table-column>
-            <el-table-column prop="startTime" label="开始时间" min-width="200">
+            <el-table-column prop="startTime"  :label="$t('label.label9_05')" min-width="200">
             </el-table-column>
-             <el-table-column prop="endTime" label="结束时间" min-width="200">
+             <el-table-column prop="endTime"  :label="$t('label.label9_06')" min-width="200">
             </el-table-column>
-             <el-table-column prop="designVersionNum" label="启用时间" min-width="200">
+             <el-table-column prop="designVersionNum"  :label="$t('label.label9_07')" min-width="200">
             </el-table-column>
-             <el-table-column prop="kidMinBatteryPower" label="最低电量(%)" min-width="200">
+             <el-table-column prop="kidMinBatteryPower"  :label="$t('label.label9_08')" min-width="200">
             </el-table-column>
-             <el-table-column prop="kidMaxBatteryPower" label="最高电量(%)" min-width="200">
+             <el-table-column prop="kidMaxBatteryPower"  :label="$t('label.label9_09')" min-width="200">
             </el-table-column>
-             <el-table-column prop="kidId" label="机器人编号" min-width="200">
+             <el-table-column prop="kidId"  :label="$t('label.label1_20')" min-width="200">
             </el-table-column>
-             <el-table-column prop="enableFlag" label="状态" min-width="200">
+             <el-table-column prop="enableFlag" :label="$t('label.label1_24')" min-width="200">
                <template slot-scope="scope" width="100%">
                 {{$Enum.getEnumSelectByValue($Enum.EnumSelect().openStatus3,scope.row.enableFlag)}}
               </template>
             </el-table-column>
              <!--第二步  开始进行修改和查询操作-->
-             <el-table-column label="操作"  min-width="350" fixed="right">
+             <el-table-column :label="$t('message.msg1_53')" min-width="350" fixed="right">
  
                 <template slot-scope="scope">
  
-                     <el-button type="text" @click="checkDetail(scope.row)">查看详情</el-button>
+                     <el-button type="text" @click="checkDetail(scope.row)">{{$t('message.msg1_54')}}</el-button>
  
-                     <el-button type="text" @click="modifyInfo(scope.row)">修改</el-button>
+                     <el-button type="text" @click="modifyInfo(scope.row)">{{$t('message.msg1_55')}}</el-button>
   
-                     <el-button type="text" @click="deleteInfo(scope.row)">删除</el-button>
+                     <el-button type="text" @click="deleteInfo(scope.row)">{{$t('message.msg1_56')}}</el-button>
                   </template>
              </el-table-column>
              <!--编辑与增加的页面-->
@@ -94,50 +94,50 @@
                         :total="searchBIN.totalRows">
           </el-pagination>
           <!--新增界面-->
-         <el-dialog title="记录" :visible.sync="dialogVisible" width="50%" :close-on-click-modal="false">
+         <el-dialog :title="$t('message.msg1_75')" :visible.sync="dialogVisible" width="50%" :close-on-click-modal="false">
              <el-form :model="addFormData" :rules="rules2" ref="addFormData" label-width="150px" class="demo-ruleForm login-container">
-                  <el-form-item prop="ruleId" label="规则编号"> 
-                    <el-input type="text" v-model="addFormData.ruleId" placeholder="规则编号" :disabled="keyDisabled"></el-input>
+                  <el-form-item prop="ruleId" :label="$t('label.label9_03')"> 
+                    <el-input type="text" v-model="addFormData.ruleId"  :disabled="keyDisabled"></el-input>
                   </el-form-item>
-                  <el-form-item prop="rulePriority" label="规则优先级"> 
-                    <el-input type="text" v-model="addFormData.rulePriority" placeholder="规则优先级" ></el-input>
+                  <el-form-item prop="rulePriority"  :label="$t('label.label9_04')"> 
+                    <el-input type="text" v-model="addFormData.rulePriority"  ></el-input>
                   </el-form-item>
-                   <el-form-item prop="startTime" label="开始时间">
+                   <el-form-item prop="startTime"  :label="$t('label.label9_05')">
                       <template>
                           <el-time-picker
                             v-model="addFormData.startTime"
                             :picker-options="{
                               selectableRange: '00:00:00 - 23:59:59'
                             }"
-                            placeholder="任意时间点" value-format="HH:mm:ss"   format="HH:mm:ss">
+                             value-format="HH:mm:ss"   format="HH:mm:ss">
                           </el-time-picker>
                         </template>
                   </el-form-item>
-                   <el-form-item prop="endTime" label="结束时间">
+                   <el-form-item prop="endTime" :label="$t('label.label9_06')">
                      <template>
                           <el-time-picker
                             v-model="addFormData.endTime"
                             :picker-options="{
                               selectableRange: '00:00:00 - 23:59:59'
                             }"
-                            placeholder="任意时间点" value-format="HH:mm:ss"   format="HH:mm:ss">
+                             value-format="HH:mm:ss"   format="HH:mm:ss">
                           </el-time-picker>
                         </template>
                   </el-form-item>
-                   <el-form-item prop="designVersionNum" label="启用时间">
-                    <el-input type="text" v-model="addFormData.designVersionNum"  placeholder="启用时间"></el-input>
+                   <el-form-item prop="designVersionNum"  :label="$t('label.label9_07')">
+                    <el-input type="text" v-model="addFormData.designVersionNum" ></el-input>
                   </el-form-item>
-                   <el-form-item prop="kidMinBatteryPower" label="最低电量(%)">
-                    <el-input type="text" v-model="addFormData.kidMinBatteryPower" placeholder="最低电量(%)"></el-input>
+                   <el-form-item prop="kidMinBatteryPower"  :label="$t('label.label9_08')">
+                    <el-input type="text" v-model="addFormData.kidMinBatteryPower" ></el-input>
                   </el-form-item>
-                   <el-form-item prop="kidMaxBatteryPower" label="最高电量(%)">
-                     <el-input type="text" v-model="addFormData.kidMaxBatteryPower" placeholder="最低电量(%)"></el-input>
+                   <el-form-item prop="kidMaxBatteryPower"  :label="$t('label.label9_09')">
+                     <el-input type="text" v-model="addFormData.kidMaxBatteryPower" ></el-input>
                   </el-form-item>
-                  <el-form-item prop="kidId" label="机器人编号">
-                    <el-input type="text" v-model="addFormData.kidId" placeholder="机器人编号"></el-input>
+                  <el-form-item prop="kidId"  :label="$t('label.label1_20')">
+                    <el-input type="text" v-model="addFormData.kidId" ></el-input>
                   </el-form-item>
-                  <el-form-item prop="enableFlag" label="状态">
-                    <el-select placeholder="状态" v-model="addFormData.enableFlag" style="width:200px" >
+                  <el-form-item prop="enableFlag"  :label="$t('label.label1_24')">
+                    <el-select  v-model="addFormData.enableFlag" style="width:200px" >
                       <el-option
                       v-for="item in $Enum.EnumSelect().openStatus3"
                       :key="item.value"
@@ -149,8 +149,8 @@
                   </el-form-item>
              </el-form>
              <span slot="footer" class="dialog-footer">
-                 <el-button @click.native="dialogVisible = false,addFormData={ruleId:'',rulePriority:'', startTime:'',endTime:'',designVersionNum:'',kidMinBatteryPower:'',kidMaxBatteryPower:'',kidId:'',enableFlag:''}">取 消</el-button>
-                 <el-button v-if="isView" type="primary" @click.native="addSubmit">确 定</el-button>
+                 <el-button @click.native="dialogVisible = false,addFormData={ruleId:'',rulePriority:'', startTime:'',endTime:'',designVersionNum:'',kidMinBatteryPower:'',kidMaxBatteryPower:'',kidId:'',enableFlag:''}">{{$t('message.msg1_30')}}</el-button>
+                 <el-button v-if="isView" type="primary" @click.native="addSubmit">{{$t('message.msg1_28')}}</el-button>
              </span>
           </el-dialog>
      </div>
