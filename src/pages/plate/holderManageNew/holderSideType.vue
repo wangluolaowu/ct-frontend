@@ -3,32 +3,32 @@
      <el-form class="demo-form-inline selectedCont clears" label-width="200px">
         <el-row>
         <el-col :span="8">
-            <el-form-item label="货位类型" >
+            <el-form-item  :label="$t('label.label8_10')">
               <el-input v-model="searchBIN.typeCode" style="width:200px"></el-input>
             </el-form-item>
         </el-col>
         <el-col :span="8">  
-            <el-form-item label="宽" >
+            <el-form-item  :label="$t('label.label8_12')">
               <el-input v-model="searchBIN.width" style="width:200px"></el-input>
             </el-form-item>
         </el-col>   
         </el-row>
          <el-row>
         <el-col :span="8">
-           <el-form-item label="高" >
+           <el-form-item  :label="$t('label.label8_13')">
               <el-input v-model="searchBIN.height" style="width:200px"></el-input>
             </el-form-item>
         </el-col>
         <el-col :span="8">  
-            <el-form-item label="深" >
+            <el-form-item  :label="$t('label.label8_14')">
               <el-input v-model="searchBIN.depth" style="width:200px"></el-input>
             </el-form-item>
         </el-col>   
         </el-row>
         <el-row>
         <el-col :span="8">  
-            <el-form-item label="页面大小" >
-             <el-select placeholder="页面大小" v-model="searchBIN.pageSize" style="width:200px">
+            <el-form-item :label="$t('label.label1_56')" >
+             <el-select v-model="searchBIN.pageSize" style="width:200px">
                 <el-option
                 v-for="item in $Enum.EnumSelect().page_size"
                 :key="item.value"
@@ -43,17 +43,17 @@
         <el-row>
         <el-col :span="5" >
           <el-form-item >  
-              <el-button type="primary" @click="loadData">查询</el-button> 
+              <el-button type="primary" @click="loadData">{{$t('message.msg1_68')}}</el-button> 
           </el-form-item>
           </el-col>
            <el-col :span="5">
             <el-form-item>
-                  <el-button type="primary" @click="restData">清空</el-button>
+                  <el-button type="primary" @click="restData">{{$t('message.msg1_30')}}</el-button>
             </el-form-item>
           </el-col>
           <el-col :span="5">
             <el-form-item>
-                <el-button type="primary" @click="add">新增</el-button>
+                <el-button type="primary" @click="add">{{$t('message.msg1_52')}}</el-button>
             </el-form-item>
           </el-col>
         </el-row>
@@ -61,26 +61,26 @@
          <el-table :data="userInfoList" style="width: 100%" border  min-height="100">
             <!--<el-table-column prop="id" label="id" >
             </el-table-column>-->
-             <el-table-column prop="typeCode" label="货位类型" width="200">
+             <el-table-column prop="typeCode"  :label="$t('label.label8_10')" width="200">
             </el-table-column>
-             <el-table-column prop="width" label="宽" width="200">
+             <el-table-column prop="width"  :label="$t('label.label8_12')" width="200">
             </el-table-column>
-             <el-table-column prop="height" label="高" width="200">
+             <el-table-column prop="height" :label="$t('label.label8_13')" width="200">
             </el-table-column>
-             <el-table-column prop="depth" label="深" width="200">
+             <el-table-column prop="depth" :label="$t('label.label8_14')" width="200">
             </el-table-column>
-             <el-table-column prop="description" label="描述" width="200">
+             <el-table-column prop="description" :label="$t('label.label5_17')" width="200">
             </el-table-column>
              <!--第二步  开始进行修改和查询操作-->
              <el-table-column label="操作"  min-width="350" fixed="right">
  
                 <template slot-scope="scope">
  
-                     <el-button type="text" @click="checkDetail(scope.row)">查看详情</el-button>
+                     <el-button type="text" @click="checkDetail(scope.row)">{{$t('message.msg1_54')}}</el-button>
  
-                     <el-button type="text" @click="modifyInfo(scope.row)">修改</el-button>
+                     <el-button type="text" @click="modifyInfo(scope.row)">{{$t('message.msg1_55')}}</el-button>
   
-                     <el-button type="text" @click="deleteInfo(scope.row)">删除</el-button>
+                     <el-button type="text" @click="deleteInfo(scope.row)">{{$t('message.msg1_56')}}</el-button>
                   </template>
              </el-table-column>
              <!--编辑与增加的页面-->
@@ -90,27 +90,27 @@
                         :total="searchBIN.totalRows">
           </el-pagination>
           <!--新增界面-->
-         <el-dialog title="记录" :visible.sync="dialogVisible" width="50%" :close-on-click-modal="false">
+         <el-dialog :title="$t('message.msg1_75')" :visible.sync="dialogVisible" width="50%" :close-on-click-modal="false">
              <el-form :model="addFormData"  ref="addFormData" label-width="150px" class="demo-ruleForm login-container">
-                  <el-form-item  prop="typeCode" label="货位类型">
-                    <el-input type="text" v-model="addFormData.typeCode" placeholder="货位类型" :disabled="keyDisabled"></el-input>
+                  <el-form-item  prop="typeCode" :label="$t('label.label8_10')">
+                    <el-input type="text" v-model="addFormData.typeCode"  :disabled="keyDisabled"></el-input>
                   </el-form-item>
-                   <el-form-item prop="width" label="宽">
-                    <el-input type="text" v-model="addFormData.width"  placeholder="宽"></el-input>
+                   <el-form-item prop="width"  :label="$t('label.label8_12')">
+                    <el-input type="text" v-model="addFormData.width"  ></el-input>
                   </el-form-item>
-                   <el-form-item prop="height" label="高">
-                    <el-input type="text" v-model="addFormData.height"  placeholder="高"></el-input>
+                   <el-form-item prop="height" :label="$t('label.label8_13')">
+                    <el-input type="text" v-model="addFormData.height"  ></el-input>
                   </el-form-item>
-                   <el-form-item prop="depth" label="深">
-                    <el-input type="text" v-model="addFormData.depth" placeholder="深" ></el-input>
+                   <el-form-item prop="depth"  :label="$t('label.label8_14')">
+                    <el-input type="text" v-model="addFormData.depth"></el-input>
                   </el-form-item>
-                   <el-form-item prop="description" label="描述">
-                    <el-input type="text" v-model="addFormData.description" placeholder="描述" ></el-input>
+                   <el-form-item prop="description"  :label="$t('label.label5_17')">
+                    <el-input type="text" v-model="addFormData.description" ></el-input>
                   </el-form-item>
              </el-form>
              <span slot="footer" class="dialog-footer">
                  <el-button @click.native="dialogVisible = false,addFormData={typeId:'',typeCode:'',width:'',height:'',depth:'',description:''}">取 消</el-button>
-                 <el-button v-if="isView" type="primary" @click.native="addSubmit">确 定</el-button>
+                 <el-button v-if="isView" type="primary" @click.native="addSubmit">{{$t('message.msg1_28')}}</el-button>
              </span>
           </el-dialog>
       </div>

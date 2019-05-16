@@ -193,7 +193,7 @@
              <el-table-column prop="descriptions " :label="$t('label.label5_17')" width="200"> 
             </el-table-column>
              <!--第二步  开始进行修改和查询操作-->
-             <el-table-column label="操作"  min-width="350" fixed="right">
+             <el-table-column label="$t('message.msg1_53')"  min-width="350" fixed="right">
  
                 <template slot-scope="scope">
  
@@ -211,7 +211,7 @@
                         :total="searchBIN.totalRows">
           </el-pagination>
           <!--新增界面-->
-         <el-dialog title="记录" :visible.sync="dialogVisible" width="50%" :close-on-click-modal="false">
+         <el-dialog title="$t('message.msg1_75')" :visible.sync="dialogVisible" width="50%" :close-on-click-modal="false">
              <el-form :model="addFormData" :rules="rules2" ref="addFormData" label-width="150px" class="demo-ruleForm login-container">
                   <el-form-item prop="kidId"  :label="$t('label.label5_01')">
                     <el-input type="text" v-model="addFormData.kidId"  :label="$t('label.label5_01')" :disabled="keyDisabled"></el-input>

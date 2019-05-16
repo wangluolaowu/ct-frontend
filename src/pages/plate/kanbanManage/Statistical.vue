@@ -1563,7 +1563,10 @@
             dataTimePrintValueListTemp.push(item.COU)
           })
           this.drawLine(dataTimeDonekeyListTemp,dataTimeDoneValueListTemp)
-          this.drawLineTwo(dataTimePrintkeyListTemp,dataTimePrintValueListTemp)
+          if(this.isShowDialog === true){
+             this.drawLineTwo(dataTimePrintkeyListTemp,dataTimePrintValueListTemp)
+          }
+         
          }
         })
           

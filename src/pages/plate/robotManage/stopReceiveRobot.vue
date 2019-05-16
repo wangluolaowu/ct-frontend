@@ -9,26 +9,26 @@
    </div>-->
     <!--弹窗-->
     <el-dialog
-      title="提示"
+      :title="$t('message.msg1_41')"
       :visible.sync="dialogVisible"
       width="30%"
     >
-      <span>是否全部暂停</span>
+      <span>{{$t('message.msg1_69')}}</span>
       <span slot="footer" class="dialog-footer">
-          <el-button @click="cancleBtn()">取 消</el-button>
-          <el-button type="primary" @click="succeBtn()">确 定</el-button>
+          <el-button @click="cancleBtn()">{{$t('message.msg1_30')}}</el-button>
+          <el-button type="primary" @click="succeBtn()">{{$t('message.msg1_68')}}</el-button>
          </span>
     </el-dialog>
      <!--弹窗-->
     <el-dialog
-      title="提示"
+      :title="$t('message.msg1_41')"
       :visible.sync="dialogVisibleStart"
       width="30%"
     >
-      <span>是否全部恢复</span>
+      <span>{{$t('message.msg1_69')}}</span>
       <span slot="footer" class="dialog-footer">
-          <el-button @click="cancleBtnStart()">取 消</el-button>
-          <el-button type="primary" @click="succeBtnStart()">确 定</el-button>
+          <el-button @click="cancleBtnStart()">{{$t('message.msg1_30')}}</el-button>
+          <el-button type="primary" @click="succeBtnStart()">{{$t('message.msg1_68')}}</el-button>
          </span>
     </el-dialog>
 
@@ -36,32 +36,32 @@
     <el-col :span="12" class="stopCon">
       <!--暂停部分机器人-->
       <template >
-        <h1>暂停部分机器人</h1>
+        <h1>{{$t('message.msg1_72')}}}</h1>
         <div style="margin: 15px 0;"></div>
         <el-checkbox-group v-model="checkedStop" @change="handleCheckedCitiesChange">
           <el-checkbox v-for="item in stopRobotName" :label="item" :key="item">{{item}}</el-checkbox>
         </el-checkbox-group>
-        <el-checkbox :indeterminate="isIndeterminate" v-model="checkAll" @change="handleCheckAllChange">全选</el-checkbox>
-        <el-button class="submitBtn" type="primary" @click="submitBtn(0)">提交</el-button>
+        <el-checkbox :indeterminate="isIndeterminate" v-model="checkAll" @change="handleCheckAllChange">{{$t('message.msg1_73')}}</el-checkbox>
+        <el-button class="submitBtn" type="primary" @click="submitBtn(0)">{{$t('message.msg1_34')}}</el-button>
       </template>
     </el-col>
     <el-col :span="12" class="resumeCon">
       <!--恢复暂停机器人-->
       <template >
-        <h1>恢复机器人</h1>
+        <h1>{{$t('message.msg1_74')}}</h1>
         <div style="margin: 15px 0;"></div>
         <el-checkbox-group v-model="checkedResumeRobot" @change="handleCheckedRemoChange">
           <el-checkbox v-for="items in resumeName" :label="items" :key="items">{{items}}</el-checkbox>
         </el-checkbox-group>
-        <el-checkbox :indeterminate="isIndeterminate2" v-model="checkAll2" @change="handleCheckAllChange2">全选</el-checkbox>
-        <el-button class="submitBtn" type="primary" @click="submitBtn(1)">提交</el-button>
+        <el-checkbox :indeterminate="isIndeterminate2" v-model="checkAll2" @change="handleCheckAllChange2">{{$t('message.msg1_73')}}</el-checkbox>
+        <el-button class="submitBtn" type="primary" @click="submitBtn(1)">{{$t('message.msg1_34')}}</el-button>
       </template>
     </el-col>
   </el-row>
 
-<el-dialog width="30%" title="提示" :visible.sync="isShowInnerConfirmDialog" append-to-body >
-            <p class="dialog-text">提交成功</p>
-            <el-button type="primary" @click="confirmReject">确认</el-button>
+<el-dialog width="30%" :title="$t('message.msg1_41')" :visible.sync="isShowInnerConfirmDialog" append-to-body >
+            <p class="dialog-text">{{$t('message.msg1_43')}}</p>
+            <el-button type="primary" @click="confirmReject">{{$t('message.msg1_68')}}</el-button>
         </el-dialog>
 
   </div>

@@ -145,7 +145,7 @@
               </template>
             </el-table-column>
              <!--第二步  开始进行修改和查询操作-->
-             <el-table-column :label="$t('label.msg1_53')"  min-width="350" fixed="right">
+             <el-table-column :label="$t('message.msg1_53')"  min-width="350" fixed="right">
  
                 <template slot-scope="scope">
  
