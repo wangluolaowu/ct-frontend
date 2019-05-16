@@ -304,6 +304,7 @@ const en = {
     label8_16: 'Shelf axle ID',
     label8_17: 'Creation date',
     label8_18: 'Shelf modify',
+    label8_19: 'Modify  status',
     label9_01: 'Charge station status',
     label9_02: 'Charge station active status',
     label9_03: 'Rule Id',

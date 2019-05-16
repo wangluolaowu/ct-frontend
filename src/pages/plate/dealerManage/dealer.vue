@@ -4,20 +4,20 @@
      <el-form class="demo-form-inline selectedCont clears" label-width="200px">
         <el-row>
         <el-col :span="8">
-            <el-form-item  label="经销商代码" >
+            <el-form-item   :label="$t('label.label6_01')" >
               <el-input v-model="searchBIN.dealerCode" style="width:200px"></el-input>
             </el-form-item>
         </el-col>
         <el-col :span="8">  
-            <el-form-item label="客户名称" >
+            <el-form-item :label="$t('label.label6_02')">
               <el-input v-model="searchBIN.dealerName" style="width:200px"></el-input>
             </el-form-item>
         </el-col>   
         </el-row>
         <el-row>
         <el-col :span="8">
-            <el-form-item  label="路线" >
-              <el-select placeholder="路线" v-model="searchBIN.route" style="width:200px">
+            <el-form-item  :label="$t('label.label6_03')" >
+              <el-select  v-model="searchBIN.route" style="width:200px">
                 <el-option
                 v-for="item in routeData"
                 :key="item.value"
@@ -29,8 +29,8 @@
          </el-form-item>
         </el-col>
         <el-col :span="8">  
-            <el-form-item label="子路线" >
-              <el-select placeholder="子路线" v-model="searchBIN.subRoute" style="width:200px">
+            <el-form-item :label="$t('label.label6_04')" >
+              <el-select v-model="searchBIN.subRoute" style="width:200px">
                 <el-option
                 v-for="item in subRouteData"
                 :key="item.value"
@@ -44,8 +44,8 @@
         </el-row>
         <el-row>
         <el-col :span="8">  
-            <el-form-item label="页面大小" >
-             <el-select placeholder="页面大小" v-model="searchBIN.pageSize" style="width:200px">
+            <el-form-item :label="$t('label.label1_56')" >
+             <el-select v-model="searchBIN.pageSize" style="width:200px">
                 <el-option
                 v-for="item in $Enum.EnumSelect().page_size"
                 :key="item.value"
@@ -60,17 +60,17 @@
         <el-row>
         <el-col :span="5" >
           <el-form-item >  
-              <el-button type="primary" @click="loadData">查询</el-button>
+              <el-button type="primary" @click="loadData">{{$t('message.msg1_68')}}</el-button>
           </el-form-item>
           </el-col>
            <el-col :span="5">
             <el-form-item>
-                   <el-button type="primary" @click="restData">清空</el-button>
+                   <el-button type="primary" @click="restData">{{$t('message.msg1_30')}}</el-button>
             </el-form-item>
           </el-col>
           <el-col :span="5">
             <el-form-item>
-                <el-button type="primary" @click="add">新增</el-button>
+                <el-button type="primary" @click="add">{{$t('message.msg1_52')}}</el-button>
             </el-form-item>
           </el-col>
         </el-row>
@@ -78,24 +78,24 @@
          <el-table :data="userInfoList" style="width: 100%" border  min-height="100">
             <!--<el-table-column prop="id" label="id" >
             </el-table-column>-->
-             <el-table-column prop="dealerCode" label="经销商代码" min-width="200">
+             <el-table-column prop="dealerCode" :label="$t('label.label6_01')" min-width="200">
             </el-table-column>
-             <el-table-column prop="dealerName" label="客户名称" min-width="200">
+             <el-table-column prop="dealerName"  :label="$t('label.label6_02')" min-width="200">
             </el-table-column>
-             <el-table-column prop="route" label="路线" min-width="200">
+             <el-table-column prop="route"  :label="$t('label.label6_03')" min-width="200">
             </el-table-column>
-             <el-table-column prop="subRoute" label="子路线" min-width="200">
+             <el-table-column prop="subRoute"  :label="$t('label.label6_04')" min-width="200">
             </el-table-column>
              <!--第二步  开始进行修改和查询操作-->
-             <el-table-column label="操作"  min-width="350" fixed="right">
+             <el-table-column  :label="$t('message.msg1_53')" min-width="350" fixed="right">
  
                 <template slot-scope="scope">
  
-                     <el-button type="text" @click="checkDetail(scope.row)">查看详情</el-button>
+                     <el-button type="text" @click="checkDetail(scope.row)">{{$t('message.msg1_54')}}</el-button>
  
-                     <el-button type="text" @click="modifyInfo(scope.row)">修改</el-button>
+                     <el-button type="text" @click="modifyInfo(scope.row)">{{$t('message.msg1_55')}}</el-button>
   
-                     <el-button type="text" @click="deleteInfo(scope.row)">删除</el-button>
+                     <el-button type="text" @click="deleteInfo(scope.row)">{{$t('message.msg1_56')}}</el-button>
                   </template>
              </el-table-column>
              <!--编辑与增加的页面-->
@@ -105,16 +105,16 @@
                         :total="searchBIN.totalRows">
           </el-pagination>
           <!--新增界面-->
-         <el-dialog title="记录" :visible.sync="dialogVisible" width="50%" :close-on-click-modal="false">
+         <el-dialog :title="$t('message.msg1_75')" :visible.sync="dialogVisible" width="50%" :close-on-click-modal="false">
              <el-form :model="addFormData"  ref="addFormData" label-width="150px" class="demo-ruleForm login-container">
-                   <el-form-item   prop="dealerCode" label="经销商代码">
-                    <el-input type="text" v-model="addFormData.dealerCode" placeholder="经销商代码" :disabled="keyDisabled"></el-input>
+                   <el-form-item   prop="dealerCode"  :label="$t('label.label6_01')">
+                    <el-input type="text" v-model="addFormData.dealerCode" :disabled="keyDisabled"></el-input>
                   </el-form-item>
-                   <el-form-item prop="dealerName" label="客户名称">
-                    <el-input type="text" v-model="addFormData.dealerName"  placeholder="客户名称"></el-input>
+                   <el-form-item prop="dealerName" :label="$t('label.label6_02')">
+                    <el-input type="text" v-model="addFormData.dealerName" ></el-input>
                   </el-form-item>
-                  <el-form-item  prop="route" label="路线">
-                    <el-select placeholder="路线" v-model="addFormData.route" style="width:200px">
+                  <el-form-item  prop="route" :label="$t('label.label6_03')">
+                    <el-select  v-model="addFormData.route" style="width:200px">
                         <el-option
                         v-for="item in routeData"
                         :key="item.value"
@@ -124,8 +124,8 @@
                       </el-option>
                     </el-select>
                   </el-form-item>
-                   <el-form-item prop="subRoute" label="子路线">
-                    <el-select placeholder="子路线" v-model="addFormData.subRoute" style="width:200px">
+                   <el-form-item prop="subRoute"  :label="$t('label.label6_04')">
+                    <el-select  v-model="addFormData.subRoute" style="width:200px">
                         <el-option
                         v-for="item in subRouteData"
                         :key="item.value"
@@ -137,8 +137,8 @@
                   </el-form-item>
              </el-form>
              <span slot="footer" class="dialog-footer">
-                 <el-button @click.native="dialogVisible = false,addFormData={dealerCode:'',dealerName:'',route:'',subRoute:''}">取 消</el-button>
-                 <el-button v-if="isView" type="primary" @click.native="addSubmit">确 定</el-button>
+                 <el-button @click.native="dialogVisible = false,addFormData={dealerCode:'',dealerName:'',route:'',subRoute:''}">{{$t('message.msg1_30')}}</el-button>
+                 <el-button v-if="isView" type="primary" @click.native="addSubmit">{{$t('message.msg1_28')}}</el-button>
              </span>
           </el-dialog>
       </div>

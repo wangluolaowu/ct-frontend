@@ -50,9 +50,9 @@
          <el-table :data="userInfoList" style="width: 100%" border  min-height="100">
             <!--<el-table-column prop="id" label="id" >
             </el-table-column>-->
-             <el-table-column prop="route" label="路线" width="200">
+             <el-table-column prop="route"  :label="$t('label.label6_01')" width="200">
             </el-table-column>
-             <el-table-column prop="subRoute" label="子路线" width="200">
+             <el-table-column prop="subRoute"  :label="$t('label.label6_04')" width="200">
             </el-table-column>
              <el-table-column prop="address" label="地址" width="200">
             </el-table-column>

@@ -8,10 +8,10 @@
             </el-form-item>
         </el-col>
         <el-col :span="8">  
-            <el-form-item  :label="$t('label.label1_43')">
+            <el-form-item  :label="$t('label.label8_19')">
               <el-select v-model="searchBIN.processFlag" style="width:200px">
                 <el-option
-                v-for="item in $Enum.EnumSelect().openStatus3"
+                v-for="item in $Enum.EnumSelect().modify_enable_flag_all"
                 :key="item.value"
                 :label="item.label"
                 :value="item.value" 
@@ -79,9 +79,9 @@
             </el-table-column>
              <el-table-column prop="posY" :label="$t('label.label8_04')" width="200">
             </el-table-column>
-             <el-table-column prop="processFlag" :label="$t('label.label1_43')" width="200">
+             <el-table-column prop="processFlag" :label="$t('label.label8_19')" width="200">
                <template slot-scope="scope" width="100%">
-                {{$Enum.getEnumSelectByValue($Enum.EnumSelect().openStatus3,scope.row.processFlag)}}
+                {{$Enum.getEnumSelectByValue($Enum.EnumSelect().modify_enable_flag,scope.row.processFlag)}}
               </template>
             </el-table-column>
              <el-table-column prop="creationDate" :label="$t('label.label8_17')" width="200">
@@ -125,10 +125,10 @@
                     <el-form-item prop="posY"  :label="$t('label.label8_04')">
                     <el-input type="text" v-model="addFormData.posY" ></el-input>
                   </el-form-item>
-                   <el-form-item prop="processFlag"  :label="$t('label.label1_43')">
+                   <el-form-item prop="processFlag"  :label="$t('label.label8_19')">
                      <el-select  v-model="addFormData.processFlag">
                         <el-option
-                            v-for="item in $Enum.EnumSelect().openStatus3"
+                            v-for="item in $Enum.EnumSelect().modify_enable_flag"
                             :key="item.value"
                             :label="item.label"
                             :value="item.value" 
