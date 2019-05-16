@@ -33,7 +33,7 @@
                     <el-input v-model="filters.pi_beachhead_pos_y" placeholder="beachhead posy" style="width:400px"></el-input>
                     </el-form-item>
                    <el-form-item>
-                     <el-button type="primary" v-on:click="submit">提交</el-button>
+                     <el-button type="primary" v-on:click="submit">{{$t('message.msg1_34')}}</el-button>
                   </el-form-item>
             </el-form>
      </div> 

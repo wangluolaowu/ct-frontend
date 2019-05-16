@@ -10,18 +10,18 @@
                     <el-input v-model="filters.posY "></el-input>
                    </el-form-item>
                    <el-form-item>
-                     <el-button type="primary" v-on:click="getUsers">查询</el-button>
-                     <el-button type="info" v-on:click="reset">清空</el-button>
+                     <el-button type="primary" v-on:click="getUsers">{{$t('message.msg1_68')}}</el-button>
+                     <el-button type="info" v-on:click="reset">{{$t('message.msg1_30')}}</el-button>
                   </el-form-item>
             </el-form>
        </el-col>
 
 
          <el-table :data="userInfoList" style="width: 100%"   border min-height="100px">
-            <el-table-column label="操作" align="center" min-width="100" fixed="left" >
+            <el-table-column :label="$t('message.msg1_53')" align="center" min-width="100" fixed="left" >
                 <template slot-scope="scope" >
-                     <el-button type="text" @click="checkDetail(scope.row)">查看详情</el-button>
-                     <el-button type="text" @click="modifyUser(scope.row)">修改</el-button>
+                     <el-button type="text" @click="checkDetail(scope.row)">{{$t('message.msg1_54')}}</el-button>
+                     <el-button type="text" @click="modifyUser(scope.row)">{{$t('message.msg1_55')}}</el-button>
                   </template>
              </el-table-column>
             <el-table-column prop="posId" label="posId">
@@ -128,8 +128,8 @@
                     </el-form-item>
              </el-form>
              <span slot="footer" class="dialog-footer">
-                 <el-button @click.native="dialogVisible = false,initParams">取 消</el-button>
-                 <el-button v-if="isView" type="primary" @click.native="addSubmit">确 定</el-button>
+                 <el-button @click.native="dialogVisible = false,initParams">{{$t('message.msg1_30')}}</el-button>
+                 <el-button v-if="isView" type="primary" @click.native="addSubmit">{{$t('message.msg1_28')}}</el-button>
              </span>
           </el-dialog>
      </div>
