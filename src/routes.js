@@ -272,6 +272,11 @@ const routes = [
         path: '/shelfManage/shelfType',
         component: () => import('@/pages/plate/holderManageNew/holderSideType'),
         name: '货架位类型'
+      },
+      {
+        path: '/shelfManage/shelfModify',
+        component: () => import('@/pages/plate/holderManageNew/shelfModify'),
+        name: '货架变更'
       }
     ]
   },

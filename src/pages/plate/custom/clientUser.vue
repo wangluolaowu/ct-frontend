@@ -7,10 +7,10 @@
                     <el-input v-model="filters.userNum" :placeholder="$t('placeholder.enter')"></el-input>
                    </el-form-item>
                    <el-form-item>
-                     <el-button type="primary" v-on:click="loadData">{{$t("message.search")}}</el-button>
+                     <el-button type="primary" v-on:click="loadData">{{$t('message.msg1_68')}}</el-button>
                   </el-form-item>
                  <el-form-item>
-                     <el-button type="info" @click="addUser">{{$t("message.add")}}</el-button>
+                     <el-button type="primary" @click="addUser">{{$t('message.msg1_52')}}</el-button>
                   </el-form-item>
             </el-form>
        </el-col>
@@ -19,31 +19,33 @@
          <el-table :data="userInfoList" style="width: 100%" border>
             <!--<el-table-column prop="id" label="id" >
             </el-table-column>-->
+            <el-table-column prop="userId" label="userId" >
+            </el-table-column>
             <el-table-column prop="userNum" label="userNum" >
             </el-table-column>
              <el-table-column prop="rfdcUserId" label="rfdcUserId" >
             </el-table-column>
              <!--第二步  开始进行修改和查询操作-->
-             <el-table-column label="操作" align="center" min-width="350">
+             <el-table-column :label="$t('message.msg1_53')" align="center" min-width="350">
  
                 <template slot-scope="scope">
  
-                     <el-button type="text" @click="checkDetail(scope.row)">查看详情</el-button>
+                     <el-button type="text" @click="checkDetail(scope.row)">{{$t('message.msg1_54')}}</el-button>
  
-                     <el-button type="text" @click="modifyUser(scope.row)">修改</el-button>
+                     <el-button type="text" @click="modifyUser(scope.row)">{{$t('message.msg1_55')}}</el-button>
   
-                     <!--<el-button type="text" @click="deleteUser(scope.row)">删除</el-button>-->
+                     <el-button type="text" @click="deleteUser(scope.row)">{{$t('message.msg1_56')}}</el-button>
                   </template>
              </el-table-column>
              <!--编辑与增加的页面-->
          </el-table>
           <!--新增界面-->
-         <el-dialog title="记录" :visible.sync="dialogVisible" width="50%" :close-on-click-modal="false">
+         <el-dialog :title="$t('message.msg1_75')" :visible.sync="dialogVisible" width="50%" :close-on-click-modal="false">
              <el-form :model="addFormData" :rules="rules2" ref="addFormData" label-width="150px" class="demo-ruleForm login-container">
                   <el-form-item prop="userNum" label="userNum">
                     <el-input type="text" v-model="addFormData.userNum"></el-input>
                   </el-form-item>
-                   <el-form-item prop="passwd" label="密码">
+                   <el-form-item prop="passwd"  :label="$t('label.label10_01')">
                     <el-input type="password" v-model="addFormData.passwd" ></el-input>
                   </el-form-item>
                    <el-form-item prop="rfdcUserId" label="rfdcUserId">
@@ -51,8 +53,8 @@
                   </el-form-item>
              </el-form>
              <span slot="footer" class="dialog-footer">
-                 <el-button @click.native="dialogVisible = false,addFormData={userId:'',userNum:'',passwd:'',rfdcUserId:''}">取 消</el-button>
-                 <el-button v-if="isView" type="primary" @click.native="addSubmit">确 定</el-button>
+                 <el-button @click.native="dialogVisible = false,addFormData={userId:'',userNum:'',passwd:'',rfdcUserId:''}">{{$t('message.msg1_30')}}</el-button>
+                 <el-button v-if="isView" type="primary" @click.native="addSubmit">{{$t('message.msg1_28')}}</el-button>
              </span>
           </el-dialog>
      </div>
@@ -131,9 +133,9 @@
             confirmButtonText: '确定',
             callback: action => {
               var params = {
-                ctUserId: rowData.id
+                userId: rowData.userId
               }
-              axios.post('/custom/iFndUsers/deleteCtUser', qs.stringify(params)).then((res) => {
+              axios.post('/custom/iFndUsers/deleteFndUsers', qs.stringify(params)).then((res) => {
                 console.info(res)
                 if (res.errCode === 'S') {
                   this.$message({
