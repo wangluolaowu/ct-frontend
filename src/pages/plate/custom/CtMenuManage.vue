@@ -4,38 +4,36 @@
          <el-col :span="24" class="toolbar conMarginLeft" >
              <el-form :inline="true" :model="filters">
                 <el-form-item>
-                    <el-input v-model="filters.name" placeholder="节点名称"></el-input>
+                    <el-input v-model="filters.name" :placeholder="$t('label.label10_02')"></el-input>
                    </el-form-item>
                    <el-form-item>
-                     <el-button type="primary" v-on:click="getUsers">查询</el-button>
+                     <el-button type="primary" v-on:click="getUsers">{{$t('message.msg1_68')}}</el-button>
                   </el-form-item>
                  <el-form-item>
-                     <el-button type="primary" @click="addUser">新增</el-button>
+                     <el-button type="primary" @click="addUser">{{$t('message.msg1_52')}}</el-button>
                   </el-form-item>
             </el-form>
        </el-col>
 
 
          <el-table :data="userInfoList" style="width: 100%" border>
-            <el-table-column type="index" label="序号" width="180">
+            <el-table-column type="index"  :label="$t('label.label1_86')" width="180">
             </el-table-column>
-            <el-table-column prop="name" label="节点名称" width="180">
+            <el-table-column prop="name"  :label="$t('label.label10_02')" width="180">
             </el-table-column>
-             <el-table-column prop="description" label="节点描述">
+             <el-table-column prop="description"  :label="$t('label.label10_03')">
             </el-table-column>
-             <el-table-column prop="available" label="节点状态" >
+             <el-table-column prop="available"  :label="$t('label.label10_04')" >
                <template slot-scope="scope">
                  {{$Enum.getEnumSelectByValue($Enum.EnumSelect().openStatus2,scope.row.available)}}
             </template>
             </el-table-column>
              <!--第二步  开始进行修改和查询操作-->
-             <el-table-column label="操作" align="center" min-width="350">
+             <el-table-column :label="$t('message.msg1_53')" align="center" min-width="350">
  
                 <template slot-scope="scope">
- 
-                     <el-button type="text" @click="checkDetail(scope.row)">子菜单管理</el-button>
- 
-                     <el-button type="text" @click="modifyUser(scope.row)">修改</el-button>
+                     <el-button type="text" @click="modifyUser(scope.row)">{{$t('message.msg1_55')}}</el-button>
+                        <el-button type="text" @click="checkDetail(scope.row)">{{$t('label.label10_05')}}</el-button>    
                      <el-button
                       size="mini"
                       :disabled="scope.$index===0"
@@ -51,16 +49,16 @@
              <!--编辑与增加的页面-->
          </el-table>
           <!--新增界面-->
-         <el-dialog title="编辑" :visible.sync="dialogVisible" width="50%" :close-on-click-modal="false">
+         <el-dialog :title="$t('message.msg1_75')" :visible.sync="dialogVisible" width="50%" :close-on-click-modal="false">
              <el-form :model="addFormData" :rules="rules2" ref="addFormData" label-width="150px" class="demo-ruleForm login-container">
-                  <el-form-item prop="name" label="节点名称">
-                    <el-input type="text" v-model="addFormData.name"  placeholder="节点名称"></el-input>
+                  <el-form-item prop="name"  :label="$t('label.label10_02')">
+                    <el-input type="text" v-model="addFormData.name"  :label="$t('label.label1_56')"></el-input>
                   </el-form-item>
-                   <el-form-item prop="description" label="节点描述">
-                    <el-input type="text" v-model="addFormData.description"  placeholder="节点描述"></el-input>
+                   <el-form-item prop="description"  :label="$t('label.label10_03')">
+                    <el-input type="text" v-model="addFormData.description" ></el-input>
                   </el-form-item>
-                   <el-form-item prop="available" label="节点状态">
-                     <el-select placeholder="节点状态" v-model="addFormData.available">
+                   <el-form-item prop="available"  :label="$t('label.label10_04')">
+                     <el-select  v-model="addFormData.available">
                         <el-option
                             v-for="item in $Enum.EnumSelect().openStatus2"
                             :key="item.value"
@@ -72,12 +70,12 @@
                   </el-form-item>
              </el-form>
              <span slot="footer" class="dialog-footer">
-                 <el-button @click.native="dialogVisible = false,addFormData={id:'',name:'',description:'',available:''}">取 消</el-button>
-                 <el-button v-if="isView" type="primary" @click.native="addSubmit">确 定</el-button>
+                 <el-button @click.native="dialogVisible = false,addFormData={id:'',name:'',description:'',available:''}">{{$t('message.msg1_30')}}</el-button>
+                 <el-button v-if="isView" type="primary" @click.native="addSubmit">{{$t('message.msg1_28')}}</el-button>
              </span>
           </el-dialog>
            <el-dialog
-      title="编辑"
+      :title="$t('message.msg1_75')"
       :visible.sync="dialogVisibleStart"
       width="90%" @close="loadData">
  <div class="tableDate mainContainer">
@@ -85,13 +83,13 @@
     <div class="table">
        <el-row>
             <el-card style="min-height: 20px">          
-              <span>{{'当前菜单节点名称:'+addFormData.name}}</span>
+              <span>{{$t('label.label10_06')+':'+addFormData.name}}</span>
             </el-card>
           </el-row>
           <div class="button" style="width:8.5%;float:right;margin-top:60px;">
             <P><el-button class="el-icon-plus" @click.prevent="addRow()" ></el-button></P>
             <!--<p><el-button class="el-icon-minus" @click.prevent="delData()"></el-button></p>-->
-            <p><el-button type="el-icon-minus" :disabled="submitDisabled" @click.prevent="submit">提交</el-button></p>
+            <p><el-button type="el-icon-minus" :disabled="submitDisabled" @click.prevent="submit">{{$t('message.msg1_34')}}</el-button></p>
           </div>
        <el-table
         :data="tableData"
@@ -102,27 +100,27 @@
         style="width: 90%"
         @selection-change='selectRow'>
         <el-table-column type="selection" width="45" align="center"></el-table-column>
-        <el-table-column label="序号"  width="40" align="center">
+        <el-table-column :label="$t('label.label1_86')" width="40" align="center" >
           <template slot-scope="scope"> <span>{{scope.$index + 1}} </span> </template>
         </el-table-column>
-         <el-table-column prop="name" label="节点名称" width="180">
+         <el-table-column prop="name"  :label="$t('label.label10_02')" width="180">
             <template slot-scope="scope">
             <el-input v-model="scope.row.name"></el-input>
           </template>
         </el-table-column>
-        <el-table-column prop="description" label="节点描述">
+        <el-table-column prop="description"  :label="$t('label.label10_03')">
            <template slot-scope="scope">
             <el-input v-model="scope.row.description"></el-input>
           </template>
         </el-table-column>
-        <el-table-column prop="url" label="节点URL" >
+        <el-table-column prop="url" :label="$t('label.label10_07')" >
           <template slot-scope="scope">
             <el-input v-model="scope.row.url"></el-input>
           </template>
         </el-table-column>
-        <el-table-column prop="available" label="节点状态" >
+        <el-table-column prop="available" :label="$t('label.label10_04')">
           <template slot-scope="scope">
-            <el-select placeholder="节点状态" v-model="scope.row.available">
+            <el-select v-model="scope.row.available">
                         <el-option
                             v-for="item in $Enum.EnumSelect().openStatus2"
                             :key="item.value"
@@ -133,7 +131,7 @@
                         </el-select>
           </template>
         </el-table-column>
-        <el-table-column label="操作" align="center" min-width="200">
+        <el-table-column :label="$t('message.msg1_53')" align="center" min-width="200">
                 <template slot-scope="scope">
                      <el-button
                       size="mini"

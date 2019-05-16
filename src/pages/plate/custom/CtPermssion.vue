@@ -70,7 +70,7 @@
                  <el-button v-if="isView" type="primary" @click.native="addSubmit">{{$t('message.msg1_28')}}</el-button>
              </span>
           </el-dialog>
-           <el-dialog  :title="$t('message.label10_10')" :visible.sync="roleUserdialogVisible" width="90%" :close-on-click-modal="false"  @close="loadData" >
+           <el-dialog  :title="$t('label.label10_10')" :visible.sync="roleUserdialogVisible" width="90%" :close-on-click-modal="false"  @close="loadData" >
               <el-row>
                  <el-card style="min-height: 20px">          
                    <span>{{$t('label.label10_11')+addFormData.name + '   ' + addFormData.permission}}</span>

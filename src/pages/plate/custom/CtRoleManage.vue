@@ -4,13 +4,13 @@
          <el-col :span="24" class="toolbar conMarginLeft" >
              <el-form :inline="true" :model="filters">
                 <el-form-item>
-                    <el-input v-model="filters.role" placeholder="角色"></el-input>
+                    <el-input v-model="filters.role" :placeholder="$t('label.label10_18')"></el-input>
                    </el-form-item>
                    <el-form-item>
-                     <el-button type="primary" v-on:click="loadData">查询</el-button>
+                     <el-button type="primary" v-on:click="loadData">{{$t('message.msg1_68')}}</el-button>
                   </el-form-item>
                  <el-form-item>
-                     <el-button type="info" @click="addUser">新增</el-button>
+                     <el-button type="primary" @click="addUser">{{$t('message.msg1_52')}}</el-button>
                   </el-form-item>
             </el-form>
        </el-col>
@@ -19,42 +19,42 @@
          <el-table :data="userInfoList" style="width: 100%" border>
             <!--<el-table-column prop="id" label="id" >
             </el-table-column>-->
-             <el-table-column prop="role" label="角色" >
+             <el-table-column prop="role"  :label="$t('label.label10_18')">
             </el-table-column>
-             <el-table-column prop="description" label="描述">
+             <el-table-column prop="description"  :label="$t('label.label10_19')">
             </el-table-column>
-            <el-table-column prop="available" label="状态"> 
+            <el-table-column prop="available" :label="$t('label.label1_24')"> 
               <template slot-scope="scope">
                  {{$Enum.getEnumSelectByValue($Enum.EnumSelect().openStatus,scope.row.available)}}
             </template>
             </el-table-column>
              <!--第二步  开始进行修改和查询操作-->
-             <el-table-column label="操作" align="center" min-width="350" >
+             <el-table-column :label="$t('message.msg1_53')" align="center" min-width="350" >
  
                 <template slot-scope="scope" class='handleBtn'>
  
-                     <el-button type="text" @click="checkDetail(scope.row)">成员管理</el-button>
-                     <el-button type="text" @click="checkMenuDetail(scope.row)">菜单管理</el-button>
-                     <el-button type="text" @click="checkPermissionDetail(scope.row)">权限管理管理</el-button>
-                     <el-button type="text" @click="modifyUser(scope.row)">修改</el-button>
+                     <el-button type="text" @click="checkDetail(scope.row)">{{$t('label.label10_20')}}</el-button>
+                     <el-button type="text" @click="checkMenuDetail(scope.row)">{{$t('label.label10_21')}}</el-button>
+                     <el-button type="text" @click="checkPermissionDetail(scope.row)">{{$t('label.label10_22')}}</el-button>
+                     <el-button type="text" @click="modifyUser(scope.row)">{{$t('message.msg1_55')}}</el-button>
                      <!--<el-button type="text" @click="deleteUser(scope.row)">删除</el-button>-->
                   </template>
              </el-table-column>
              <!--编辑与增加的页面-->
          </el-table>
           <!--新增界面-->
-         <el-dialog title="编辑" :visible.sync="dialogVisible" width="50%" :close-on-click-modal="false">
+         <el-dialog :title="$t('message.msg1_75')" :visible.sync="dialogVisible" width="50%" :close-on-click-modal="false">
              <el-form :model="addFormData" :rules="rules2" ref="addFormData" label-width="150px" class="demo-ruleForm login-container">
-                  <el-form-item prop="role" label="角色">
-                    <el-input type="text" v-model="addFormData.role" auto-complete="off" placeholder="角色"></el-input>
+                  <el-form-item prop="role" :label="$t('label.label10_18')">
+                    <el-input type="text" v-model="addFormData.role" auto-complete="off" ></el-input>
                   </el-form-item>
-                   <el-form-item prop="description" label="描述">
-                    <el-input type="text" v-model="addFormData.description" auto-complete="off" placeholder="描述"></el-input>
+                   <el-form-item prop="description" :label="$t('label.label10_19')">
+                    <el-input type="text" v-model="addFormData.description" auto-complete="off" ></el-input>
                   </el-form-item>
                    <el-row> 
                    <el-col>
-                   <el-form-item label="状态" >
-                    <el-select placeholder="状态" v-model="addFormData.available">
+                   <el-form-item :label="$t('label.label1_24')"  >
+                    <el-select  v-model="addFormData.available">
                         <el-option
                             v-for="item in $Enum.EnumSelect().openStatus"
                             :key="item.value"
@@ -68,31 +68,31 @@
                  </el-row>
              </el-form>
              <span slot="footer" class="dialog-footer">
-                 <el-button @click.native="dialogVisible = false,addFormData={id:'',role:'',description:'',available:''}">取 消</el-button>
-                 <el-button v-if="isView" type="primary" @click.native="addSubmit">确 定</el-button>
+                 <el-button @click.native="dialogVisible = false,addFormData={id:'',role:'',description:'',available:''}">{{$t('message.msg1_30')}}</el-button>
+                 <el-button v-if="isView" type="primary" @click.native="addSubmit">{{$t('message.msg1_28')}}</el-button>
              </span>
           </el-dialog>
-           <el-dialog title="角色-用户" :visible.sync="roleUserdialogVisible" width="60%" :close-on-click-modal="false"  @close="loadData" >
+           <el-dialog :title="$t('label.label10_23')" :visible.sync="roleUserdialogVisible" width="60%" :close-on-click-modal="false"  @close="loadData" >
               <el-row>
                  <el-card style="min-height: 20px">          
-                   <span>{{'当前角色:'+addFormData.role}}</span>
+                   <span>{{$t('label.label10_24')+addFormData.role}}</span>
                  </el-card>
                </el-row>
               <el-transfer
                 filterable
-                :filter-method="filterMethod"
-                filter-placeholder="请输入用户名称"
+                :filter-method="filterMethod" 
+                :filter-placeholder="$t('label.label10_25')"
                 v-model="value2"
-                :titles="['可选用户','已选用户']"
+                :titles="[$t('label.label10_26'),$t('label.label10_27')]"
                 :data="data2" 
                 id='maskDialog'>
               </el-transfer>
-               <el-button  type="primary" @click="createRoleUser">保存</el-button>
+               <el-button  type="primary" @click="createRoleUser">{{$t('message.msg1_28')}}</el-button>
            </el-dialog> 
-            <el-dialog title="菜单-用户" :visible.sync="roleMenudialogVisible" width="60%" :close-on-click-modal="false"   @close="loadData">
+            <el-dialog :title="$t('label.label10_28')" :visible.sync="roleMenudialogVisible" width="60%" :close-on-click-modal="false"   @close="loadData">
               <el-row>
                  <el-card style="min-height: 20px">          
-                   <span>{{'当前角色:'+addFormData.role}}</span>
+                   <span>{{$t('label.label10_24')+':'+addFormData.role}}</span>
                  </el-card>
                </el-row>
              <el-tree
@@ -105,24 +105,24 @@
               :default-checked-keys="treeValue"
               :props="defaultProps">
             </el-tree>
-               <el-button  type="primary" @click="createRoleMenu">保存</el-button>
+               <el-button  type="primary" @click="createRoleMenu">{{$t('message.msg1_28')}}</el-button>
            </el-dialog>  
-            <el-dialog title="角色-权限" :visible.sync="rolePermissiondialogVisible" width="60%" :close-on-click-modal="false"  @close="loadData" >
+            <el-dialog :title="$t('label.label10_29')" :visible.sync="rolePermissiondialogVisible" width="60%" :close-on-click-modal="false"  @close="loadData" >
               <el-row>
                  <el-card style="min-height: 20px">          
-                   <span>{{'当前角色:'+addFormData.role}}</span>
+                   <span>{{$t('label.label10_24')+':'+addFormData.role}}</span>
                  </el-card>
                </el-row>
               <el-transfer
                 filterable
                 :filter-method="filterMethodPermission"
-                filter-placeholder="请输入用户名称"
+                :filter-placeholder="$t('label.label10_30')"
                 v-model="permissionValue"
-                :titles="['可选权限','已选权限']"
+                :titles="[$t('label.label10_31'),$t('label.label10_32')]"
                 :data="permissionData" 
                 id='maskDialog'>
               </el-transfer>
-               <el-button  type="primary" @click="createPermissionUser">保存</el-button>
+               <el-button  type="primary" @click="createPermissionUser">{{$t('message.msg1_28')}}</el-button>
            </el-dialog> 
      </div>
   </template>

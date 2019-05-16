@@ -4,13 +4,13 @@
          <el-col :span="24" class="toolbar conMarginLeft" >
              <el-form :inline="true" :model="filters">
                 <el-form-item>
-                    <el-input v-model="filters.description" placeholder="资源"></el-input>
+                    <el-input v-model="filters.description" :placeholder="$t('label.label10_16')"></el-input>
                    </el-form-item>
                    <el-form-item>
-                     <el-button type="primary" v-on:click="loadData">查询</el-button>
+                     <el-button type="primary" v-on:click="loadData">{{$t('message.msg1_68')}}</el-button>
                   </el-form-item>
                  <el-form-item>
-                     <el-button type="primary" @click="addUser">新增</el-button>
+                     <el-button type="primary" @click="addUser">{{$t('message.msg1_52')}}</el-button>
                   </el-form-item>
             </el-form>
        </el-col>
@@ -19,23 +19,23 @@
          <el-table :data="userInfoList" style="width: 100%" border>
             <!--<el-table-column prop="id" label="id" >
             </el-table-column>-->
-            <el-table-column prop="description" label="资源名称" >
+            <el-table-column prop="description" :label="$t('label.label10_17')" >
             </el-table-column>
              <el-table-column prop="url" label="URL">
             </el-table-column>
-            <el-table-column prop="available" label="状态">
+            <el-table-column prop="available" :label="$t('label.label1_24')">
                 <template slot-scope="scope">
                 {{$Enum.getEnumSelectByValue($Enum.EnumSelect().openStatus,scope.row.available)}}
                 </template>
             </el-table-column>
              <!--第二步  开始进行修改和查询操作-->
-             <el-table-column label="操作" align="center" min-width="350">
+             <el-table-column :label="$t('message.msg1_53')"  align="center" min-width="350">
  
                 <template slot-scope="scope">
  
-                     <el-button type="text" @click="checkDetail(scope.row)">查看详情</el-button>
+                     <el-button type="text" @click="checkDetail(scope.row)">{{$t('message.msg1_54')}}</el-button>
  
-                     <el-button type="text" @click="modifyUser(scope.row)">修改</el-button>
+                     <el-button type="text" @click="modifyUser(scope.row)">{{$t('message.msg1_55')}}</el-button>
   
                      <!--<el-button type="text" @click="deleteUser(scope.row)">删除</el-button>-->
                   </template>
@@ -43,18 +43,18 @@
              <!--编辑与增加的页面-->
          </el-table>
           <!--新增界面-->
-         <el-dialog title="记录" :visible.sync="dialogVisible" width="50%" :close-on-click-modal="false">
+         <el-dialog :title="$t('message.msg1_75')" :visible.sync="dialogVisible" width="50%" :close-on-click-modal="false">
              <el-form :model="addFormData" :rules="rules2" ref="addFormData" label-width="150px" class="demo-ruleForm login-container">
-                  <el-form-item prop="description" label="资源名称">
-                    <el-input type="text" v-model="addFormData.description" placeholder="资源名称"></el-input>
+                  <el-form-item prop="description" :label="$t('label.label10_17')">
+                    <el-input type="text" v-model="addFormData.description" ></el-input>
                   </el-form-item>
                    <el-form-item prop="url" label="URL">
                     <el-input type="text" v-model="addFormData.url"  placeholder="URL"></el-input>
                   </el-form-item>
                  <el-row> 
                    <el-col>
-                <el-form-item prop="available" label="状态" style="width:400px">
-                    <el-select placeholder="状态" v-model="addFormData.available">
+                <el-form-item prop="available" :label="$t('label.label1_24')" style="width:400px">
+                    <el-select  v-model="addFormData.available">
                         <el-option
                             v-for="item in $Enum.EnumSelect().openStatus"
                             :key="item.value"
@@ -68,8 +68,8 @@
                  </el-row>
              </el-form>
              <span slot="footer" class="dialog-footer">
-                 <el-button @click.native="dialogVisible = false,addFormData={id:'',description:'',url:'',available:''}">取 消</el-button>
-                 <el-button v-if="isView" type="primary" @click.native="addSubmit">确 定</el-button>
+                 <el-button @click.native="dialogVisible = false,addFormData={id:'',description:'',url:'',available:''}">{{$t('message.msg1_30')}}</el-button>
+                 <el-button v-if="isView" type="primary" @click.native="addSubmit">{{$t('message.msg1_28')}}</el-button>
              </span>
           </el-dialog>
      </div>

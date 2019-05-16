@@ -2,16 +2,15 @@
      <div class="mainContainer">
           <!--工具条-->
          <el-col :span="24" class="toolbar conMarginLeft" >
-           <span>{{$t('message.text')}}</span>
              <el-form :inline="true" :model="filters">
                 <el-form-item>
-                    <el-input v-model="filters.username" :placeholder="$t('placeholder.enter')"></el-input>
+                    <el-input v-model="filters.username" placeholder="username"></el-input>
                    </el-form-item>
                    <el-form-item>
-                     <el-button type="primary" v-on:click="loadData">{{$t("message.search")}}</el-button>
+                     <el-button type="primary" v-on:click="loadData">{{$t('message.msg1_68')}}</el-button>
                   </el-form-item>
                  <el-form-item>
-                     <el-button type="info" @click="addUser">{{$t("message.add")}}</el-button>
+                     <el-button type="primary" @click="addUser">{{$t('message.msg1_52')}}</el-button>
                   </el-form-item>
             </el-form>
        </el-col>
@@ -24,13 +23,11 @@
             </el-table-column>
              <el-table-column prop="lastName" label="LastName">
             </el-table-column>
-             <el-table-column prop="username" label="登录名" >
-            </el-table-column>
-             <el-table-column prop="password" label="密码" >
+             <el-table-column prop="username" :label="$t('label.label10_15')" >
             </el-table-column>
              <el-table-column prop="email" label="Email" >
             </el-table-column>
-            <el-table-column prop="state" label="状态">
+            <el-table-column prop="state" :label="$t('label.label1_24')">
                 <template slot-scope="scope">
                 {{$Enum.getEnumSelectByValue($Enum.EnumSelect().openStatus3,scope.row.state)}}
                 </template>
@@ -40,17 +37,17 @@
  
                 <template slot-scope="scope">
  
-                     <el-button type="text" @click="checkDetail(scope.row)">查看详情</el-button>
+                     <el-button type="text" @click="checkDetail(scope.row)">{{$t('message.msg1_54')}}</el-button>
  
-                     <el-button type="text" @click="modifyUser(scope.row)">修改</el-button>
+                     <el-button type="text" @click="modifyUser(scope.row)">{{$t('message.msg1_55')}}</el-button>
   
-                     <el-button type="text" @click="deleteUser(scope.row)">删除</el-button>
+                     <el-button type="text" @click="deleteUser(scope.row)">{{$t('message.msg1_56')}}</el-button>
                   </template>
              </el-table-column>
              <!--编辑与增加的页面-->
          </el-table>
           <!--新增界面-->
-         <el-dialog title="记录" :visible.sync="dialogVisible" width="50%" :close-on-click-modal="false">
+         <el-dialog :title="$t('message.msg1_75')" :visible.sync="dialogVisible" width="50%" :close-on-click-modal="false">
              <el-form :model="addFormData" :rules="rules2" ref="addFormData" label-width="150px" class="demo-ruleForm login-container">
                   <el-form-item prop="firstName" label="FirstName">
                     <el-input type="text" v-model="addFormData.firstName" placeholder="FirstName"></el-input>
@@ -58,19 +55,19 @@
                    <el-form-item prop="lastName" label="LastName">
                     <el-input type="text" v-model="addFormData.lastName"  placeholder="LastName"></el-input>
                   </el-form-item>
-                   <el-form-item prop="username" label="登录名">
-                    <el-input type="text" v-model="addFormData.username"  placeholder="登录名"></el-input>
+                   <el-form-item prop="username" :label="$t('label.label10_15')">
+                    <el-input type="text" v-model="addFormData.username"  ></el-input>
                   </el-form-item>
-                   <el-form-item prop="password" label="密码">
-                    <el-input type="password" v-model="addFormData.password" placeholder="密码"></el-input>
+                   <el-form-item prop="password" :label="$t('label.label10_01')">
+                    <el-input type="password" v-model="addFormData.password" ></el-input>
                   </el-form-item>
                    <el-form-item prop="email" label="Email">
                     <el-input type="text" v-model="addFormData.email" placeholder="Email"></el-input>
                   </el-form-item>
                  <el-row> 
                    <el-col>
-                <el-form-item prop="state" label="状态" style="width:400px">
-                    <el-select placeholder="状态" v-model="addFormData.state">
+                <el-form-item prop="state" :label="$t('label.label1_24')"  style="width:400px">
+                    <el-select  v-model="addFormData.state">
                         <el-option
                             v-for="item in $Enum.EnumSelect().openStatus3"
                             :key="item.value"
@@ -84,8 +81,8 @@
                  </el-row>
              </el-form>
              <span slot="footer" class="dialog-footer">
-                 <el-button @click.native="dialogVisible = false,addFormData={id:'',firstName:'',lastName:'',username:'',password:'',email:'',state:''}">取 消</el-button>
-                 <el-button v-if="isView" type="primary" @click.native="addSubmit">确 定</el-button>
+                 <el-button @click.native="dialogVisible = false,addFormData={id:'',firstName:'',lastName:'',username:'',password:'',email:'',state:''}">{{$t('message.msg1_30')}}</el-button>
+                 <el-button v-if="isView" type="primary" @click.native="addSubmit">{{$t('message.msg1_28')}}</el-button>
              </span>
           </el-dialog>
      </div>
