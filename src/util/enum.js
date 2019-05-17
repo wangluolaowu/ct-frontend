@@ -1,4 +1,5 @@
-const i18nData = require('../i18n/i18n')
+import i18n from '../i18n/i18n'
+
 const Enum = {
 
 }
@@ -515,13 +516,45 @@ Enum.EnumSelect = function() {
   }
 
   EnumObjEn = {
-    enable_flag: [
+    modify_enable_flag: [
       {
-        label: '锁点',
+        label: 'Unprocessed submission',
         value: 0
       },
       {
-        label: '正常点',
+        label: 'RCS has been updated',
+        value: 1
+      },
+      {
+        label: 'Background data updated',
+        value: 2
+      }
+    ],
+    modify_enable_flag_all: [
+      {
+        label: 'All',
+        value: ''
+      },
+      {
+        label: 'Unprocessed submission',
+        value: 0
+      },
+      {
+        label: 'RCS has been updated',
+        value: 1
+      },
+      {
+        label: 'Background data updated',
+        value: 2
+      }
+    ],
+    enable_flag: [
+      {
+        label: 'Lock point',
+        value: 0
+      },
+      {
+        label: 'Normal point',
         value: 1
       }
     ],
@@ -545,79 +578,79 @@ Enum.EnumSelect = function() {
     ],
     openStatus: [
       {
-        label: '开启',
+        label: 'open',
         value: true
       },
       {
-        label: '禁用',
+        label: 'closed',
         value: false
       }
     ],
     openStatus3: [
       {
-        label: '开启',
+        label: 'open',
         value: 1
       },
       {
-        label: '禁用',
+        label: 'closed',
         value: 0
       }
     ],
     openStatus2: [
       {
-        label: '开启',
+        label: 'Open',
         value: '1'
       },
       {
-        label: '禁用',
+        label: 'Closed',
         value: '0'
       }
     ],
     Y_N_STATUS: [
       {
-        label: '全部',
+        label: 'All',
         value: ''
       },
       {
-        label: '是',
+        label: 'Yes',
         value: 'Y'
       },
       {
-        label: '否',
+        label: 'No',
         value: 'N'
       }
     ],
     Y_N_STATUS2: [
       {
-        label: '是',
+        label: 'Yes',
         value: 'Y'
       },
       {
-        label: '否',
+        label: 'No',
         value: 'N'
       }
     ],
     workstation_status: [
       {
-        label: '全部',
+        label: 'All',
         value: ''
       },
       {
-        label: '小工作站',
+        label: 'Small workstation',
         value: '1'
       },
       {
-        label: '大工作站',
+        label: 'Large workstation',
         value: '2'
       }
     ],
     workstation_status2: [
       {
-        label: '小工作站',
+        label: 'Small workstation',
         value: '1'
       },
       {
-        label: '大工作站',
+        label: 'Large workstation',
         value: '2'
       }
     ],
@@ -633,155 +666,155 @@ Enum.EnumSelect = function() {
     ],
     KM_KID_TASK_TYPE: [
       {
-        label: '待命/STANDBY',
+        label: 'STANDBY',
         value: 1
       },
       {
-        label: '移动/SIMPLE_MOVE',
+        label: 'SIMPLE_MOVE',
         value: 2
       },
       {
-        label: '负载移动/LOAD_MOVE',
+        label: 'LOAD_MOVE',
         value: 3
       },
       {
-        label: '充电/CHARGE',
+        label: 'CHARGE',
         value: 4
       },
       {
-        label: '退出/QUIT',
+        label: 'QUIT',
         value: 5
       }
     ],
     KM_KID_TASK_STATUS: [
       {
-        label: '新建/NEW',
+        label: 'NEW',
         value: 1
       },
       {
-        label: '已分配/ASSIGNED',
+        label: 'ASSIGNED',
         value: 2
       },
       {
-        label: '已接受/ACCEPTED',
+        label: 'ACCEPTED',
         value: 3
       },
       {
-        label: '已拒绝/REJECTED',
+        label: 'REJECTED',
         value: 4
       },
       {
-        label: '运行中/EXECUTING',
+        label: 'EXECUTING',
         value: 5
       },
       {
-        label: '完成/COMPLETED',
+        label: 'COMPLETED',
         value: 6
       },
       {
-        label: '已抓取/PULLED',
+        label: 'PULLED',
         value: 98
       },
       {
-        label: '失败/FAILED',
+        label: 'FAILED',
         value: 99
       }
     ],
     KID_BATTERY_FAULT_CODE: [
       {
-        label: '向下摄像头解码失败',
+        label: 'Failed to decode downward camera',
         value: 1
       },
       {
-        label: '向上摄像头解码失败',
+        label: 'Upward Camera Decoding Failed',
         value: 2
       },
       {
-        label: '左轮电机报警',
+        label: 'Left wheel motor alarm',
         value: 3
       },
       {
-        label: '右轮电机报警',
+        label: 'Right-wheel motor alarm',
         value: 4
       },
       {
-        label: '旋转电机报警',
+        label: 'Rotating motor alarm',
         value: 5
       },
       {
-        label: '电机通讯失败',
+        label: 'Failure of motor communication',
         value: 6
       },
       {
-        label: '举升失败',
+        label: 'Lift failure',
         value: 7
       },
       {
-        label: '下降失败',
+        label: 'Fall failure',
         value: 8
       },
       {
-        label: '归零失败',
+        label: 'Zeroing failure',
         value: 9
       },
       {
-        label: '空车时检测到前方有障碍物',
+        label: 'Obstacles were detected in front of empty cars',
         value: 10
       },
       {
-        label: '载重时检测到前方有障碍物',
+        label: 'Obstacles were detected in front of the load',
         value: 11
       },
       {
-        label: '电机计数器错误',
+        label: 'Motor Counter Error',
         value: 12
       }
     ],
     KM_KID_STATUS: [
       {
-        label: '已注册/REGISTERED',
+        label: 'REGISTERED',
         value: 1
       },
       {
-        label: '待命/STANDBY',
+        label: 'STANDBY',
         value: 2
       },
       {
-        label: '任务已分配/TASK_ASSIGNED',
+        label: 'TASK_ASSIGNED',
         value: 3
       },
       {
-        label: '任务执行中/TASK_EXECUTING',
+        label: 'TASK_EXECUTING',
         value: 4
       },
       {
-        label: '充电中/CHARGING',
+        label: 'CHARGING',
         value: 5
       },
       {
-        label: '充电完成/COMPL_CHARGE',
+        label: 'COMPL_CHARGE',
         value: 6
       },
       {
-        label: 'SERVER重启',
+        label: 'SERVER restart',
         value: 90
       },
       {
-        label: '维修中/MAINTAINING',
+        label: 'MAINTAINING',
         value: 98
       },
       {
-        label: '断线/OFFLINE',
+        label: 'OFFLINE',
         value: 99
       }
     ],
     TM_MOVE_TASK_RELEASE_LOAD: [
       {
-        label: '放下',
+        label: 'Put down',
         value: 1
       },
       {
-        label: '举升',
+        label: 'Lift',
         value: 2
       }
     ],
@@ -837,23 +870,23 @@ Enum.EnumSelect = function() {
     ],
     dml_Bin_Status: [
       {
-        label: '全部',
+        label: 'All',
         value: ''
       },
       {
-        label: '未创建波次',
+        label: 'No wave number created',
         value: 1
       },
       {
-        label: '完成',
+        label: 'Complete',
         value: 3
       },
       {
-        label: '在途',
+        label: 'On the way',
         value: 4
       },
       {
-        label: '不在途',
+        label: 'No way',
         value: 5
       }
     ],
@@ -885,63 +918,63 @@ Enum.EnumSelect = function() {
     ],
     pi_pose_control_type: [
       {
-        label: '移动',
+        label: 'move',
         value: 'SIMPLE_MOVE'
       },
       {
-        label: '举起',
+        label: 'lift',
         value: 'SIMPLE_MOVE1'
       },
       {
-        label: '放下',
+        label: 'put down',
         value: 'SIMPLE_MOVE2'
       },
       {
-        label: '旋转90',
+        label: 'Rotate 90',
         value: 'SIMPLE_MOVE3'
       },
       {
-        label: '旋转180',
+        label: 'Rotate 180',
         value: 'SIMPLE_MOVE4'
       },
       {
-        label: '旋转270',
+        label: 'Rotate 270',
         value: 'SIMPLE_MOVE5'
       },
       {
-        label: '旋转360',
+        label: 'Rotate 360',
         value: 'SIMPLE_MOVE6'
       },
       {
-        label: '旋转-90',
+        label: 'Rotate-90',
         value: 'SIMPLE_MOVE7'
       },
       {
-        label: '旋转-180',
+        label: 'Rotate-180',
         value: 'SIMPLE_MOVE8'
       },
       {
-        label: '旋转-270',
+        label: 'Rotate-270',
         value: 'SIMPLE_MOVE9'
       },
       {
-        label: '旋转-360',
+        label: 'Rotate-360',
         value: 'SIMPLE_MOVE10'
       }
     ],
     CHARGE_STATUS: [
       {
-        label: '在充电',
+        label: 'Charging',
         value: 1
       },
       {
-        label: '未充电',
+        label: 'uncharged',
         value: 2
       }
     ],
     order_type: [
       {
-        label: '全部',
+        label: 'All',
         value: ''
       },
       {
@@ -980,8 +1013,8 @@ Enum.EnumSelect = function() {
       }
     ]
   }
-  console.log('this.$i18n.locale=======' + i18nData.locale)
-  if (i18nData.locale === 'en') {
+
+  if (i18n.locale === 'en') {
     return EnumObjEn
   }
   return EnumObj

@@ -28,7 +28,7 @@
         qs,
         logining: false,
         ruleForm2: {
-          account: 'alc1123',
+          account: 'test1',
           checkPass: '123',
           code: '123456'
         },
