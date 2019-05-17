@@ -212,8 +212,8 @@
           that.userInfoList.splice(index - 1, 1);
           that.userInfoList.splice(index,0, upDate);
           let result = []
-          that.userInfoList[index].menuIndex=index
-          that.userInfoList[index-1].menuIndex=index+1
+          that.userInfoList[index].menuIndex=index+1
+          that.userInfoList[index-1].menuIndex=index
           result.push(that.userInfoList[index])
           result.push(that.userInfoList[index-1])
           this.updateIndex(result);
@@ -232,8 +232,8 @@
             that.userInfoList.splice(index + 1, 1);
             that.userInfoList.splice(index,0, downDate);
             let result = []
-            that.userInfoList[index].menuIndex=index+2
-            that.userInfoList[index+1].menuIndex=index+1
+            that.userInfoList[index].menuIndex=index+1
+            that.userInfoList[index+1].menuIndex=index+2
             result.push(that.userInfoList[index])
             result.push(that.userInfoList[index+1])
             this.updateIndex(result);
