@@ -39,6 +39,7 @@ axiosInstance.interceptors.response.use(res => {
   }
   return res.data
 }, err => {
+  console.log('err====' + err)
   Loading.service().close()
   if (err && err.response) {
     switch (err.response.status) {
