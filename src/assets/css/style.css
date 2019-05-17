@@ -26,11 +26,17 @@ html * {
     margin-right: 15px;
 }
 
-ul li label,
-ul li span {
+ul li label{
     display: inline-block;
     font-size: 14px;
     width: 70px;
+    line-height: 30px;
+    vertical-align: middle;
+}
+ul li span {
+    display: inline-block;
+    font-size: 14px;
+    /* width: 70px; */
     line-height: 30px;
     vertical-align: middle;
 }

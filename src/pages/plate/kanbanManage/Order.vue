@@ -663,10 +663,13 @@ export default {
           right: 50
         },
         xAxis: {
-          axisLabel: {
-            interval: 0,
-            rotate: 40 },
-
+        axisLabel: {
+          interval: 0,
+          rotate: 30,
+         
+        },
+      
+        
           data: sum24KeyListTemp
         },
         yAxis: {},

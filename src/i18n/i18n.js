@@ -13,11 +13,11 @@ Vue.prototype._init = function(options) {
 }
 
 // 从localStorage中拿到用户的语言选择，如果没有，那默认中文。
-const DEFAULT_LANG = 'cn'
+const DEFAULT_LANG = 'en'
 const LOCALE_KEY = 'lang'
 
 const i18n = new VueI18n({
-  locale: DEFAULT_LANG || 'cn',
+  locale: DEFAULT_LANG || 'en',
   messages
 })
 

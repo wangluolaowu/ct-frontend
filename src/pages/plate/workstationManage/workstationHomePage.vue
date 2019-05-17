@@ -177,47 +177,47 @@
           </el-col>-->
         </el-row>
       </el-form>
-         <el-table :data="userInfoList" style="width: 100%" border  height="500">
+         <el-table :data="userInfoList" style="width: 100%" border  min-height="100">
             <!--<el-table-column prop="id" label="id" >
             </el-table-column>-->
-            <el-table-column prop="entityWorkstationId" :label="$t('label.label7_02')" width="200">
+            <el-table-column prop="entityWorkstationId" :label="$t('label.label7_02')" min-width="200">
             </el-table-column>
-            <el-table-column prop="entityWorkstationNum" :label="$t('label.label1_09')" width="200">
+            <el-table-column prop="entityWorkstationNum" :label="$t('label.label1_09')" min-width="200">
             </el-table-column>
-             <el-table-column prop="softwareVersionNum" :label="$t('label.label7_01')" width="200">
+             <el-table-column prop="softwareVersionNum" :label="$t('label.label7_01')" min-width="200">
             </el-table-column>
-             <el-table-column prop="designVersionNum" :label="$t('label.label7_04')" width="200">
+             <el-table-column prop="designVersionNum" :label="$t('label.label7_04')" min-width="200">
             </el-table-column>
-             <el-table-column prop="mfgLotNum" :label="$t('label.label7_03')" width="200">
+             <el-table-column prop="mfgLotNum" :label="$t('label.label7_03')" min-width="200">
             </el-table-column>
-             <el-table-column prop="startServiceDate" :label="$t('label.label7_06')" width="200">
+             <el-table-column prop="startServiceDate" :label="$t('label.label7_06')" min-width="200">
                   <template slot-scope="scope">
                         {{$DateFormat.dateFormat(scope.row.startServiceDate,true)}}
-                      </template>
+                  </template>
             </el-table-column>
-             <el-table-column prop="totalServiceMileage" :label="$t('label.label7_13')" width="200">
+             <el-table-column prop="totalServiceMileage" :label="$t('label.label7_13')" min-width="200">
             </el-table-column>
-             <el-table-column prop="macAddress" :label="$t('label.label7_07')" width="200">
+             <el-table-column prop="macAddress" :label="$t('label.label7_07')" min-width="200">
             </el-table-column>
-             <el-table-column prop="kidIpAddress" :label="$t('label.label7_08')" width="200">
+             <el-table-column prop="ipAddress" :label="$t('label.label7_08')" min-width="200">
             </el-table-column>
-             <el-table-column prop="latestMaintainDate" :label="$t('label.label5_15')" width="200">
+             <el-table-column prop="latestMaintainDate" :label="$t('label.label5_15')" min-width="200">
                   <template slot-scope="scope">
                         {{$DateFormat.dateFormat(scope.row.latestMaintainDate,true)}}
                       </template>
             </el-table-column>
-             <el-table-column prop="latestRepairDate" :label="$t('label.label5_16')" width="200">
+             <el-table-column prop="latestRepairDate" :label="$t('label.label5_16')" min-width="200">
                   <template slot-scope="scope">
                         {{$DateFormat.dateFormat(scope.row.latestRepairDate,true)}}
                       </template>
             </el-table-column>
-              <el-table-column prop="electronicTagsCount " :label="$t('label.label7_09')" width="200"> 
+            <el-table-column prop="electronicTagsCount"  :label="$t('label.label7_09')" min-width="200"> 
             </el-table-column>
-              <el-table-column prop="projectorModelNumber " :label="$t('label.label7_10')" width="200"> 
+              <el-table-column prop="projectorModelNumber " :label="$t('label.label7_10')" min-width="200"> 
             </el-table-column>
-              <el-table-column prop="scanningGunModelNumber " :label="$t('label.label7_05')" width="200"> 
+              <el-table-column prop="scanningGunModelNumber " :label="$t('label.label7_05')" min-width="200"> 
             </el-table-column>
-             <el-table-column prop="descriptions " :label="$t('label.label5_17')"  width="200"> 
+             <el-table-column prop="descriptions " :label="$t('label.label5_17')"  min-width="200"> 
             </el-table-column>
              <!--第二步  开始进行修改和查询操作-->
              <el-table-column label="操作"  min-width="350" fixed="right">
@@ -271,8 +271,8 @@
                   <el-form-item prop="macAddress"  :label="$t('label.label7_07')">
                     <el-input type="text" v-model="addFormData.macAddress" ></el-input>
                   </el-form-item>
-                  <el-form-item prop="kidIpAddress"  :label="$t('label.label7_08')">
-                    <el-input type="text" v-model="addFormData.kidIpAddress" ></el-input>
+                  <el-form-item prop="ipAddress"  :label="$t('label.label7_08')">
+                    <el-input type="text" v-model="addFormData.ipAddress" ></el-input>
                   </el-form-item>
                  <el-form-item prop="latestMaintainDate"  :label="$t('label.label5_15')">
                      <el-date-picker
@@ -308,7 +308,7 @@
                   </el-form-item>
              </el-form>
              <span slot="footer" class="dialog-footer">
-                 <el-button @click.native="dialogVisible = false,addFormData={entityWorkstationId:'',entityWorkstationNum:'',softwareVersionNum:'',designVersionNum:'',mfgLotNum:'',startServiceDate:'',totalServiceMileage:'',macAddress:'',kidIpAddress:'',latestMaintainDate:'',latestRepairDate:'',electronicTagsCount:'',projectorModelNumber:'',scanningGunModelNumber:'',descriptions:''}">取 消</el-button>
+                 <el-button @click.native="dialogVisible = false,addFormData={entityWorkstationId:'',entityWorkstationNum:'',softwareVersionNum:'',designVersionNum:'',mfgLotNum:'',startServiceDate:'',totalServiceMileage:'',macAddress:'',ipAddress:'',latestMaintainDate:'',latestRepairDate:'',electronicTagsCount:'',projectorModelNumber:'',scanningGunModelNumber:'',descriptions:''}">取 消</el-button>
                  <el-button v-if="isView" type="primary" @click.native="addSubmit">{{$t('message.msg1_28')}}</el-button>
              </span>
           </el-dialog>
@@ -336,7 +336,7 @@
             startServiceDate:'',
             totalServiceMileage:'',
             macAddress:'',
-            kidIpAddress:'',
+            ipAddress:'',
             latestMaintainDate:'',
             latestRepairDate:'',
             electronicTagsCount:'',
@@ -353,7 +353,7 @@
             startServiceDate:'',
             totalServiceMileage:'',
             macAddress:'',
-            kidIpAddress:'',
+            ipAddress:'',
             latestMaintainDate:'',
             latestRepairDate:'',
             electronicTagsCount:'',
@@ -405,7 +405,7 @@
             startServiceDate:'',
             totalServiceMileage:'',
             macAddress:'',
-            kidIpAddress:'',
+            ipAddress:'',
             latestMaintainDate:'',
             latestRepairDate:'',
             electronicTagsCount:'',
@@ -422,9 +422,11 @@
         loadData() {
           let param = {'params': JSON.stringify(this.searchBIN)}
           axios.post('/workstationManage/homePage/selectWorkstationListBySearch', qs.stringify(param)).then((res) => {
-            var _data = res.data.result
-            this.userInfoList = _data
-            this.searchBIN.totalRows = res.data.totalRows
+             if(res.errCode === 'S'){
+                var _data = res.data.result
+                this.userInfoList = _data()
+                this.searchBIN.totalRows = res.data.totalRows
+             }
           })
         },
         add() {
@@ -437,7 +439,7 @@
             startServiceDate:'',
             totalServiceMileage:'',
             macAddress:'',
-            kidIpAddress:'',
+            ipAddress:'',
             latestMaintainDate:'',
             latestRepairDate:'',
             electronicTagsCount:'',
@@ -453,12 +455,24 @@
         },
         checkDetail(rowData) {
           this.addFormData = Object.assign({}, rowData)
+          let startServiceDateTemp = this.addFormData.startServiceDate
+          let latestMaintainDateTemp = this.addFormData.latestMaintainDate
+          let latestRepairDateTemp = this.addFormData.latestRepairDate
+          this.addFormData.startServiceDate = new Date(this.$DateFormat.dateFormat(startServiceDateTemp,true))
+          this.addFormData.latestMaintainDate = new Date(this.$DateFormat.dateFormat(latestMaintainDateTemp,true))
+          this.addFormData.latestRepairDate = new Date(this.$DateFormat.dateFormat(latestRepairDateTemp,true))
           this.isView = false
           this.dialogVisible = true
           //  this.addFormReadOnly = true;
         },
         modifyInfo(rowData) {
           this.addFormData = Object.assign({}, rowData)
+          let startServiceDateTemp = this.addFormData.startServiceDate
+          let latestMaintainDateTemp = this.addFormData.latestMaintainDate
+          let latestRepairDateTemp = this.addFormData.latestRepairDate
+          this.addFormData.startServiceDate = new Date(this.$DateFormat.dateFormat(startServiceDateTemp,true))
+          this.addFormData.latestMaintainDate = new Date(this.$DateFormat.dateFormat(latestMaintainDateTemp,true))
+          this.addFormData.latestRepairDate = new Date(this.$DateFormat.dateFormat(latestRepairDateTemp,true))
           this.isView = true
           this.keyDisabled=true
           this.dialogVisible = true

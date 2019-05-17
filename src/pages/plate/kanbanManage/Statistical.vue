@@ -936,48 +936,50 @@
         </el-col>
         </el-row>
         <el-row>
-        <el-col >
-          <el-form-item class='sublimtInfo'>
+        <el-col :span="12">
+          <el-form-item>  
+                <el-button type="primary" @click="confirmSTOCK_TAKING">{{$t('message.msg1_28')}}</el-button>
+                <el-button type="primary" @click="resetSTOCK_TAKING">{{$t('message.msg1_29')}}</el-button>
+                <el-button type="primary" @click="cancelSTOCK_TAKING">{{$t('message.msg1_30')}}</el-button>
+          </el-form-item>
+            </el-col>
+            <el-col :span="12">
+          <el-form-item>
               <el-checkbox v-model="searchSTOCK_TAKING.submitAll"  @change="handleCheckAllChangeSTOCK_TAKING">{{$t('message.msg1_26')}}</el-checkbox>
               <el-button  type="primary" :disabled="downLoadDisabledSTOCK_TAKING"   @click="SetDownloadFunc('STOCK_TAKING')">{{$t('message.msg1_27')}}</el-button>
-          </el-form-item>
-          <el-form-item class='buttonGroups'>  
-                <el-button type="primary" @click="confirmSTOCK_TAKING">{{$t('message.msg1_28')}}</el-button>
-                <el-button type="info" @click="resetSTOCK_TAKING">{{$t('message.msg1_29')}}</el-button>
-                <el-button type="info" @click="cancelSTOCK_TAKING">{{$t('message.msg1_30')}}</el-button>
           </el-form-item>
         </el-col>
       
         </el-row>
       </el-form>
       <el-table ref="multipleTableSTOCK_TAKING" :data="tableData.STOCK_TAKING" height="500" style="width: 100%" @selection-change="handleSelectionChangeSTOCK_TAKING" border v-loading="tableLoadingSTOCK_TAKING">
-            <el-table-column type="selection" width="55" fixed="left">
+            <el-table-column type="selection" min-width="55">
             </el-table-column>
-            <el-table-column prop="locNum"  :label="$t('label.label1_83')" width="100" fixed>
+            <el-table-column prop="locNum"  :label="$t('label.label1_83')" min-width="100">
             </el-table-column>
-            <el-table-column prop="skuNum" :label="$t('label.label1_70')" width="100" fixed>
+            <el-table-column prop="skuNum" :label="$t('label.label1_70')" min-width="100">
             </el-table-column>
-            <el-table-column prop="page"  :label="$t('label.label1_92')" width="100">
+            <el-table-column prop="page"  :label="$t('label.label1_92')" min-width="100">
             </el-table-column>
-            <el-table-column prop="binQty" :label="$t('label.label1_93')" width="100">
+            <el-table-column prop="binQty" :label="$t('label.label1_93')" min-width="100">
             </el-table-column>
-            <el-table-column prop="noOfCount"  :label="$t('label.label1_90')" width="100">
+            <el-table-column prop="noOfCount"  :label="$t('label.label1_90')" min-width="100">
             </el-table-column>
-            <el-table-column prop="countBy"  :label="$t('label.label1_94')" width="100">
+            <el-table-column prop="countBy"  :label="$t('label.label1_94')" min-width="100">
             </el-table-column>
-            <el-table-column prop="rfdcUserId" :label="$t('label.label1_91')" width="100">
+            <el-table-column prop="rfdcUserId" :label="$t('label.label1_91')" min-width="100">
             </el-table-column>
-            <el-table-column prop="creationDate" :label="$t('label.label1_72')" width="100">
+            <el-table-column prop="creationDate" :label="$t('label.label1_72')" min-width="100">
                <template slot-scope="scope">
                         {{$DateFormat.dateFormat(scope.row.creationDate,true)}}
                       </template>
             </el-table-column>
-            <el-table-column prop="wavedDate"  :label="$t('label.label1_73')" width="100">
+            <el-table-column prop="wavedDate"  :label="$t('label.label1_73')" min-width="100">
               <template slot-scope="scope">
                         {{$DateFormat.dateFormat(scope.row.wavedDate,true)}}
                       </template>
             </el-table-column>
-             <el-table-column prop="lastUpdateDate" :label="$t('label.label1_82')" width="100">
+             <el-table-column prop="lastUpdateDate" :label="$t('label.label1_82')" min-width="100">
                <template slot-scope="scope">
                         {{$DateFormat.dateFormat(scope.row.lastUpdateDate,true)}}
                       </template>

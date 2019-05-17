@@ -49,7 +49,7 @@
        <el-row v-for="(tableDataItem, j) in this.dialogTableData" :key="j" width="100%">
          <div>
            <label>
-           <span style="line-height:3">{{$t('message.msg1_45') + ': ' + (tableDataItem[0].orderWaveId || '') }}</span>
+           <span style="line-height:3">{{$t('message.msg1_45') + ': ' + (tableDataItem.orderWaveId || '') }}</span>
            <span style="line-height:3">{{$t('message.msg1_46') + ': ' + $DateFormat.dateFormat(tableDataItem[0].creatDate,true) }}</span>
            </label>
            </div>
@@ -58,13 +58,16 @@
             <el-card style="min-height: 520px">
               <ul class="station-info">
                   <li>
-                      <label for="">{{$t('message.msg1_36')}}</label><span>{{i + 1}}</span>
+                      <label for="">{{$t('message.msg1_36')}}</label><span>{{'&#12288;' +item.wsid}}</span>
                   </li>
                   <li>
-                      <label for="">{{$t('message.msg1_37')}}</label><span>{{item.orderListCount || ''}}</span>
+                      <label for="">{{$t('message.msg1_37')}}</label><span>{{'&#12288;' +item.orderListCount || ''}}</span>
                   </li>
                   <li>
-                      <label for="">{{$t('message.msg1_39')}}</label><span>{{item.forecastWallCount || ''}}</span>
+                      <label for="">{{$t('message.msg1_38')}}</label><span>{{'&#12288;' +item.routeListCount}}</span>
+                  </li>
+                  <li>
+                      <label for="">{{$t('message.msg1_39')}}</label><span>{{'&#12288;' +item.forecastWallCount || ''}}</span>
                   </li>
               </ul>
               <transition-group>            

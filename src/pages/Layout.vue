@@ -1,12 +1,12 @@
 <template>
 	<el-container>
 		<el-header id="headCon">
-      <el-col id="logo" class="clears">
+      <div id="logo" class="clears">
         <img id="logoTag" class="fl" src="../assets/images/logo.png" alt="">
         <!-- <img id="logoLine" class="fl" src="../assets/images/head1.png" alt=""> -->
         <span id="titles" class="fl">BIXI Control Tower</span>
-      </el-col>
-			<el-col  class="userinfo">
+      </div>
+			<div  class="userinfo">
 				<!-- <el-dropdown trigger="hover">
           <span class="el-dropdown-link userinfo-inner"> 欢迎您，{{sysUserName}}</span>
           <el-dropdown-menu slot="dropdown">
@@ -16,12 +16,12 @@
           </el-dropdown-menu>
         </el-dropdown> -->
         <ul class="clears userinfoCon">
-          <li><img src="../assets/images/u549.png"  alt="" title="用户"><span :title="sysUserName">{{sysUserName}}</span></li>
+          <li><img src="../assets/images/u549.png"  alt="" title="用户"><span :title="sysUserName" style="min-width:100px;">{{sysUserName}}</span></li>
           <!-- <li><i class="el-icon-edit"></i>{{sysUserName}}</li> -->
-          <li  @click='changeLanguage'  title="切换语言"><img src="../assets/images/u547.png"  alt=""><span :title='sysLanguage'>{{sysLanguage}}</span></li>
+          <li  @click='changeLanguage'  title="切换语言"><img src="../assets/images/u547.png"  alt=""><span :title='sysLanguage' >{{sysLanguage}}</span></li>
           <li  @click='logout'><img src="../assets/images/u545.png"  alt="" title="退出"><span>退出</span></li>
         </ul>
-			</el-col>
+			</div>
 		</el-header>
         <el-container>
             <el-aside :class="collapsed?'menu-collapsed':'menu-expanded'">
@@ -185,7 +185,7 @@ export default {
   .userinfo{
     display: flex;
     justify-content: flex-end;
-    width:500px;
+    // width:500px;
   }
   .userinfo-inner{
     font-size: 18px;
@@ -217,19 +217,24 @@ export default {
     min-width:1200px;
   }
   #logo{
-    min-width:680px;
+    // min-width:680px;
   }
    #titles{
     width:350px;
    }
    .userinfoCon{
-    min-width:400px;
+    // min-width:400px;
    }
+
    .userinfoCon li{
      float:left;
      color:#fff;
      margin-right:15px;
      font-size:16px;
+     
+   }
+   ul li span{
+  //  min-width: 150px!important;
    }
    .userinfoCon li img{
       vertical-align: middle;
@@ -239,13 +244,14 @@ export default {
    }
    .userinfoCon li span{
      cursor:pointer;
+     font-size: 16px;
      letter-spacing:1px;
      overflow:hidden;
      white-space: nowrap;
     text-overflow: ellipsis;
     -o-text-overflow: ellipsis;
     -ms-text-overflow: ellipsis;
-    max-width:70px;
+    display: inline-block;
    }
   
    .userinfoCon li:last-child{
