@@ -1,4 +1,5 @@
 import axios from 'axios'
+import {Message, Loading} from 'element-ui'
 const golbalData = require('./baseData')
 
 let axiosInstance = axios.create({
@@ -17,70 +18,78 @@ let axiosInstance = axios.create({
   }
 })
 axiosInstance.interceptors.request.use(config => {
+  Loading.service({text: 'Loading...'})
   let token = sessionStorage.getItem('token')
   if (token && token !== '') {
     config.headers.Authorization = token
   }
   return config
 }, err => {
+  Message.error({message: '请求超时!'})
   // console.log('err.res==request==' + err.res)
   return Promise.reject(err)
 })
 
 axiosInstance.interceptors.response.use(res => {
-/* 在此处理请求返回内容 */
+  Loading.service().close()
+ /* 在此处理请求返回内容 */
   let token = res.headers['Authorization']
   if (token && token !== '') {
     sessionStorage.setItem('token', token)
   }
   return res.data
 }, err => {
+  Loading.service().close()
   if (err && err.response) {
     switch (err.response.status) {
       case 400:
-        err.message = '请求错误(400)'
+        Message.error({message: '请求错误(400),请稍后再试'})
         break
       case 401:
-        err.message = '未授权，请重新登录(401)'
+        Message.error({message: '未授权，请重新登录(401)'})
         break
       case 403:
-        err.message = '拒绝访问(403)'
+        Message.error({message: '未授权，拒绝访问(403),请稍后再试'})
         break
       case 404:
-        err.message = '请求出错(404)'
+        Message.error({message: '请求出错(404),请稍后再试'})
         break
       case 408:
-        err.message = '请求超时(408)'
+        Message.error({message: '请求超时(408),请稍后再试'})
         break
       case 500:
-        err.message = '服务器错误(500)'
+        Message.error({message: '服务器错误(500),请稍后再试'})
         break
       case 501:
-        err.message = '服务未实现(501)'
+        Message.error({message: '服务未实现(501),请稍后再试'})
         break
       case 502:
-        err.message = '网络错误(502)'
+        Message.error({message: '网络错误(502),请稍后再试'})
         break
       case 503:
-        err.message = '服务不可用(503)'
+        Message.error({message: '服务不可用(503),请稍后再试'})
         break
       case 504:
-        err.message = '网络超时(504)'
+        Message.error({message: '网络超时(504),请稍后再试'})
         break
       case 505:
-        err.message = 'HTTP版本不受支持(505)'
+        Message.error({message: 'HTTP版本不受支持(505),请稍后再试'})
         break
       case 702:
-        // window.$message.warning('当前登录已过期，请重新登录！！！')
+        Message.error({message: '当前登录已过期，请重新登录！！！'})
         sessionStorage.removeItem('token')
         sessionStorage.removeItem('user')
         window.location.href = golbalData.loginUrl
         break
+      case 703:
+        Message.error({message: '当前用户没有该操作权限,请联系管理员稍后再试'})
+        break
       default:
         err.message = `连接出错(${err.response.status})!`
+        Message.error({message: err.message})  
     }
   } else {
-    err.message = '连接服务器失败!'
+    Message.error({message: '连接服务器失败!'})
   }
   return Promise.reject(err)
 })
