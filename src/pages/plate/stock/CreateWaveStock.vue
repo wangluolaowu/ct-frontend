@@ -268,7 +268,7 @@ export default {
           this.getTableData()
           this.$message.warning('文件导入成功')
         } else {
-          this.$message.warning('文件导入失败')
+          this.$message.warning('文件导入失败,'+res.errMsg)
         }
       })
     },
