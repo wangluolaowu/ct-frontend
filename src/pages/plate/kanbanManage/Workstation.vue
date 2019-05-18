@@ -2,9 +2,9 @@
   <div class="workStation">
     <h4 class="h2">{{$t('message.msg1_18')}}</h4>
     <el-table :data='tableData.list' highlight-current-row v-loading="tableLoading" style="width: 100%" border>
-      <el-table-column prop="entityWorkstationId" :label="$t('label.label1_09')"  min-width='100'>
+      <el-table-column prop="entityWorkstationId" :label="$t('label.label1_09')"  min-width='200'>
       </el-table-column>
-      <el-table-column prop="wallCount" :label="$t('label.label1_10')"  min-width='100'>
+      <el-table-column prop="wallCount" :label="$t('label.label1_10')"  min-width='200'>
       </el-table-column>
        <el-table-column prop="entityWorkstationStatus" v-model="isShow" :label="$t('label.label1_43')">
          <template slot-scope="scope" width="100%">
@@ -13,12 +13,12 @@
       </el-table-column>
       <el-table-column prop="userNum" v-model="isShow" :label="$t('label.label1_44')">
       </el-table-column>  
-      <el-table-column prop="workstationType" :label="$t('label.label1_29')" width="300">
+      <el-table-column prop="workstationType" :label="$t('label.label1_29')" min-width="300">
          <template slot-scope="scope" width="100%">
             {{$Enum.getEnumSelectByValue(WS_TYPE,scope.row.workstationType)}}
          </template>
       </el-table-column>
-      <el-table-column prop="workstationStatus" :label="$t('label.label1_48')"  width="200">
+      <el-table-column prop="workstationStatus" :label="$t('label.label1_48')"  min-width="200">
         <template slot-scope="scope" width="100%">
           {{$Enum.getEnumSelectByValue(WS_STATUS,scope.row.workstationStatus)}}
          </template>

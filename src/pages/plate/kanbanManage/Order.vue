@@ -4,16 +4,16 @@
       <div class="tabConOther">
         <h4 class="h2">{{$t('message.msg1_03')}}</h4>
         <el-table :data='tableData.SList' highlight-current-row v-loading="tableLoadingSDT" style="width: 100%" border>
-          <el-table-column prop="inC" :label="$t('label.label1_01')" :render-header="$ELTable.labelHead"></el-table-column>
-          <el-table-column prop="waveC" :label="$t('label.label1_02')" :render-header="$ELTable.labelHead"></el-table-column>
-          <el-table-column prop="complC" :label="$t('label.label1_03')"  :render-header="$ELTable.labelHead"></el-table-column>
+          <el-table-column prop="inC" :label="$t('label.label1_01')" min-width='200' :render-header="$ELTable.labelHead"></el-table-column>
+          <el-table-column prop="waveC" :label="$t('label.label1_02')" min-width='200' :render-header="$ELTable.labelHead"></el-table-column>
+          <el-table-column prop="complC" :label="$t('label.label1_03')"  min-width='200' :render-header="$ELTable.labelHead"></el-table-column>
 
-          <el-table-column prop="uncomplC" :label="$t('label.label1_04')" :render-header="$ELTable.labelHead"></el-table-column>
-          <el-table-column prop="comingC" :label="$t('label.label1_05')" :render-header="$ELTable.labelHead"></el-table-column>
-          <el-table-column prop="instantRaion" :label="$t('label.label1_06')" :render-header="$ELTable.labelHead"></el-table-column>
+          <el-table-column prop="uncomplC" :label="$t('label.label1_04')" min-width='200' :render-header="$ELTable.labelHead"></el-table-column>
+          <el-table-column prop="comingC" :label="$t('label.label1_05')" min-width='200' :render-header="$ELTable.labelHead"></el-table-column>
+          <el-table-column prop="instantRaion" :label="$t('label.label1_06')" min-width='200' :render-header="$ELTable.labelHead"></el-table-column>
           <!--新添加字段-->
-           <el-table-column prop="complPercent" :label="$t('label.label1_07')" :render-header="$ELTable.labelHead"></el-table-column>
-          <el-table-column prop="forecastComplSecond" :label="$t('label.label1_08')" :render-header="$ELTable.labelHead">
+           <el-table-column prop="complPercent" :label="$t('label.label1_07')" min-width='200' :render-header="$ELTable.labelHead"></el-table-column>
+          <el-table-column prop="forecastComplSecond" :label="$t('label.label1_08')" min-width='200' :render-header="$ELTable.labelHead">
              <template slot-scope="scope">
                 {{getDate(scope.row.forecastComplSecond,scope.row.uncomplC,scope.row.instantRaion)}}
             </template>
@@ -23,9 +23,9 @@
       <div class="tabConOther">
         <h4 class="h2">{{$t('message.msg1_04')}}</h4>
         <el-table :data='tableData.SOrderList' highlight-current-row v-loading="tableLoadingSD" border>
-          <el-table-column prop="entityWorkstationId" :label="$t('label.label1_09')" min-width='100' :render-header="$ELTable.labelHead"></el-table-column>
-          <el-table-column prop="forecastWallCount" :label="$t('label.label1_10')" min-width='100' :render-header="$ELTable.labelHead"></el-table-column>
-          <el-table-column prop="workstationStatus" :label="$t('label.label1_11')" width="200" :render-header="$ELTable.labelHead">
+          <el-table-column prop="entityWorkstationId" :label="$t('label.label1_09')" min-width='200' :render-header="$ELTable.labelHead"></el-table-column>
+          <el-table-column prop="forecastWallCount" :label="$t('label.label1_10')" min-width='200' :render-header="$ELTable.labelHead"></el-table-column>
+          <el-table-column prop="workstationStatus" :label="$t('label.label1_11')" min-width='200' :render-header="$ELTable.labelHead">
             <template slot-scope="scope">
               {{$Enum.getEnumSelectByValue(WS_STATUS,scope.row.workstationStatus)}}
             </template>
@@ -113,9 +113,9 @@
       <div class="tabConOther">
         <h4 class="h2">{{$t('message.msg1_66')}}</h4>
         <el-table :data='tableData.UOrderList' highlight-current-row  style="width: 100%" border>
-          <el-table-column prop="entityWorkstationId" :label="$t('label.label1_09')" min-width='100' :render-header="$ELTable.labelHead"></el-table-column>
-          <el-table-column prop="forecastWallCount" :label="$t('label.label1_10')" min-width='100' :render-header="$ELTable.labelHead"></el-table-column>
-          <el-table-column prop="workstationStatus" :label="$t('label.label1_11')" width="200" :render-header="$ELTable.labelHead">
+          <el-table-column prop="entityWorkstationId" :label="$t('label.label1_09')" min-width='200' :render-header="$ELTable.labelHead"></el-table-column>
+          <el-table-column prop="forecastWallCount" :label="$t('label.label1_10')" min-width='200' :render-header="$ELTable.labelHead"></el-table-column>
+          <el-table-column prop="workstationStatus" :label="$t('label.label1_11')" min-width='200' :render-header="$ELTable.labelHead">
             <template slot-scope="scope">
               {{$Enum.getEnumSelectByValue(WS_STATUS,scope.row.workstationStatus)}}
             </template>
@@ -125,7 +125,7 @@
           <el-table-column prop="comingC" :label="$t('label.label1_14')" min-width="160" :render-header="$ELTable.labelHead"></el-table-column>
           <el-table-column prop="instantRaion" :label="$t('label.label1_06')" min-width="220" :render-header="$ELTable.labelHead"></el-table-column>
           <!--新添加字段-->
-          <el-table-column prop="complPercent" :label="$t('label.label1_07')" min-width="100" :render-header="$ELTable.labelHead"></el-table-column>
+          <el-table-column prop="complPercent" :label="$t('label.label1_07')" min-width='200' :render-header="$ELTable.labelHead"></el-table-column>
           <el-table-column prop="forecastComplSecond" :label="$t('label.label1_08')" min-width="200" :render-header="$ELTable.labelHead">
              <template slot-scope="scope">
                 {{getDate(scope.row.forecastComplSecond,scope.row.uncomplC,scope.row.instantRaion)}}

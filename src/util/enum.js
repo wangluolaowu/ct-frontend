@@ -7,6 +7,24 @@ Enum.EnumSelect = function() {
   let EnumObj = {}
   let EnumObjEn = {}
   EnumObj = {
+    pick_order_type_all: [
+      {
+        label: '全部',
+        value: ''
+      },
+      {
+        label: 'S',
+        value: 'S'
+      },
+      {
+        label: 'V',
+        value: 'V'
+      },
+      {
+        label: 'U',
+        value: 'U'
+      }
+    ],
     modify_enable_flag: [
       {
         label: '提交未处理',
@@ -377,6 +395,32 @@ Enum.EnumSelect = function() {
       {
         label: '未创建波次',
         value: 1
+      },
+      {
+        label: '完成',
+        value: 3
+      },
+      {
+        label: '在途',
+        value: 4
+      },
+      {
+        label: '不在途',
+        value: 5
+      }
+    ],
+    dml_Bin_Status_all: [
+      {
+        label: '全部',
+        value: ''
+      },
+      {
+        label: '未创建波次',
+        value: 1
+      },
+      {
+        label: '手工打印',
+        value: 2
       },
       {
         label: '完成',
@@ -890,6 +934,31 @@ Enum.EnumSelect = function() {
         value: 5
       }
     ],
+    dml_Bin_Status_all: [
+      {
+        label: 'All',
+        value: ''
+      },
+      {
+        label: 'No wave number created',
+        value: 1
+      },
+      {
+        label: 'Manual printed',
+        value: 2
+      },
+      {
+        label: 'Complete',
+        value: 3
+      },
+      {
+        label: 'On the way',
+        value: 4
+      },
+      {
+        label: 'No way',
+        value: 5
+      }],
     page_size: [
       {
         label: '10',
@@ -992,6 +1061,24 @@ Enum.EnumSelect = function() {
       {
         label: 'RELOC',
         value: 'RELOC'
+      }
+    ],
+    pick_order_type_all: [
+      {
+        label: 'All',
+        value: ''
+      },
+      {
+        label: 'S',
+        value: 'S'
+      },
+      {
+        label: 'V',
+        value: 'V'
+      },
+      {
+        label: 'U',
+        value: 'U'
       }
     ],
     order_type2: [

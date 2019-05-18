@@ -47,17 +47,18 @@
       </el-tabs>
       <!-- 搜索区域 -->
       <div  v-if="dialogList.dialogPICK" >
-      <el-form label-width="160px" class="demo-form-inline selectedCont clears">
+      <el-form label-width="180px" class="demo-form-inline selectedCont clears">
         <el-row>
         <el-col :span="8">
             <el-form-item :label="$t('label.label1_49')">
                 <el-select v-model="searchPick.dmlOrderStatus" style="width:200px">
-                    <el-option label="全部" value=""></el-option>
-                    <el-option label="未创建波次" value="1"></el-option>
-                    <el-option label="手工打印" value="2"></el-option>
-                    <el-option label="完成" value="3"></el-option>
-                    <el-option label="在途" value="4"></el-option>
-                    <el-option label="不在途" value="5"></el-option>    
+                <el-option
+                v-for="item in $Enum.EnumSelect().dml_Bin_Status_all"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value" 
+                > 
+              </el-option>
                 </el-select>
             </el-form-item>
         </el-col>
@@ -71,10 +72,13 @@
             <el-col :span="8">
             <el-form-item :label="$t('label.label1_51')">
                 <el-select  v-model="searchPick.attribute09" style="width:200px">
-                    <el-option label="全部" value=""></el-option>
-                    <el-option label="S" value="S"></el-option>
-                    <el-option label="V" value="V"></el-option>
-                    <el-option label="U" value="U"></el-option>
+                   <el-option
+                    v-for="item in $Enum.EnumSelect().pick_order_type_all"
+                    :key="item.value"
+                    :label="item.label"
+                    :value="item.value" 
+                   > 
+              </el-option>
                 </el-select>
             </el-form-item>
             </el-col>
@@ -237,70 +241,74 @@
             </el-form-item>
             </el-col>
             </el-row>
-            <el-col >
-              <el-form-item class='sublimtInfo'>
-                   <el-checkbox v-model="searchPick.submitAll"  @change="handleCheckAllChangePICK">{{$t('message.msg1_26')}}</el-checkbox>
-                   <el-button  type="primary" :disabled="downLoadDisabledPick" @click="SetDownloadFunc('PICK')">{{$t('message.msg1_27')}}</el-button>
-              </el-form-item>
-              <el-form-item class='buttonGroups'>  
+            <el-row>
+            <el-col :span="12">
+              <el-form-item >  
                    <el-button type="primary" @click="confirm">{{$t('message.msg1_28')}}</el-button>
-                   <el-button type="info" @click="reset">{{$t('message.msg1_29')}}</el-button>
-                   <el-button type="info" @click="cancel">{{$t('message.msg1_30')}}</el-button>
+                   <el-button type="primary" @click="reset">{{$t('message.msg1_29')}}</el-button>
+                   <el-button type="primary" @click="cancel">{{$t('message.msg1_30')}}</el-button>
+              </el-form-item>
+              </el-col>
+               <el-col :span="12">
+                <el-form-item class='sublimtInfo'>
+                   <el-checkbox v-model="searchPick.submitAll"  @change="handleCheckAllChangePICK">{{$t('message.msg1_26')}}</el-checkbox>
+                   <el-button  :type="downLoadDisabledPickButton" :disabled="downLoadDisabledPick" @click="SetDownloadFunc('PICK')">{{$t('message.msg1_27')}}</el-button>
               </el-form-item>
             </el-col>
+            </el-row>
       </el-form>
       <el-table ref="multipleTable" :data="tableData.pick" tooltip-effect="dark" style="width: 100%" @selection-change="handleSelectionChangePick" border v-loading="tableLoadingPick">
             <el-table-column type="selection" width="55">
             </el-table-column>
-            <el-table-column prop="attribute07" :label="$t('label.label1_67')"  width="100">
+            <el-table-column prop="attribute07" :label="$t('label.label1_67')"  min-width="200">
             </el-table-column>
-            <el-table-column prop="attribute08" :label="$t('label.label1_68')"  width="100">
+            <el-table-column prop="attribute08" :label="$t('label.label1_68')"  min-width="200">
             </el-table-column>
-            <el-table-column prop="attribute03" :label="$t('label.label1_52')"  width="100">
+            <el-table-column prop="attribute03" :label="$t('label.label1_52')"  min-width="200">
             </el-table-column>
-            <el-table-column prop="attribute04" :label="$t('label.label1_54')"   width="100">
+            <el-table-column prop="attribute04" :label="$t('label.label1_54')"   min-width="200">
             </el-table-column>
-            <el-table-column prop="attribute01" :label="$t('label.label1_69')"   width="100">
+            <el-table-column prop="attribute01" :label="$t('label.label1_69')"   min-width="200">
             </el-table-column>
-            <el-table-column prop="attribute10" :label="$t('label.label1_50')"  width="100">
+            <el-table-column prop="attribute10" :label="$t('label.label1_50')"  min-width="200">
             </el-table-column>
-            <el-table-column prop="attribute09" :label="$t('label.label1_51')" width="100">
+            <el-table-column prop="attribute09" :label="$t('label.label1_51')" min-width="200">
             </el-table-column>
-            <el-table-column prop="locNum" :label="$t('label.label1_55')"  width="100">
+            <el-table-column prop="locNum" :label="$t('label.label1_55')"  min-width="200">
             </el-table-column>
-            <el-table-column prop="skuNum" :label="$t('label.label1_70')"  width="100">
+            <el-table-column prop="skuNum" :label="$t('label.label1_70')"  min-width="200">
             </el-table-column>
-            <el-table-column prop="createDt" :label="$t('label.label1_71')"  width="150">
+            <el-table-column prop="createDt" :label="$t('label.label1_71')"  min-width="200">
                <template slot-scope="scope">
                         {{$DateFormat.dateFormat(scope.row.createDt,true)}}
                 </template>
             </el-table-column>
-            <el-table-column prop="attribute19" :label="$t('label.label1_57')"  width="200"> 
+            <el-table-column prop="attribute19" :label="$t('label.label1_57')"  min-width="200"> 
               <template slot-scope="scope" width="100%">
                 {{$Enum.getEnumSelectByValue(Y_N_STATUS,scope.row.attribute19)}}
               </template>
             </el-table-column>
-            <el-table-column prop="attribute18" :label="$t('label.label1_58')" width="200">
+            <el-table-column prop="attribute18" :label="$t('label.label1_58')" min-width="200">
                <template slot-scope="scope" width="100%">
                   {{$Enum.getEnumSelectByValue(Y_N_STATUS,scope.row.attribute18)}}
               </template>
             </el-table-column>
-            <el-table-column prop="dmlOrderStatus" :label="$t('label.label1_49')" width="200">
+            <el-table-column prop="dmlOrderStatus" :label="$t('label.label1_49')" min-width="200">
               <template slot-scope="scope" width="100%">
                 {{$Enum.getEnumSelectByValue(DML_PICK_ORDER_STATUS,scope.row.dmlOrderStatus)}}
               </template>
             </el-table-column>
-            <el-table-column prop="orderInDate" :label="$t('label.label1_72')"  width="150">
+            <el-table-column prop="orderInDate" :label="$t('label.label1_72')"  min-width="200">
                <template slot-scope="scope">
                         {{$DateFormat.dateFormat(scope.row.orderInDate,true)}}
                       </template>
             </el-table-column>
-             <el-table-column prop="waveCreateDate" :label="$t('label.label1_73')" width="200">
+             <el-table-column prop="waveCreateDate" :label="$t('label.label1_73')" min-width="200">
                <template slot-scope="scope">
                         {{$DateFormat.dateFormat(scope.row.waveCreateDate,true)}}
                       </template>
             </el-table-column>
-             <el-table-column prop="lastUpdateDate" :label="$t('label.label1_28')" width="200">
+             <el-table-column prop="lastUpdateDate" :label="$t('label.label1_28')" min-width="200">
                <template slot-scope="scope">
                         {{$DateFormat.dateFormat(scope.row.lastUpdateDate,true)}}
                       </template>
@@ -787,7 +795,7 @@
         </el-col>
         </el-row>
       </el-form>
-      <el-table ref="multipleTableCALL_SHELF" :data="tableData.CALL_SHELF" height="500"  @selection-change="handleSelectionChangeCALL_SHELF" border v-loading="tableLoadingCALL_SHELF">
+      <el-table ref="multipleTableCALL_SHELF" :data="tableData.CALL_SHELF" min-height="500"  @selection-change="handleSelectionChangeCALL_SHELF" border v-loading="tableLoadingCALL_SHELF">
             <el-table-column type="selection" width="55">
             </el-table-column>
             <el-table-column type="index" :label="$t('label.label1_86')" >
@@ -1026,6 +1034,11 @@
        searchRelocPickOutSelect:[],
        searchCALL_SHELFSelect:[],
        searchSTOCK_TAKINGSelect:[],
+       downLoadDisabledPickButton:'info',
+       downLoadDisabledBINButton:'info',
+       downLoadDisabledRelocPickOutButton:'info',
+       downLoadDisabledCALL_SHELFButton:'info',
+       downLoadDisabledSTOCK_TAKINGButton:'info',
        downLoadDisabledPick:true,
        downLoadDisabledBIN:true,
        downLoadDisabledRelocPickOut:true,
@@ -1158,40 +1171,50 @@
         this.searchPick.submitAll=val
         if(this.searchPickSelect.length > 0 || val){
          this.downLoadDisabledPick = false
+         this.downLoadDisabledPickButton = "primary"
         }else{
          this.downLoadDisabledPick = true
+         this.downLoadDisabledPickButton = "info"
         }
       },
        handleCheckAllChangeBIN(val){
         this.searchBIN.submitAll=val
         if(this.searchBINSelect.length > 0 || val){
          this.downLoadDisabledBIN = false
+         this.downLoadDisabledBINButton = "primary"
         }else{
          this.downLoadDisabledBIN = true
+         this.downLoadDisabledBINButton = "info"
         }
       },
        handleCheckAllChangeRelocPickOut(val){
         this.searchRelocPickOut.submitAll=val
         if(this.searchRelocPickOutSelect.length > 0 || val){
          this.downLoadDisabledRelocPickOut = false
+         this.downLoadDisabledRelocPickOutButton = "primary"
         }else{
          this.downLoadDisabledRelocPickOut = true
+         this.downLoadDisabledRelocPickOutButton = "info"
         }
       },
        handleCheckAllChangeCALL_SHELF(val){
         this.searchCALL_SHELF.submitAll=val
         if(this.searchCALL_SHELFSelect.length > 0 || val){
          this.downLoadDisabledCALL_SHELF = false
+         this.downLoadDisabledCALL_SHELFButton = "primary"
         }else{
          this.downLoadDisabledCALL_SHELF = true
+         this.downLoadDisabledCALL_SHELFButton = "info"
         }
       },
        handleCheckAllChangeSTOCK_TAKING(val){
         this.searchSTOCK_TAKING.submitAll=val
         if(this.searchSTOCK_TAKINGSelect.length > 0 || val){
          this.downLoadDisabledSTOCK_TAKING = false
+         this.downLoadDisabledSTOCK_TAKINGButton = "primary"
         }else{
          this.downLoadDisabledSTOCK_TAKING = true
+         this.downLoadDisabledSTOCK_TAKINGButton = "info"
         }
       },
      SetDownloadFunc (arg1) {
@@ -1267,8 +1290,10 @@
        this.searchPickSelect = val
       if (this.searchPickSelect.length > 0 || this.searchPick.submitAll) {
         this.downLoadDisabledPick = false
+        this.downLoadDisabledPickButton = "primary"
       } else {
         this.downLoadDisabledPick = true
+        this.downLoadDisabledPickButton = "info"
       }
       },
       handleCurrentChangePick(){
@@ -1282,8 +1307,10 @@
         this.searchBINSelect = val
         if (this.searchBINSelect.length > 0 || this.searchBIN.submitAll) {
           this.downLoadDisabledBIN = false
+          this.downLoadDisabledBINButton = "primary"
         } else {
           this.downLoadDisabledBIN = true
+          this.downLoadDisabledBINButton = "info"
         }
       }, 
       handleCurrentChangeBIN(){
@@ -1294,8 +1321,10 @@
         this.searchRelocPickOutSelect = val
         if (this.searchRelocPickOutSelect.length > 0 || this.searchRelocPickOut.submitAll) {
           this.downLoadDisabledRelocPickOut = false
+           this.downLoadDisabledRelocPickOutButton = "primary"
         } else {
           this.downLoadDisabledRelocPickOut = true
+          this.downLoadDisabledRelocPickOutButton = "info"
         }
       }, 
       handleCurrentChangeRELOC_PICKOUT(){
@@ -1306,8 +1335,10 @@
         this.searchCALL_SHELFSelect = val
         if (this.searchCALL_SHELFSelect.length > 0 || this.searchCALL_SHELF.submitAll) {
           this.downLoadDisabledCALL_SHELF = false
+          this.downLoadDisabledCALL_SHELFButton = "primary"
         } else {
           this.downLoadDisabledCALL_SHELF = true
+          this.downLoadDisabledCALL_SHELFButton = "info"
         }
       }, 
       handleCurrentChangeCALL_SHELF(){
@@ -1318,8 +1349,10 @@
         this.searchSTOCK_TAKINGSelect = val
         if (this.searchSTOCK_TAKINGSelect.length > 0 || this.searchSTOCK_TAKING.submitAll) {
           this.downLoadDisabledSTOCK_TAKING = false
+          this.downLoadDisabledSTOCK_TAKINGButton = "primary"
         } else {
           this.downLoadDisabledSTOCK_TAKING = true
+          this.downLoadDisabledSTOCK_TAKINGButton = "info"
         }
       }, 
       handleCurrentChangeSTOCK_TAKING(){

@@ -2,22 +2,22 @@
   <div class="charingCon">
     <h4 class="h2">{{$t('message.msg1_17')}}</h4>
     <el-table :data='tableData.list' highlight-current-row v-loading="tableLoading" style="width: 100%" border>
-      <el-table-column prop="chargePointId" :label="$t('label.label1_42')" min-width='120'>
+      <el-table-column prop="chargePointId" :label="$t('label.label1_42')" min-width='200'>
       </el-table-column>
-      <el-table-column prop="activeFlag" :label="$t('label.label1_43')" >
+      <el-table-column prop="activeFlag" :label="$t('label.label1_43')" min-width='200'>
       </el-table-column>
-      <el-table-column prop="connAliveFlag" :label="$t('label.label1_44')">
+      <el-table-column prop="connAliveFlag" :label="$t('label.label1_44')" min-width='200'>
       </el-table-column>
-      <el-table-column prop="posX" :label="$t('label.label1_22')">
+      <el-table-column prop="posX" :label="$t('label.label1_22')" min-width='200'>
       </el-table-column>
-      <el-table-column prop="posY" :label="$t('label.label1_23')" >
+      <el-table-column prop="posY" :label="$t('label.label1_23')" min-width='200'>
       </el-table-column>
-      <el-table-column prop="offsetDirectioin" :label="$t('label.label1_45')">
+      <el-table-column prop="offsetDirectioin" :label="$t('label.label1_45')" min-width='200'>
          <template slot-scope="scope" width="100%">
             {{ $Enum.getEnumSelectByValue(MD_MAP_DIRECTION_LIMIT,scope.row.offsetDirectioin) }}
          </template>
       </el-table-column>
-      <el-table-column prop="externalDevice" :label="$t('label.label1_46')">
+      <el-table-column prop="externalDevice" :label="$t('label.label1_46')" min-width='200'>
       </el-table-column>
 
       <el-table-column prop="chargingKidId" :label="$t('label.label1_47')" min-width="200">
