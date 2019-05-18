@@ -635,8 +635,9 @@ export default {
       }).then((res) => {
         // console.log(res);
         if (res.errCode === 'S') {
-           res.data.result.map((item,i) => {
-            if(i === 0){
+
+           res.data.result.reverse().map((item,i) => {
+            if(i === res.data.result.length -1){
               this.endTime24 = item.LAST_UPDATE_TIME
             }  
             sum24KeyListTemp.push(item.LAST_UPDATE_DATE)

@@ -1009,7 +1009,7 @@
         tableLoadingSTOCK_TAKING:false,
         tableLoadingRELOC_PICKOUT:false,
         tableLoadingCALL_SHELF:false,
-        isShowDialog:false,
+        isShowDialog:true,
         tableData: {
           pick: [],
           BIN:[],
