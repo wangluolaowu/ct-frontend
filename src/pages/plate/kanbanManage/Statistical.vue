@@ -1289,7 +1289,7 @@
             }
             return item
           })
-          console.log('this.DML--status----' + JSON.stringify(this.DML_PICK_ORDER_STATUS))
+          //console.log('this.DML--status----' + JSON.stringify(this.DML_PICK_ORDER_STATUS))
         }
       })
     },

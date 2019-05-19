@@ -408,19 +408,19 @@ Enum.EnumSelect = function() {
       },
       {
         label: '未创建波次',
-        value: 1
+        value: '1'
       },
       {
         label: '完成',
-        value: 3
+        value: '3'
       },
       {
         label: '在途',
-        value: 4
+        value: '4'
       },
       {
         label: '不在途',
-        value: 5
+        value: '5'
       }
     ],
     dml_Bin_Status_all: [
@@ -430,23 +430,23 @@ Enum.EnumSelect = function() {
       },
       {
         label: '未创建波次',
-        value: 1
+        value: '1'
       },
       {
         label: '手工打印',
-        value: 2
+        value: '2'
       },
       {
         label: '完成',
-        value: 3
+        value: '3'
       },
       {
         label: '在途',
-        value: 4
+        value: '4'
       },
       {
         label: '不在途',
-        value: 5
+        value: '5'
       }
     ],
     page_size: [
@@ -961,19 +961,19 @@ Enum.EnumSelect = function() {
       },
       {
         label: 'No wave number created',
-        value: 1
+        value: '1'
       },
       {
         label: 'Complete',
-        value: 3
+        value: '3'
       },
       {
         label: 'On the way',
-        value: 4
+        value: '4'
       },
       {
         label: 'No way',
-        value: 5
+        value: '5'
       }
     ],
     dml_Bin_Status_all: [
@@ -983,23 +983,23 @@ Enum.EnumSelect = function() {
       },
       {
         label: 'No wave number created',
-        value: 1
+        value: '1'
       },
       {
         label: 'Manual printed',
-        value: 2
+        value: '2'
       },
       {
         label: 'Complete',
-        value: 3
+        value: '3'
       },
       {
         label: 'On the way',
-        value: 4
+        value: '4'
       },
       {
         label: 'No way',
-        value: 5
+        value: '5'
       }],
     page_size: [
       {
