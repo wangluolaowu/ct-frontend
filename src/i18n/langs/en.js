@@ -102,7 +102,7 @@ const en = {
     label1_08: 'Time still needed (min)',
     label1_09: 'Workstation ID',
     label1_10: 'Seedwall amount',
-    label1_11: 'Status',
+    label1_11: 'Whether to receive',
     label1_12: 'Order accomplished of today',
     label1_13: 'Order assigned-unaccomplished',
     label1_14: 'Order on-going',

@@ -503,50 +503,50 @@
           </el-form-item>
         </el-col>
       </el-form>
-      <el-table ref="multipleTableBIN" key='multipleTableBIN' :data="tableData.BIN" min-height="500" style="width: 99.9%" @selection-change="handleSelectionChangeBIN" border v-loading="tableLoadingBIN">
+      <el-table ref="multipleTableBIN" key='multipleTableBIN' :data="tableData.BIN"  style="width: 99.9%" @selection-change="handleSelectionChangeBIN" border v-loading="tableLoadingBIN">
             <el-table-column type="selection" width="55">
             </el-table-column>
-            <el-table-column prop="binTicketNum" :label="$t('label.label1_75')" min-width="200"  :render-header="$ELTable.labelHead">
+            <el-table-column prop="binTicketNum" :label="$t('label.label1_75')" min-width="200" >
             </el-table-column>
             <el-table-column prop="binGrn" label="GRN"  width="200"  >
             </el-table-column>
-            <el-table-column prop="skuNum" :label="$t('label.label1_70')"  width="200"  :render-header="$ELTable.labelHead">
+            <el-table-column prop="skuNum" :label="$t('label.label1_70')"  width="200"  >
             </el-table-column>
-            <el-table-column prop="binPartDesc" :label="$t('label.label1_78')"  width="200"  :render-header="$ELTable.labelHead">
+            <el-table-column prop="binPartDesc" :label="$t('label.label1_78')"  width="200" >
             </el-table-column>
-            <el-table-column prop="binWip" :label="$t('label.label1_52')"   width="200"  :render-header="$ELTable.labelHead">
+            <el-table-column prop="binWip" :label="$t('label.label1_52')"   width="200" >
             </el-table-column>
-            <el-table-column prop="binWipLine" :label="$t('label.label1_54')"   width="200"  :render-header="$ELTable.labelHead">
+            <el-table-column prop="binWipLine" :label="$t('label.label1_54')"   width="200" >
             </el-table-column>
-            <el-table-column prop="binOrdNo" :label="$t('label.label1_74')" width="200"  :render-header="$ELTable.labelHead">
+            <el-table-column prop="binOrdNo" :label="$t('label.label1_74')" width="200" >
             </el-table-column>
-            <el-table-column prop="binOrdLine" :label="$t('label.label1_75')"  min-width="200"  :render-header="$ELTable.labelHead">
+            <el-table-column prop="binOrdLine" :label="$t('label.label1_75')"  min-width="200"  >
             </el-table-column>
-            <el-table-column prop="locNum" :label="$t('label.label1_55')"  width="200"  :render-header="$ELTable.labelHead">
+            <el-table-column prop="locNum" :label="$t('label.label1_55')"  width="200"  >
             </el-table-column>
-            <el-table-column prop="binQty" :label="$t('label.label1_80')" width="200"  :render-header="$ELTable.labelHead">
+            <el-table-column prop="binQty" :label="$t('label.label1_80')" width="200" >
             </el-table-column>
-            <el-table-column prop="createDt" :label="$t('label.label1_81')" width="200"  :render-header="$ELTable.labelHead">
+            <el-table-column prop="createDt" :label="$t('label.label1_81')" width="200" >
                <template slot-scope="scope" width="100%">
                         {{$DateFormat.dateFormat(scope.row.createDt,true)}}
                 </template>
             </el-table-column>
-            <el-table-column prop="dmlBinStatus" :label="$t('label.label1_49')" width="200"  :render-header="$ELTable.labelHead"> 
+            <el-table-column prop="dmlBinStatus" :label="$t('label.label1_49')" width="200" > 
               <template slot-scope="scope" width="100%">
                 {{$Enum.getEnumSelectByValue($Enum.EnumSelect().dml_Bin_Status,scope.row.dmlBinStatus)}}
               </template>
             </el-table-column>
-            <el-table-column prop="binInDate" :label="$t('label.label1_72')" width="200"  :render-header="$ELTable.labelHead">
+            <el-table-column prop="binInDate" :label="$t('label.label1_72')" width="200"  >
                <template slot-scope="scope" width="100%">
                  {{$DateFormat.dateFormat(scope.row.binInDate,true)}}
               </template>
             </el-table-column>
-            <el-table-column prop="whiteCreationDate" :label="$t('label.label1_73')" width="200"  :render-header="$ELTable.labelHead">
+            <el-table-column prop="whiteCreationDate" :label="$t('label.label1_73')" width="200" >
                <template slot-scope="scope" width="100%">
                 {{$DateFormat.dateFormat(scope.row.whiteCreationDate,true)}}
               </template>
             </el-table-column>
-            <el-table-column prop="lastUpdateDate" :label="$t('label.label1_82')" width="150"  :render-header="$ELTable.labelHead">
+            <el-table-column prop="lastUpdateDate" :label="$t('label.label1_82')" width="200" >
                <template slot-scope="scope" width="100%">
                         {{$DateFormat.dateFormat(scope.row.lastUpdateDate,true)}}
                 </template>
@@ -1279,12 +1279,17 @@
         if (res.errCode === 'S') {
           res.data.result.map(item => {
             if (item.lookupType === 'DML_PICK_ORDER_STATUS') {
+              let itemTemp = {}
               item.value = item.lookupValueNum
               item.label = item.meaning || item.item.lookupValueNum
+              itemTemp.value = String(item.lookupValueNum)
+              itemTemp.label = item.meaning || item.item.lookupValueNum
               this.DML_PICK_ORDER_STATUS.push(item)
+              this.DML_PICK_ORDER_STATUS.push(itemTemp)
             }
             return item
           })
+          console.log('this.DML--status----' + JSON.stringify(this.DML_PICK_ORDER_STATUS))
         }
       })
     },
