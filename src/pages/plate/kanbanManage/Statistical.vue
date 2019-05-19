@@ -257,7 +257,7 @@
             </el-col>
             </el-row>
       </el-form>
-      <el-table ref="multipleTable" :data="tableData.pick" tooltip-effect="dark" style="width: 100%" @selection-change="handleSelectionChangePick" border v-loading="tableLoadingPick">
+      <el-table ref="multipleTable" :data="tableData.pick" tooltip-effect="dark" style="width: 99.9%" @selection-change="handleSelectionChangePick" border v-loading="tableLoadingPick">
             <el-table-column type="selection" width="55">
             </el-table-column>
             <el-table-column prop="attribute07" :label="$t('label.label1_67')"  min-width="200">
@@ -299,17 +299,17 @@
               </template>
             </el-table-column>
             <el-table-column prop="orderInDate" :label="$t('label.label1_72')"  min-width="200">
-               <template slot-scope="scope">
+               <template slot-scope="scope" width="100%">
                         {{$DateFormat.dateFormat(scope.row.orderInDate,true)}}
                       </template>
             </el-table-column>
              <el-table-column prop="waveCreateDate" :label="$t('label.label1_73')" min-width="200">
-               <template slot-scope="scope">
+               <template slot-scope="scope" width="100%">
                         {{$DateFormat.dateFormat(scope.row.waveCreateDate,true)}}
                       </template>
             </el-table-column>
              <el-table-column prop="lastUpdateDate" :label="$t('label.label1_28')" min-width="200">
-               <template slot-scope="scope">
+               <template slot-scope="scope" width="100%">
                         {{$DateFormat.dateFormat(scope.row.lastUpdateDate,true)}}
                       </template>
             </el-table-column>
@@ -320,7 +320,7 @@
           </el-pagination>
       </div> 
       <div  v-if="dialogList.dialogBIN" >
-        <el-form class="demo-form-inline selectedCont clears" label-width="160px">
+        <el-form class="demo-form-inline selectedCont clears" label-width="180px">
         <el-row>
         <el-col :span="8">
             <el-form-item :label="$t('label.label1_49')" >
@@ -489,65 +489,67 @@
             </el-form-item>
         </el-col>
         </el-row>
-        <el-col >
-          <el-form-item class='sublimtInfo'>    
-              <el-checkbox v-model="searchBIN.submitAll"  @change="handleCheckAllChangeBIN">{{$t('message.msg1_26')}}</el-checkbox>
-              <el-button  type="primary" :disabled="downLoadDisabledBIN" @click="SetDownloadFunc('BIN')">{{$t('message.msg1_27')}} </el-button>
-          </el-form-item>
-          <el-form-item class='buttonGroups'>  
+        <el-col :span="12">
+          <el-form-item >  
               <el-button type="primary" @click="confirmBIN">{{$t('message.msg1_28')}}</el-button>
-              <el-button type="info" @click="resetBIN">{{$t('message.msg1_29')}}</el-button>
-              <el-button type="info" @click="cancelBIN">{{$t('message.msg1_30')}}</el-button>
+              <el-button type="primary" @click="resetBIN">{{$t('message.msg1_29')}}</el-button>
+              <el-button type="primary" @click="cancelBIN">{{$t('message.msg1_30')}}</el-button>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+             <el-form-item class='sublimtInfo'>    
+              <el-checkbox v-model="searchBIN.submitAll"  @change="handleCheckAllChangeBIN">{{$t('message.msg1_26')}}</el-checkbox>
+              <el-button  :type="downLoadDisabledBINButton" :disabled="downLoadDisabledBIN" @click="SetDownloadFunc('BIN')">{{$t('message.msg1_27')}} </el-button>
           </el-form-item>
         </el-col>
       </el-form>
-      <el-table ref="multipleTableBIN" :data="tableData.BIN" height="500" style="width: 100%" @selection-change="handleSelectionChangeBIN" border v-loading="tableLoadingBIN">
-            <el-table-column type="selection" width="55" fixed="left">
+      <el-table ref="multipleTableBIN" key='multipleTableBIN' :data="tableData.BIN" min-height="500" style="width: 99.9%" @selection-change="handleSelectionChangeBIN" border v-loading="tableLoadingBIN">
+            <el-table-column type="selection" width="55">
             </el-table-column>
-            <el-table-column prop="binTicketNum" :label="$t('label.label1_75')" width="100">
+            <el-table-column prop="binTicketNum" :label="$t('label.label1_75')" min-width="200"  :render-header="$ELTable.labelHead">
             </el-table-column>
-            <el-table-column prop="binGrn" label="GRN"  width="100">
+            <el-table-column prop="binGrn" label="GRN"  width="200"  >
             </el-table-column>
-            <el-table-column prop="skuNum" :label="$t('label.label1_70')"  width="100">
+            <el-table-column prop="skuNum" :label="$t('label.label1_70')"  width="200"  :render-header="$ELTable.labelHead">
             </el-table-column>
-            <el-table-column prop="binPartDesc" :label="$t('label.label1_78')"  width="100">
+            <el-table-column prop="binPartDesc" :label="$t('label.label1_78')"  width="200"  :render-header="$ELTable.labelHead">
             </el-table-column>
-            <el-table-column prop="binWip" :label="$t('label.label1_52')"   width="100">
+            <el-table-column prop="binWip" :label="$t('label.label1_52')"   width="200"  :render-header="$ELTable.labelHead">
             </el-table-column>
-            <el-table-column prop="binWipLine" :label="$t('label.label1_54')"   width="100">
+            <el-table-column prop="binWipLine" :label="$t('label.label1_54')"   width="200"  :render-header="$ELTable.labelHead">
             </el-table-column>
-            <el-table-column prop="binOrdNo" :label="$t('label.label1_74')" width="100">
+            <el-table-column prop="binOrdNo" :label="$t('label.label1_74')" width="200"  :render-header="$ELTable.labelHead">
             </el-table-column>
-            <el-table-column prop="binOrdLine" :label="$t('label.label1_75')"  width="100">
+            <el-table-column prop="binOrdLine" :label="$t('label.label1_75')"  min-width="200"  :render-header="$ELTable.labelHead">
             </el-table-column>
-            <el-table-column prop="binQty" :label="$t('label.label1_80')"  width="100">
+            <el-table-column prop="locNum" :label="$t('label.label1_55')"  width="200"  :render-header="$ELTable.labelHead">
             </el-table-column>
-             <el-table-column prop="locNum" :label="$t('label.label1_55')"  width="100">
+            <el-table-column prop="binQty" :label="$t('label.label1_80')" width="200"  :render-header="$ELTable.labelHead">
             </el-table-column>
-            <el-table-column prop="createDt" :label="$t('label.label1_81')" width="150">
-               <template slot-scope="scope">
+            <el-table-column prop="createDt" :label="$t('label.label1_81')" width="200"  :render-header="$ELTable.labelHead">
+               <template slot-scope="scope" width="100%">
                         {{$DateFormat.dateFormat(scope.row.createDt,true)}}
-                      </template>
+                </template>
             </el-table-column>
-            <el-table-column prop="dmlBinStatus" :label="$t('label.label1_49')"  width="200"> 
+            <el-table-column prop="dmlBinStatus" :label="$t('label.label1_49')" width="200"  :render-header="$ELTable.labelHead"> 
               <template slot-scope="scope" width="100%">
                 {{$Enum.getEnumSelectByValue($Enum.EnumSelect().dml_Bin_Status,scope.row.dmlBinStatus)}}
               </template>
             </el-table-column>
-            <el-table-column prop="binInDate" :label="$t('label.label1_72')" width="200">
+            <el-table-column prop="binInDate" :label="$t('label.label1_72')" width="200"  :render-header="$ELTable.labelHead">
                <template slot-scope="scope" width="100%">
                  {{$DateFormat.dateFormat(scope.row.binInDate,true)}}
               </template>
             </el-table-column>
-            <el-table-column prop="whiteCreationDate" :label="$t('label.label1_73')" width="200">
-              <template slot-scope="scope" width="100%">
+            <el-table-column prop="whiteCreationDate" :label="$t('label.label1_73')" width="200"  :render-header="$ELTable.labelHead">
+               <template slot-scope="scope" width="100%">
                 {{$DateFormat.dateFormat(scope.row.whiteCreationDate,true)}}
               </template>
             </el-table-column>
-            <el-table-column prop="lastUpdateDate" :label="$t('label.label1_82')" width="150">
-               <template slot-scope="scope">
+            <el-table-column prop="lastUpdateDate" :label="$t('label.label1_82')" width="150"  :render-header="$ELTable.labelHead">
+               <template slot-scope="scope" width="100%">
                         {{$DateFormat.dateFormat(scope.row.lastUpdateDate,true)}}
-                      </template>
+                </template>
             </el-table-column>
         </el-table>
          <el-pagination v-if="searchBIN.totalRows>0" class="pagination" background @current-change="handleCurrentChangeBIN"
@@ -1505,7 +1507,7 @@
       },
       getdialogBIN () {
         let that = this
-        this.axios.get('kanban/orderSum/selectBINDetailsVList', {
+        axios.get('kanban/orderSum/selectBINDetailsVList', {
           params: that.searchBIN
         }).then((res) => {
           if (res.errCode === 'S') {

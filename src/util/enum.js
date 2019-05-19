@@ -105,6 +105,20 @@ Enum.EnumSelect = function() {
         value: 0
       }
     ],
+    openStatus3_all: [
+      {
+        label: '全部',
+        value: ''
+      },
+      {
+        label: '开启',
+        value: 1
+      },
+      {
+        label: '禁用',
+        value: 0
+      }
+    ],
     openStatus4: [
       {
         label: '停用',
@@ -517,6 +531,20 @@ Enum.EnumSelect = function() {
         value: 2
       }
     ],
+    CHARGE_STATUS_all: [
+      {
+        label: '全部',
+        value: ''
+      },
+      {
+        label: '在充电',
+        value: 1
+      },
+      {
+        label: '未充电',
+        value: 2
+      }
+    ],
     order_type: [
       {
         label: '全部',
@@ -631,6 +659,20 @@ Enum.EnumSelect = function() {
       }
     ],
     openStatus3: [
+      {
+        label: 'open',
+        value: 1
+      },
+      {
+        label: 'closed',
+        value: 0
+      }
+    ],
+    openStatus3_all: [
+      {
+        label: 'All',
+        value: ''
+      },
       {
         label: 'open',
         value: 1
@@ -1032,6 +1074,20 @@ Enum.EnumSelect = function() {
       }
     ],
     CHARGE_STATUS: [
+      {
+        label: 'Charging',
+        value: 1
+      },
+      {
+        label: 'uncharged',
+        value: 2
+      }
+    ],
+    CHARGE_STATUS_all: [
+      {
+        label: 'All',
+        value: ''
+      },
       {
         label: 'Charging',
         value: 1

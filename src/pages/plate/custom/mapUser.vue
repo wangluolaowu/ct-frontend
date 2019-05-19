@@ -49,7 +49,7 @@
          <el-dialog :title="$t('message.msg1_75')" :visible.sync="dialogVisible" width="50%" :close-on-click-modal="false">
              <el-form :model="addFormData" :rules="rules2" ref="addFormData" label-width="150px" class="demo-ruleForm login-container">
                   <el-form-item prop="clientId" label="clientId" :disabled="keyDisabled">
-                    <el-input type="text" v-model="addFormData.clientId"></el-input>
+                    <el-input type="text" v-model="addFormData.clientId" :maxlength="9"></el-input>
                   </el-form-item>
                   <el-form-item prop="ipAddress" label="ipAddress">
                     <el-input type="text" v-model="addFormData.ipAddress"></el-input>
@@ -66,7 +66,7 @@
                         </el-select>
                   </el-form-item>
                    <el-form-item prop="connPassword"  :label="$t('label.label10_01')">
-                    <el-input type="password" v-model="addFormData.connPassword"></el-input>
+                    <el-input type="password" v-model="addFormData.connPassword" :maxlength="9"></el-input>
                   </el-form-item>
                    <el-form-item prop="adminFlag" label="adminFlag" style="width:400px">
                     <el-select  v-model="addFormData.adminFlag">
@@ -109,14 +109,32 @@
            adminFlag:''
           },
           rules2: {
-            username: [{
+            clientId: [{
               required: true,
-              message: '用户名不能为空',
+              message: 'ClientId不能为空,请输入5-9位正整数',
+              trigger: 'blur'
+            },
+            { validator:this.$validate.isInteger, trigger: 'blur' }
+            ],
+            ipAddress: [{
+              required: true,
+              message: 'IpAddress不能为空',
+              trigger: 'blur'
+            },{ validator:this.$validate.validateIP, trigger: 'blur' }],
+            activeFlag: [{
+              required: true,
+              message: 'ActiveFlag不能为空',
               trigger: 'blur'
             }],
-            password: [{
+            connPassword: [{
               required: true,
-              message: '密码不能为空',
+              message: 'ConnPassword不能为空,请输入5-9位正整数',
+              trigger: 'blur'
+            },
+            { validator:this.$validate.isInteger, trigger: 'blur' }],
+            adminFlag: [{
+              required: true,
+              message: 'AdminFlag不能为空',
               trigger: 'blur'
             }]
           },
@@ -140,9 +158,9 @@
           this.addFormData = {
            clientId:'',
            ipAddress:'',
-           activeFlag:'',
+           activeFlag:1,
            connPassword:'',
-           adminFlag:''
+           adminFlag:1
           }
           this.isView = true
           this.dialogVisible = true

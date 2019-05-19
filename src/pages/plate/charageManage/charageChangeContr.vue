@@ -14,19 +14,6 @@
         </el-col>
         </el-row>
          <el-row>  
-            <el-col :span="8">  
-            <el-form-item  :label="$t('label.label1_56')">
-             <el-select  v-model="searchBIN.pageSize" style="width:200px">
-                <el-option
-                v-for="item in $Enum.EnumSelect().page_size"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value" 
-                > 
-              </el-option>
-           </el-select>
-            </el-form-item>
-        </el-col> 
         <el-col :span="8">
             <el-form-item  :label="$t('label.label5_01')">
               <el-input v-model="searchBIN.kidId" style="width:200px"></el-input>
@@ -95,7 +82,7 @@
           </el-pagination>
           <!--新增界面-->
          <el-dialog :title="$t('message.msg1_75')" :visible.sync="dialogVisible" width="50%" :close-on-click-modal="false">
-             <el-form :model="addFormData" :rules="rules2" ref="addFormData" label-width="150px" class="demo-ruleForm login-container">
+             <el-form :model="addFormData" :rules="rules2" ref="addFormData" label-width="200px" class="demo-ruleForm login-container">
                   <el-form-item prop="ruleId" :label="$t('label.label9_03')"> 
                     <el-input type="text" v-model="addFormData.ruleId"  :disabled="keyDisabled"></el-input>
                   </el-form-item>
@@ -241,9 +228,11 @@
         loadData() {
           let param = {'params': JSON.stringify(this.searchBIN)}
           axios.post('/charageManage/rules/selectCharageRulesListBySearch', qs.stringify(param)).then((res) => {
-            var _data = res.data.result
-            this.userInfoList = _data
-            this.searchBIN.totalRows = res.data.totalRows
+           if(res.errCode === 'S') {
+              var _data = res.data.result
+              this.userInfoList = _data
+             //this.searchBIN.totalRows = res.data.totalRows
+           }
           })
         },
         add() {

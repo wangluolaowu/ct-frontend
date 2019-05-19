@@ -1,6 +1,6 @@
  <template>
      <div class="mainContainer">
-     <el-form class="demo-form-inline selectedCont clears" label-width="200px">
+     <el-form class="demo-form-inline selectedCont clears" label-width="220px">
         <el-row>
         <el-col :span="8">
             <el-form-item :label="$t('label.label1_42')">
@@ -11,7 +11,7 @@
             <el-form-item  :label="$t('label.label9_01')">
                <el-select  v-model="searchBIN.chargeStatus" style="width:200px">
                 <el-option
-                v-for="item in $Enum.EnumSelect().CHARGE_STATUS"
+                v-for="item in $Enum.EnumSelect().CHARGE_STATUS_all"
                 :key="item.value"
                 :label="item.label"
                 :value="item.value" 
@@ -26,7 +26,7 @@
             <el-form-item  :label="$t('label.label9_02')">
               <el-select  v-model="searchBIN.activeFlag" style="width:200px">
                 <el-option
-                v-for="item in $Enum.EnumSelect().openStatus3"
+                v-for="item in $Enum.EnumSelect().openStatus3_all"
                 :key="item.value"
                 :label="item.label"
                 :value="item.value" 
@@ -35,19 +35,6 @@
            </el-select>
             </el-form-item>
         </el-col> 
-        <el-col :span="8">  
-            <el-form-item  :label="$t('label.label1_56')">
-             <el-select  v-model="searchBIN.pageSize" style="width:200px">
-                <el-option
-                v-for="item in $Enum.EnumSelect().page_size"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value" 
-                > 
-              </el-option>
-           </el-select>
-          </el-form-item>
-          </el-col>   
         </el-row>
         <el-row>
         <el-col :span="5" >
@@ -99,7 +86,7 @@
           </el-pagination>
           <!--新增界面-->
          <el-dialog :title="$t('message.msg1_75')" :visible.sync="dialogVisible" width="50%" :close-on-click-modal="false">
-             <el-form :model="addFormData" :rules="rules2" ref="addFormData" label-width="150px" class="demo-ruleForm login-container">
+             <el-form :model="addFormData" :rules="rules2" ref="addFormData" label-width="220px" class="demo-ruleForm login-container">
                    <el-form-item prop="chargePointNum"  :label="$t('label.label1_42')">
                     <el-input type="text" v-model="addFormData.chargePointNum"   :disabled="keyDisabled"></el-input>
                   </el-form-item>
@@ -200,9 +187,11 @@
         loadData() {
           let param = {'params': JSON.stringify(this.searchBIN)}
           axios.post('/charageManage/switchStatus/selectCharageListBySearch', qs.stringify(param)).then((res) => {
-            var _data = res.data.result
-            this.userInfoList = _data
-            this.searchBIN.totalRows = res.data.totalRows
+             if(res.errCode === 'S'){
+                var _data = res.data.result
+                this.userInfoList = _data
+                //this.searchBIN.totalRows = res.data.totalRows
+             }
           })
         },
         add() {

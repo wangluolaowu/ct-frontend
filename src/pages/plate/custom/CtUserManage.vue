@@ -49,20 +49,20 @@
           <!--新增界面-->
          <el-dialog :title="$t('message.msg1_75')" :visible.sync="dialogVisible" width="50%" :close-on-click-modal="false">
              <el-form :model="addFormData" :rules="rules2" ref="addFormData" label-width="150px" class="demo-ruleForm login-container">
-                  <el-form-item prop="firstName" label="FirstName">
-                    <el-input type="text" v-model="addFormData.firstName" placeholder="FirstName"></el-input>
+                  <el-form-item prop="firstName" label="FirstName" >
+                    <el-input type="text" v-model="addFormData.firstName" placeholder="FirstName" :maxlength="20"></el-input>
                   </el-form-item>
-                   <el-form-item prop="lastName" label="LastName">
-                    <el-input type="text" v-model="addFormData.lastName"  placeholder="LastName"></el-input>
+                   <el-form-item prop="lastName" label="LastName" >
+                    <el-input type="text" v-model="addFormData.lastName"  placeholder="LastName" :maxlength="20"></el-input>
                   </el-form-item>
-                   <el-form-item prop="username" :label="$t('label.label10_15')">
-                    <el-input type="text" v-model="addFormData.username"  ></el-input>
+                   <el-form-item prop="username" :label="$t('label.label10_15')" >
+                    <el-input type="text" v-model="addFormData.username"  :maxlength="20"></el-input>
                   </el-form-item>
                    <el-form-item prop="password" :label="$t('label.label10_01')">
                     <el-input type="password" v-model="addFormData.password" ></el-input>
                   </el-form-item>
                    <el-form-item prop="email" label="Email">
-                    <el-input type="text" v-model="addFormData.email" placeholder="Email"></el-input>
+                    <el-input type="text" v-model="addFormData.email" placeholder="Email" ></el-input>
                   </el-form-item>
                  <el-row> 
                    <el-col>
@@ -109,14 +109,34 @@
             state: ''
           },
           rules2: {
-            username: [{
+            firstName: [{
+              required: true,
+              message: 'FirstName不能为空',
+              trigger: 'blur'
+            }],
+            lastName: [{
+              required: true,
+              message: 'LastName不能为空',
+              trigger: 'blur'
+            }],
+             username: [{
               required: true,
               message: '用户名不能为空',
               trigger: 'blur'
-            }],
+            }], 
             password: [{
               required: true,
               message: '密码不能为空',
+              trigger: 'blur'
+            },{ validator:this.$validate.isPassword, trigger: 'blur' }],
+             email: [{
+              required: true,
+              message: '邮箱不能为空',
+              trigger: 'blur'
+            },{ type: 'email', message: '请输入正确的邮箱地址', trigger: 'blur,change' }], 
+            state: [{
+              required: true,
+              message: '状态不能为空',
               trigger: 'blur'
             }]
           },
@@ -132,8 +152,10 @@
         loadData() {
           let param = {'username': this.filters.username}
           axios.post('/custom/ctUser/selectCtUserList', qs.stringify(param)).then((res) => {
-            var _data = res.data.result
-            this.userInfoList = _data
+            if(res.errCode === 'S'){
+               var _data = res.data.result
+               this.userInfoList = _data
+            }
           })
         },
         addUser() {
@@ -144,7 +166,7 @@
             username: '',
             password: '',
             email: '',
-            state: ''
+            state: 1
           }
           this.isView = true
           this.dialogVisible = true

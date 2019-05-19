@@ -43,13 +43,13 @@
          <el-dialog :title="$t('message.msg1_75')" :visible.sync="dialogVisible" width="50%" :close-on-click-modal="false">
              <el-form :model="addFormData" :rules="rules2" ref="addFormData" label-width="150px" class="demo-ruleForm login-container">
                   <el-form-item prop="userNum" label="userNum">
-                    <el-input type="text" v-model="addFormData.userNum"></el-input>
+                    <el-input type="text" v-model="addFormData.userNum" :maxlength="20"></el-input>
                   </el-form-item>
                    <el-form-item prop="passwd"  :label="$t('label.label10_01')">
-                    <el-input type="password" v-model="addFormData.passwd" ></el-input>
+                    <el-input type="password" v-model="addFormData.passwd" :maxlength="20"></el-input>
                   </el-form-item>
                    <el-form-item prop="rfdcUserId" label="rfdcUserId">
-                    <el-input type="text" v-model="addFormData.rfdcUserId"></el-input>
+                    <el-input type="text" v-model="addFormData.rfdcUserId" :maxlength="20"></el-input>
                   </el-form-item>
              </el-form>
              <span slot="footer" class="dialog-footer">
@@ -78,14 +78,14 @@
             rfdcUserId:''
           },
           rules2: {
-            username: [{
+            userNum: [{
               required: true,
-              message: '用户名不能为空',
+              message: 'UserNum不能为空',
               trigger: 'blur'
             }],
-            password: [{
+            passwd: [{
               required: true,
-              message: '密码不能为空',
+              message: 'passwd不能为空',
               trigger: 'blur'
             }]
           },
@@ -101,8 +101,10 @@
         loadData() {
           let param = {'userNum': this.filters.userNum}
           axios.post('/custom/iFndUsers/selectIFndUsersList', qs.stringify(param)).then((res) => {
-            var _data = res.data.result
-            this.userInfoList = _data
+            if(res.errCode === 'S'){
+               var _data = res.data.result
+               this.userInfoList = _data
+            }
           })
         },
         addUser() {

@@ -377,9 +377,11 @@
         loadData() {
           let param = {'params': JSON.stringify(this.searchBIN)}
           axios.post('/holderManage/homePage/selectHolderListBySearch', qs.stringify(param)).then((res) => {
-            var _data = res.data.result
-            this.userInfoList = _data
-            this.searchBIN.totalRows = res.data.totalRows
+            if(res.errCode === 'S'){
+              var _data = res.data.result
+              this.userInfoList = _data
+              this.searchBIN.totalRows = res.data.totalRows
+            }
           })
         },
         add() {

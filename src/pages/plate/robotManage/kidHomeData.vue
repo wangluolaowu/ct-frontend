@@ -191,6 +191,9 @@
                       </template>
             </el-table-column>
              <el-table-column prop="descriptions " :label="$t('label.label5_17')" width="200"> 
+                    <template slot-scope="scope">
+                        {{scope.row.descriptions}}
+                      </template>
             </el-table-column>
              <!--第二步  开始进行修改和查询操作-->
              <el-table-column label="$t('message.msg1_53')"  min-width="350" fixed="right">
@@ -211,8 +214,8 @@
                         :total="searchBIN.totalRows">
           </el-pagination>
           <!--新增界面-->
-         <el-dialog title="$t('message.msg1_75')" :visible.sync="dialogVisible" width="50%" :close-on-click-modal="false">
-             <el-form :model="addFormData" :rules="rules2" ref="addFormData" label-width="150px" class="demo-ruleForm login-container">
+         <el-dialog :title="$t('message.msg1_75')" :visible.sync="dialogVisible" width="50%" :close-on-click-modal="false">
+             <el-form :model="addFormData" :rules="rules2" ref="addFormData" label-width="200px" class="demo-ruleForm login-container">
                   <el-form-item prop="kidId"  :label="$t('label.label5_01')">
                     <el-input type="text" v-model="addFormData.kidId"  :label="$t('label.label5_01')" :disabled="keyDisabled"></el-input>
                   </el-form-item>
@@ -266,7 +269,7 @@
                     ></el-date-picker>
                   </el-form-item>
                     <el-form-item prop="latestRepairDate" :label="$t('label.label5_16')">
-                        <el-date-picker
+                       <el-date-picker
                         v-model="addFormData.latestRepairDate"
                         format="yyyy-MM-dd HH:mm:ss"
                         value-format="yyyy-MM-dd HH:mm:ss"
@@ -276,7 +279,7 @@
                     ></el-date-picker>
                   </el-form-item>
                     <el-form-item prop="descriptions "  :label="$t('label.label5_17')">
-                    <el-input type="text" v-model="addFormData.descriptions"></el-input>
+                    <el-input type="textarea" v-model="addFormData.descriptions"></el-input>
                   </el-form-item>
              </el-form>
              <span slot="footer" class="dialog-footer">
@@ -338,16 +341,16 @@
           },
           addType:false,
           rules2: {
-            username: [{
-              required: true,
-              message: '用户名不能为空',
-              trigger: 'blur'
-            }],
-            password: [{
-              required: true,
-              message: '密码不能为空',
-              trigger: 'blur'
-            }]
+            kidId: [
+              {required: true,message: '机器人编号不能为空',trigger: 'blur'},
+              {validator:this.$validate.isIntegerAlone, trigger: 'blur'}
+            ],
+            totalServiceMileage: [
+               {validator:this.$validate.isIntegerAlone, trigger: 'blur'}
+            ],
+            ipAddress: [
+               {validator:this.$validate.validateIP, trigger: 'blur'}
+            ]
           }
         }
       },
@@ -409,9 +412,11 @@
         loadData() {
           let param = {'params': JSON.stringify(this.searchBIN)}
           axios.post('/robotManage/kidHomeData/selectKidsInfoBySearch', qs.stringify(param)).then((res) => {
-            var _data = res.data.result
-            this.userInfoList = _data
-            this.searchBIN.totalRows = res.data.totalRows
+            if(res.errCode === 'S'){
+              var _data = res.data.result
+              this.userInfoList = _data
+              this.searchBIN.totalRows = res.data.totalRows
+            }
           })
         },
         add() {
@@ -437,12 +442,24 @@
         },
         checkDetail(rowData) {
           this.addFormData = Object.assign({}, rowData)
+          let startServiceDateTemp = this.addFormData.startServiceDate
+          let latestMaintainDateTemp = this.addFormData.latestMaintainDate
+          let latestRepairDateTemp = this.addFormData.latestRepairDate
+          this.addFormData.startServiceDate = new Date(this.$DateFormat.dateFormat(startServiceDateTemp,true))
+          this.addFormData.latestMaintainDate = new Date(this.$DateFormat.dateFormat(latestMaintainDateTemp,true))
+          this.addFormData.latestRepairDate = new Date(this.$DateFormat.dateFormat(latestRepairDateTemp,true))
           this.isView = false
           this.dialogVisible = true
           //  this.addFormReadOnly = true;
         },
         modifyInfo(rowData) {
           this.addFormData = Object.assign({}, rowData)
+          let startServiceDateTemp = this.addFormData.startServiceDate
+          let latestMaintainDateTemp = this.addFormData.latestMaintainDate
+          let latestRepairDateTemp = this.addFormData.latestRepairDate
+          this.addFormData.startServiceDate = new Date(this.$DateFormat.dateFormat(startServiceDateTemp,true))
+          this.addFormData.latestMaintainDate = new Date(this.$DateFormat.dateFormat(latestMaintainDateTemp,true))
+          this.addFormData.latestRepairDate = new Date(this.$DateFormat.dateFormat(latestRepairDateTemp,true))
           this.isView = true
           this.keyDisabled = true
           this.dialogVisible = true

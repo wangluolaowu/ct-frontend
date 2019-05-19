@@ -67,45 +67,6 @@
               <el-input v-model="searchBIN.projectorModelNumber" style="width:200px"></el-input>
             </el-form-item>
         </el-col>
-        <el-col :span="8">  
-            <el-form-item  :label="$t('label.label1_56')">
-             <el-select  v-model="searchBIN.pageSize" style="width:200px">
-                <el-option
-                v-for="item in $Enum.EnumSelect().page_size"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value" 
-                > 
-              </el-option>
-           </el-select>
-            </el-form-item>
-        </el-col>   
-        </el-row>
-        <el-row>
-        <el-col :span="8">
-           <el-form-item :label="$t('label.label7_11')">
-               <el-date-picker
-                v-model="searchBIN.startTimeStartServiceDate"
-                format="yyyy-MM-dd HH:mm:ss"
-                value-format="yyyy-MM-dd HH:mm:ss"
-                type="datetime"
-                @change="handleChangeTime"
-                style="width:200px"
-              ></el-date-picker>
-            </el-form-item>
-        </el-col>
-        <el-col :span="8">  
-            <el-form-item  :label="$t('label.label7_12')">
-               <el-date-picker
-                v-model="searchBIN.endTimeStartServiceDate"
-                format="yyyy-MM-dd HH:mm:ss"
-                value-format="yyyy-MM-dd HH:mm:ss"
-                type="datetime"
-                style="width:200px"
-                @change="handleChangeTime"
-              ></el-date-picker>
-            </el-form-item>
-        </el-col>
         </el-row>
          <el-row>
         <el-col :span="8">
@@ -177,7 +138,7 @@
           </el-col>-->
         </el-row>
       </el-form>
-         <el-table :data="userInfoList" style="width: 100%" border  min-height="100">
+         <el-table :data="userInfoList" key='userInfoList' style="width: 100%" border  min-height="100">
             <!--<el-table-column prop="id" label="id" >
             </el-table-column>-->
             <el-table-column prop="entityWorkstationId" :label="$t('label.label7_02')" min-width="200">
@@ -197,11 +158,11 @@
             </el-table-column>
              <el-table-column prop="totalServiceMileage" :label="$t('label.label7_13')" min-width="200">
             </el-table-column>
-             <el-table-column prop="macAddress" :label="$t('label.label7_07')" min-width="200">
+             <el-table-column prop="macAddress" :label="$t('label.label7_07')" width="200">
             </el-table-column>
-             <el-table-column prop="ipAddress" :label="$t('label.label7_08')" min-width="200">
+             <el-table-column prop="ipAddress" :label="$t('label.label7_08')" width="200">
             </el-table-column>
-             <el-table-column prop="latestMaintainDate" :label="$t('label.label5_15')" min-width="200">
+             <el-table-column prop="latestMaintainDate" :label="$t('label.label5_15')" width="200">
                   <template slot-scope="scope">
                         {{$DateFormat.dateFormat(scope.row.latestMaintainDate,true)}}
                       </template>
@@ -211,13 +172,22 @@
                         {{$DateFormat.dateFormat(scope.row.latestRepairDate,true)}}
                       </template>
             </el-table-column>
-            <el-table-column prop="electronicTagsCount"  :label="$t('label.label7_09')" min-width="200"> 
+            <el-table-column prop="electronicTagsCount"  :label="$t('label.label7_09')" width="200"> 
             </el-table-column>
-              <el-table-column prop="projectorModelNumber " :label="$t('label.label7_10')" min-width="200"> 
+              <el-table-column prop="projectorModelNumber " :label="$t('label.label7_10')" width="200"> 
+                 <template slot-scope="scope">
+                       {{scope.row.projectorModelNumber}}
+                  </template>
             </el-table-column>
-              <el-table-column prop="scanningGunModelNumber " :label="$t('label.label7_05')" min-width="200"> 
+              <el-table-column prop="scanningGunModelNumber " :label="$t('label.label7_05')" width="200"> 
+                 <template slot-scope="scope">
+                       {{scope.row.scanningGunModelNumber}}
+                  </template>
             </el-table-column>
-             <el-table-column prop="descriptions " :label="$t('label.label5_17')"  min-width="200"> 
+             <el-table-column prop="descriptions " :label="$t('label.label5_17')"  width="200"> 
+                <template slot-scope="scope">
+                       {{scope.row.descriptions}}
+                  </template>
             </el-table-column>
              <!--第二步  开始进行修改和查询操作-->
              <el-table-column label="操作"  min-width="350" fixed="right">
@@ -239,7 +209,7 @@
           </el-pagination>
           <!--新增界面-->
          <el-dialog :title="$t('message.msg1_75')" :visible.sync="dialogVisible" width="50%" :close-on-click-modal="false">
-             <el-form :model="addFormData" :rules="rules2" ref="addFormData" label-width="150px" class="demo-ruleForm login-container">
+             <el-form :model="addFormData" :rules="rules2" ref="addFormData" label-width="180px" class="demo-ruleForm login-container">
                   <el-form-item prop="entityWorkstationId" :label="$t('label.label7_02')">
                     <el-input type="text" v-model="addFormData.entityWorkstationId" :disabled="keyDisabled"></el-input>
                   </el-form-item>
@@ -304,7 +274,7 @@
                     <el-input type="text" v-model="addFormData.scanningGunModelNumber" ></el-input>
                   </el-form-item>
                     <el-form-item prop="descriptions " :label="$t('label.label5_17')">
-                    <el-input type="text" v-model="addFormData.descriptions" ></el-input>
+                    <el-input type="textarea" v-model="addFormData.descriptions" ></el-input>
                   </el-form-item>
              </el-form>
              <span slot="footer" class="dialog-footer">
@@ -371,16 +341,28 @@
           },
           addType:false,
           rules2: {
-            username: [{
+            entityWorkstationNum: [{
               required: true,
-              message: '用户名不能为空',
+              message: '工作站编号不能为空',
               trigger: 'blur'
             }],
-            password: [{
+            softwareVersionNum: [{
               required: true,
-              message: '密码不能为空',
+              message: '软件版本不能为空',
               trigger: 'blur'
-            }]
+            }],
+            totalServiceMileage: [
+            {validator:this.$validate.isIntegerAlone, trigger: 'blur'}
+            ], 
+            ipAddress: [
+              {validator:this.$validate.validateIP, trigger: 'blur'}
+              ],
+            electronicTagsCount: [
+              {validator:this.$validate.isIntegerAlone, trigger: 'blur'}
+              ],
+            macAddress: [
+              {validator:this.$validate.isMAC, trigger: 'blur'}
+              ],
           }
         }
       },
@@ -424,8 +406,8 @@
           axios.post('/workstationManage/homePage/selectWorkstationListBySearch', qs.stringify(param)).then((res) => {
              if(res.errCode === 'S'){
                 var _data = res.data.result
-                this.userInfoList = _data()
-                this.searchBIN.totalRows = res.data.totalRows
+                this.userInfoList = _data
+                //this.searchBIN.totalRows = res.data.totalRows
              }
           })
         },

@@ -20,11 +20,13 @@ import Enum from './util/enum'
 import DateFormat from './util/date'
 import * as socketApi from './util/websocket'
 import './assets/css/bass.css'
+import * as validate from './util/validateUtil'
 
 Vue.prototype.$ELTable = ELTable
 Vue.prototype.$Enum = Enum
 Vue.prototype.$DateFormat = DateFormat
 Vue.prototype.$socketApi = socketApi
+Vue.prototype.$validate = validate
 
 promise.polyfill()
 window.axios = axios

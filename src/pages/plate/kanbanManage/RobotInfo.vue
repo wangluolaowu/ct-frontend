@@ -3,29 +3,29 @@
     <div class="tabOne">
       <h4 class="h2">{{$t('message.msg1_14')}}</h4>
       <el-table :data='tableData.list' highlight-current-row v-loading="tableLoading" style="width: 100%" border>
-        <el-table-column prop="kidId" :label="$t('label.label1_20')" min-width='100' :render-header="$ELTable.labelHead">
+        <el-table-column prop="kidId" :label="$t('label.label1_20')" min-width='200' >
         </el-table-column>
-        <el-table-column prop="batteryFaultCode" :label="$t('label.label1_21')" min-width="200" :render-header="$ELTable.labelHead">
+        <el-table-column prop="batteryFaultCode" :label="$t('label.label1_21')" min-width="200" >
            <template slot-scope="scope" width="100%">
              {{$Enum.getEnumSelectByValue(KID_BATTERY_FAULT_CODE,scope.row.batteryFaultCode)}}
             </template>
         </el-table-column>
-        <el-table-column prop="posX" :label="$t('label.label1_22')" :render-header="$ELTable.labelHead">
+        <el-table-column prop="posX" :label="$t('label.label1_22')" min-width='200'>
         </el-table-column>
-        <el-table-column prop="posY" :label="$t('label.label1_23')" :render-header="$ELTable.labelHead">
+        <el-table-column prop="posY" :label="$t('label.label1_23')" min-width='200'>
         </el-table-column>
-        <el-table-column prop="kidStatus" :label="$t('label.label1_24')" width="200" :render-header="$ELTable.labelHead">
+        <el-table-column prop="kidStatus" :label="$t('label.label1_24')" min-width='200' >
            <template slot-scope="scope" width="100%">
               {{$Enum.getEnumSelectByValue(KM_KID_STATUS,scope.row.kidStatus)}}
             </template>
         </el-table-column>
-        <el-table-column prop="kidTaskId" :label="$t('label.label1_25')" :render-header="$ELTable.labelHead">
+        <el-table-column prop="kidTaskId" :label="$t('label.label1_25')" min-width='200'>
         </el-table-column>
-        <el-table-column prop="holderId" :label="$t('label.label1_26')" :render-header="$ELTable.labelHead">
+        <el-table-column prop="holderId" :label="$t('label.label1_26')" min-width='200' >
         </el-table-column>
-        <el-table-column prop="batteryPower" :label="$t('label.label1_27')" min-width='100' :render-header="$ELTable.labelHead">
+        <el-table-column prop="batteryPower" :label="$t('label.label1_27')" min-width='200'>
         </el-table-column>
-        <el-table-column prop="lastUpdateDate" :label="$t('label.label1_28')" min-width="200" :render-header="$ELTable.labelHead">
+        <el-table-column prop="lastUpdateDate" :label="$t('label.label1_28')" min-width="200" >
           <template slot-scope="scope">
                 {{$DateFormat.dateFormat(scope.row.lastUpdateDate,true)}}
             </template>
@@ -39,42 +39,42 @@
     <div class="tabOne tabTwo">
       <h4 class="h2">{{$t('message.msg1_15')}}</h4>
       <el-table :data='tableData.list1' highlight-current-row v-loading="tableLoading" style="width: 100%" border>
-        <el-table-column prop="kidIncharge" :label="$t('label.label1_20')" min-width="100" :render-header="$ELTable.labelHead">
+        <el-table-column prop="kidIncharge" :label="$t('label.label1_20')" min-width="200" >
         </el-table-column>
-        <el-table-column prop="taskId" :label="$t('label.label1_25')" min-width="100" :render-header="$ELTable.labelHead">
+        <el-table-column prop="taskId" :label="$t('label.label1_25')" min-width="200" >
         </el-table-column>
-        <el-table-column prop="tasktType" :label="$t('label.label1_29')" min-width="200" :render-header="$ELTable.labelHead">
+        <el-table-column prop="tasktType" :label="$t('label.label1_29')" min-width="200" >
           <template slot-scope="scope" width="100%">
             {{$Enum.getEnumSelectByValue(KM_KID_TASK_TYPE,scope.row.tasktType)}}
             </template>
         </el-table-column>
-        <el-table-column prop="taskStatus" :label="$t('label.label1_30')" min-width="200" :render-header="$ELTable.labelHead">
+        <el-table-column prop="taskStatus" :label="$t('label.label1_30')" min-width="200" >
           <template slot-scope="scope" width="100%">
             {{$Enum.getEnumSelectByValue(KM_KID_TASK_STATUS,scope.row.taskStatus)}}
             </template>
         </el-table-column>
-        <el-table-column prop="srcPosX" :label="$t('label.label1_31')" min-width="100" :render-header="$ELTable.labelHead">
+        <el-table-column prop="srcPosX" :label="$t('label.label1_31')" min-width="200" >
         </el-table-column>
-        <el-table-column prop="srcPosY" :label="$t('label.label1_32')" min-width="100" :render-header="$ELTable.labelHead">
+        <el-table-column prop="srcPosY" :label="$t('label.label1_32')" min-width="200" >
         </el-table-column>
-        <el-table-column prop="posX" :label="$t('label.label1_33')" min-width="100" :render-header="$ELTable.labelHead">
+        <el-table-column prop="posX" :label="$t('label.label1_33')" min-width="200" >
         </el-table-column>
-        <el-table-column prop="posY" :label="$t('label.label1_34')" min-width="100" :render-header="$ELTable.labelHead">
+        <el-table-column prop="posY" :label="$t('label.label1_34')" min-width="200" >
         </el-table-column>
-        <el-table-column prop="destPosX" :label="$t('label.label1_35')" min-width="100" :render-header="$ELTable.labelHead">
+        <el-table-column prop="destPosX" :label="$t('label.label1_35')" min-width="200" >
         </el-table-column>
-        <el-table-column prop="destPosY" :label="$t('label.label1_36')"  min-width="100" :render-header="$ELTable.labelHead">
+        <el-table-column prop="destPosY" :label="$t('label.label1_36')"  min-width="200">
         </el-table-column>
-        <el-table-column prop="objectId" :label="$t('label.label1_26')" min-width="100" :render-header="$ELTable.labelHead">
+        <el-table-column prop="objectId" :label="$t('label.label1_26')" min-width="200" >
         </el-table-column>
-        <el-table-column prop="wsId" :label="$t('label.label1_09')" min-width="100" :render-header="$ELTable.labelHead">
+        <el-table-column prop="wsId" :label="$t('label.label1_09')" min-width="200" >
         </el-table-column>
-        <el-table-column prop="creationDate" :label="$t('label.label1_37')" min-width="200" :render-header="$ELTable.labelHead">
+        <el-table-column prop="creationDate" :label="$t('label.label1_37')" min-width="200" >
            <template slot-scope="scope">
                 {{$DateFormat.dateFormat(scope.row.creationDate,true)}}
             </template>
         </el-table-column>
-        <el-table-column prop="lastUpdateDate" :label="$t('label.label1_28')" min-width="200" :render-header="$ELTable.labelHead">
+        <el-table-column prop="lastUpdateDate" :label="$t('label.label1_28')" min-width="200" >
            <template slot-scope="scope">
                 {{$DateFormat.dateFormat(scope.row.lastUpdateDate,true)}}
             </template>
@@ -88,55 +88,55 @@
     <div class="tabOne tabTwo">
       <h4 class="h2">{{$t('message.msg1_16')}}</h4>
       <el-table :data='tableData.list2' highlight-current-row v-loading="tableLoading" style="width: 100%" border>
-        <el-table-column prop="kidIncharge" :label="$t('label.label1_20')" min-width="100" :render-header="$ELTable.labelHead">
+        <el-table-column prop="kidIncharge" :label="$t('label.label1_20')" min-width="200" >
         </el-table-column>
-        <el-table-column prop="taskId" :label="$t('label.label1_25')" min-width="85" :render-header="$ELTable.labelHead">
+        <el-table-column prop="taskId" :label="$t('label.label1_25')" min-width="200" >
         </el-table-column>
-        <el-table-column prop="taskType" :label="$t('label.label1_29')" min-width="200" :render-header="$ELTable.labelHead">
+        <el-table-column prop="taskType" :label="$t('label.label1_29')" min-width="200" >
            <template slot-scope="scope" width="100%">
              {{$Enum.getEnumSelectByValue(KM_KID_TASK_TYPE,scope.row.tasktType)}}
             </template>
         </el-table-column>
-        <el-table-column prop="taskStatus" :label="$t('label.label1_30')" min-width="200" :render-header="$ELTable.labelHead">
+        <el-table-column prop="taskStatus" :label="$t('label.label1_30')" min-width="200" >
           <template slot-scope="scope" width="100%">
              {{$Enum.getEnumSelectByValue(KM_KID_TASK_STATUS,scope.row.taskStatus)}}
             </template>
         </el-table-column>
-        <el-table-column prop="srcPosX" :label="$t('label.label1_31')"  min-width="100" :render-header="$ELTable.labelHead">
+        <el-table-column prop="srcPosX" :label="$t('label.label1_31')"  min-width="200" >
         </el-table-column>
-        <el-table-column prop="srcPosY" :label="$t('label.label1_32')"  min-width="100" :render-header="$ELTable.labelHead">
+        <el-table-column prop="srcPosY" :label="$t('label.label1_32')"  min-width="200" >
         </el-table-column>
-        <el-table-column prop="posX" :label="$t('label.label1_33')"  min-width="100" :render-header="$ELTable.labelHead">
+        <el-table-column prop="posX" :label="$t('label.label1_33')"  min-width="200" >
         </el-table-column>
-        <el-table-column prop="posY" :label="$t('label.label1_34')"  min-width="100" :render-header="$ELTable.labelHead">
+        <el-table-column prop="posY" :label="$t('label.label1_34')"  min-width="200" >
         </el-table-column>
-        <el-table-column prop="destPosX" :label="$t('label.label1_35')"  min-width="100" :render-header="$ELTable.labelHead">
+        <el-table-column prop="destPosX" :label="$t('label.label1_35')"  min-width="200">
         </el-table-column>
-        <el-table-column prop="destPosY" :label="$t('label.label1_36')"  min-width="100" :render-header="$ELTable.labelHead">
+        <el-table-column prop="destPosY" :label="$t('label.label1_36')"  min-width="200" >
         </el-table-column>
-        <el-table-column prop="destObjectSide" :label="$t('label.label1_39')" min-width="160" :render-header="$ELTable.labelHead">
+        <el-table-column prop="destObjectSide" :label="$t('label.label1_39')" min-width="250" >
         </el-table-column>
-        <el-table-column prop="destObjectDirection" :label="$t('label.label1_38')" min-width="175" :render-header="$ELTable.labelHead">
+        <el-table-column prop="destObjectDirection" :label="$t('label.label1_38')" min-width="250" >
         </el-table-column>
-        <el-table-column prop="objectGrossWeight" :label="$t('label.label1_40')"  min-width="100" :render-header="$ELTable.labelHead">
+        <el-table-column prop="objectGrossWeight" :label="$t('label.label1_40')"  min-width="200" >
         </el-table-column>
-        <el-table-column prop="objectId" :label="$t('label.label1_26')" min-width="100" :render-header="$ELTable.labelHead">
+        <el-table-column prop="objectId" :label="$t('label.label1_26')" min-width="200" >
         </el-table-column>
-        <el-table-column prop="releaseLoadFlag" :label="$t('label.label1_41')"  min-width="200" :render-header="$ELTable.labelHead">
+        <el-table-column prop="releaseLoadFlag" :label="$t('label.label1_41')"  min-width="200" >
           <template slot-scope="scope" width="100%">
             {{$Enum.getEnumSelectByValue(TM_MOVE_TASK_RELEASE_LOAD,scope.row.releaseLoadFlag)}}
             </template>
         </el-table-column>
-        <el-table-column prop="chargePointId" :label="$t('label.label1_42')"  min-width="100" :render-header="$ELTable.labelHead">
+        <el-table-column prop="chargePointId" :label="$t('label.label1_42')"  min-width="200" >
         </el-table-column>
-        <el-table-column prop="wsId" :label="$t('label.label1_09')"  min-width="100" :render-header="$ELTable.labelHead">
+        <el-table-column prop="wsId" :label="$t('label.label1_09')"  min-width="200" >
         </el-table-column>
-        <el-table-column prop="creationDate" :label="$t('label.label1_37')" min-width="200" :render-header="$ELTable.labelHead">
+        <el-table-column prop="creationDate" :label="$t('label.label1_37')" min-width="200" >
            <template slot-scope="scope">
                 {{$DateFormat.dateFormat(scope.row.creationDate,true)}}
             </template>
         </el-table-column>
-        <el-table-column prop="lastUpdateDate" :label="$t('label.label1_28')" min-width="200" :render-header="$ELTable.labelHead">
+        <el-table-column prop="lastUpdateDate" :label="$t('label.label1_28')" min-width="200" >
            <template slot-scope="scope">
                 {{$DateFormat.dateFormat(scope.row.lastUpdateDate,true)}}
             </template>
