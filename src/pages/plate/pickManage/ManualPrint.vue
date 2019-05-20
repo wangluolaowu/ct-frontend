@@ -3,7 +3,7 @@
  <div class="mainContainer">
   <el-form :inline="true" class="demo-form-inline" label-width="130px">
          <el-row>
-          <el-col :span="8">
+          <el-col :span="10">
             <el-form-item  :label="$t('label.label1_49')">
                 <el-select  v-model="search.dmlOrderStatus" style="width:200px">
                     <el-option :label="$t('label.label2_04')"  value=""></el-option>
@@ -13,14 +13,14 @@
                 </el-select>
             </el-form-item>
           </el-col>
-          <el-col :span="12">
+          <el-col :span="10">
             <el-form-item :label="$t('label.label1_50')">
               <el-input v-model="search.attribute10" style="width:200px"></el-input>
             </el-form-item>
           </el-col>
          </el-row>
          <el-row>
-          <el-col :span="8">
+          <el-col :span="10">
             <el-form-item :label="$t('label.label1_51')" >
                 <el-select v-model="search.attribute09" style="width:200px">
                     <el-option :label="$t('label.label2_04')" value=""></el-option>
@@ -31,74 +31,74 @@
             </el-form-item>
             </el-col>
             
-             <el-col :span="8">
+             <el-col :span="10">
               <el-form-item  :label="$t('label.label1_52')">
                  <el-input v-model="search.attribute03" style="width:200px"></el-input>
             </el-form-item>
              </el-col>
          </el-row>
          <el-row>
-              <el-col :span="8">
-             <el-form-item :label="$t('label.label1_53')">
-               <el-input v-model="search.attribute07" style="width:200px"></el-input>
-            </el-form-item>
+            <el-col :span="10">
+              <el-form-item :label="$t('label.label1_53')">
+                <el-input v-model="search.attribute07" style="width:200px"></el-input>
+              </el-form-item>
             </el-col>
-             <el-col :span="8">
-            <el-form-item :label="$t('label.label1_54')">
-                 <el-input v-model="search.attribute04" style="width:200px"></el-input>
-            </el-form-item>
+            <el-col :span="10">
+              <el-form-item :label="$t('label.label1_54')">
+                  <el-input v-model="search.attribute04" style="width:200px"></el-input>
+              </el-form-item>
              </el-col>
          </el-row>
          <el-row>
-            <el-col :span="8">
-            <el-form-item  :label="$t('label.label1_55')">
-                <el-input v-model="search.locNum" style="width:200px"></el-input>
-            </el-form-item>
+            <el-col :span="10">
+              <el-form-item  :label="$t('label.label1_55')">
+                  <el-input v-model="search.locNum" style="width:200px"></el-input>
+              </el-form-item>
             </el-col>
-             <el-col :span="8">  
-            <el-form-item :label="$t('label.label1_56')">
-              <el-select  v-model="search.pageSize" style="width:200px">
-                <el-option
-                v-for="item in $Enum.EnumSelect().page_size"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value" 
-                > 
-              </el-option>
-           </el-select>
-            </el-form-item>
-        </el-col>   
+            <el-col :span="10">  
+              <el-form-item :label="$t('label.label1_56')">
+                  <el-select  v-model="search.pageSize" style="width:200px">
+                    <el-option
+                      v-for="item in $Enum.EnumSelect().page_size"
+                      :key="item.value"
+                      :label="item.label"
+                      :value="item.value" 
+                      > 
+                    </el-option>
+                </el-select>
+              </el-form-item>
+            </el-col>   
          </el-row>
          <el-row>
-         <el-col :span="8">
-            <el-form-item  :label="$t('label.label1_57')">
-                <el-select v-model="search.attribute19" style="width:200px">
-                <el-option
-                v-for="item in Y_N_STATUS"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value" 
-                > 
-              </el-option>
-          </el-select>
-            </el-form-item>
-            </el-col>
-            <el-col :span="8">
-            <el-form-item :label="$t('label.label1_58')">
-                 <el-select  v-model="search.attribute18" style="width:200px">
-                <el-option
-                v-for="item in Y_N_STATUS"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value" 
-                > 
-              </el-option>
-               </el-select>
-            </el-form-item>
+          <el-col :span="10">
+              <el-form-item  :label="$t('label.label1_57')">
+                  <el-select v-model="search.attribute19" style="width:200px">
+                      <el-option
+                      v-for="item in Y_N_STATUS"
+                      :key="item.value"
+                      :label="item.label"
+                      :value="item.value" 
+                      > 
+                    </el-option>
+                  </el-select>
+              </el-form-item>
+              </el-col>
+            <el-col :span="10">
+              <el-form-item :label="$t('label.label1_58')">
+                  <el-select  v-model="search.attribute18" style="width:200px">
+                    <el-option
+                    v-for="item in Y_N_STATUS"
+                    :key="item.value"
+                    :label="item.label"
+                    :value="item.value" 
+                    > 
+                  </el-option>
+                </el-select>
+              </el-form-item>
             </el-col>
          </el-row>
          <el-row>
-          <el-col :span="8">
+          <el-col :span="10">
            <el-form-item :label="$t('label.label1_59')">
               <el-date-picker
                 v-model="search.startTimeCreateDt"
@@ -110,7 +110,7 @@
               ></el-date-picker>
             </el-form-item>
             </el-col>
-            <el-col :span="8">
+            <el-col :span="10">
             <el-form-item :label="$t('label.label1_60')">
               <el-date-picker
                 v-model="search.endTimeCreateDt"
@@ -123,7 +123,7 @@
             </el-col>
          </el-row>
          <el-row>
-          <el-col :span="8">
+          <el-col :span="10">
            <el-form-item :label="$t('label.label1_61')" >
               <el-date-picker
                 v-model="search.startTimeWaveCreateDate"
@@ -135,7 +135,7 @@
               ></el-date-picker>
             </el-form-item>
             </el-col>
-            <el-col :span="8">
+            <el-col :span="10">
             <el-form-item  :label="$t('label.label1_62')">
               <el-date-picker
                 v-model="search.endTimeWaveCreateDate"
@@ -148,7 +148,7 @@
             </el-col>
          </el-row>
          <el-row>
-         <el-col :span="8">
+         <el-col :span="10">
            <el-form-item :label="$t('label.label2_18')" >
               <el-date-picker
                 v-model="search.startTimeLastUpdateDate"
@@ -160,7 +160,7 @@
               ></el-date-picker>
             </el-form-item>
             </el-col>
-            <el-col :span="8">
+            <el-col :span="10">
             <el-form-item  :label="$t('label.label2_19')" >
               <el-date-picker
                 v-model="search.endTimeLastUpdateDate"
@@ -173,7 +173,7 @@
             </el-col>
          </el-row>
          <el-row>
-          <el-col :span="8">
+          <el-col :span="10">
            <el-form-item :label="$t('label.label1_65')">
               <el-date-picker
                 v-model="search.startTimeOrderInDate"
@@ -185,7 +185,7 @@
               ></el-date-picker>
             </el-form-item>
             </el-col>
-            <el-col :span="8">
+            <el-col :span="10">
             <el-form-item  :label="$t('label.label1_66')">
               <el-date-picker
                 v-model="search.endTimeOrderInDate"

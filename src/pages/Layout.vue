@@ -15,8 +15,8 @@
             <el-dropdown-item divided @click.native="logout">退出登录</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown> -->
-        <ul class="clears userinfoCon">
-          <li><img src="../assets/images/u549.png"  alt="" title="用户"><span :title="sysUserName" style="min-width:100px;">{{sysUserName}}</span></li>
+        <ul class="clears userinfoCon"><!--style="min-width:100px;" -->
+          <li><img src="../assets/images/u549.png"  alt="" title="用户"><span :title="sysUserName" >{{sysUserName}}</span></li>
           <!-- <li><i class="el-icon-edit"></i>{{sysUserName}}</li> -->
           <li  @click='changeLanguage'  title="切换语言"><img src="../assets/images/u547.png"  alt=""><span :title='sysLanguage' >{{sysLanguage}}</span></li>
           <li  @click='logout'><img src="../assets/images/u545.png"  alt="" title="退出"><span>退出</span></li>
@@ -165,7 +165,7 @@ export default {
     height: 80px!important;
   }
   #logo #logoTag{
-    width:300px;
+    width:285px;
     height: 40px;
     margin-top: 8px;
     margin-right:30px;
@@ -177,6 +177,9 @@ export default {
     margin-right: 10px;
     margin: 8px 15px 0 30px;
   }*/
+  #logo{
+    min-width: 660px;
+  }
   #titles{
     color: #fff;
     font-size: 36px;
@@ -185,7 +188,7 @@ export default {
   .userinfo{
     display: flex;
     justify-content: flex-end;
-    // width:500px;
+    min-width:500px;
   }
   .userinfo-inner{
     font-size: 18px;
@@ -220,21 +223,13 @@ export default {
     // min-width:680px;
   }
    #titles{
-    width:350px;
+    width:345px;
    }
-   .userinfoCon{
-    // min-width:400px;
-   }
-
    .userinfoCon li{
      float:left;
      color:#fff;
      margin-right:15px;
      font-size:16px;
-     
-   }
-   ul li span{
-  //  min-width: 150px!important;
    }
    .userinfoCon li img{
       vertical-align: middle;
@@ -246,15 +241,12 @@ export default {
      cursor:pointer;
      font-size: 16px;
      letter-spacing:1px;
-     overflow:hidden;
-     white-space: nowrap;
-    text-overflow: ellipsis;
-    -o-text-overflow: ellipsis;
-    -ms-text-overflow: ellipsis;
-    display: inline-block;
+    //  overflow:hidden;
+    //  white-space: nowrap;
+    // text-overflow: ellipsis;
+    // -o-text-overflow: ellipsis;
+    // -ms-text-overflow: ellipsis;
+    // display: inline-block;
    }
   
-   .userinfoCon li:last-child{
-    margin-right:0px;
-   }
 </style>

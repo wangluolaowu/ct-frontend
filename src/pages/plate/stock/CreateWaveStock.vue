@@ -79,32 +79,32 @@
                  </el-row>
                   <el-row>
                   <el-col :span="8">
-           <el-form-item  :label="$t('label.label2_13')">
-              <el-date-picker
-                v-model="search.startTime"
-                format="yyyy-MM-dd HH:mm:ss"
-                value-format="yyyy-MM-dd HH:mm:ss"
-                type="datetime"
-                @change="handleChangeTime"
-                style="width:200px"
-              ></el-date-picker>
-            </el-form-item>
-            </el-col>
-             <el-col :span="8">
-            <el-form-item :label="$t('label.label2_14')" >
-              <el-date-picker
-                v-model="search.endTime"
-                format="yyyy-MM-dd HH:mm:ss"
-                value-format="yyyy-MM-dd HH:mm:ss"
-                type="datetime"
-                 @change="handleChangeTime"
-                 style="width:200px"
-              ></el-date-picker>
-            </el-form-item>
-             </el-col>
+                    <el-form-item  :label="$t('label.label2_13')">
+                        <el-date-picker
+                          v-model="search.startTime"
+                          format="yyyy-MM-dd HH:mm:ss"
+                          value-format="yyyy-MM-dd HH:mm:ss"
+                          type="datetime"
+                          @change="handleChangeTime"
+                          style="width:200px"
+                        ></el-date-picker>
+                      </el-form-item>
+                      </el-col>
+                      <el-col :span="8">
+                      <el-form-item :label="$t('label.label2_14')" >
+                        <el-date-picker
+                          v-model="search.endTime"
+                          format="yyyy-MM-dd HH:mm:ss"
+                          value-format="yyyy-MM-dd HH:mm:ss"
+                          type="datetime"
+                          @change="handleChangeTime"
+                          style="width:200px"
+                        ></el-date-picker>
+                      </el-form-item>
+                      </el-col>
                </el-row>
                <el-row>
-                  <el-col :span="8">
+                  <el-col :span="10">
                   <el-form-item >
                     <el-button type="primary" @click="confirm">{{$t('message.msg1_28')}}</el-button>
                     <el-button :type="cancelIsDisabledButton" :disabled = "cancelIsDisabled" @click="cancel">{{$t('message.msg1_30')}}</el-button>
@@ -113,7 +113,7 @@
                   <el-col :span="12" >
                     <el-form-item>
                        <el-checkbox v-model="search.submitAll"  @change="handleCheckAllChange">{{$t('message.msg1_33')}}</el-checkbox>
-                       <el-button :type="submitIsDisabledButton" @click="submit" :disabled = "submitIsDisabled" >{{$t('message.msg1_34')}}</el-button>
+                       <el-button :type="submitIsDisabledButton" type="primary" @click="submit" :disabled = "submitIsDisabled" >{{$t('message.msg1_34')}}</el-button>
                     </el-form-item>
                   </el-col>
                 </el-row>
