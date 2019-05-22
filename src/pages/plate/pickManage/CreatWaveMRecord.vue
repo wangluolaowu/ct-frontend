@@ -22,7 +22,7 @@
                 ></el-date-picker>
                 </el-form-item>
               </el-col>
-              <el-col :span="8">
+              <el-col :span="10">
                 <el-form-item :label="$t('label.label2_14')" prop>
                   <el-date-picker
                     v-model="search.endTime"
@@ -33,7 +33,7 @@
                   ></el-date-picker>
                 </el-form-item>
               </el-col>
-              <el-col :span="5">
+              <el-col :span="6">
                 <el-form-item>
                   <el-button type="primary" @click="confirm">{{$t('message.msg1_28')}}</el-button>
                   <el-button type="info" @click="cancel">{{$t('message.msg1_29')}}</el-button>

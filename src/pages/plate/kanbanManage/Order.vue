@@ -663,13 +663,15 @@ export default {
           top: 30,
           right: 50
         },
-        xAxis: {
-        axisLabel: {
-          interval: 0,
-          rotate: 30,
-         
+        grid:{
+          y2: 100
         },
-      
+        xAxis: {
+          axisLabel: {
+            interval: 0,
+            rotate: 60,
+
+        },
         
           data: sum24KeyListTemp
         },

@@ -1628,10 +1628,13 @@
             top: 30,
             right: 50
           },
+          grid:{
+            y2: 100
+          },
           xAxis: {
             axisLabel: {
               interval: 0,
-              rotate: 40
+              rotate: 60
             },
             // x轴的动态数据需要填写在则里面
             data: dataTimeDonekeyListArg
@@ -1667,10 +1670,13 @@
             top: 30,
             right: 50
           },
+          grid:{
+            y2: 100
+          },
           xAxis: {
             axisLabel: {
               interval: 0,
-              rotate: 40
+              rotate: 60
             },
             // x轴的动态数据需要填写在则里面
             data: dataTimePrintkeyListArg

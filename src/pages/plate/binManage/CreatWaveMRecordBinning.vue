@@ -14,7 +14,7 @@
                 ></el-date-picker>
                 </el-form-item>
               </el-col>
-              <el-col :span="8">
+              <el-col :span="10">
                 <el-form-item :label="$t('label.label2_14')">
                   <el-date-picker
                     v-model="search.endTime"

@@ -2,93 +2,93 @@
      <div class="mainContainer">
      <el-form class="demo-form-inline selectedCont clears" label-width="200px">
         <el-row>
-        <el-col :span="8">
-            <el-form-item :label="$t('label.label1_51')">
-              <el-select v-model="searchBIN.orderType" style="width:200px">
-                        <el-option
-                          v-for="item in $Enum.EnumSelect().order_type"
-                          :key="item.value"
-                          :label="item.label"
-                          :value="item.value" 
-                          > 
-                       </el-option>
-                    </el-select>
-            </el-form-item>
-        </el-col>
-        <el-col :span="8">  
-            <el-form-item :label="$t('label.label2_22')">
-               <el-select v-model="searchBIN.wsWallSchema" style="width:200px">
-                        <el-option
-                          v-for="item in $Enum.EnumSelect().workstation_status"
-                          :key="item.value"
-                          :label="item.label"
-                          :value="item.value" 
-                          > 
-                       </el-option>
-                    </el-select>
-            </el-form-item>
-        </el-col>   
-        </el-row>
-         <el-row>
-        <el-col :span="8">
-           <el-form-item label="ISP Dealer" >
-              <el-select v-model="searchBIN.ispDealer" style="width:200px">
-                        <el-option
-                          v-for="item in $Enum.EnumSelect().Y_N_STATUS"
-                          :key="item.value"
-                          :label="item.label"
-                          :value="item.value" 
-                          > 
-                       </el-option>
-                    </el-select>
-            </el-form-item>
-        </el-col>
-        <el-col :span="8">  
-            <el-form-item label="ICT Dealer" >
-              <el-select v-model="searchBIN.ictDealer" style="width:200px">
-                        <el-option
-                          v-for="item in $Enum.EnumSelect().Y_N_STATUS"
-                          :key="item.value"
-                          :label="item.label"
-                          :value="item.value" 
-                          > 
-                       </el-option>
-                    </el-select>
-            </el-form-item>
-        </el-col>   
-        </el-row>
-         <el-row>
-        <el-col :span="8">
-           <el-form-item :label="$t('label.label2_23')">
-              <el-input v-model="searchBIN.algorithm" style="width:200px"></el-input>
-            </el-form-item>
-        </el-col>
-        <el-col :span="8">  
-            <el-form-item :label="$t('label.label1_24')">
-               <el-select v-model="searchBIN.enableFlag" style="width:200px">
-                        <el-option
-                          v-for="item in $Enum.EnumSelect().openStatus2"
-                          :key="item.value"
-                          :label="item.label"
-                          :value="item.value" 
-                          > 
-                       </el-option>
-                    </el-select>
-            </el-form-item>
-        </el-col>   
+          <el-col :span="10">
+              <el-form-item :label="$t('label.label1_51')">
+                <el-select v-model="searchBIN.orderType" style="width:200px">
+                          <el-option
+                            v-for="item in $Enum.EnumSelect().order_type"
+                            :key="item.value"
+                            :label="item.label"
+                            :value="item.value" 
+                            > 
+                        </el-option>
+                      </el-select>
+              </el-form-item>
+          </el-col>
+          <el-col :span="10">  
+              <el-form-item :label="$t('label.label2_22')">
+                <el-select v-model="searchBIN.wsWallSchema" style="width:200px">
+                          <el-option
+                            v-for="item in $Enum.EnumSelect().workstation_status"
+                            :key="item.value"
+                            :label="item.label"
+                            :value="item.value" 
+                            > 
+                        </el-option>
+                      </el-select>
+              </el-form-item>
+          </el-col>   
         </el-row>
         <el-row>
-        <el-col :span="8">  
+          <el-col :span="10">
+            <el-form-item label="ISP Dealer" >
+                <el-select v-model="searchBIN.ispDealer" style="width:200px">
+                          <el-option
+                            v-for="item in $Enum.EnumSelect().Y_N_STATUS"
+                            :key="item.value"
+                            :label="item.label"
+                            :value="item.value" 
+                            > 
+                        </el-option>
+                      </el-select>
+              </el-form-item>
+          </el-col>
+          <el-col :span="10">  
+              <el-form-item label="ICT Dealer" >
+                <el-select v-model="searchBIN.ictDealer" style="width:200px">
+                          <el-option
+                            v-for="item in $Enum.EnumSelect().Y_N_STATUS"
+                            :key="item.value"
+                            :label="item.label"
+                            :value="item.value" 
+                            > 
+                        </el-option>
+                      </el-select>
+              </el-form-item>
+          </el-col>   
+        </el-row>
+        <el-row>
+          <el-col :span="10">
+            <el-form-item :label="$t('label.label2_23')">
+                <el-input v-model="searchBIN.algorithm" style="width:200px"></el-input>
+              </el-form-item>
+          </el-col>
+          <el-col :span="10">  
+              <el-form-item :label="$t('label.label1_24')">
+                <el-select v-model="searchBIN.enableFlag" style="width:200px">
+                          <el-option
+                            v-for="item in $Enum.EnumSelect().openStatus2"
+                            :key="item.value"
+                            :label="item.label"
+                            :value="item.value" 
+                            > 
+                        </el-option>
+                      </el-select>
+              </el-form-item>
+          </el-col>   
+        </el-row>
+        <el-row>
+        <el-col :span="10">  
             <el-form-item :label="$t('label.label1_56')" >
              <el-select  v-model="searchBIN.pageSize" style="width:200px">
                 <el-option
                 v-for="item in $Enum.EnumSelect().page_size"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value" 
-                > 
-              </el-option>
-           </el-select>
+                      :key="item.value"
+                      :label="item.label"
+                      :value="item.value" 
+                      > 
+                    </el-option>
+                </el-select>
             </el-form-item>
         </el-col>   
         </el-row>
