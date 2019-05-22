@@ -80,10 +80,7 @@ const en = {
     msg1_78: '',
     msg1_79: '',
     msg1_80: '',
-    msg1_81: '',
-    'mes': 'Hello',
-    'riqi': 'date',
-    'text': ''
+    msg1_81: ''
   },
   button: {
     button01: '查询'

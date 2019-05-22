@@ -81,10 +81,7 @@ const cn = {
     msg1_78: '',
     msg1_79: '',
     msg1_80: '',
-    msg1_81: '',
-    'mes': '你好',
-    'riqi': '日期',
-    'text': ''
+    msg1_81: ''
   },
   placeholder: {
     enter: '用户名'
