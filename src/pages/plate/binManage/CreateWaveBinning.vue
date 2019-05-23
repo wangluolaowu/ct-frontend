@@ -19,7 +19,7 @@
                 <el-table ref="multipleTable" :data="tableData" tooltip-effect="dark" style="width: 100%" border @selection-change="handleSelectionChange" v-loading="tableLoading">
                     <el-table-column type="selection" width="55">
                     </el-table-column>
-                    <el-table-column prop="binGrn" label="GRN" width="150">
+                    <el-table-column prop="binGrn" :label="$t('label.label1_99')" width="150">
                     </el-table-column>
                     <el-table-column prop="skuNum" :label="$t('label.label1_70')" width="150">
                     </el-table-column>

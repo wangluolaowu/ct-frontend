@@ -185,7 +185,7 @@ const cn = {
     label1_96: '拣出',
     label1_97: '召唤货架',
     label1_98: '是否接收',
-    label1_99: '',
+    label1_99: '箱号',
     label1_100: '',
     label1_101: '',
     label1_102: '',

@@ -343,7 +343,7 @@
         </el-row>
          <el-row>
         <el-col :span="8">
-           <el-form-item label="GRN" >
+           <el-form-item :label="$t('label.label1_99')" >
               <el-input v-model="searchBIN.binGrn" style="width:200px"></el-input>
             </el-form-item>
         </el-col>
@@ -508,7 +508,7 @@
             </el-table-column>
             <el-table-column prop="binTicketNum" :label="$t('label.label1_75')" min-width="200" >
             </el-table-column>
-            <el-table-column prop="binGrn" label="GRN"  width="200"  >
+            <el-table-column prop="binGrn" :label="$t('label.label1_99')"  width="200"  >
             </el-table-column>
             <el-table-column prop="skuNum" :label="$t('label.label1_70')"  width="200"  >
             </el-table-column>
