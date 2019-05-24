@@ -574,8 +574,7 @@
             <el-form-item :label="$t('label.label1_70')">
               <el-input v-model="searchRelocPickOut.skuNum" style="width:200px"></el-input>
             </el-form-item>
-        </el-col>   
-        </el-row>
+        </el-col>      </el-row>
         <el-row>
         <el-col :span="8">
            <el-form-item :label="$t('label.label1_65')" >
@@ -1303,7 +1302,7 @@
         this.downLoadDisabledPickButton = "info"
       }
       },
-      handleCurrentChangePick(){
+      handleCurrentChangePick(val){
       this.searchPick.currentPage = val
       this.getdialogPICK()
       },
@@ -1320,7 +1319,7 @@
           this.downLoadDisabledBINButton = "info"
         }
       }, 
-      handleCurrentChangeBIN(){
+      handleCurrentChangeBIN(val){
       this.searchBIN.currentPage = val
       this.getdialogBIN()
       },
@@ -1334,7 +1333,7 @@
           this.downLoadDisabledRelocPickOutButton = "info"
         }
       }, 
-      handleCurrentChangeRELOC_PICKOUT(){
+      handleCurrentChangeRELOC_PICKOUT(val){
       this.searchRelocPickOut.currentPage = val
       this.getdialogRELOC_PICKOUT()
       },
@@ -1348,7 +1347,7 @@
           this.downLoadDisabledCALL_SHELFButton = "info"
         }
       }, 
-      handleCurrentChangeCALL_SHELF(){
+      handleCurrentChangeCALL_SHELF(val){
       this.searchCALL_SHELF.currentPage = val
       this.getdialogCALL_SHELF()
       },
@@ -1362,7 +1361,7 @@
           this.downLoadDisabledSTOCK_TAKINGButton = "info"
         }
       }, 
-      handleCurrentChangeSTOCK_TAKING(){
+      handleCurrentChangeSTOCK_TAKING(val){
       this.searchSTOCK_TAKING.currentPage = val
       this.getdialogSTOCK_TAKING()
       },
