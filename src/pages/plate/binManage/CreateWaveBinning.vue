@@ -25,17 +25,17 @@
                     </el-table-column>
                     <el-table-column prop="binPartDesc" :label="$t('label.label1_78')" width="200">
                     </el-table-column>
-                    <el-table-column prop="binWip" :label="$t('label.label1_52')"  width="100">
+                    <el-table-column prop="binWip" :label="$t('label.label1_52')"  width="200">
                     </el-table-column>
-                    <el-table-column prop="binWipLine" :label="$t('label.label1_54')"  width="100">
+                    <el-table-column prop="binWipLine" :label="$t('label.label1_54')"  width="200">
                     </el-table-column>
-                    <el-table-column prop="binOrdNo" :label="$t('label.label1_74')" >
+                    <el-table-column prop="binOrdNo" :label="$t('label.label1_74')" width="200">
                     </el-table-column>
-                    <el-table-column prop="binOrdLine" :label="$t('label.label1_79')" >
+                    <el-table-column prop="binOrdLine" :label="$t('label.label1_79')" width="200">
                     </el-table-column>
                     <el-table-column prop="binQty" :label="$t('label.label1_80')" >
                     </el-table-column>
-                    <el-table-column prop="locNum" :label="$t('label.label2_09')" >
+                    <el-table-column prop="locNum" :label="$t('label.label2_09')" width="200">
                     </el-table-column>
                     <el-table-column prop="binTicketNum" :label="$t('label.label3_03')" width="200">
                     </el-table-column>
