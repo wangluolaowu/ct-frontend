@@ -130,11 +130,11 @@
                     </el-table-column>
                     <el-table-column prop="page" :label="$t('label.label1_92')"  min-width="100"> 
                     </el-table-column>
-                    <el-table-column prop="binQty" :label="$t('label.label1_93')"  min-width="100">
+                    <el-table-column prop="binQty" :label="$t('label.label1_93')"  min-width="200">
                     </el-table-column>
-                    <el-table-column prop="noOfCount" :label="$t('label.label1_90')"  min-width="100">
+                    <el-table-column prop="noOfCount" :label="$t('label.label1_90')"  min-width="200">
                     </el-table-column>
-                     <el-table-column prop="countBy" :label="$t('label.label1_94')" min-width="100">
+                     <el-table-column prop="countBy" :label="$t('label.label1_94')" min-width="200">
                     </el-table-column>
                      <el-table-column prop="rfdcUserId"  :label="$t('label.label1_91')" min-width="100">
                     </el-table-column>
