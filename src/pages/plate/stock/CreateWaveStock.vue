@@ -113,7 +113,7 @@
                   <el-col :span="12" >
                     <el-form-item>
                        <el-checkbox v-model="search.submitAll"  @change="handleCheckAllChange">{{$t('message.msg1_33')}}</el-checkbox>
-                       <el-button :type="submitIsDisabledButton" type="primary" @click="submit" :disabled = "submitIsDisabled" >{{$t('message.msg1_34')}}</el-button>
+                       <el-button :type="submitIsDisabledButton"  @click="submit" :disabled = "submitIsDisabled" >{{$t('message.msg1_34')}}</el-button>
                     </el-form-item>
                   </el-col>
                 </el-row>

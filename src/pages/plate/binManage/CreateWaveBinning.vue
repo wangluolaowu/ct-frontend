@@ -10,10 +10,10 @@
                      <el-checkbox v-model="search.submitAll"  @change="handleCheckAllChange">{{$t('message.msg1_33')}}</el-checkbox>
                     </el-form-item>
                     <el-form-item>
-                     <el-button  :type="submitIsDisabledButton" type='primary' :disabled = "submitIsDisabled" @click="submit">{{$t('message.msg1_34')}}</el-button>
+                     <el-button  :type="submitIsDisabledButton"  :disabled = "submitIsDisabled" @click="submit">{{$t('message.msg1_34')}}</el-button>
                     </el-form-item> 
                     <el-form-item>
-                        <el-button :type="cancelDisabledButton" type="info" :disabled = "cancelDisabled" @click="cancel">{{$t('message.msg1_30')}}</el-button>
+                        <el-button :type="cancelDisabledButton" :disabled = "cancelDisabled" @click="cancel">{{$t('message.msg1_30')}}</el-button>
                     </el-form-item>
                 </el-form>
                 <el-table ref="multipleTable" :data="tableData" tooltip-effect="dark" style="width: 100%" border @selection-change="handleSelectionChange" v-loading="tableLoading">
