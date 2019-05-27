@@ -353,11 +353,13 @@
 import axios from '../../../util/http'
 import dateFormat from '../../../util/date'
 import echarts from 'echarts'
+import qs from 'qs'
 export default {
   name: 'Order',
   data () {
     return {
       axios,
+      qs,
       dateFormat,
       tableLoading: false,
       WS_STATUS: [],
@@ -371,7 +373,7 @@ export default {
       tableLoadingTC: false,
       timer: '',
       search: { // 查询参数
-        orderType: 'S'
+        extWorkstationType: 'kanban'
       },
       tableData: {
         Vlist: [],
@@ -430,14 +432,44 @@ export default {
   created () {
      this.getSelectValues()
      this.getSum24()
-     this.interval=window.setInterval(() => {
-     setTimeout(this.getTimeOut(), 0)
-    }, 60000)
+     //this.interval=window.setInterval(() => {
+     //setTimeout(this.getTimeOut(), 0)
+   // }, 60000)
+    this.getStockCallShelfList()
+    this.websocketToLogin()
   },
   destroyed() { 
      clearInterval(this.interval)
   },
   methods: {
+     websocketToLogin () {
+      // 【agentData：发送的参数；this.getConfigResult：回调方法】
+        let This = this
+        this.interval=window.setInterval(() => {
+         setTimeout(This.$socketApi.sendSock(qs.stringify(this.search), this.getConfigResult), 0)
+        }, 60000)
+      
+      },
+      getConfigResult (res) {
+        let that = this
+      // 接收回调函数返回数据的方法
+        if (res.errCode === 'S') {
+          that.tableData.Vlist = res.data.resultVSum
+          that.tableData.VOrderList = res.data.resultVInfoList
+          that.tableData.SList = res.data.resultSSum
+          that.tableData.SOrderList = res.data.resultSInfoList
+          that.tableData.USUMlist = res.data.resultUSum
+          that.tableData.UOrderList = res.data.resultUInfoList
+          that.tableData.PutawayAllList = res.data.resultBINSum
+          that.tableData.PutawayList = res.data.resultBINInfoList
+          that.tableData.TiaoCangAllList = res.data.resultRELOCSum
+          that.tableData.TiaoCangLists = res.data.resultRELOCInfoList
+          that.tableData.resultStockSum = res.data.resultStockSum
+          that.tableData.resultStockInfoList = res.data.resultStockInfoList
+          that.tableData.resultCallShelfSum = res.data.resultCallShelfSum
+          that.tableData.resultCallShelfInfoList = res.data.resultCallShelfInfoList      
+        }
+      },
     // 切换
     handleTabClick: function (tab, event) {
       this.getSum24()
@@ -447,6 +479,7 @@ export default {
         this.sum24ValueList=[]
       },
     getDate(data, unCou,instation) {
+      //console.log('data=='+data+"===unCou==="+unCou+"====instation==="+instation)
       if (data) {
         return Math.floor(data / 60)
       } else {
@@ -471,159 +504,36 @@ export default {
             return item
           })
         }
-        this.getTimeOut()
+        //this.getTimeOut()
       })
     },
     getTimeOut() {
-      this.getPutaway()
-      this.getPutawayData()
-      this.getSData()
-      this.getVData()
-      this.getVAllData()
-      this.getSAllData()
-      //this.getSum24()
-      this.getTiaoCangAllList()
-      this.getTiaoCangLists()
-      this.getStockCallShelfList()
+     this.getStockCallShelfList ()
     },
     getStockCallShelfList () { // 盘点，召唤货架信息
       let that = this
-      this.tableLoadingVDT = true
       this.axios.get('kanban/orderKanban/selectStockCallShelfList', {
         params: {
           orderType: 'V'
         }
       }).then((res) => {
         if (res.errCode === 'S') {
+          that.tableData.Vlist = res.data.resultVSum
+          that.tableData.VOrderList = res.data.resultVInfoList
+          that.tableData.SList = res.data.resultSSum
+          that.tableData.SOrderList = res.data.resultSInfoList
+          that.tableData.USUMlist = res.data.resultUSum
+          that.tableData.UOrderList = res.data.resultUInfoList
+          that.tableData.PutawayAllList = res.data.resultBINSum
+          that.tableData.PutawayList = res.data.resultBINInfoList
+          that.tableData.TiaoCangAllList = res.data.resultRELOCSum
+          that.tableData.TiaoCangLists = res.data.resultRELOCInfoList
           that.tableData.resultStockSum = res.data.resultStockSum
           that.tableData.resultStockInfoList = res.data.resultStockInfoList
           that.tableData.resultCallShelfSum = res.data.resultCallShelfSum
-          that.tableData.resultCallShelfInfoList = res.data.resultCallShelfInfoList
-          that.tableData.USUMlist = res.data.resultUSum
-          that.tableData.UOrderList = res.data.resultUInfoList
+          that.tableData.resultCallShelfInfoList = res.data.resultCallShelfInfoList      
         }
       })
-      this.tableLoadingVDT = false
-    },
-    getVAllData () { // 获取拣货V单汇总
-      let that = this
-      this.tableLoadingVDT = true
-      this.axios.get('kanban/orderKanban/selectDmlPickDeliveryStatList', {
-        params: {
-          orderType: 'V'
-        }
-      }).then((res) => {
-        if (res.errCode === 'S') {
-          that.tableData.Vlist = res.data.result
-        }
-      })
-      this.tableLoadingVDT = false
-    },
-    getVData () { // 获取拣货V单
-      let that = this
-      this.tableLoadingVD = true
-      this.axios.get('kanban/orderKanban/selectDmlPickDeliveryWsStatList', {
-        params: that.VOrderListSearch
-      }).then((res) => {
-        if (res.errCode === 'S') {
-          that.tableData.VOrderList = res.data.result
-        }
-      })
-      this.tableLoadingVD = false
-    }, // V单分页
-    VOrderListSearchHandleCurrentChange (val) {
-      this.VOrderListSearch.currentPage = val
-      this.getVData()
-    },
-    // 获取拣货S单汇总
-    getSAllData () {
-      let that = this
-      this.tableLoadingSDT = true
-      this.axios.get('kanban/orderKanban/selectDmlPickDeliveryStatList', {
-        params: {
-          orderType: 'S'
-        }
-      }).then((res) => {
-        if (res.errCode === 'S') {
-          that.tableData.SList = res.data.result
-        }
-      })
-      this.tableLoadingSDT = false
-    }, // S单分页
-    SOrderListHandleCurrentChange (val) {
-      this.SOrderListSearch.currentPage = val
-      this.getSData()
-    },
-    // 获取拣货S单
-    getSData () {
-      let that = this
-      this.tableLoadingSD = true
-      this.axios.get('kanban/orderKanban/selectDmlPickDeliveryWsStatList', {
-        params: that.SOrderListSearch
-      }).then((res) => {
-        if (res.errCode === 'S') {
-          that.tableData.SOrderList = res.data.result
-        }
-      })
-      this.tableLoadingSD = false
-    }, // 获取拣货S单汇总
-    getTiaoCangAllList() {
-      this.tableLoadingTCT = true
-      let that = this
-      this.axios.get('kanban/orderKanban/selectDmlPickDeliveryStatList', {
-        params: {
-          orderType: 'RELOC'
-        }
-      }).then((res) => {
-        if (res.errCode === 'S') {
-          console.log(res)
-          that.tableData.TiaoCangAllList = res.data.result
-        }
-      })
-      this.tableLoadingTCT = false
-    },
-    getTiaoCangLists() {
-      this.tableLoadingTC = true
-      let that = this
-      this.axios.get('kanban/orderKanban/selectDmlPickDeliveryWsStatList', {
-        params: {
-          extWorkstationType: 'RELOC'
-        }
-      }).then((res) => {
-        if (res.errCode === 'S') {
-          that.tableData.TiaoCangLists = res.data.result
-        }
-      })
-      this.tableLoadingTC = false
-    }, // 上架订单汇总
-    getPutawayData () {
-      this.tableLoadingSJT = true
-      this.axios.get('kanban/orderKanban/selectDmlBinDeliveryStatList', {}).then((res) => {
-        if (res.errCode === 'S') {
-          let result = []
-          result.push(res.data.result)
-          this.tableData.PutawayAllList = result
-        }
-      })
-      this.tableLoadingSJT = false
-    },
-    // 上架
-    getPutaway () {
-      let that = this
-      this.tableLoadingSJ = true
-      this.axios.get('kanban/orderKanban/selectDmlBinDeliveryWsStatList', {
-        params: that.PutawayListSearch
-      }).then((res) => {
-        // console.log(res);
-        if (res.errCode === 'S') {
-          that.tableData.PutawayList = res.data.result
-        }
-      })
-      this.tableLoadingSJ = false
-    }, // 上架分页
-    PutawayListSearchHandleCurrentChange (val) {
-      this.PutawayListSearch.currentPage = val
-      this.getPutaway()
     }, // 切换
     getSum24(){
       let sum24KeyListTemp = []
