@@ -320,7 +320,7 @@
           </el-pagination>
       </div> 
       <div  v-if="dialogList.dialogBIN" >
-        <el-form class="demo-form-inline selectedCont clears" label-width="180px">
+        <el-form class="demo-form-inline selectedCont clears" label-width="200px">
         <el-row>
         <el-col :span="8">
             <el-form-item :label="$t('label.label1_49')" >
@@ -563,7 +563,7 @@
           <el-tab-pane :label="$t('message.msg1_32')" name="CALL_SHELF"></el-tab-pane>
          </el-tabs>
          <div v-if="TabRELOC.RELOC_PICK_OUT">
-        <el-form class="demo-form-inline selectedCont clears" label-width="160px">
+        <el-form class="demo-form-inline selectedCont clears" label-width="180px">
         <el-row>
         <el-col :span="8">
             <el-form-item  :label="$t('label.label1_83')">
@@ -656,7 +656,7 @@
         <el-row>
         <el-col :span="8">
            <el-form-item :label="$t('label.label1_56')" >
-               <el-select v-model="searchBIN.pageSize" style="width:200px">
+               <el-select v-model="searchRelocPickOut.pageSize" style="width:200px">
                 <el-option
                 v-for="item in $Enum.EnumSelect().page_size"
                 :key="item.value"
@@ -669,41 +669,52 @@
         </el-col> 
         </el-row>
         <el-row>
-        <el-col :span="12">
-          <el-form-item class='sublimtInfo'>    
-               <el-checkbox v-model="searchRelocPickOut.submitAll"  @change="handleCheckAllChangeRelocPickOut">{{$t('message.msg1_26')}}</el-checkbox>
-              <el-button  type="primary" :disabled="downLoadDisabledRelocPickOut" @click="SetDownloadFunc('RELOC_PICKOUT')">{{$t('message.msg1_27')}} </el-button>
-          </el-form-item>
-          <el-form-item class='buttonGroups'>  
+            <el-col :span="12">
+          <el-form-item >  
                 <el-button type="primary" @click="confirmRELOC_PICKOUT">{{$t('message.msg1_28')}}</el-button>
-                <el-button type="info" @click="resetRELOC_PICKOUT">{{$t('message.msg1_29')}}</el-button>
-                <el-button type="info" @click="cancelRELOC_PICKOUT">{{$t('message.msg1_30')}}</el-button>
+                <el-button type="primary" @click="resetRELOC_PICKOUT">{{$t('message.msg1_29')}}</el-button>
+                <el-button type="primary" @click="cancelRELOC_PICKOUT">{{$t('message.msg1_30')}}</el-button>
           </el-form-item>
         </el-col>
+           <el-col :span="12">
+          <el-form-item class='sublimtInfo'>    
+               <el-checkbox v-model="searchRelocPickOut.submitAll"  @change="handleCheckAllChangeRelocPickOut">{{$t('message.msg1_26')}}</el-checkbox>
+              <el-button  :type="downLoadDisabledRelocPickOutButton" :disabled="downLoadDisabledRelocPickOut" @click="SetDownloadFunc('RELOC_PICKOUT')">{{$t('message.msg1_27')}} </el-button>
+          </el-form-item>
+            </el-col>
         </el-row>  
       </el-form>
-      <el-table ref="multipleTableRELOC_PICKOUT" :data="tableData.RELOC_PICKOUT" height="500" style="width: 100%" @selection-change="handleSelectionChangeRELOC_PICKOUT" border v-loading="tableLoadingRELOC_PICKOUT">
+      <el-table ref="multipleTableRELOC_PICKOUT" :key="key3" :data="tableData.RELOC_PICKOUT" style="width: 99.9%" @selection-change="handleSelectionChangeRELOC_PICKOUT" border v-loading="tableLoadingRELOC_PICKOUT">
             <el-table-column type="selection" width="55" fixed="left">
             </el-table-column>
-            <el-table-column  type="index" :label="$t('label.label1_86')"  width="100" fixed>
+            <el-table-column  type="index" :label="$t('label.label1_86')"  width="150">
             </el-table-column>
-            <el-table-column prop="locNum" :label="$t('label.label1_83')"  width="100" fixed>
+            <el-table-column prop="locNum" :label="$t('label.label1_83')"   min-width="150">
+               <template slot-scope="scope" width="100%">
+                  {{scope.row.locNum}}
+              </template>
             </el-table-column>
-            <el-table-column prop="skuNum" :label="$t('label.label1_70')"  width="100">
+            <el-table-column prop="skuNum" :label="$t('label.label1_70')"   min-width="150">
+               <template slot-scope="scope" width="100%">
+                  {{scope.row.skuNum}}
+              </template>
             </el-table-column>
-            <el-table-column prop="skuName" :label="$t('label.label1_78')" width="100">
+            <el-table-column prop="skuName" :label="$t('label.label1_78')"  min-width="150">
+               <template slot-scope="scope" width="100%">
+                  {{scope.row.skuName}}
+              </template>
             </el-table-column>
-            <el-table-column prop="orderInDate" :label="$t('label.label1_72')" width="200">
+            <el-table-column prop="orderInDate" :label="$t('label.label1_72')"  min-width="200">
                <template slot-scope="scope" width="100%">
                   {{$DateFormat.dateFormat(scope.row.orderInDate,true)}}
               </template>
             </el-table-column>
-            <el-table-column prop="waveCreateDate" :label="$t('label.label1_73')" width="200">
+            <el-table-column prop="waveCreateDate" :label="$t('label.label1_73')"  min-width="200">
               <template slot-scope="scope" width="100%">
                  {{$DateFormat.dateFormat(scope.row.waveCreateDate,true)}}
               </template>
             </el-table-column>
-            <el-table-column prop="lastUpdateDate" :label="$t('label.label1_82')" width="150">
+            <el-table-column prop="lastUpdateDate" :label="$t('label.label1_82')"  min-width="200">
                <template slot-scope="scope">
                         {{$DateFormat.dateFormat(scope.row.lastUpdateDate,true)}}
                       </template>
@@ -715,18 +726,26 @@
           </el-pagination>
       </div> 
       <div v-if="TabRELOC.CALL_SHELF">
-        <el-form class="demo-form-inline selectedCont clears" label-width="160px">
+        <el-form class="demo-form-inline selectedCont clears" label-width="180px">
         <el-row>
         <el-col :span="8">
             <el-form-item  :label="$t('label.label1_83')">
                  <el-input v-model="searchCALL_SHELF.locNum" style="width:200px"></el-input>
             </el-form-item>
         </el-col>
-        <el-col :span="8">
-           <el-form-item  :label="$t('label.label1_56')">
-              <el-input v-model="searchCALL_SHELF.pageSize" style="width:200px"></el-input>
+        <el-col :span="8">  
+            <el-form-item :label="$t('label.label1_56')" >
+              <el-select v-model="searchCALL_SHELF.pageSize" style="width:200px">
+                <el-option
+                v-for="item in $Enum.EnumSelect().page_size"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value" 
+                > 
+              </el-option>
+           </el-select>
             </el-form-item>
-        </el-col> 
+        </el-col>   
         </el-row>
         <el-row>
         <el-col :span="8">
@@ -784,22 +803,22 @@
        <el-col :span="12">
         <el-form-item>  
               <el-button type="primary" @click="confirmCALL_SHELF">{{$t('message.msg1_28')}}</el-button>
-              <el-button type="info" @click="resetCALL_SHELF">{{$t('message.msg1_29')}}</el-button>
-              <el-button type="info" @click="cancelCALL_SHELF">{{$t('message.msg1_30')}}</el-button>
+              <el-button type="primary" @click="resetCALL_SHELF">{{$t('message.msg1_29')}}</el-button>
+              <el-button type="primary" @click="cancelCALL_SHELF">{{$t('message.msg1_30')}}</el-button>
         </el-form-item>
         </el-col>
        <el-col :span="12">
         <el-form-item>
               <el-checkbox v-model="searchCALL_SHELF.submitAll"  @change="handleCheckAllChangeCALL_SHELF">{{$t('message.msg1_26')}}</el-checkbox>
-              <el-button  type="primary" :disabled="downLoadDisabledCALL_SHELF" @click="SetDownloadFunc('CALL_SHELF')">{{$t('message.msg1_27')}} </el-button>
+              <el-button  :type="downLoadDisabledCALL_SHELFButton" :disabled="downLoadDisabledCALL_SHELF" @click="SetDownloadFunc('CALL_SHELF')">{{$t('message.msg1_27')}} </el-button>
         </el-form-item>
         </el-col>
         </el-row>
       </el-form>
-      <el-table ref="multipleTableCALL_SHELF" :data="tableData.CALL_SHELF" min-height="500"  @selection-change="handleSelectionChangeCALL_SHELF" border v-loading="tableLoadingCALL_SHELF">
+      <el-table ref="multipleTableCALL_SHELF" :data="tableData.CALL_SHELF"  @selection-change="handleSelectionChangeCALL_SHELF" border v-loading="tableLoadingCALL_SHELF">
             <el-table-column type="selection" width="55">
             </el-table-column>
-            <el-table-column type="index" :label="$t('label.label1_86')" >
+            <el-table-column type="index" :label="$t('label.label1_86')" width="100">
             </el-table-column>
             <el-table-column prop="locNum" :label="$t('label.label1_83')" >
             </el-table-column>
@@ -821,7 +840,7 @@
       </div> 
       </div>
       <div  v-if="dialogList.dialogSTOCK_TAKING">
-         <el-form class="demo-form-inline selectedCont clears" label-width="160px">
+         <el-form class="demo-form-inline selectedCont clears" label-width="180px">
         <el-row>
         <el-col :span="8">
             <el-form-item  :label="$t('label.label1_83')"  >
@@ -854,7 +873,7 @@
         </el-col>
         <el-col :span="8">  
             <el-form-item :label="$t('label.label1_56')" >
-              <el-select placeholder="页面大小" v-model="searchBIN.pageSize" style="width:200px">
+              <el-select v-model="searchSTOCK_TAKING.pageSize" style="width:200px">
                 <el-option
                 v-for="item in $Enum.EnumSelect().page_size"
                 :key="item.value"
@@ -955,26 +974,26 @@
             <el-col :span="12">
           <el-form-item>
               <el-checkbox v-model="searchSTOCK_TAKING.submitAll"  @change="handleCheckAllChangeSTOCK_TAKING">{{$t('message.msg1_26')}}</el-checkbox>
-              <el-button  type="primary" :disabled="downLoadDisabledSTOCK_TAKING"   @click="SetDownloadFunc('STOCK_TAKING')">{{$t('message.msg1_27')}}</el-button>
+              <el-button  :type="downLoadDisabledSTOCK_TAKINGButton" :disabled="downLoadDisabledSTOCK_TAKING"   @click="SetDownloadFunc('STOCK_TAKING')">{{$t('message.msg1_27')}}</el-button>
           </el-form-item>
         </el-col>
       
         </el-row>
       </el-form>
-      <el-table ref="multipleTableSTOCK_TAKING" :data="tableData.STOCK_TAKING" height="500" style="width: 100%" @selection-change="handleSelectionChangeSTOCK_TAKING" border v-loading="tableLoadingSTOCK_TAKING">
+      <el-table ref="multipleTableSTOCK_TAKING" :data="tableData.STOCK_TAKING"  style="width: 99.9%" @selection-change="handleSelectionChangeSTOCK_TAKING" border v-loading="tableLoadingSTOCK_TAKING">
             <el-table-column type="selection" min-width="55">
             </el-table-column>
             <el-table-column prop="locNum"  :label="$t('label.label1_83')" min-width="100">
             </el-table-column>
-            <el-table-column prop="skuNum" :label="$t('label.label1_70')" min-width="100">
+            <el-table-column prop="skuNum" :label="$t('label.label1_70')" min-width="150">
             </el-table-column>
             <el-table-column prop="page"  :label="$t('label.label1_92')" min-width="100">
             </el-table-column>
-            <el-table-column prop="binQty" :label="$t('label.label1_93')" min-width="100">
+            <el-table-column prop="binQty" :label="$t('label.label1_93')" min-width="200">
             </el-table-column>
             <el-table-column prop="noOfCount"  :label="$t('label.label1_90')" min-width="100">
             </el-table-column>
-            <el-table-column prop="countBy"  :label="$t('label.label1_94')" min-width="100">
+            <el-table-column prop="countBy"  :label="$t('label.label1_94')" min-width="200">
             </el-table-column>
             <el-table-column prop="rfdcUserId" :label="$t('label.label1_91')" min-width="100">
             </el-table-column>
@@ -983,12 +1002,12 @@
                         {{$DateFormat.dateFormat(scope.row.creationDate,true)}}
                       </template>
             </el-table-column>
-            <el-table-column prop="wavedDate"  :label="$t('label.label1_73')" min-width="100">
+            <el-table-column prop="wavedDate"  :label="$t('label.label1_73')" min-width="200">
               <template slot-scope="scope">
                         {{$DateFormat.dateFormat(scope.row.wavedDate,true)}}
                       </template>
             </el-table-column>
-             <el-table-column prop="lastUpdateDate" :label="$t('label.label1_82')" min-width="100">
+             <el-table-column prop="lastUpdateDate" :label="$t('label.label1_82')" min-width="200">
                <template slot-scope="scope">
                         {{$DateFormat.dateFormat(scope.row.lastUpdateDate,true)}}
                       </template>
@@ -1019,6 +1038,7 @@
         tableLoadingRELOC_PICKOUT:false,
         tableLoadingCALL_SHELF:false,
         isShowDialog:true,
+        key3:'',
         tableData: {
           pick: [],
           BIN:[],
@@ -1232,21 +1252,26 @@
          resultData.submitAll=this.searchBIN.submitAll
           resultData.params = JSON.stringify(this.searchBIN)
         resultData.result = JSON.stringify(this.searchBINSelect)
-       }else if(arg1 === 'STOCK_PICK_OUT'){
+       }else if(arg1 === 'RELOC_PICKOUT'){
          fileName='调仓订单流水数据'
          resultData.submitAll=this.searchRelocPickOut.submitAll
-          resultData.params = JSON.stringify(this.searchRelocPickOut)
-        resultData.result = JSON.stringify(this.searchRelocPickOutSelect)
+         resultData.params = JSON.stringify(this.searchRelocPickOut)
+         resultData.result = JSON.stringify(this.searchRelocPickOutSelect)
        }else if(arg1 === 'CALL_SHELF'){
           fileName='召唤货架订单流水数据'
          resultData.submitAll=this.searchCALL_SHELF.submitAll
           resultData.params = JSON.stringify(this.searchCALL_SHELF)
         resultData.result = JSON.stringify(this.searchCALL_SHELFSelect)
-       }else{
+       }else if(arg1 === 'STOCK_TAKING'){
           fileName='盘点订单流水数据'
-         resultData.submitAll=this.searchSTOCK_TAKING.submitAll
-          resultData.params = JSON.stringify(this.searchSTOCK_TAKING)
-        resultData.result = JSON.stringify(this.searchSTOCK_TAKINGSelect)
+         resultData.submitAll=this.searchCALL_SHELF.submitAll
+          resultData.params = JSON.stringify(this.searchCALL_SHELF)
+        resultData.result = JSON.stringify(this.searchCALL_SHELFSelect)
+       }else{
+         fileName='拣货订单流水数据'
+        resultData.submitAll=this.searchPick.submitAll
+        resultData.params = JSON.stringify(this.searchPick)
+        resultData.result = JSON.stringify(this.searchPickSelect)
        }
  
        this.axios.postD('kanban/orderSum/exportDmlPickDetailsVList', qs.stringify(resultData)).then(res => {
@@ -1422,7 +1447,7 @@
         this.$refs.multipleTableRELOC_PICKOUT.clearSelection()
       },
       confirmRELOC_PICKOUT(){
-        this.searchRELOC_PICKOUT.currentPage = 1
+        this.searchRelocPickOut.currentPage = 1
         this.getdialogRELOC_PICKOUT()
       },
       resetRELOC_PICKOUT(){
@@ -1492,9 +1517,11 @@
         if(this.searchReloc.orderType === 'CALL_SHELF'){
            this.TabRELOC.CALL_SHELF = true
            this.TabRELOC.RELOC_PICK_OUT = false
+           this.getdialogCALL_SHELF ()
          }else{
            this.TabRELOC.CALL_SHELF = false
            this.TabRELOC.RELOC_PICK_OUT = true
+           this.getdialogRELOC_PICKOUT ()
          }
       },
       getdialogPICK () {
