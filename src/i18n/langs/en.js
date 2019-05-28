@@ -89,7 +89,7 @@ const en = {
     'enter': 'User name'
   },
   label: {
-    label1_01: 'Order received of today',
+    label1_01: 'Order received',
     label1_02: 'Order batched of today',
     label1_03: 'Order accomplished of today',
     label1_04: 'Order unaccomplished',
