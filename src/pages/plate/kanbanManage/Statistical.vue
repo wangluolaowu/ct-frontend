@@ -1277,7 +1277,7 @@
        this.axios.postD('kanban/orderSum/exportDmlPickDetailsVList', qs.stringify(resultData)).then(res => {
         const content = res
         const blob = new Blob([content], {type: 'application/vnd.ms-excel'})
-        const exportFileName = this.$DateFormat.dateFormat(new Date(),true)+'_'+fileName+'.xls'
+        const exportFileName = this.$DateFormat.dateFormat(new Date(),true)+'_'+fileName+'.xlsx'
         if ('download' in document.createElement('a')) { // 非IE下载
           this.$message.warning('文件下载中。。。')
           const elink = document.createElement('a')
