@@ -19,9 +19,9 @@
          <el-table :data="userInfoList" style="width: 100%" border>
             <!--<el-table-column prop="id" label="id" >
             </el-table-column>-->
-             <el-table-column prop="name" :label="$t('label.label10_08')" >
+             <el-table-column prop="name" :label="$t('label.label10_08')"  min-width="200">
             </el-table-column>
-             <el-table-column prop="permission"  :label="$t('label.label10_09')">
+             <el-table-column prop="permission"  :label="$t('label.label10_09')"  min-width="200">
             </el-table-column>
             <el-table-column prop="available"  :label="$t('label.label1_24')"> 
               <template slot-scope="scope">
@@ -29,7 +29,7 @@
             </template>
             </el-table-column>
              <!--第二步  开始进行修改和查询操作-->
-             <el-table-column :label="$t('message.msg1_53')" align="center" min-width="350" >
+             <el-table-column :label="$t('message.msg1_53')" align="center" min-width="250" >
  
                 <template slot-scope="scope" class='handleBtn'>
  
@@ -70,7 +70,27 @@
                  <el-button v-if="isView" type="primary" @click.native="addSubmit">{{$t('message.msg1_28')}}</el-button>
              </span>
           </el-dialog>
-           <el-dialog  :title="$t('label.label10_10')" :visible.sync="roleUserdialogVisible" width="90%" :close-on-click-modal="false"  @close="loadData" >
+          <el-dialog  :title="$t('label.label10_10')" :visible.sync="roleUserdialogVisible" width="90%" :close-on-click-modal="false"  @close="loadData" >
+              <el-row>
+                 <el-card style="min-height: 20px">          
+                   <span>{{$t('label.label10_11')+addFormData.name + '   ' + addFormData.permission}}</span>
+                 </el-card>
+               </el-row>
+              <el-tree
+                :load="handleLoad"
+                accordion
+                lazy
+                show-checkbox
+                node-key="id"
+                ref="menuListTree"
+                :default-expanded-keys="[rootNode.id]"
+                :default-checked-keys="[]"
+                :props="defaultProps">
+                
+              </el-tree>
+               <el-button  type="primary" @click="createRoleUser" >{{$t('message.msg1_28')}}</el-button>
+           </el-dialog>
+           <!--<el-dialog  :title="$t('label.label10_10')" :visible.sync="roleUserdialogVisible" width="90%" :close-on-click-modal="false"  @close="loadData" >
               <el-row>
                  <el-card style="min-height: 20px">          
                    <span>{{$t('label.label10_11')+addFormData.name + '   ' + addFormData.permission}}</span>
@@ -86,7 +106,7 @@
                 id='maskDialog'>
               </el-transfer>
                <el-button  type="primary" @click="createRoleUser">{{$t('message.msg1_28')}}</el-button>
-           </el-dialog> 
+           </el-dialog> -->
      </div>
   </template>
   
@@ -101,10 +121,17 @@
           data2: [],
           value2: [],
           pinyin: [],
+          treeData:[],
+          treeValue:[],
+          treeParentValue:[],
+          rootNode : {
+          id : "10000",
+          label : "资源"
+          },
           defaultProps: {
-          children: 'children',
-          label: 'label'
-           },
+            children: 'children',
+            label: 'label'
+          },
           userInfoList: [],
           openStatus: [],
           addFormReadOnly: true,
@@ -142,7 +169,74 @@
         //this.getSelectValues()
       },
       methods: {
+        handleLoad(node,resolve){
+          //console.log('this.value2------------'+this.value2)
+           //this.$refs.menuListTree.setCheckedKeys(this.treeValue)
+           if(this.$refs.menuListTree!=undefined) this.checkedKeys = this.$refs.menuListTree.getCheckedKeys();
+           if (node.level == 0) {
+              return resolve([this.rootNode]);
+           } else {
+             let children = []
+              axios.post('custom/common/selectResourcePermissionList', qs.stringify({'permissionId':this.addFormData.id})).then((res) => {
+              if (res.errCode === 'S') {
+              children = res.data.result.map(item => {
+                  let itemTemp = {}
+                  itemTemp.id = item.id
+                  itemTemp.label = item.description + "--" + item.url      
+                  return itemTemp    
+              }) 
+              resolve(children)
+             if(res.data.resultSelect){
+                res.data.resultSelect.map(item => { 
+                   this.treeValue.push(item.id)
+                  return item
+               })
+              }
+             
+             // this.$refs.menuListTree.setCheckedKeys(that.value2)
+              //console.log('222=======' +  JSON.stringify(this.treeData))
+             // console.log('333=======' +  JSON.stringify(this.treeValue))
+              if(this.$refs.menuListTree!=undefined) this.$refs.menuListTree.setCheckedKeys(this.treeValue);
+            }
+            })
+            
+          }
+        },
         generateData2 () {
+          this.treeData = []
+          this.treeValue = []
+          this.treeParentValue = []
+          axios.post('custom/common/selectResourcePermissionList', qs.stringify({'permissionId':this.addFormData.id})).then((res) => {
+            if (res.errCode === 'S') {
+              let parentItem = {}
+              parentItem.id = 10000
+              parentItem.label = "权限"
+              let children = []
+              children = res.data.result.map(item => {
+                  let itemTemp = {}
+                  itemTemp.id = item.id
+                  itemTemp.label = item.description + "--" + item.url      
+                  return itemTemp    
+              }) 
+             parentItem.children = children 
+             this.treeData.push(parentItem)
+             if(res.data.resultSelect){
+                res.data.resultSelect.map(item => { 
+                   this.treeValue.push(item.id)
+                  return item
+               })
+              }
+              this.treeParentValue.push(10000)
+             
+             // this.$refs.menuListTree.setCheckedKeys(that.value2)
+              console.log('222=======' +  JSON.stringify(this.treeData))
+              console.log('333=======' +  JSON.stringify(this.treeValue))
+             
+            }
+          })
+          
+        },
+        generateData3 () {
           let that = this
           that.data2 = []
           this.value2 = []
@@ -167,8 +261,9 @@
         },
         createRoleUser(val) {
            let dataResult = {}
+           let valueData = [].concat(this.$refs.menuListTree.getCheckedKeys())
            dataResult.permissionId = this.addFormData.id
-           dataResult.resourceIdList = JSON.stringify(this.value2)
+           dataResult.resourceIdList = JSON.stringify(valueData)
            axios.post('custom/common/updateResourcePermission', qs.stringify(dataResult)).then((res) => {
             if (res.errCode === 'S') {
               this.$message({
@@ -208,8 +303,9 @@
         },
         checkDetail(rowData) {
           this.addFormData = Object.assign({}, rowData) 
-          this.generateData2()
+         // this.generateData2()   
           this.roleUserdialogVisible = true
+          
         },
         modifyUser(rowData) {
           this.addFormData = Object.assign({}, rowData)

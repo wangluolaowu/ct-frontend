@@ -19,9 +19,9 @@
          <el-table :data="userInfoList" style="width: 100%" border>
             <!--<el-table-column prop="id" label="id" >
             </el-table-column>-->
-            <el-table-column prop="description" :label="$t('label.label10_17')" >
+            <el-table-column prop="description" :label="$t('label.label10_17')" min-width="200">
             </el-table-column>
-             <el-table-column prop="url" label="URL">
+             <el-table-column prop="url" label="URL" min-width="250">
             </el-table-column>
             <el-table-column prop="available" :label="$t('label.label1_24')">
                 <template slot-scope="scope">
@@ -29,7 +29,7 @@
                 </template>
             </el-table-column>
              <!--第二步  开始进行修改和查询操作-->
-             <el-table-column :label="$t('message.msg1_53')"  align="center" min-width="350">
+             <el-table-column :label="$t('message.msg1_53')"  align="center" min-width="250">
  
                 <template slot-scope="scope">
  

@@ -19,9 +19,9 @@
          <el-table :data="userInfoList" style="width: 100%" border>
             <!--<el-table-column prop="id" label="id" >
             </el-table-column>-->
-             <el-table-column prop="role"  :label="$t('label.label10_18')">
+             <el-table-column prop="role"  :label="$t('label.label10_18')" min-width="150">
             </el-table-column>
-             <el-table-column prop="description"  :label="$t('label.label10_19')">
+             <el-table-column prop="description"  :label="$t('label.label10_19')"  min-width="150">
             </el-table-column>
             <el-table-column prop="available" :label="$t('label.label1_24')"> 
               <template slot-scope="scope">
@@ -29,7 +29,7 @@
             </template>
             </el-table-column>
              <!--第二步  开始进行修改和查询操作-->
-             <el-table-column :label="$t('message.msg1_53')" align="center" min-width="350" >
+             <el-table-column :label="$t('message.msg1_53')"  min-width="300" >
  
                 <template slot-scope="scope" class='handleBtn'>
  
@@ -269,16 +269,15 @@
                   return item
                })
               }
-              console.log('111=======' +  JSON.stringify(this.treeValue))
-              console.log('222=======' +  JSON.stringify(this.treeData))
-              console.log('333=======' +  JSON.stringify(this.treeParentValue))
             }
           })
         },
         createRoleMenu(){
+          let menuData = [].concat(this.$refs.tree.getCheckedKeys(), this.$refs.tree.getHalfCheckedKeys())
           let dataResult = {}
            dataResult.roleId = this.addFormData.id
-           dataResult.menuIdList = JSON.stringify(this.$refs.tree.getCheckedKeys())
+           this.$refs.tree.getCheckedKeys()
+           dataResult.menuIdList = JSON.stringify(menuData)
            axios.post('custom/common/updateCtUserMenuInfo', qs.stringify(dataResult)).then((res) => {
             if (res.errCode === 'S') {
               this.$message({

@@ -12,13 +12,16 @@
                  <el-form-item>
                      <el-button type="primary" @click="addUser">{{$t('message.msg1_52')}}</el-button>
                   </el-form-item>
+                <el-form-item class='sublimtInfo'>
+                   <el-button  type="primary"  @click="SetDownloadFunc">{{$t('message.msg1_27')}}</el-button>
+              </el-form-item>
             </el-form>
        </el-col>
 
 
          <el-table :data="userInfoList" style="width: 100%" border>
-            <!--<el-table-column prop="id" label="id" >
-            </el-table-column>-->
+            <el-table-column type="selection" width="55">
+            </el-table-column>
             <el-table-column prop="firstName" label="FirstName" >
             </el-table-column>
              <el-table-column prop="lastName" label="LastName">
@@ -253,9 +256,31 @@
                this.loadData()
             }
           })
+        }, 
+        SetDownloadFunc (arg1) {
+        let fileName = 'Daimler BIXI 用户数据'
+        axios.postD('custom/ctUser/exportCtUserList', {}).then(res => {
+        const content = res
+        const blob = new Blob([content], {type: 'application/vnd.ms-excel'})
+        const exportFileName = this.$DateFormat.dateFormat(new Date(),true)+'_'+fileName+'.xlsx'
+        if ('download' in document.createElement('a')) { // 非IE下载
+          this.$message.warning('文件下载中。。。')
+          const elink = document.createElement('a')
+          elink.download = exportFileName
+          elink.style.display = 'none'
+          elink.href = URL.createObjectURL(blob)
+          document.body.appendChild(elink)
+          elink.click()
+          URL.revokeObjectURL(elink.href) // 释放URL 对象
+          document.body.removeChild(elink)
+        } else { // IE10+下载
+          this.$message.warning('文件下载中。。。')
+          navigator.msSaveBlob(blob, exportFileName)
         }
+      })
       }
     }
+  }
  </script>
  
  <style>
