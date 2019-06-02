@@ -14,12 +14,12 @@
             </el-form-item>
         </el-col>   
         </el-row>
-        <el-row>
+         <el-row>
         <el-col :span="8">
-            <el-form-item  :label="$t('label.label6_03')" >
-              <el-select  v-model="searchBIN.route" style="width:200px">
+            <el-form-item  :label="$t('label.label1_57')" >
+              <el-select  v-model="searchBIN.ispDealer" style="width:200px">
                 <el-option
-                v-for="item in routeData"
+                v-for="item in $Enum.EnumSelect().Y_N_STATUS"
                 :key="item.value"
                 :label="item.label"
                 :value="item.value" 
@@ -29,10 +29,10 @@
          </el-form-item>
         </el-col>
         <el-col :span="8">  
-            <el-form-item :label="$t('label.label6_04')" >
-              <el-select v-model="searchBIN.subRoute" style="width:200px">
+            <el-form-item :label="$t('label.label1_58')" >
+              <el-select v-model="searchBIN.ictDealer" style="width:200px">
                 <el-option
-                v-for="item in subRouteData"
+                v-for="item in $Enum.EnumSelect().Y_N_STATUS"
                 :key="item.value"
                 :label="item.label"
                 :value="item.value" 
@@ -55,7 +55,7 @@
               </el-option>
            </el-select>
             </el-form-item>
-        </el-col>   
+        </el-col>
         </el-row>
         <el-row>
         <el-col :span="5" >
@@ -82,9 +82,21 @@
             </el-table-column>
              <el-table-column prop="dealerName"  :label="$t('label.label6_02')" min-width="200">
             </el-table-column>
-             <el-table-column prop="route"  :label="$t('label.label6_03')" min-width="200">
+             <el-table-column prop="routeS"  :label="$t('label.label6_05')" min-width="200">
             </el-table-column>
-             <el-table-column prop="subRoute"  :label="$t('label.label6_04')" min-width="200">
+            <el-table-column prop="routeV"  :label="$t('label.label6_06')" min-width="200">
+            </el-table-column>
+             <el-table-column prop="subRouteV"  :label="$t('label.label6_07')" min-width="200">
+            </el-table-column>
+             <el-table-column prop="ictDealer"  :label="$t('label.label1_58')" min-width="200">
+                <template slot-scope="scope" width="100%">
+                         {{$Enum.getEnumSelectByValue($Enum.EnumSelect().Y_N_STATUS2,scope.row.ictDealer)}}
+                    </template>
+            </el-table-column>
+             <el-table-column prop="ispDealer"  :label="$t('label.label1_57')" min-width="200">
+                <template slot-scope="scope" width="100%">
+                         {{$Enum.getEnumSelectByValue($Enum.EnumSelect().Y_N_STATUS2,scope.row.ispDealer)}}
+                    </template>
             </el-table-column>
              <!--第二步  开始进行修改和查询操作-->
              <el-table-column  :label="$t('message.msg1_53')" min-width="350" fixed="right">
@@ -106,17 +118,17 @@
           </el-pagination>
           <!--新增界面-->
          <el-dialog :title="$t('message.msg1_75')" :visible.sync="dialogVisible" width="50%" :close-on-click-modal="false">
-             <el-form :model="addFormData"  ref="addFormData" label-width="150px" class="demo-ruleForm login-container">
+             <el-form :model="addFormData"  ref="addFormData" :rules="rules2" label-width="150px" class="demo-ruleForm login-container">
                    <el-form-item   prop="dealerCode"  :label="$t('label.label6_01')">
                     <el-input type="text" v-model="addFormData.dealerCode" :disabled="keyDisabled"></el-input>
                   </el-form-item>
                    <el-form-item prop="dealerName" :label="$t('label.label6_02')">
                     <el-input type="text" v-model="addFormData.dealerName" ></el-input>
                   </el-form-item>
-                  <el-form-item  prop="route" :label="$t('label.label6_03')">
-                    <el-select  v-model="addFormData.route" style="width:200px">
+                  <el-form-item  prop="routeS" :label="$t('label.label6_05')">
+                    <el-select  v-model="addFormData.routeS" style="width:200px">
                         <el-option
-                        v-for="item in routeData"
+                        v-for="item in routeDataS"
                         :key="item.value"
                         :label="item.label"
                         :value="item.value" 
@@ -124,10 +136,43 @@
                       </el-option>
                     </el-select>
                   </el-form-item>
-                   <el-form-item prop="subRoute"  :label="$t('label.label6_04')">
-                    <el-select  v-model="addFormData.subRoute" style="width:200px">
+                   <el-form-item prop="routeV"  :label="$t('label.label6_06')">
+                    <el-select  v-model="addFormData.routeV" style="width:200px">
                         <el-option
-                        v-for="item in subRouteData"
+                        v-for="item in routeDataV"
+                        :key="item.value"
+                        :label="item.label"
+                        :value="item.value" 
+                        > 
+                      </el-option>
+                    </el-select>
+                  </el-form-item>
+                   <el-form-item prop="subRouteV"  :label="$t('label.label6_07')">
+                    <el-select  v-model="addFormData.subRouteV" style="width:200px">
+                        <el-option
+                        v-for="item in subRouteDataV"
+                        :key="item.value"
+                        :label="item.label"
+                        :value="item.value" 
+                        > 
+                      </el-option>
+                    </el-select>
+                  </el-form-item>
+                    <el-form-item prop="ictDealer"  :label="$t('label.label1_58')">
+                    <el-select  v-model="addFormData.ictDealer" style="width:200px">
+                        <el-option
+                        v-for="item in $Enum.EnumSelect().Y_N_STATUS2"
+                        :key="item.value"
+                        :label="item.label"
+                        :value="item.value" 
+                        > 
+                      </el-option>
+                    </el-select>
+                  </el-form-item>
+                   <el-form-item prop="ispDealer"  :label="$t('label.label1_57')">
+                    <el-select  v-model="addFormData.ispDealer" style="width:200px">
+                        <el-option
+                        v-for="item in $Enum.EnumSelect().Y_N_STATUS2"
                         :key="item.value"
                         :label="item.label"
                         :value="item.value" 
@@ -137,7 +182,7 @@
                   </el-form-item>
              </el-form>
              <span slot="footer" class="dialog-footer">
-                 <el-button @click.native="dialogVisible = false,addFormData={dealerCode:'',dealerName:'',route:'',subRoute:''}">{{$t('message.msg1_30')}}</el-button>
+                 <el-button @click.native="dialogVisible = false,addFormData={dealerCode:'',dealerName:'',routeS:'',routeV:'',subRouteV:'',ictDealer:'',ispDealer:''}">{{$t('message.msg1_30')}}</el-button>
                  <el-button v-if="isView" type="primary" @click.native="addSubmit">{{$t('message.msg1_28')}}</el-button>
              </span>
           </el-dialog>
@@ -158,25 +203,40 @@
           submitDisabled:true,
           dialogresult:false,
           tableDataDialog:[],
-          routeData:[],
-          subRouteData:[],
+          routeDataS:[],
+          routeDataV:[],
+          subRouteDataV:[],
           isView: true,
           addType:false,
           addFormData: {
            dealerCode:'',
            dealerName:'',
-           route:'',
-           subRoute:''
+           routeS:'',
+           routeV:'',
+           subRouteV:'',
+           ctDealer:'',
+           ispDealer:''
           },
           searchBIN: {
             dealerCode:'',
             dealerName:'',
-            route:'',
-            subRoute:'',
+            routeS:'',
+            routeV:'',
+            subRouteV:'',
+            ictDealer:'',
+            ispDealer:'',
             currentPage:1,
             pageSize:50,
             totalRows:-1
-          }
+          },
+          rules2: {
+            dealerCode: [{
+              required: true,
+              message: '经销商代码不能为空',
+              trigger: 'blur'
+            }
+            ]
+          },
         }
       },
   mounted: function () {
@@ -188,8 +248,9 @@
           let param = {'params': 'test'}
           axios.post('/dealerManage/dealer/selectSelectRouteList', qs.stringify(param)).then((res) => {
              if (res.errCode === 'S') {
-                 this.routeData = res.data.resultRoute
-                 this.subRouteData = res.data.resultSubRoute
+                 this.routeDataS = res.data.routeDataS
+                 this.routeDataV = res.data.routeDataV
+                 this.subRouteDataV = res.data.subRouteDataV
               }
           })
         },
@@ -204,8 +265,11 @@
           this.searchBIN = {
             dealerCode:'',
             dealerName:'',
-            route:'',
-            subRoute:'',
+            routeS:'',
+            routeV:'',
+            subRouteV:'',
+            ictDealer:'',
+            ispDealer:'',
             currentPage:currentPageTemp,
             pageSize:pageSizeTemp,
             totalRows:totalRowsTemp
@@ -214,17 +278,22 @@
         loadData() {
           let param = {'params': JSON.stringify(this.searchBIN)}
           axios.post('/dealerManage/dealer/selectDealerListBySearch', qs.stringify(param)).then((res) => {
-            var _data = res.data.result
-            this.userInfoList = _data
-            this.searchBIN.totalRows = res.data.totalRows
+            if (res.errCode === 'S') {
+              var _data = res.data.result
+              this.userInfoList = _data
+              this.searchBIN.totalRows = res.data.totalRows
+            }
           })
         },
         add() {
           this.addFormData = {
-             dealerCode:'',
-             dealerName:'',
-             route:'',
-             subRoute:''
+            dealerCode:'',
+            dealerName:'',
+            routeS:'',
+            routeV:'',
+            subRouteV:'',
+            ictDealer:'',
+            ispDealer:'',
           }
           this.isView = true
           this.dialogVisible = true
@@ -289,7 +358,7 @@
                   } else {
                     this.$message({
                       type: 'info',
-                      message: '修改失败'
+                      message: '修改失败,'+res.errMsg
                     })
                   }
                   this.dialogVisible = false
@@ -305,7 +374,7 @@
                   } else {
                     this.$message({
                       type: 'info',
-                      message: '添加失败'
+                      message: '添加失败'+res.errMsg
                     })
                   }
                   this.dialogVisible = false

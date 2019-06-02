@@ -1,6 +1,11 @@
 
   <template>
      <div class="mainContainer">
+      <el-tabs id="topTitle" v-model="searchBIN.orderType" @tab-click="handleTabClick">
+            <el-tab-pane :label="$t('label.label6_05')" name="S"></el-tab-pane>
+            <el-tab-pane :label="$t('label.label6_06')" name="V"></el-tab-pane>
+            <el-tab-pane :label="$t('label.label6_07')" name="V_SUB"></el-tab-pane>
+      </el-tabs>
      <el-form class="demo-form-inline selectedCont clears" label-width="200px">
         <el-row>
         <el-col :span="8">
@@ -8,13 +13,6 @@
               <el-input v-model="searchBIN.route" style="width:200px"></el-input>
             </el-form-item>
         </el-col>
-        <el-col :span="8">  
-            <el-form-item label="子路线" >
-              <el-input v-model="searchBIN.subRoute" style="width:200px"></el-input>
-            </el-form-item>
-        </el-col>   
-        </el-row>
-        <el-row>
         <el-col :span="8">  
             <el-form-item label="页面大小" >
              <el-select placeholder="页面大小" v-model="searchBIN.pageSize" style="width:200px">
@@ -27,7 +25,7 @@
               </el-option>
            </el-select>
             </el-form-item>
-        </el-col>   
+        </el-col>     
         </el-row>
         <el-row>
         <el-col :span="5" >
@@ -50,10 +48,10 @@
          <el-table :data="userInfoList" style="width: 100%" border  min-height="100">
             <!--<el-table-column prop="id" label="id" >
             </el-table-column>-->
-             <el-table-column prop="route"  :label="$t('label.label6_01')" width="200">
+             <el-table-column prop="route"  :label="$t('label.label6_03')" width="200">
             </el-table-column>
-             <el-table-column prop="subRoute"  :label="$t('label.label6_04')" width="200">
-            </el-table-column>
+             <!--<el-table-column prop="subRoute"  :label="$t('label.label6_04')" width="200">
+            </el-table-column>-->
              <el-table-column prop="address" label="地址" width="200">
             </el-table-column>
              <el-table-column prop="orderType" label="订单类型" width="200">
@@ -81,25 +79,33 @@
           </el-pagination>
           <!--新增界面-->
          <el-dialog title="记录" :visible.sync="dialogVisible" width="50%" :close-on-click-modal="false">
-             <el-form :model="addFormData"  ref="addFormData" label-width="150px" class="demo-ruleForm login-container">
+             <el-form :model="addFormData"  ref="addFormData" :rules="rules2" label-width="150px" class="demo-ruleForm login-container">
                   <el-form-item  prop="route" label="路线">
                     <el-input type="text" v-model="addFormData.route" placeholder="路线" :disabled="keyDisabled"></el-input>
                   </el-form-item>
-                   <el-form-item prop="subRoute" label="子路线">
+                  <!--<el-form-item prop="orderType" label="订单类型">
+                    <el-select  v-model="addFormData.orderType" style="width:200px">
+                        <el-option
+                        v-for="item in $Enum.EnumSelect().order_type_route"
+                        :key="item.value"
+                        :label="item.label"
+                        :value="item.value" 
+                        > 
+                      </el-option>
+                    </el-select>
+                  </el-form-item>-->
+                   <!--<el-form-item prop="subRoute" label="子路线">
                     <el-input type="text" v-model="addFormData.subRoute"  placeholder="子路线" :disabled="keyDisabled"></el-input>
-                  </el-form-item>
+                  </el-form-item>-->
                    <el-form-item prop="address" label="地址">
                     <el-input type="text" v-model="addFormData.address"  placeholder="地址"></el-input>
                   </el-form-item>
-                   <el-form-item prop="orderType" label="订单类型">
-                    <el-input type="text" v-model="addFormData.orderType" placeholder="订单类型" ></el-input>
-                  </el-form-item>
                    <el-form-item prop="description" label="描述">
-                    <el-input type="text" v-model="addFormData.description" placeholder="描述" ></el-input>
+                    <el-input type="textarea" v-model="addFormData.description" placeholder="描述" ></el-input>
                   </el-form-item>
              </el-form>
              <span slot="footer" class="dialog-footer">
-                 <el-button @click.native="dialogVisible = false,addFormData={route:'',subRoute:'',address:'',orderType:'',description:''}">取 消</el-button>
+                 <el-button @click.native="dialogVisible = false,addFormData={route:'',address:'',orderType:'',description:''}">取 消</el-button>
                  <el-button v-if="isView" type="primary" @click.native="addSubmit">确 定</el-button>
              </span>
           </el-dialog>
@@ -124,27 +130,73 @@
           addType:false,
           addFormData: {
            route:'',
-           subRoute:'',
            address:'',
            orderType:'',
            description:''
           },
           searchBIN: {
+            orderType:'S',
             route:'',
-            subRoute:'',
-            address:'',
-            orderType:'',
-            description:'',
             currentPage:1,
             pageSize:50,
             totalRows:-1
-          }
+          },
+          rules2: {
+            route: [{
+              required: true,
+              message: '路线不能为空',
+              trigger: 'blur'
+            },{ validator:this.getRoute, trigger: 'blur' }
+            ]
+          },
         }
       },
   mounted: function () {
         this.loadData()
       },
       methods: {
+        getRoute(rule, value, callback){
+            if (!this.addType){
+              callback()
+            }
+            if (value === '' || value === undefined || value === null) {
+              callback()
+            }
+            setTimeout(() => {
+              let resultData = {}
+              resultData.orderType = this.searchBIN.orderType
+              resultData.route = value
+              resultData.currentPage = 1
+              resultData.pageSize = 50
+              resultData.totalRows = -1
+              let param = {'params': JSON.stringify(resultData)}
+              axios.post('/dealerManage/route/selectROUTEListBySearch', qs.stringify(param)).then((res) => {
+                if(res.errCode === 'S'){
+                  var _data = res.data.result
+                  if(_data &&_data !== null){
+                   callback(new Error('该路线已存在，请核实后操作！！！'))
+                  }else{
+                    callback()
+                  }
+                }
+              })
+              
+            }, 1000)
+        },
+        handleTabClick: function (tab, event) {
+          this.initParams()
+          this.loadData()
+        },
+        initParams () {
+          let orderTypeTemp = this.searchBIN.orderType
+          this.searchBIN = {
+            route:'',
+            orderType:orderTypeTemp,
+            currentPage:1,
+            pageSize:50,
+            totalRows:-1
+          }
+        },
         handleCurrentChangeBIN(val){
             this.searchBIN.currentPage = val;
             this.loadData()
@@ -153,12 +205,10 @@
           let currentPageTemp = this.searchBIN.currentPage
           let pageSizeTemp = this.searchBIN.pageSize
           let totalRowsTemp = this.searchBIN.totalRows
+          let orderTypeTemp = this.searchBIN.orderType
           this.searchBIN = {
             route:'',
-            subRoute:'',
-            address:'',
-            orderType:'',
-            description:'',
+            orderType:orderTypeTemp,
             currentPage:currentPageTemp,
             pageSize:pageSizeTemp,
             totalRows:totalRowsTemp
@@ -167,15 +217,16 @@
         loadData() {
           let param = {'params': JSON.stringify(this.searchBIN)}
           axios.post('/dealerManage/route/selectROUTEListBySearch', qs.stringify(param)).then((res) => {
-            var _data = res.data.result
-            this.userInfoList = _data
-            this.searchBIN.totalRows = res.data.totalRows
+            if(res.errCode === 'S'){
+              var _data = res.data.result
+              this.userInfoList = _data
+              this.searchBIN.totalRows = res.data.totalRows
+            }
           })
         },
         add() {
           this.addFormData = {
              route:'',
-           subRoute:'',
            address:'',
            orderType:'',
            description:''
@@ -205,7 +256,7 @@
             callback: action => {
               var params = {
                 route: rowData.route,
-                subRoute: rowData.subRoute
+                orderType: this.searchBIN.orderType
               }
               axios.post('/dealerManage/route/deleteROUTEInfo', qs.stringify(params)).then((res) => {
                 console.info(res)
@@ -231,6 +282,7 @@
             // 代表通过验证 ,将参数传回后台
             if (valid) {
               let param = Object.assign({}, this.addFormData)
+              param.orderType = this.searchBIN.orderType
               let result = {}
               result.result = JSON.stringify(param)   
               if (!this.addType) {

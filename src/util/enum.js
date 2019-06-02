@@ -584,6 +584,38 @@ Enum.EnumSelect = function() {
         label: 'RELOC',
         value: 'RELOC'
       }
+    ],
+    order_type_route_all: [
+      {
+        label: '全部',
+        value: ''
+      },
+      {
+        label: 'V',
+        value: 'V'
+      },
+      {
+        label: 'S',
+        value: 'S'
+      },
+      {
+        label: 'V_SUB',
+        value: 'V_SUB'
+      }
+    ],
+    order_type_route: [
+      {
+        label: 'V',
+        value: 'V'
+      },
+      {
+        label: 'S',
+        value: 'S'
+      },
+      {
+        label: 'V_SUB',
+        value: 'V_SUB'
+      }
     ]
   }
 
@@ -1153,6 +1185,38 @@ Enum.EnumSelect = function() {
       {
         label: 'RELOC',
         value: 'RELOC'
+      }
+    ],
+    order_type_route_all: [
+      {
+        label: 'All',
+        value: ''
+      },
+      {
+        label: 'V',
+        value: 'V'
+      },
+      {
+        label: 'S',
+        value: 'S'
+      },
+      {
+        label: 'V_SUB',
+        value: 'V_SUB'
+      }
+    ],
+    order_type_route: [
+      {
+        label: 'V',
+        value: 'V'
+      },
+      {
+        label: 'S',
+        value: 'S'
+      },
+      {
+        label: 'V_SUB',
+        value: 'V_SUB'
       }
     ]
   }
