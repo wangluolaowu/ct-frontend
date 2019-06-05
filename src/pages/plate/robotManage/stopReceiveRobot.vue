@@ -36,7 +36,7 @@
     <el-col :span="12" class="stopCon">
       <!--暂停部分机器人-->
       <template >
-        <h1>{{$t('message.msg1_72')}}}</h1>
+        <h1>{{$t('message.msg1_72')}}</h1>
         <div style="margin: 15px 0;"></div>
         <el-checkbox-group v-model="checkedStop" @change="handleCheckedCitiesChange">
           <el-checkbox v-for="item in stopRobotName" :label="item" :key="item">{{item}}</el-checkbox>
