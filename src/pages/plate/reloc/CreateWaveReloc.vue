@@ -280,8 +280,7 @@ export default {
       this.tableTotalRows = 0
       this.tableSelectRows = 0
       this.getTableData()
-      this.dialog.systemReason = ''
-      this.dialog.manualReason = ''
+      
     },
     confirmAssign () {
       let dataResult = {}
@@ -404,6 +403,8 @@ export default {
           this.tableTotalRows = that.tableData.length
         }
       })
+      this.dialog.systemReason = ''
+      this.dialog.manualReason = ''
     },
     handleCurrentChange (val) {
       this.search.currentPage = val

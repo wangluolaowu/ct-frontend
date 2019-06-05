@@ -36,7 +36,7 @@
               <el-col :span="6">
                 <el-form-item>
                   <el-button type="primary" @click="confirm">{{$t('message.msg1_28')}}</el-button>
-                  <el-button type="info" @click="cancel">{{$t('message.msg1_29')}}</el-button>
+                  <el-button type="primary" @click="cancel">{{$t('message.msg1_29')}}</el-button>
                 </el-form-item>
               </el-col>
             </el-row>
@@ -49,7 +49,7 @@
        <el-row v-for="(tableDataItem, j) in this.dialogTableData" :key="j" width="100%">
          <div>
            <label>
-           <span style="line-height:3">{{$t('message.msg1_45') + ': ' + (tableDataItem.orderWaveId || '') }}</span>
+           <span style="line-height:3">{{$t('message.msg1_45') + ': ' + (tableDataItem[0].orderWaveId || '') }}</span>
            <span style="line-height:3">{{$t('message.msg1_46') + ': ' + $DateFormat.dateFormat(tableDataItem[0].creatDate,true) }}</span>
            </label>
            </div>
@@ -131,8 +131,8 @@ export default {
       this.confirm()
     },
     cancel() {//点击清空时应执行的操作
-      this.startTime = ''
-      this.endTime = ''
+      this.search.startTime = ''
+      this.search.endTime = ''
     },handleTabClick: function (tab, event) {
       this.initParams()
       this.confirm()

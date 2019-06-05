@@ -61,23 +61,23 @@
                 <el-table ref="multipleTable" :data="tableData" tooltip-effect="dark" style="width: 100%" border @selection-change="handleSelectionChange" v-loading="tableLoading">
                     <el-table-column type="selection" width="55">
                     </el-table-column>
-                    <el-table-column prop="dealerAccount" :label="$t('label.label1_67')" min-width="100" >
+                    <el-table-column prop="dealerAccount" :label="$t('label.label1_67')" min-width="200" >
                     </el-table-column>
                     <el-table-column prop="custName" :label="$t('label.label1_68')"  min-width="200" >
                     </el-table-column>
-                    <el-table-column prop="wip" :label="$t('label.label1_52')"  min-width="100">
+                    <el-table-column prop="wip" :label="$t('label.label1_52')"  min-width="200">
                     </el-table-column>
-                    <el-table-column prop="wipLine" :label="$t('label.label1_54')"  min-width="100">
+                    <el-table-column prop="wipLine" :label="$t('label.label1_54')"  min-width="200">
                     </el-table-column>
                     <el-table-column prop="pickTicketNum" :label="$t('label.label2_07')" min-width="200">
                     </el-table-column>
-                    <el-table-column prop="route" :label="$t('label.label1_50')" min-width="50">
+                    <el-table-column prop="route" :label="$t('label.label1_50')" min-width="150">
                     </el-table-column>
-                     <el-table-column prop="subRoute" :label="$t('label.label2_08')"  min-width="100">
+                     <el-table-column prop="subRoute" :label="$t('label.label2_08')"  min-width="150">
                     </el-table-column>
-                    <el-table-column prop="orderType" :label="$t('label.label1_51')" min-width="100">
+                    <el-table-column prop="orderType" :label="$t('label.label1_51')" min-width="150">
                     </el-table-column>
-                    <el-table-column prop="locNum" :label="$t('label.label2_09')" min-width="100">
+                    <el-table-column prop="locNum" :label="$t('label.label2_09')" min-width="150">
                     </el-table-column>
                     <el-table-column prop="skuNum" :label="$t('label.label1_70')"  min-width="200">
                     </el-table-column>
@@ -279,8 +279,6 @@ export default {
       this.isShowOkDialog = false
       this.isShowDialog = false
       this.getTableData()
-      this.dialog.systemReason = ''
-      this.dialog.manualReason = ''
     },
     confirmAssign () {
       let dataResult = {}
@@ -384,6 +382,8 @@ export default {
         }
         this.tableLoading = false
       })
+      this.dialog.systemReason = ''
+      this.dialog.manualReason = ''
     },
     handleCurrentChange (val) {
       this.search.currentPage = val

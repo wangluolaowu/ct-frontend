@@ -268,7 +268,7 @@
                 } else {
                   this.$message({
                     type: 'info',
-                    message: `删除失败`
+                    message: `删除失败,`+res.errMsg
                   })
                 }
                 this.loadData()
