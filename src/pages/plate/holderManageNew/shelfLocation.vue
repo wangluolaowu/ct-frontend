@@ -133,12 +133,12 @@
                          <el-row>
                            <div style="float:left;width:55%;height:100%;font-color:white;">
                             <ul class="station-info" v-for="(item, i) in locationLevelNumAData" :key="i">
-                               <li :style="{height: 200+'px;line-height:'+200+'px;min-height:'+200+'px;text-align:center !important'}">{{item.locationNum}}</li>
+                               <li :style="getStationInfo(item)">{{item.locationNum}}</li>
                              </ul> 
                            </div>
                            <div style="float:right;width:44%;height:100%;font-color:white;border-left:1px solid black">
                              <ul  class="station-info" v-for="(item, i) in locationLevelNumBData" :key="i">
-                               <li  :style="{height: 200+'px;line-height:200px;text-align:center !important'}">{{item.locationNum}}</li>
+                               <li  :style="getStationInfo(item)">{{item.locationNum}}</li>
                              </ul> 
                            </div>
                          </el-row>     
@@ -231,6 +231,9 @@
         this.loadData()
       },
       methods: {
+        getStationInfo(item){
+          return "height: 200px;line-height:200px;min-height:200px;text-align:center !important"
+        },
         confirmShowOkDialog(arg1,arg2){  
           this.locationLevelNumBData = []
           this.locationLevelNumData = []
