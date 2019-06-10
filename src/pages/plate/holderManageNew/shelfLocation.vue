@@ -117,35 +117,35 @@
              <!--展示货位立体图-->
          <el-dialog :title="$t('label.label8_20')" :visible.sync="dialogLocationVisible" width="50%" :close-on-click-modal="false">
              <div class="block" style="height:100%;width:90%;display:inline-block">
-               <div style="height:100%;width:50%;float:left;" >
+               <div style="height:100%;width:50%;float:left;" ref='myLocation'>
                  <el-row  v-for="(item, i) in this.locationSideNumData" :key="i" type="flex" class="row-bg" justify="center" style="margin-top:1px;">
-                  <el-col :span="10" :height="getHeight">
-                    <div>
-                      <el-button @click="confirmShowOkDialog(item.holderId,item.levelNumUp2down)" class="grid-a-contentWidth"> {{'第'+(i+1) +'层,高度：'}}{{item.levelHeight}}</el-button>
+                  <el-col :span="10"  >
+                    <div :id="item.levelNumUp2dow">
+                      <el-button  @click="confirmShowOkDialog(item.holderId,item.levelNumUp2down)"  class="grid-a-contentWidth location" :style="{height: item.levelHeight/5+'px !important'}" > {{'第'+(i+1) +'层,高度：'}}{{item.levelHeight}}</el-button>
                     </div> 
                   </el-col>
                 </el-row>
                </div>
                <div style="height:100%;width:50%;float:right;">
-                <el-row   type="flex" class="row-bg" justify="center" style="margin-top:1px;">
+                <el-row   type="flex" class="row-bg" justify="center" style="margin-top:1px;" v-if="dialogAB">
                   <el-col :span="10"  >
                    <div class="grid-a-contentWidth1">
                          <el-row>
-                           <div style="float:left;width:55%;height:200px;font-color:white;">
+                           <div style="float:left;width:55%;height:100%;font-color:white;">
                             <ul class="station-info" v-for="(item, i) in locationLevelNumAData" :key="i">
-                               <li>{{item.locationNum}}</li>
+                               <li :style="{height: 200+'px;line-height:'+200+'px;min-height:'+200+'px;text-align:center !important'}">{{item.locationNum}}</li>
                              </ul> 
                            </div>
-                           <div style="float:right;width:44%;height:200px;font-color:white;border-left:1px solid black">
-                             <ul class="station-info"  v-for="(item, i) in locationLevelNumBData" :key="i">
-                               <li>{{item.locationNum}}</li>
+                           <div style="float:right;width:44%;height:100%;font-color:white;border-left:1px solid black">
+                             <ul  class="station-info" v-for="(item, i) in locationLevelNumBData" :key="i">
+                               <li  :style="{height: 200+'px;line-height:200px;text-align:center !important'}">{{item.locationNum}}</li>
                              </ul> 
                            </div>
                          </el-row>     
                    </div> 
                   </el-col>
                 </el-row>
-                <el-row   type="flex" class="row-bg" justify="center" style="margin-top:1px;">
+                <el-row   type="flex" class="row-bg" justify="center" style="margin-top:1px;" v-if="dialogAlone">
                   <el-col :span="10"  >
                    <div class="grid-a-contentWidth1">
                          <el-row>
@@ -176,6 +176,8 @@
           dialogVisibleStart:false,
           submitDisabled:true,
           dialogresult:false,
+          dialogAlone:false,
+          dialogAB:false,
           tableDataDialog:[],
           locationSideNumData:[],
           locationLevelNumAData:[],
@@ -229,18 +231,23 @@
         this.loadData()
       },
       methods: {
-        confirmShowOkDialog(arg1,arg2){
+        confirmShowOkDialog(arg1,arg2){  
           this.locationLevelNumBData = []
           this.locationLevelNumData = []
           this.locationLevelNumAData = []
+          this.dialogAlone = false
+          this.dialogAB = false 
           this.getLocationInfoByLevelNum(arg1,arg2)
         },
         showLocation(row){
           this.dialogLocationVisible = true
+          this.locationLevelNumBData = []
+          this.locationLevelNumData = []
+          this.locationLevelNumAData = []
+          this.dialogAlone = false
+          this.dialogAB = false
           this.getLocationInfoBySideNum(row.holderId,row.sideNum)
-        },
-        getHeight(row){
-         console.log('row===='+row)
+          this.getLocationInfoByLevelNum(row.holderId,row.levelNumUp2down)
         },
         tableRowClassName({row, rowIndex}) {
           if (row.isSucess === '否') {
@@ -301,12 +308,18 @@
             if(res.errCode === 'S'){
               
               if(res.data.resultA === null){
+                this.dialogAB = false
+                this.dialogAlone = true
                 this.locationLevelNumData = res.data.resultB
               }
               if(res.data.resultB === null){
+                this.dialogAB = false
+                this.dialogAlone = true
                 this.locationLevelNumData = res.data.resultA
               }
               if(this.locationLevelNumData.length === 0){
+                this.dialogAB = true
+                this.dialogAlone = false
                 this.locationLevelNumAData = res.data.resultA
                 this.locationLevelNumBData = res.data.resultB
               }
@@ -429,16 +442,27 @@
         background-color:  #f0f9eb;
      }
      .grid-a-contentWidth {    
-        background-color: #026780;
+        background-color: #09c;
         border-radius: 4px;
         min-height: 100px;
         width: 200%;
      }
-
+    .grid-a-contentWidth:active{
+      background: #026780;
+      color: #ffffff;
+    }
+    .location:focus, .location:hover{
+      background:#026780;
+      color: #ffffff;
+    }
      .grid-a-contentWidth1 {    
-        background-color: blue;
+        background-color: #026780;
+        color: #ffffff;
         border-radius: 4px;
         min-height: 200px;
         width: 200%;
+     }
+     .station-info {
+       min-height: 200px;
      }
  </style>
