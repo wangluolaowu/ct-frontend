@@ -169,7 +169,7 @@
           isView: true,
           tableData: [{
           rowNum: 1,
-          id:0,
+          id:'',
           name: '',
           description: '',
           url: '',
@@ -280,8 +280,10 @@
         loadData() {
           let param = {'name': this.filters.name}
           axios.post('/custom/ctMenu/selectCtMenuList', qs.stringify(param)).then((res) => {
-            var _data = res.data.result
-            this.userInfoList = _data
+            if(res.errCode === 'S'){
+              var _data = res.data.result
+              this.userInfoList = _data
+            }
           })
         },
         updateIndex(result) {
@@ -317,8 +319,20 @@
         getChildMenuList(arg){
           let param = {'parentId': arg}
           axios.post('/custom/ctMenu/selectChildCtMenuListByParentId', qs.stringify(param)).then((res) => {
-            var _data = res.data.result
-            this.tableData = _data
+            if(res.errCode === 'S'){
+              var _data = res.data.result
+              this.tableData = _data
+              if(this.tableData === null ){
+                this.tableData = [{
+                  rowNum: 1,
+                  id: '',
+                  name: '',
+                  description: '',
+                  url: '',
+                  available:'1'
+                }]
+              }
+            }
           })
         },
         modifyUser(rowData) {

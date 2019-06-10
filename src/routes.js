@@ -386,6 +386,19 @@ const routes = [
         name: '地图编辑'
       }
     ]
+  },
+  {
+    path: '/',
+    component: Layout,
+    name: '审计管理',
+    icon: 'el-icon-service',
+    children: [
+      {
+        path: '/auditLog/auditLog',
+        component: () => import('@/pages/plate/auditLog/auditLog'),
+        name: '审计'
+      }
+    ]
   }
 ]
 for (let i in routerlist) {

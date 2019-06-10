@@ -616,6 +616,30 @@ Enum.EnumSelect = function() {
         label: 'V_SUB',
         value: 'V_SUB'
       }
+    ],
+    side_Num_All: [
+      {
+        label: '全部',
+        value: ''
+      },
+      {
+        label: 'A',
+        value: 1
+      },
+      {
+        label: 'B',
+        value: 3
+      }
+    ],
+    side_Num: [
+      {
+        label: 'A',
+        value: 1
+      },
+      {
+        label: 'B',
+        value: 3
+      }
     ]
   }
 
@@ -1217,6 +1241,30 @@ Enum.EnumSelect = function() {
       {
         label: 'V_SUB',
         value: 'V_SUB'
+      }
+    ],
+    side_Num_All: [
+      {
+        label: 'All',
+        value: ''
+      },
+      {
+        label: 'A',
+        value: 1
+      },
+      {
+        label: 'B',
+        value: 3
+      }
+    ],
+    side_Num: [
+      {
+        label: 'A',
+        value: 1
+      },
+      {
+        label: 'B',
+        value: 3
       }
     ]
   }
