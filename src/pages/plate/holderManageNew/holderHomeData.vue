@@ -253,7 +253,7 @@
                 <div style="height:100%;width:95%;">
                <div style="height:100%;width:45%;float:left;margin-top:10px;" ref='myLocation'>
                 <div>
-                <el-row type="flex" class="row-bg" justify="center" style="margin-top:1px;"><el-col :span="10" style="font-size:16px;height:10px;margin-bottom:5px;line-height:10px;text-align:center;" >货架A面轮廓图</el-col></el-row>
+                <el-row type="flex" class="row-bg" justify="center" style="margin-top:1px;"><el-col :span="10" ><span style="font-size:16px;height:10px;margin-bottom:5px;line-height:10px;text-algin:center;">货架A面轮廓图</span></el-col></el-row>
                  <el-row  v-for="(item, i) in this.locationSideNumAData" :key="i" type="flex" class="row-bg" justify="center" style="margin-top:1px;">
                   <el-col :span="10"  >
                     <div>
@@ -263,7 +263,7 @@
                 </el-row>
                 </div>
                 <div>
-                 <el-row type="flex" class="row-bg" justify="center" style="margin-top:1px;"><el-col :span="10" style="font-size:16px;height:10px;margin-bottom:5px;line-height:10px;text-align:center;" >货架B面轮廓图</el-col></el-row>
+                 <el-row type="flex" class="row-bg" justify="center" style="margin-top:1px;"><el-col :span="10" ><span style="font-size:16px;height:10px;margin-bottom:5px;line-height:10px;text-algin:center;">货架B面轮廓图</span></el-col></el-row>
                  <el-row  v-for="(itemj, j) in this.locationSideNumBData" :key="j" type="flex" class="row-bg" justify="center" style="margin-top:1px;">
                   <el-col :span="10"  >
                     <div>
@@ -274,7 +274,7 @@
                 </div>
                </div>
                <div style="height:100%;width:45%;float:right;margin-top:10px;">
-                <el-row  type="flex" class="row-bg" justify="center" style="margin-top:1px;"><el-col :span="10" style="font-size:16px;margin-left:80px;height:10px;margin-bottom:5px;line-height:10px;text-align:center;" >货位轮廓图</el-col></el-row>
+                <el-row  type="flex" class="row-bg" justify="center" style="margin-top:1px;"><el-col :span="10" ><span style="font-size:16px;height:10px;margin-bottom:5px;line-height:10px;text-algin:center;">货位轮廓图</span></el-col></el-row>
                 <el-row   type="flex" class="row-bg" justify="center" style="margin-top:1px;" v-if="dialogAB">
                   <el-col :span="10"  >
                    <div class="grid-a-contentWidth1">
@@ -408,10 +408,7 @@
           this.getLocationInfoByLevelNum(arg1,arg2)
         },
         getMainInfo(item){
-           if(item.levelNumUp2down === this.levelNumUp2dow){
-             return "height: "+item.levelHeight/5+'px; !important'
-           }
-          return "height: "+item.levelHeight/5+'px !important'
+          return "height: "+item.levelHeight/5+'px;!important'
         },
         getStationInfo(item){
            return "height:" +item.levelHeightTemp+'px;line-height:'+item.levelHeightTemp+'px;text-align:center;border-top:1px solid black ;!important'
@@ -712,9 +709,6 @@
         border-radius: 4px;
         min-height: 100px;
         width: 200%;
-     }
-     .location{
-        background: #0099cc;
      }
  
    .grid-a-contentWidth:active{

@@ -30,12 +30,11 @@
                         unique-opened router v-show="!collapsed">
                     <div v-for="(item,index) in menuList" :key="index">
                         <el-submenu :index="index + ''" v-if="item.subMenuVoList.length > 0" :key="index">
-                            <template slot="title"><i :class="item.icon">{{item.icon}}</i>{{item.name}}</template>
+                            <template slot="title"><i :class="item.icon"></i>{{item.name}}</template>
                             <template v-for="child in item.subMenuVoList">
                               <el-menu-item :index="child.url" :key="child.url" :route="{'path':child.url}">{{child.name}}</el-menu-item>
                             </template>
                         </el-submenu>
-                        <!--<el-menu-item v-if="item.leaf && item.children.length > 0" :index="item.children[0].path" :key="index"><i :class="item.iconCls"></i>{{item.children[0].name}}</el-menu-item>-->
                     </div>
                 </el-menu>
             </el-aside>
@@ -92,8 +91,10 @@ export default {
     // 获取用户菜单
     http() {
       this.axios.get('/menu', {}).then((res) => {
-        console.log(res)
-        this.menuList = res
+        this.menuList = res.map(item=>{
+          item.icon = 'el-icon-service'
+          return item
+        })
       })
     },
     onSubmit () {
