@@ -94,7 +94,7 @@
         <el-row :gutter="10">
           <el-col :span="4" v-for="(item, i) in this.dialogTableData" :key="i">
             <el-card style="min-height: 520px">
-              <ul class="station-info">
+              <ul class="station-info" style="min-height: 80px">
                   <li>
                       <label for="">{{$t('message.msg1_36')}}</label><span>{{'&#12288;' +item.wsid}}</span>
                   </li>
