@@ -254,7 +254,7 @@ export default {
       })
     },
     tableRowClassName({row, rowIndex}) {
-        if (row.skuNumValidate && row.skuNumValidate === true && row.locNumValidate === true) {
+        if (row.locNumValidate && row.locNumValidate === true) {
           return ''
         } 
         return 'warning-row'

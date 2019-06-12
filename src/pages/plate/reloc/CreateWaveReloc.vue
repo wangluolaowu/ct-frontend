@@ -195,7 +195,7 @@ export default {
       })
     },
     tableRowClassName({row, rowIndex}) {
-        if (row.skuNumValidate && row.skuNumValidate === true && row.locNumValidate === true) {
+        if (row.locNumValidate && row.locNumValidate === true) {
           return ''
         } 
         return 'warning-row'
@@ -296,7 +296,7 @@ export default {
         })
         result = result.concat(newList)
       })
-      console.log('result===========' + JSON.stringify(this.dialogTableData))
+      //console.log('result===========' + JSON.stringify(this.dialogTableData))
       dataResult.result = JSON.stringify(result)
       dataResult.reason = JSON.stringify(this.dialog)
       dataResult.orderWaveId = this.id
@@ -338,7 +338,7 @@ export default {
       this.cancelIsDisabledButton = 'info'
       this.tableLoading = true
       let dataResult = {}
-      console.log('JSON.stringify(this.sendStr)==========' + JSON.stringify(this.sendStr))
+      //console.log('JSON.stringify(this.sendStr)==========' + JSON.stringify(this.sendStr))
       dataResult.result = JSON.stringify(this.sendStr)
       dataResult.submitAll = this.search.submitAll
       dataResult.orderType = this.search.orderType
