@@ -109,7 +109,7 @@
              <el-table-column :label="$t('message.msg1_53')" min-width="350" fixed="right">
  
                 <template slot-scope="scope">
- 
+                     <el-button type="text" @click="showLocation(scope.row)">{{$t('label.label8_20')}}</el-button>
                      <el-button type="text" @click="checkDetail(scope.row)">{{$t('message.msg1_54')}}</el-button>
  
                      <el-button type="text" @click="modifyInfo(scope.row)">{{$t('message.msg1_55')}}</el-button>
@@ -239,6 +239,73 @@
           <el-button type="primary" @click="confirm">{{$t('message.msg1_28')}}</el-button>
          </span>
     </el-dialog>
+           <!--展示货位立体图-->
+   <el-dialog :title="$t('label.label8_20')" :visible.sync="dialogLocationVisible" width="50%" :close-on-click-modal="false">
+             <div class="block" style="height:100%;width:95%;display:inline-block">
+               <el-card>
+                  <el-form :model="addFormDataDetail"  ref="addFormDataDetail" label-width="0" class="demo-ruleForm login-container">
+                   <el-form-item >
+                   <span style="margin-right:15px;">{{$t('label.label8_01')}} : {{addFormDataDetail.holderId}}</span>
+                   <span style="margin-right:15px;">{{$t('label.label8_10')}} : {{addFormDataDetail.holderNum}}</span>
+                  </el-form-item>
+                 </el-form>
+                </el-card>
+               <div style="height:100%;width:45%;float:left;margin-top:10px;" ref='myLocation'>
+                <div>
+                <el-row type="flex" class="row-bg" justify="center" style="margin-top:1px;"><el-col :span="10" style="font-size:16px;margin-left:80px;height:10px;margin-bottom:5px;line-height:10px;text-align:center;" >货架A面轮廓图</el-col></el-row>
+                 <el-row  v-for="(item, i) in this.locationSideNumAData" :key="i" type="flex" class="row-bg" justify="center" style="margin-top:1px;">
+                  <el-col :span="10"  >
+                    <div>
+                      <el-button  @click.native="confirmShowOkDialog(item.holderId,item.levelNumUp2down)"  class="grid-a-contentWidth location"      :style="getMainInfo(item)" > {{'第'+(i+1) +'层,高度：'}}{{item.levelHeight}}</el-button>
+                    </div> 
+                  </el-col>
+                </el-row>
+                </div>
+                <div>
+                 <el-row type="flex" class="row-bg" justify="center" style="margin-top:1px;"><el-col :span="10" style="font-size:16px;margin-left:80px;height:10px;margin-bottom:5px;line-height:10px;text-align:center;" >货架B面轮廓图</el-col></el-row>
+                 <el-row  v-for="(itemj, j) in this.locationSideNumBData" :key="j" type="flex" class="row-bg" justify="center" style="margin-top:1px;">
+                  <el-col :span="10"  >
+                    <div>
+                      <el-button  @click.native="confirmShowOkDialog(itemj.holderId,itemj.levelNumUp2down)"  class="grid-a-contentWidth location"    :style="getMainInfo(itemj)" > {{'第'+(j+1) +'层,高度：'}}{{itemj.levelHeight}}</el-button>
+                    </div> 
+                  </el-col>
+                </el-row>
+                </div>
+               </div>
+               <div style="height:100%;width:45%;float:right;margin-right:60px;margin-top:10px;">
+                <el-row  type="flex" class="row-bg" justify="center" style="margin-top:1px;"><el-col :span="10" style="font-size:16px;margin-left:80px;height:10px;margin-bottom:5px;line-height:10px;text-align:center;" >货位轮廓图</el-col></el-row>
+                <el-row   type="flex" class="row-bg" justify="center" style="margin-top:1px;" v-if="dialogAB">
+                  <el-col :span="10"  >
+                   <div class="grid-a-contentWidth1">
+                         <el-row>
+                           <div style="float:left;width:55%;height:100%;font-color:white;">
+                            <ul class="station-info">
+                               <li  v-for="(item, ii) in locationLevelNumAData" :key="ii" :style="getStationInfo(item)">{{item.locationNum}}</li>
+                             </ul> 
+                           </div>
+                           <div style="float:right;width:44%;height:100%;font-color:white;border-left:1px solid black">
+                             <ul  class="station-info" >
+                               <li  v-for="(item, iii) in locationLevelNumBData" :key="iii" :style="getStationInfo(item)">{{item.locationNum}}</li>
+                             </ul> 
+                           </div>
+                         </el-row>     
+                   </div> 
+                  </el-col>
+                </el-row>
+                <el-row   type="flex" class="row-bg" justify="center" style="margin-top:1px;" v-if="dialogAlone">
+                  <el-col :span="10"  >
+                   <div class="grid-a-contentWidth1">
+                         <el-row>
+                             <div class="station-info" style="text-align:center;height:200px;line-height:200px;"  v-for="(item, i) in locationLevelNumData" :key="i">
+                               {{item.locationNum}}
+                             </div> 
+                         </el-row>     
+                   </div> 
+                  </el-col>
+                </el-row>
+               </div>
+             </div>
+          </el-dialog>
   </div>
   </template>
   
@@ -258,6 +325,14 @@
           submitDisabled:true,
           dialogresult:false,
           tableDataDialog:[],
+          locationSideNumAData:[],
+          locationSideNumBData:[],
+          locationLevelNumAData:[],
+          locationLevelNumBData:[],
+          locationLevelNumData:[],
+          dialogLocationVisible:false,
+          dialogAlone:false,
+          dialogAB:false,
           isView: true,
           addFormData: {
             holderId:'',
@@ -289,6 +364,10 @@
           pi_orig_pos_x: '',
           pi_orig_pos_y: ''
         }],
+        addFormDataDetail:{
+            holderId:'',
+            holderNum:''
+          },
           addType:false,
           rulesAdd: {
             pi_holder_id: [{
@@ -318,6 +397,88 @@
         this. getSelectValues()
       },
       methods: {
+        confirmShowOkDialog(arg1,arg2){  
+          this.locationLevelNumBData = []
+          this.locationLevelNumData = []
+          this.locationLevelNumAData = []
+          this.dialogAlone = false
+          this.dialogAB = false 
+          this.getLocationInfoByLevelNum(arg1,arg2)
+        },
+        getMainInfo(item){
+           if(item.levelNumUp2down === this.levelNumUp2dow){
+             return "height: "+item.levelHeight/5+'px; !important'
+           }
+          return "height: "+item.levelHeight/5+'px !important'
+        },
+        getStationInfo(item){
+           return "height:" +item.levelHeightTemp+'px;line-height:'+item.levelHeightTemp+'px;text-align:center;border-top:1px solid black ;!important'
+        },
+         showLocation(row){
+          this.dialogLocationVisible = true
+          this.locationLevelNumBData = []
+          this.locationLevelNumData = []
+          this.locationLevelNumAData = []
+          this.dialogAlone = false
+          this.dialogAB = false
+          this.addFormDataDetail = Object.assign({}, row)
+          this.getLocationInfoBySideNum(row.holderId,row.sideNum)
+          this.getLocationInfoByLevelNum(row.holderId,row.levelNumUp2down)
+        },
+        getLocationInfoBySideNum(holderId) {
+          let resultData = {}
+          resultData.holderId = holderId
+          let param = {'params': JSON.stringify(resultData)}
+          axios.post('/holderManage/shelfLocation/selectLocationByHolderId', qs.stringify(param)).then((res) => {
+            if(res.errCode === 'S'){
+              this.locationSideNumAData = res.data.resultA
+              this.locationSideNumBData = res.data.resultB
+            }
+          })
+        }, 
+        getLocationInfoByLevelNum(holderId,levelNum) {
+          let resultData = {}
+          resultData.holderId = holderId
+          resultData.levelNumUp2down = levelNum
+          let param = {'params': JSON.stringify(resultData)}
+          axios.post('/holderManage/shelfLocation/selectLocationByLevelNum', qs.stringify(param)).then((res) => {
+            if(res.errCode === 'S'){
+              
+              if(res.data.resultA === null){
+                this.dialogAB = false
+                this.dialogAlone = true
+                this.locationLevelNumData = res.data.resultB
+              }
+              if(res.data.resultB === null){
+                this.dialogAB = false
+                this.dialogAlone = true
+                this.locationLevelNumData = res.data.resultA
+              }
+              if(this.locationLevelNumData.length === 0){
+                this.dialogAB = true
+                this.dialogAlone = false
+                this.locationLevelNumAData = res.data.resultA
+                this.locationLevelNumBData = res.data.resultB
+              }
+              if(this.locationLevelNumAData !== 0){
+                 let  sizeTemp = this.locationLevelNumAData.length 
+                 let levelHeightTemp = 200/sizeTemp
+                 this.locationLevelNumAData.map(item=>{
+                   item.levelHeightTemp = levelHeightTemp
+                   return item
+                 })
+              }
+              if(this.locationLevelNumBData !== 0){
+                 let  sizeTemp = this.locationLevelNumBData.length 
+                 let levelHeightTemp = 200/sizeTemp
+                 this.locationLevelNumBData.map(item=>{
+                   item.levelHeightTemp = levelHeightTemp
+                   return item
+                 })
+              }
+            }
+          })
+        },
        getSelectValues() {
         axios.get('common/enum/selectEnumList', {
           params: 'test'
@@ -539,5 +700,45 @@
 
      .el-table .success-row {
          background: #f0f9eb;
+     }
+      .block{
+        padding: 15px 12px;
+        background-color:  #f0f9eb;
+     }
+     .grid-a-contentWidth {    
+        background-color: #09c;
+        border-radius: 4px;
+        min-height: 100px;
+        width: 200%;
+     }
+     .location{
+        background: #09c;
+     }
+ 
+   .grid-a-contentWidth:active{
+      background: #026780;
+      color: #ffffff;
+    }
+    .location:focus, .location:hover{
+      background:#026780;
+      color: #ffffff;
+    }
+     .grid-a-contentWidth1 {    
+        background-color: #026780;
+        color: #ffffff;
+        border-radius: 4px;
+        min-height: 200px;
+        width: 200%;
+     }
+     .active{
+       background:#7a8486;
+       color: #ffffff;
+     }
+     .activeNo{
+       background:#09c;
+       color: #ffffff;
+     }
+     .station-info {
+       min-height: 200px;
      }
  </style>

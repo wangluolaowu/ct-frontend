@@ -44,7 +44,7 @@
         <el-col :span="8">
            <el-form-item  :label="$t('label.label11_01')">
                <template>
-                  <div class="block">
+                  <div>
                     <el-date-picker
                     v-model="searchBIN.startTime"
                      @change="handleChangeTime1"
@@ -65,7 +65,7 @@
         <el-col :span="8">
            <el-form-item  :label="$t('label.label11_02')">
                <template>
-                  <div class="block">
+                  <div>
                     <el-date-picker
                     v-model="searchBIN.endTime"
                     format="yyyy-MM-dd HH:mm:ss"

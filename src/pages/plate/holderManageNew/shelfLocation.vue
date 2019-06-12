@@ -105,8 +105,8 @@
                    <el-form-item prop="holderNum" :label="$t('label.label1_26')">
                     <el-input type="text" v-model="addFormData.holderNum"  :disabled="true"></el-input>
                   </el-form-item>
-                   <el-form-item prop="warehouseArea"  :label="$t('label.label8_11')">
-                    <el-input type="text" v-model="addFormData.warehouseArea" :disabled="true"></el-input>
+                   <el-form-item prop="sideNum"  :label="$t('label.label8_11')">
+                    <el-input type="text" v-model="addFormData.sideNum" :disabled="true"></el-input>
                   </el-form-item>
              </el-form>
              <span slot="footer" class="dialog-footer">
@@ -116,17 +116,30 @@
           </el-dialog>
              <!--展示货位立体图-->
          <el-dialog :title="$t('label.label8_20')" :visible.sync="dialogLocationVisible" width="50%" :close-on-click-modal="false">
-             <div class="block" style="height:100%;width:90%;display:inline-block">
-               <div style="height:100%;width:50%;float:left;" ref='myLocation'>
+             <div class="block" style="height:100%;width:95%;display:inline-block">
+               <el-card>
+                  <el-form :model="addFormDataDetail"  ref="addFormDataDetail" label-width="0" class="demo-ruleForm login-container">
+                   <el-form-item >
+                   <span style="margin-right:15px;">{{$t('label.label8_09')}} : {{addFormDataDetail.locationNum}}</span>
+                   <span style="margin-right:15px;">{{$t('label.label8_10')}} : {{addFormDataDetail.locationTypeCode}}</span>
+                   <span style="margin-right:15px;">{{$t('label.label1_26')}} : {{addFormDataDetail.holderNum}}</span>
+                   <span style="margin-right:15px;">{{$t('label.label8_11')}} : {{$Enum.getEnumSelectByValue($Enum.EnumSelect().side_Num,addFormDataDetail.sideNum)}}</span>
+                   <span>{{$t('label.label8_21')}} : {{'第'+levelNumUp2dow+'层'}} </span>
+                  </el-form-item>
+                 </el-form>
+                </el-card>
+               <div style="height:100%;width:45%;float:left;margin-top:10px;" ref='myLocation'>
+                <el-row type="flex" class="row-bg" justify="center" style="margin-top:1px;"><el-col :span="10" style="font-size:16px;margin-left:80px;height:10px;margin-bottom:5px;line-height:10px;text-align:center;" >货架轮廓图</el-col></el-row>
                  <el-row  v-for="(item, i) in this.locationSideNumData" :key="i" type="flex" class="row-bg" justify="center" style="margin-top:1px;">
                   <el-col :span="10"  >
-                    <div :id="item.levelNumUp2dow">
-                      <el-button  @click="confirmShowOkDialog(item.holderId,item.levelNumUp2down)" class="grid-a-contentWidth location" :class="setClass(item)" :style="{height: item.levelHeight/5+'px !important'}" > {{'第'+(i+1) +'层,高度：'}}{{item.levelHeight}}</el-button>
+                    <div>
+                      <el-button  @click.native="confirmShowOkDialog(item.holderId,item.levelNumUp2down)"  class="grid-a-contentWidth location" :class="setClass(item)"     :style="getMainInfo(item)" > {{'第'+(i+1) +'层,高度：'}}{{item.levelHeight}}</el-button>
                     </div> 
                   </el-col>
                 </el-row>
                </div>
-               <div style="height:100%;width:50%;float:right;">
+               <div style="height:100%;width:45%;float:right;margin-right:60px;margin-top:10px;">
+                <el-row  type="flex" class="row-bg" justify="center" style="margin-top:1px;"><el-col :span="10" style="font-size:16px;margin-left:80px;height:10px;margin-bottom:5px;line-height:10px;text-align:center;" >货位轮廓图</el-col></el-row>
                 <el-row   type="flex" class="row-bg" justify="center" style="margin-top:1px;" v-if="dialogAB">
                   <el-col :span="10"  >
                    <div class="grid-a-contentWidth1">
@@ -193,6 +206,13 @@
             holderNum:'',
             warehouseArea:''
           },
+          addFormDataDetail:{
+            locationId:'',
+            locationNum:'',
+            locationTypeCode:'',
+            holderNum:'',
+            warehouseArea:''
+          },
           searchBIN: {
             locationId:'',
             locationNum:'',
@@ -233,13 +253,19 @@
       },
       methods: {
         setClass(item){
-           if(item.levelNumUp2dow === this.levelNumUp2dow){
-             return [{ active: isActive }]
+          if(item.levelNumUp2down === this.levelNumUp2dow){
+            return 'active'
+          }
+          return 'activeNo'
+        },
+        getMainInfo(item){
+           if(item.levelNumUp2down === this.levelNumUp2dow){
+             return "height: "+item.levelHeight/5+'px; !important'
            }
-          return ""
+          return "height: "+item.levelHeight/5+'px !important'
         },
         getStationInfo(item){
-          return "height:" +item.levelHeightTemp+'px;line-height:'+item.levelHeightTemp+'px;text-align:center;border-top:1px solid black !important'
+           return "height:" +item.levelHeightTemp+'px;line-height:'+item.levelHeightTemp+'px;text-align:center;border-top:1px solid black ;!important'
         },
         confirmShowOkDialog(arg1,arg2){  
           this.locationLevelNumBData = []
@@ -257,6 +283,7 @@
           this.dialogAlone = false
           this.dialogAB = false
           this.levelNumUp2dow = row.levelNumUp2down
+          this.addFormDataDetail = Object.assign({}, row)
           this.getLocationInfoBySideNum(row.holderId,row.sideNum)
           this.getLocationInfoByLevelNum(row.holderId,row.levelNumUp2down)
         },
@@ -474,7 +501,11 @@
         min-height: 100px;
         width: 200%;
      }
-    .grid-a-contentWidth:active{
+     .location{
+        background: #09c;
+     }
+ 
+   .grid-a-contentWidth:active{
       background: #026780;
       color: #ffffff;
     }
@@ -488,6 +519,14 @@
         border-radius: 4px;
         min-height: 200px;
         width: 200%;
+     }
+     .active{
+       background:#7a8486;
+       color: #ffffff;
+     }
+     .activeNo{
+       background:#09c;
+       color: #ffffff;
      }
      .station-info {
        min-height: 200px;

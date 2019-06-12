@@ -306,6 +306,7 @@ const en = {
     label8_18: 'Shelf modify',
     label8_19: 'Modify  status',
     label8_20: 'Location info',
+    label8_21: 'Location floor',
     label9_01: 'Charging station status',
     label9_02: 'Charging station active status',
     label9_03: 'Rule Id',
