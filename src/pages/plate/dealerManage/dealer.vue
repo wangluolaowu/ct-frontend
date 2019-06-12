@@ -43,6 +43,47 @@
         </el-col>   
         </el-row>
         <el-row>
+        <el-col :span="8">
+            <el-form-item  :label="$t('label.label6_06')" >
+              <el-select  v-model="searchBIN.routeV" style="width:200px">
+                <el-option
+                v-for="item in routeDataV"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value" 
+                > 
+              </el-option>
+           </el-select>
+         </el-form-item>
+        </el-col>
+         <el-col :span="8">  
+            <el-form-item :label="$t('label.label6_05')" >
+             <el-select v-model="searchBIN.routeS" style="width:200px">
+                <el-option
+                v-for="item in routeDataS"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value" 
+                > 
+              </el-option>
+           </el-select>
+            </el-form-item>
+        </el-col>
+        <!--<el-col :span="8">  
+            <el-form-item :label="$t('label.label6_07')" >
+              <el-select v-model="searchBIN.subRouteDataV" style="width:200px">
+                <el-option
+                v-for="item in subRouteDataV"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value" 
+                > 
+              </el-option>
+           </el-select>
+            </el-form-item>
+        </el-col> -->  
+        </el-row>
+        <el-row>
         <el-col :span="8">  
             <el-form-item :label="$t('label.label1_56')" >
              <el-select v-model="searchBIN.pageSize" style="width:200px">

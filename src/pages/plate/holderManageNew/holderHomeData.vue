@@ -250,9 +250,10 @@
                   </el-form-item>
                  </el-form>
                 </el-card>
+                <div style="height:100%;width:95%;">
                <div style="height:100%;width:45%;float:left;margin-top:10px;" ref='myLocation'>
                 <div>
-                <el-row type="flex" class="row-bg" justify="center" style="margin-top:1px;"><el-col :span="10" style="font-size:16px;margin-left:80px;height:10px;margin-bottom:5px;line-height:10px;text-align:center;" >货架A面轮廓图</el-col></el-row>
+                <el-row type="flex" class="row-bg" justify="center" style="margin-top:1px;"><el-col :span="10" style="font-size:16px;height:10px;margin-bottom:5px;line-height:10px;text-align:center;" >货架A面轮廓图</el-col></el-row>
                  <el-row  v-for="(item, i) in this.locationSideNumAData" :key="i" type="flex" class="row-bg" justify="center" style="margin-top:1px;">
                   <el-col :span="10"  >
                     <div>
@@ -262,7 +263,7 @@
                 </el-row>
                 </div>
                 <div>
-                 <el-row type="flex" class="row-bg" justify="center" style="margin-top:1px;"><el-col :span="10" style="font-size:16px;margin-left:80px;height:10px;margin-bottom:5px;line-height:10px;text-align:center;" >货架B面轮廓图</el-col></el-row>
+                 <el-row type="flex" class="row-bg" justify="center" style="margin-top:1px;"><el-col :span="10" style="font-size:16px;height:10px;margin-bottom:5px;line-height:10px;text-align:center;" >货架B面轮廓图</el-col></el-row>
                  <el-row  v-for="(itemj, j) in this.locationSideNumBData" :key="j" type="flex" class="row-bg" justify="center" style="margin-top:1px;">
                   <el-col :span="10"  >
                     <div>
@@ -272,7 +273,7 @@
                 </el-row>
                 </div>
                </div>
-               <div style="height:100%;width:45%;float:right;margin-right:60px;margin-top:10px;">
+               <div style="height:100%;width:45%;float:right;margin-top:10px;">
                 <el-row  type="flex" class="row-bg" justify="center" style="margin-top:1px;"><el-col :span="10" style="font-size:16px;margin-left:80px;height:10px;margin-bottom:5px;line-height:10px;text-align:center;" >货位轮廓图</el-col></el-row>
                 <el-row   type="flex" class="row-bg" justify="center" style="margin-top:1px;" v-if="dialogAB">
                   <el-col :span="10"  >
@@ -304,6 +305,7 @@
                   </el-col>
                 </el-row>
                </div>
+                </div>
              </div>
           </el-dialog>
   </div>
@@ -706,13 +708,13 @@
         background-color:  #f0f9eb;
      }
      .grid-a-contentWidth {    
-        background-color: #09c;
+        background-color: #0099cc;
         border-radius: 4px;
         min-height: 100px;
         width: 200%;
      }
      .location{
-        background: #09c;
+        background: #0099cc;
      }
  
    .grid-a-contentWidth:active{
@@ -735,7 +737,7 @@
        color: #ffffff;
      }
      .activeNo{
-       background:#09c;
+       background:#0099cc;
        color: #ffffff;
      }
      .station-info {
