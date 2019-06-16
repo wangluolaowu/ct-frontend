@@ -12,7 +12,7 @@
                 <el-form  class="demo-form-inline selectedCont clears" label-width="180px">
                    <el-row>
                      <el-col :span="8">
-                    <el-form-item class="fl" label="ISP dealer：">
+                    <el-form-item class="fl" label="ISP dealer">
                         <el-select  v-model="search.ispDealer">
                             <el-option :label="$t('label.label2_04')" value=""></el-option>
                             <el-option :label="$t('label.label2_05')" value="Y"></el-option>
@@ -22,12 +22,42 @@
                     </el-form-item>
                      </el-col>
                      <el-col :span="8">
-                    <el-form-item class="fl" label="ICT dealer：">
+                    <el-form-item class="fl" label="ICT dealer">
                         <el-select  v-model="search.ictDealer">
                             <el-option :label="$t('label.label2_04')" value=""></el-option>
                             <el-option :label="$t('label.label2_05')" value="Y"></el-option>
                             <el-option :label="$t('label.label2_06')" value="N"></el-option>
                         </el-select>
+                    </el-form-item>
+                     </el-col>
+                    </el-row>
+                    <el-row>
+                     <el-col :span="8">
+                    <el-form-item class="fl" :label="$t('label.label6_01')">
+                      <template>
+                        <el-select v-model="search.route" multiple filterable placeholder="请选择">
+                          <el-option
+                            v-for="item in routeList"
+                            :key="item.value"
+                            :label="item.label"
+                            :value="item.value">
+                          </el-option>
+                        </el-select>
+                        </template>
+                    </el-form-item>
+                     </el-col>
+                     <el-col :span="8">
+                    <el-form-item class="fl" :label="$t('label.label1_50')">
+                      <template>
+                        <el-select v-model="search.dealerAccount" multiple filterable placeholder="请选择">
+                          <el-option
+                            v-for="item in dealerAccountList"
+                            :key="item.value"
+                            :label="item.label"
+                            :value="item.value">
+                          </el-option>
+                        </el-select>
+                      </template>
                     </el-form-item>
                      </el-col>
                     </el-row>
@@ -188,10 +218,14 @@ export default {
       drag: false,
       cancelDisabledButton:'info',
       submitIsDisabledButton:'info',
+      routeList:[],
+      dealerAccountList:[],
       search: { // 查询参数
         orderType: 'S',
         ispDealer: '',
         ictDealer: '',
+        route:[],
+        dealerAccount:[],
         currentPage: 1,
         // locNum: 'RA080511',
         submitAll: false
@@ -228,6 +262,18 @@ export default {
     getSelectValues() {
       let Enum = this.$Enum.EnumSelect()
       this.Y_N_STATUS = Enum.Y_N_STATUS
+      this.axios.get('/pickManage/pickInfo/selectPickRouteList', {
+        params: {
+          orderType: this.search.orderType
+        }
+      }).then((res) => {
+        if (res.errCode === 'S') {
+          console.log(res.data.result)
+          // 弹出层
+          this.routeList = res.data.resultRoute
+          this.dealerAccountList = res.data.resultDealer
+        }
+      })
     },
     handleSelectionChange (val) {
       let arr = []
@@ -363,18 +409,25 @@ export default {
     handleTabClick: function (tab, event) {
       this.initParams()
       this.getTableData()
+      this.getSelectValues()
     },
     initParams () {
       this.search.ispDealer = ''
       this.search.ictDealer = ''
+      this.search.route = []
+      this.search.dealerAccount = []
       this.search.currentPage = 1
     },
     getTableData () { // 创建波次查询列表
       this.tableLoading = true
       let that = this
-      this.axios.get('/reloc/createWave/selectDmlPickCreateWaveVList', {
-        params: that.search
-      }).then((res) => {
+      let routeTemp = that.search.route
+      let dealerAccountTemp = that.search.dealerAccount
+      let resultData = {}
+      
+      resultData.params = JSON.stringify(that.search)
+      resultData.orderType = that.search.orderType
+      this.axios.post('/reloc/createWave/selectDmlPickCreateWaveVList',  qs.stringify(resultData)).then((res) => {
         if (res.errCode === 'S') {
           that.tableData = res.data.result
           that.totalRows = res.data.totalRows
