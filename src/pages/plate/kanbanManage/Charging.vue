@@ -17,7 +17,10 @@
             {{ $Enum.getEnumSelectByValue(MD_MAP_DIRECTION_LIMIT,scope.row.offsetDirectioin) }}
          </template>
       </el-table-column>
-      <el-table-column prop="externalDevice" :label="$t('label.label1_46')" min-width='200'>
+      <el-table-column prop="endStatus" :label="$t('label.label1_46')" min-width='200'>
+        <template slot-scope="scope" width="100%">
+            {{ $Enum.getEnumSelectByValue(CS_CHARGE_POINT_STATUS,scope.row.endStatus) }}
+         </template>
       </el-table-column>
 
       <el-table-column prop="chargingKidId" :label="$t('label.label1_47')" min-width="200">
@@ -43,6 +46,7 @@ export default {
       axios,
       tableLoading: false,
       MD_MAP_DIRECTION_LIMIT: [],
+      CS_CHARGE_POINT_STATUS:[],
       tableData: {
         list: []
       },
@@ -66,8 +70,13 @@ export default {
           res.data.result.map(item => {
             if (item.lookupType === 'MD_MAP_DIRECTION_LIMIT') {
               item.value = item.lookupValueNum
-              item.label = item.lookupValueCode
+              item.label = item.meaning||item.lookupValueNum
               this.MD_MAP_DIRECTION_LIMIT.push(item)
+            }
+            if (item.lookupType === 'CS_CHARGE_POINT_STATUS') {
+              item.value = item.lookupValueNum
+              item.label = item.meaning||item.lookupValueNum
+              this.CS_CHARGE_POINT_STATUS.push(item)
             }
             return item
           })
@@ -84,11 +93,6 @@ export default {
         if (res.errCode === 'S') {
           console.log(res.data.result)
           that.tableData.list = res.data.result.map(item => {
-            if (item.chargingKidId !== 0) {
-              item.externalDevice = '正在充电'
-            } else {
-              item.externalDevice = '未充电'
-            }
             if (item.activeFlag === 1) {
               item.activeFlag = '是'
             } else {

@@ -1,27 +1,80 @@
  <template>
      <div class="mainContainer">
           <!--工具条-->
-         <el-col :span="24" class="toolbar" style="padding-bottom: 0px;">
-             <el-form :inline="true" :model="filters">
-                <el-form-item label="taskId">
-                    <el-input v-model="filters.taskId" placeholder="taskId"></el-input>
-                   </el-form-item>
-                   <el-form-item label="referenceTaskId">
-                    <el-input v-model="filters.referenceTaskId" placeholder="referenceTaskId"></el-input>
-                   </el-form-item>
-                   <el-form-item>
-                     <el-button type="primary" v-on:click="getUsers">{{$t('message.msg1_68')}}</el-button>
-                     <el-button type="info" v-on:click="reset">{{$t('message.msg1_30')}}</el-button>
-                  </el-form-item>
+             <el-form class="demo-form-inline selectedCont clears" label-width="200px">
+                <el-row>
+                <el-col :span="8">
+                    <el-form-item label="objectId">
+                      <el-input v-model="filters.objectId" style="width:200px"></el-input>
+                    </el-form-item>
+                </el-col>
+                <el-col :span="8">  
+                    <el-form-item label="kidIncharge">
+                      <el-input v-model="filters.kidIncharge" style="width:200px"></el-input>
+                    </el-form-item>
+                </el-col>   
+                </el-row>
+                 <el-row>
+                <el-col :span="8">
+                    <el-form-item label="taskId">
+                      <el-input v-model="filters.taskId" style="width:200px"></el-input>
+                    </el-form-item>
+                </el-col>
+                <el-col :span="8">  
+                    <el-form-item label="referenceTaskId">
+                      <el-input v-model="filters.referenceTaskId" style="width:200px"></el-input>
+                    </el-form-item>
+                </el-col>   
+                </el-row>
+                  <el-row>
+                <el-col :span="8">
+                    <el-form-item label="taskStatus">
+                     <template> 
+                    <el-select  v-model="filters.taskStatus" multiple filterable style="width:200px">
+                    <el-option
+                    v-for="item in $Enum.EnumSelect().task_status_all"
+                    :key="item.value"
+                    :label="item.label"
+                    :value="item.value" 
+                    > 
+                  </el-option>
+                </el-select>
+                </template>
+                </el-form-item>
+                </el-col>
+                <el-col :span="8">  
+                 <el-form-item  :label="$t('label.label1_56')">
+                 <el-select  v-model="filters.pageSize" style="width:200px">
+                    <el-option
+                    v-for="item in $Enum.EnumSelect().page_size"
+                    :key="item.value"
+                    :label="item.label"
+                    :value="item.value" 
+                    > 
+                  </el-option>
+                </el-select>
+               </el-form-item>
+                </el-col>   
+                </el-row>
+                 <el-row>
+                  <el-col :span="5" >
+                    <el-form-item>  
+                        <el-button type="primary" @click="loadData">{{$t('message.msg1_68')}}</el-button> 
+                    </el-form-item>
+                    </el-col>
+                    <el-col :span="5">
+                      <el-form-item>
+                          <el-button type="primary" @click="restData">{{$t('message.msg1_30')}}</el-button>
+                      </el-form-item>
+                    </el-col>
+                  </el-row>
             </el-form>
-       </el-col>
-
 
          <el-table :data="userInfoList" style="width: 100%"   border>
             <el-table-column :label="$t('message.msg1_53')" align="center" min-width="100" fixed="left"  style='color:#fff;'>
                 <template slot-scope="scope" >
                      <el-button type="text" @click="checkDetail(scope.row)">{{$t('message.msg1_54')}}</el-button>
-                     <el-button type="text" @click="modifyUser(scope.row)">{{$t('message.msg1_55')}}</el-button>
+                     <el-button type="text" v-show="scope.row.taskStatus === 98" @click="modifyUser(scope.row)">{{$t('message.msg1_55')}}</el-button>
                   </template>
              </el-table-column>
             <el-table-column prop="taskId" label="taskId" fixed  style='color:#fff!important;'>
@@ -48,6 +101,9 @@
              <el-table-column prop="destPosY" label="destPosY" min-width='100'>
             </el-table-column>
              <el-table-column prop="taskStatus" label="taskStatus" min-width='120'>
+               <template slot-scope="scope">
+                {{$Enum.getEnumSelectByValue($Enum.EnumSelect().task_status_all,scope.row.taskType)}}
+                </template>
             </el-table-column>
              <el-table-column prop="creationDate" label="creationDate" min-width='120'>
                  <template slot-scope="scope">
@@ -107,7 +163,7 @@
                       <span>{{addFormData.po_change_id}}</span>
                     </el-form-item>
                      <el-form-item label="Task Id">
-                    <el-input v-model="addFormData.taskId" placeholder="Task Id" min-width='410'></el-input>
+                    <el-input v-model="addFormData.taskId" placeholder="Task Id" min-width='410' :disabled="true"></el-input>
                     </el-form-item>
                      <el-form-item label="Task Type">
                           <el-select placeholder="Task Type" v-model="addFormData.taskType">
@@ -231,6 +287,9 @@
           filters: {
             taskId: '',
             referenceTaskId:'',
+            objectId:'',
+            kidIncharge:'',
+            taskStatus:'',
             currentPage: 1,
             pageSize:50
           },
@@ -265,9 +324,12 @@
                 this.loadData()
             })
        },
-        reset(){
+        restData(){
             this.filters.taskId = ''
             this.filters.referenceTaskId = '' 
+            this.filters.objectId = ''
+            this.filters.kidIncharge = '' 
+            this.filters.taskStatus = '' 
         },  
         initParams(){
             this.addFormData.po_retcode=''
@@ -290,18 +352,17 @@
         loadData() {
           let param = {'params': JSON.stringify(this.filters)}
           axios.post('/adminPageManage/createTask/selectCreateKidTaskChange', qs.stringify(param)).then((res) => {
-            this.userInfoList = res.data.result
-            this.totalRows = res.data.totalRows
+            if(res.errCode === 'S'){
+              this.userInfoList = res.data.result
+              this.totalRows = res.data.totalRows
+            }
           })
         },
        handleCurrentChange (val) {
          this.filters.currentPage = val
          this.loadData()
        },
-        getUsers() {
-          this.loadData()
-        },
-        checkDetail(rowData) {
+      checkDetail(rowData) {
           this.addFormData = Object.assign({}, rowData)
           this.isView = false
           this.dialogVisible = true
@@ -327,13 +388,15 @@
                       type: 'info',
                       message: '修改成功'
                     })
-                    this.loadData()
+                   
                   } else {
                     this.$message({
                       type: 'info',
                       message: '修改失败'
                     })
                   }
+                  this.dialogVisible = false
+                  this.loadData()
                 })
             }
           })

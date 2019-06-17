@@ -172,10 +172,14 @@
         handleLoad(node,resolve){
           //console.log('this.value2------------'+this.value2)
            //this.$refs.menuListTree.setCheckedKeys(this.treeValue)
+           console.log('node======'+node)
            if(this.$refs.menuListTree!=undefined) this.checkedKeys = this.$refs.menuListTree.getCheckedKeys();
            if (node.level == 0) {
               return resolve([this.rootNode]);
            } else {
+             this.treeData = []
+             this.treeValue = []
+             this.treeParentValue = []
              let children = []
               axios.post('custom/common/selectResourcePermissionList', qs.stringify({'permissionId':this.addFormData.id})).then((res) => {
               if (res.errCode === 'S') {
@@ -195,7 +199,7 @@
              
              // this.$refs.menuListTree.setCheckedKeys(that.value2)
               //console.log('222=======' +  JSON.stringify(this.treeData))
-             // console.log('333=======' +  JSON.stringify(this.treeValue))
+              console.log('333=======' +  JSON.stringify(this.treeValue))
               if(this.$refs.menuListTree!=undefined) this.$refs.menuListTree.setCheckedKeys(this.treeValue);
             }
             })
@@ -227,10 +231,6 @@
                })
               }
               this.treeParentValue.push(10000)
-             
-             // this.$refs.menuListTree.setCheckedKeys(that.value2)
-              console.log('222=======' +  JSON.stringify(this.treeData))
-              console.log('333=======' +  JSON.stringify(this.treeValue))
              
             }
           })
@@ -303,7 +303,7 @@
         },
         checkDetail(rowData) {
           this.addFormData = Object.assign({}, rowData) 
-         // this.generateData2()   
+          //this.generateData2()   
           this.roleUserdialogVisible = true
           
         },

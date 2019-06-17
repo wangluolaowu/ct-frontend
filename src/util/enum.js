@@ -7,6 +7,44 @@ Enum.EnumSelect = function() {
   let EnumObj = {}
   let EnumObjEn = {}
   EnumObj = {
+    task_status_all: [
+      {
+        label: '全部',
+        value: ''
+      },
+      {
+        label: '完成',
+        value: 6
+      },
+      {
+        label: 'Kid关闭',
+        value: 98
+      },
+      {
+        label: '执行中_1',
+        value: 1
+      },
+      {
+        label: '执行中_2',
+        value: 2
+      },
+      {
+        label: '执行中_3',
+        value: 3
+      },
+      {
+        label: '执行中_4',
+        value: 4
+      },
+      {
+        label: '执行中_5',
+        value: 5
+      },
+      {
+        label: '任务失败',
+        value: 99
+      }
+    ],
     pick_order_type_all: [
       {
         label: '全部',
@@ -1266,7 +1304,45 @@ Enum.EnumSelect = function() {
         label: 'B',
         value: 3
       }
-    ]
+    ],
+    task_status_all: [
+      {
+        label: 'All',
+        value: ''
+      },
+      {
+        label: 'Done',
+        value: 6
+      },
+      {
+        label: 'Kid closed',
+        value: 98
+      },
+      {
+        label: 'doing_1',
+        value: 1
+      },
+      {
+        label: 'doing_2',
+        value: 2
+      },
+      {
+        label: 'doing_3',
+        value: 3
+      },
+      {
+        label: 'doing_4',
+        value: 4
+      },
+      {
+        label: 'doing_5',
+        value: 5
+      },
+      {
+        label: 'Task failed',
+        value: 99
+      }
+    ],
   }
 
   if (i18n.locale === 'en') {
