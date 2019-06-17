@@ -102,7 +102,7 @@
             </el-table-column>
              <el-table-column prop="taskStatus" label="taskStatus" min-width='120'>
                <template slot-scope="scope">
-                {{$Enum.getEnumSelectByValue($Enum.EnumSelect().task_status_all,scope.row.taskType)}}
+                {{$Enum.getEnumSelectByValue($Enum.EnumSelect().task_status_all,scope.row.taskStatus)}}
                 </template>
             </el-table-column>
              <el-table-column prop="creationDate" label="creationDate" min-width='120'>
@@ -126,7 +126,7 @@
             </el-table-column>
              <el-table-column prop="destObjectDirection" label="destObjectDirection" min-width='200'>
                   <template slot-scope="scope">
-                {{$Enum.getEnumSelectByValue(MD_MAP_DIRECTION_LIMIT,scope.row.destObjectSide)}}
+                {{$Enum.getEnumSelectByValue(MD_MAP_DIRECTION_LIMIT,scope.row.destObjectDirection)}}
                 </template>
             </el-table-column>
              <el-table-column prop="objectGrossWeight" label="objectGrossWeight" min-width='200'>
@@ -137,7 +137,7 @@
             </el-table-column>
              <el-table-column prop="releaseLoadFlag" label="releaseLoadFlag" min-width='150'>
                   <template slot-scope="scope">
-                {{$Enum.getEnumSelectByValue(TM_MOVE_TASK_RELEASE_LOAD,scope.row.destObjectSide)}}
+                {{$Enum.getEnumSelectByValue(TM_MOVE_TASK_RELEASE_LOAD,scope.row.releaseLoadFlag)}}
                 </template>
             </el-table-column>
              <el-table-column prop="chargePointId" label="chargePointId" min-width='150'>
