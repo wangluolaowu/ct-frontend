@@ -80,7 +80,7 @@ Enum.EnumSelect = function() {
     modify_enable_flag_all: [
       {
         label: '全部',
-        value: ''
+        value: null
       },
       {
         label: '提交未处理',
@@ -699,7 +699,7 @@ Enum.EnumSelect = function() {
     modify_enable_flag_all: [
       {
         label: 'All',
-        value: ''
+        value: null
       },
       {
         label: 'Unprocessed submission',

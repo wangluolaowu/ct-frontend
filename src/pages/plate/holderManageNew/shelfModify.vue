@@ -247,13 +247,13 @@
             posId:'',
             posX:'',
             posY:'',
-            processFlag:'',
+            processFlag:null,
             creationDate:'',
             lastUpdateDate:''
           },
           searchBIN: {
              holderId:'',
-             processFlag:'',
+             processFlag:null,
              posX:'',
              posY:'',
             currentPage:1,
@@ -282,7 +282,7 @@
           let totalRowsTemp = this.searchBIN.totalRows
           this.searchBIN = {
              holderId:'',
-             processFlag:'',
+             processFlag:null,
              posX:'',
              posY:'',
             currentPage:currentPageTemp,
