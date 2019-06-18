@@ -388,6 +388,7 @@ const en = {
     label11_13: 'Error message',
     label11_14: 'Workstation',
     label11_15: 'Map tools',
+    label11_16: 'Duration(ms)',
     label4_08: 'Error description'
   },
   ...enLocale

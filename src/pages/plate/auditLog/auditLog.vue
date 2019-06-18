@@ -108,15 +108,11 @@
                      <el-button type="text" @click="checkDetail(scope.row)">{{$t('message.msg1_54')}}</el-button>
                   </template>
              </el-table-column>
-            <el-table-column prop="startTime" :label="$t('label.label11_01')" min-width="200">
-                <template slot-scope="scope">
-                  {{ $DateFormat.dateFormat(scope.row.startTime,true) }}
-                </template>
+            <el-table-column prop="startTimeString" :label="$t('label.label11_01')" min-width="200">
             </el-table-column>
-            <el-table-column prop="endTime" :label="$t('label.label11_02')" min-width="200">
-                 <template slot-scope="scope">
-                  {{ $DateFormat.dateFormat(scope.row.endTime,true) }}
-                </template>
+             <el-table-column prop="duration" :label="$t('label.label11_16')" min-width="200">
+            </el-table-column>
+            <el-table-column prop="endTimeString" :label="$t('label.label11_02')" min-width="200">
             </el-table-column>
              <el-table-column prop="userName" :label="$t('label.label11_03')" min-width="200">
             </el-table-column>
@@ -159,10 +155,13 @@
                    <span>{{$t('label.label11_05')}} : {{addFormData.action}}</span>
                   </el-form-item>
                   <el-form-item >
-                   <span>{{$t('label.label11_01')}} : {{$DateFormat.dateFormat(addFormData.startTime,true)}}</span>
+                   <span>{{$t('label.label11_01')}} : {{addFormData.startTimeString}}</span>
                   </el-form-item>
                   <el-form-item >
-                   <span>{{$t('label.label11_02')}} : {{$DateFormat.dateFormat(addFormData.endTime,true)}}</span>
+                   <span>{{$t('label.label11_16')}} : {{addFormData.duration}}</span>
+                  </el-form-item>
+                    <el-form-item >
+                   <span>{{$t('label.label11_02')}} : {{addFormData.endTimeString}}</span>
                   </el-form-item>
                   <el-form-item > 
                    <span>{{$t('label.label11_11')}} : {{addFormData.argument}}</span>
@@ -219,10 +218,13 @@
         loadData() {
            let param = {'params': JSON.stringify(this.searchBIN)}
           axios.post('/auditManage/selectAuditListBySearch', qs.stringify(param)).then((res) => {
-            if(res.code === 'S'){
+            if(res.errCode === 'S'){
                var _data = res.data.result
                this.userInfoList = _data
                this.searchBIN.totalRows = res.data.totalRows
+            }else{
+               this.userInfoList = null
+               this.searchBIN.totalRows = 0
             }
           })
         },

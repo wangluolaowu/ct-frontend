@@ -384,6 +384,7 @@ const cn = {
     label11_13: '错误信息',
     label11_14: '工作站',
     label11_15: '地图工具',
+    label11_16: '持续时间(毫秒)',
     label4_08: '错误描述'
   },
   ...zhLocale
