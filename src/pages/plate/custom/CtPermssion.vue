@@ -78,11 +78,10 @@
                </el-row>
               <el-tree
                 :load="handleLoad"
-                accordion
                 lazy
-                show-checkbox
                 node-key="id"
                 ref="menuListTree"
+                show-checkbox
                 :default-expanded-keys="[rootNode.id]"
                 :default-checked-keys="[]"
                 :props="defaultProps">
@@ -90,23 +89,6 @@
               </el-tree>
                <el-button  type="primary" @click="createRoleUser" >{{$t('message.msg1_28')}}</el-button>
            </el-dialog>
-           <!--<el-dialog  :title="$t('label.label10_10')" :visible.sync="roleUserdialogVisible" width="90%" :close-on-click-modal="false"  @close="loadData" >
-              <el-row>
-                 <el-card style="min-height: 20px">          
-                   <span>{{$t('label.label10_11')+addFormData.name + '   ' + addFormData.permission}}</span>
-                 </el-card>
-               </el-row>
-              <el-transfer
-                filterable
-                :filter-method="filterMethod"
-                :filter-placeholder="$t('label.label10_12')"
-                v-model="value2"
-                :titles="[$t('label.label10_13'),$t('label.label10_14')]"
-                :data="data2" 
-                id='maskDialog'>
-              </el-transfer>
-               <el-button  type="primary" @click="createRoleUser">{{$t('message.msg1_28')}}</el-button>
-           </el-dialog> -->
      </div>
   </template>
   
@@ -130,7 +112,8 @@
           },
           defaultProps: {
             children: 'children',
-            label: 'label'
+            label: 'label',
+            isLeaf: 'leaf'
           },
           userInfoList: [],
           openStatus: [],
@@ -140,6 +123,9 @@
           roleMenudialogVisible:false,
           isView: true,
           currentRoleId:'',
+          isFirst:true,
+          node:[],
+          resolve:[],
           addFormData: {
             id: '',
             name: '',
@@ -165,28 +151,28 @@
       },
   mounted: function () {
         this.loadData()
-        //this.generateData2()
-        //this.getSelectValues()
       },
       methods: {
         handleLoad(node,resolve){
-          //console.log('this.value2------------'+this.value2)
-           //this.$refs.menuListTree.setCheckedKeys(this.treeValue)
-           console.log('node======'+node)
+           if(this.isFirst){
+             this.node = node
+             this.resolve = resolve
+             this.isFirst = false
+           }
            if(this.$refs.menuListTree!=undefined) this.checkedKeys = this.$refs.menuListTree.getCheckedKeys();
            if (node.level == 0) {
               return resolve([this.rootNode]);
            } else {
              this.treeData = []
              this.treeValue = []
-             this.treeParentValue = []
              let children = []
               axios.post('custom/common/selectResourcePermissionList', qs.stringify({'permissionId':this.addFormData.id})).then((res) => {
               if (res.errCode === 'S') {
               children = res.data.result.map(item => {
                   let itemTemp = {}
                   itemTemp.id = item.id
-                  itemTemp.label = item.description + "--" + item.url      
+                  itemTemp.label = item.description + "--" + item.url 
+                  itemTemp.leaf = true     
                   return itemTemp    
               }) 
               resolve(children)
@@ -196,68 +182,12 @@
                   return item
                })
               }
-             
-             // this.$refs.menuListTree.setCheckedKeys(that.value2)
-              //console.log('222=======' +  JSON.stringify(this.treeData))
               console.log('333=======' +  JSON.stringify(this.treeValue))
               if(this.$refs.menuListTree!=undefined) this.$refs.menuListTree.setCheckedKeys(this.treeValue);
             }
             })
             
           }
-        },
-        generateData2 () {
-          this.treeData = []
-          this.treeValue = []
-          this.treeParentValue = []
-          axios.post('custom/common/selectResourcePermissionList', qs.stringify({'permissionId':this.addFormData.id})).then((res) => {
-            if (res.errCode === 'S') {
-              let parentItem = {}
-              parentItem.id = 10000
-              parentItem.label = "权限"
-              let children = []
-              children = res.data.result.map(item => {
-                  let itemTemp = {}
-                  itemTemp.id = item.id
-                  itemTemp.label = item.description + "--" + item.url      
-                  return itemTemp    
-              }) 
-             parentItem.children = children 
-             this.treeData.push(parentItem)
-             if(res.data.resultSelect){
-                res.data.resultSelect.map(item => { 
-                   this.treeValue.push(item.id)
-                  return item
-               })
-              }
-              this.treeParentValue.push(10000)
-             
-            }
-          })
-          
-        },
-        generateData3 () {
-          let that = this
-          that.data2 = []
-          this.value2 = []
-          axios.post('custom/common/selectResourcePermissionList', qs.stringify({'permissionId':this.addFormData.id})).then((res) => {
-            if (res.errCode === 'S') {
-              res.data.result.forEach(function(c, index) {
-                that.pinyin.push(c.description)
-                that.data2.push({
-                  key: c.id,
-                  label: c.description,
-                  pinyin: that.pinyin[index]
-                })       
-              })  
-             if(res.data.resultSelect){
-                this.value2=res.data.resultSelect.map(item => { 
-                  return item.id
-               })
-              }
-
-            }
-          })
         },
         createRoleUser(val) {
            let dataResult = {}
@@ -302,10 +232,12 @@
           // this.addFormReadOnly = false;
         },
         checkDetail(rowData) {
-          this.addFormData = Object.assign({}, rowData) 
-          //this.generateData2()   
+          this.addFormData = Object.assign({}, rowData)   
           this.roleUserdialogVisible = true
-          
+          if(this.isFirst === false){
+            this.node.childNodes = []
+            this.handleLoad(this.node,this.resolve)
+          }
         },
         modifyUser(rowData) {
           this.addFormData = Object.assign({}, rowData)

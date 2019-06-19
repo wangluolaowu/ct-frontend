@@ -33,7 +33,7 @@
                     </el-row>
                     <el-row>
                      <el-col :span="8">
-                    <el-form-item class="fl" :label="$t('label.label6_01')">
+                    <el-form-item class="fl" :label="$t('label.label1_50')">
                       <template>
                         <el-select v-model="search.route" multiple filterable placeholder="请选择">
                           <el-option
@@ -47,7 +47,7 @@
                     </el-form-item>
                      </el-col>
                      <el-col :span="8">
-                    <el-form-item class="fl" :label="$t('label.label1_50')">
+                    <el-form-item class="fl" :label="$t('label.label6_01')">
                       <template>
                         <el-select v-model="search.dealerAccount" multiple filterable placeholder="请选择">
                           <el-option
