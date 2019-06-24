@@ -78,15 +78,16 @@
                    <span>{{$t('label.label10_24')+addFormData.role}}</span>
                  </el-card>
                </el-row>
-              <el-transfer
-                filterable
-                :filter-method="filterMethod" 
-                :filter-placeholder="$t('label.label10_25')"
-                v-model="value2"
-                :titles="[$t('label.label10_26'),$t('label.label10_27')]"
-                :data="data2" 
-                id='maskDialog'>
-              </el-transfer>
+              <el-tree
+              :data="data2"
+              show-checkbox
+              ref="userTree"
+              highlight-current
+              node-key="id"
+              :default-expanded-keys="parentValue2"
+              :default-checked-keys="value2"
+              :props="defaultProps">
+            </el-tree>
                <el-button  type="primary" @click="createRoleUser">{{$t('message.msg1_28')}}</el-button>
            </el-dialog> 
             <el-dialog :title="$t('label.label10_28')" :visible.sync="roleMenudialogVisible" width="60%" :close-on-click-modal="false"   @close="loadData">
@@ -95,7 +96,7 @@
                    <span>{{$t('label.label10_24')+':'+addFormData.role}}</span>
                  </el-card>
                </el-row>
-             <el-tree
+                <el-tree
               :data="treeData"
               show-checkbox
               ref="tree"
@@ -113,15 +114,25 @@
                    <span>{{$t('label.label10_24')+':'+addFormData.role}}</span>
                  </el-card>
                </el-row>
-              <el-transfer
-                filterable
-                :filter-method="filterMethodPermission"
-                :filter-placeholder="$t('label.label10_30')"
-                v-model="permissionValue"
-                :titles="[$t('label.label10_31'),$t('label.label10_32')]"
-                :data="permissionData" 
-                id='maskDialog'>
-              </el-transfer>
+               <div>
+                <el-input
+                  placeholder="输入关键字进行过滤"
+                  v-model="filterText">
+                </el-input>
+              </div>
+                <el-tree
+                 class="filter-tree"
+                 :load="getPermissionValue"
+                  lazy
+                  show-checkbox
+                  ref="permissionTree"
+                  highlight-current
+                  node-key="id"
+                  :default-expanded-keys="[rootNode.id]"
+                  :default-checked-keys="[]"
+                  :props="defaultProps"
+                  :filter-node-method="filterNode">
+                </el-tree>
                <el-button  type="primary" @click="createPermissionUser">{{$t('message.msg1_28')}}</el-button>
            </el-dialog> 
      </div>
@@ -135,8 +146,10 @@
       name: 'home',
       data() {
         return {
+          filterText: '',
           data2: [],
           value2: [],
+          parentValue2:[],
           treeValue:[],
           treeParentValue:[],
           treeData:[],
@@ -144,10 +157,18 @@
           permissionValue:[],
           permissionData:[],
           permissionPinyin:[],
+          rootNode : {
+          id : "10000",
+          label : "权限"
+          },
           defaultProps: {
-          children: 'children',
-          label: 'label'
-           },
+            children: 'children',
+            label: 'label',
+            isLeaf: 'leaf'
+          },
+          isFirst:true,
+          node:[],
+          resolve:[],
           userInfoList: [],
           openStatus: [],
           addFormReadOnly: true,
@@ -180,62 +201,86 @@
           }
         }
       },
-  mounted: function () {
+     mounted: function () {
         this.loadData()
-        //this.generateData2()
-        //this.getSelectValues()
+      },
+     watch: {
+        filterText(val) {
+          this.$refs.permissionTree.filter(val)
+        }
       },
       methods: {
-        generateData2 () {
-          let that = this
-          that.data2 = []
-          axios.post('custom/ctUser/selectCtUserList', {}).then((res) => {
-            if (res.errCode === 'S') {
-              res.data.result.forEach(function(c, index) {
-                that.pinyin.push(c.username)
-                that.data2.push({
-                  key: c.id,
-                  label: c.username,
-                  pinyin: that.pinyin[index]
-                })       
-              })  
-            }
-          })
+        filterNode(value, data) {
+          if (!value) return true;
+          return data.label.indexOf(value) !== -1
         },
-        generateValue2 () {
+        getUserValue () {
+          this.data2 = []
           this.value2 = []
+          this.parentValue2 = []
           axios.post('custom/common/selectUserListByRoleId', qs.stringify({'ctRoleId':this.addFormData.id})).then((res) => {
             if (res.errCode === 'S') {
-              if(res.data.result){
-                this.value2=res.data.result.map(item => { 
-                  return item.id
+                 if(res.data.resultTree){
+                  this.data2=res.data.resultTree.map(item => {
+                  let itemTemp = {}
+                  itemTemp.id = '10000'+item.id
+                  itemTemp.label = item.departmentName
+                  let children = item.ctUserList.map(childItem =>{
+                    let childItemTemp = {}
+                    childItemTemp.id = childItem.id
+                    childItemTemp.label = childItem.username
+                    return childItemTemp
+                  })
+                  itemTemp.children = children
+                  return itemTemp
                })
               } 
+              if(res.data.resultSelectTree){
+                 res.data.resultSelectTree.map(item => {
+                  this.parentValue2.push('10000'+item.id)
+                  item.ctUserList.map(childItem =>{
+                     this.value2.push(childItem.id)                   
+                    return childItem
+                  })
+                  return item
+               })
+              }
             }
           })
         },
-        getPermissionValue () {
-          let that = this
+        getPermissionValue (node,resolve) {
+          if(this.isFirst){
+             this.node = node
+             this.resolve = resolve
+             this.isFirst = false
+           }
+           if(this.$refs.permissionTree!=undefined) this.checkedKeys = this.$refs.permissionTree.getCheckedKeys();
+           if (node.level == 0) {
+              return resolve([this.rootNode]);
+           } else {
           this.permissionValue = []
           this.permissionData = []
-          that.pinyin = []
           axios.post('custom/common/selectRolePermissionList', qs.stringify({'roleId':this.addFormData.id})).then((res) => {
             if (res.errCode === 'S') {
-                res.data.result.forEach(function(c, index) {
-                that.pinyin.push(c.name)
-                that.permissionData.push({
-                  key: c.id,
-                  label: c.name,
-                  pinyin: that.pinyin[index]
-                })       
-              })
-              if(res.data.resultSelect){
-                this.permissionValue=res.data.resultSelect.map(item => { 
-                  return item.id
+                let childrenTemp = []
+                childrenTemp = res.data.result.map(item=>{
+                  let itemTempChildren = {}
+                  itemTempChildren.id = item.id
+                  itemTempChildren.label = item.name+":"+item.permission
+                  itemTempChildren.leaf = true 
+                  return itemTempChildren       
                })
+               resolve(childrenTemp)
+              if(res.data.resultSelect){
+                 res.data.resultSelect.map(item => { 
+                   this.permissionValue.push(item.id)
+                   return item
+               })
+               if(this.$refs.permissionTree!=undefined) this.$refs.permissionTree.setCheckedKeys(this.permissionValue);
               } 
             }
           })
+          }
         },
         getTreeValueAndData () {
           this.treeValue = []
@@ -296,8 +341,9 @@
         },
         createPermissionUser(){
           let dataResult = {}
+          let valueData = [].concat(this.$refs.permissionTree.getCheckedKeys())
            dataResult.roleId = this.addFormData.id
-           dataResult.permissionIdList = JSON.stringify(this.permissionValue)
+           dataResult.permissionIdList = JSON.stringify(valueData)
            axios.post('custom/common/updateRolePermission', qs.stringify(dataResult)).then((res) => {
             if (res.errCode === 'S') {
               this.$message({
@@ -316,8 +362,9 @@
         },
         createRoleUser(val) {
            let dataResult = {}
+           let valueData = [].concat(this.$refs.userTree.getCheckedKeys())
            dataResult.roleId = this.addFormData.id
-           dataResult.userIdList = JSON.stringify(this.value2)
+           dataResult.userIdList = JSON.stringify(valueData)
            axios.post('custom/common/updateCtUserRoleInfo', qs.stringify(dataResult)).then((res) => {
             if (res.errCode === 'S') {
               this.$message({
@@ -360,8 +407,12 @@
         },
         checkPermissionDetail(rowData){
           this.addFormData = Object.assign({}, rowData) 
-          this.getPermissionValue()
           this.rolePermissiondialogVisible = true
+          this.filterText = ''
+          if(this.isFirst === false){
+            this.node.childNodes = []
+            this.getPermissionValue(this.node,this.resolve)
+          }
         },
         checkMenuDetail(rowData){
           this.addFormData = Object.assign({}, rowData) 
@@ -370,8 +421,7 @@
         },
         checkDetail(rowData) {
           this.addFormData = Object.assign({}, rowData) 
-          this.generateData2()
-          this.generateValue2()
+          this.getUserValue()
           this.roleUserdialogVisible = true
         },
         modifyUser(rowData) {

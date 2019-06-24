@@ -76,7 +76,14 @@
                    <span>{{$t('label.label10_11')+addFormData.name + '   ' + addFormData.permission}}</span>
                  </el-card>
                </el-row>
+               <div>
+                <el-input
+                  placeholder="输入关键字进行过滤"
+                  v-model="filterText">
+                </el-input>
+              </div>
               <el-tree
+                class="filter-tree"
                 :load="handleLoad"
                 lazy
                 node-key="id"
@@ -84,7 +91,8 @@
                 show-checkbox
                 :default-expanded-keys="[rootNode.id]"
                 :default-checked-keys="[]"
-                :props="defaultProps">
+                :props="defaultProps"
+                :filter-node-method="filterNode">
                 
               </el-tree>
                <el-button  type="primary" @click="createRoleUser" >{{$t('message.msg1_28')}}</el-button>
@@ -100,6 +108,7 @@
       name: 'home',
       data() {
         return {
+          filterText: '',
           data2: [],
           value2: [],
           pinyin: [],
@@ -146,13 +155,23 @@
           },
           filters: {
             name: ''
-          }
+          },
+
         }
       },
-  mounted: function () {
+      mounted: function () {
         this.loadData()
       },
+      watch: {
+        filterText(val) {
+          this.$refs.menuListTree.filter(val)
+        }
+      },
       methods: {
+        filterNode(value, data) {
+          if (!value) return true;
+          return data.label.indexOf(value) !== -1
+        },
         handleLoad(node,resolve){
            if(this.isFirst){
              this.node = node
@@ -182,7 +201,7 @@
                   return item
                })
               }
-              console.log('333=======' +  JSON.stringify(this.treeValue))
+              //console.log('333=======' +  JSON.stringify(this.treeValue))
               if(this.$refs.menuListTree!=undefined) this.$refs.menuListTree.setCheckedKeys(this.treeValue);
             }
             })
@@ -234,6 +253,7 @@
         checkDetail(rowData) {
           this.addFormData = Object.assign({}, rowData)   
           this.roleUserdialogVisible = true
+          this.filterText = ''
           if(this.isFirst === false){
             this.node.childNodes = []
             this.handleLoad(this.node,this.resolve)

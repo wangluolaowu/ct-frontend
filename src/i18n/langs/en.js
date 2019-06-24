@@ -77,7 +77,7 @@ const en = {
     msg1_75: 'Record',
     msg1_76: 'Search',
     msg1_77: 'Resource management',
-    msg1_78: '',
+    msg1_78: 'Change password',
     msg1_79: '',
     msg1_80: '',
     msg1_81: ''
@@ -366,7 +366,7 @@ const en = {
     label10_30: 'Please enter permission',
     label10_31: 'Allowed',
     label10_32: 'Selected',
-    label10_33: '',
+    label10_33: 'Change password',
     label10_34: '',
     label10_35: '',
     label10_36: '',
@@ -389,6 +389,8 @@ const en = {
     label11_14: 'Workstation',
     label11_15: 'Map tools',
     label11_16: 'Duration(ms)',
+    label12_01: 'Deparmrnt name',
+    label12_02: 'Deparmrnt',
     label4_08: 'Error description'
   },
   ...enLocale

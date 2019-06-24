@@ -211,6 +211,11 @@ const routes = [
         path: '/custom/mapUser',
         component: () => import('@/pages/plate/custom/mapUser'),
         name: '地图用户管理'
+      },
+      {
+        path: '/custom/department',
+        component: () => import('@/pages/plate/custom/CtDepartment'),
+        name: '部门管理'
       }
     ]
   },
