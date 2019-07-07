@@ -182,6 +182,7 @@
                       <el-col :span="18" style="line-height:1.7">
                         <div>{{ 'route: ' + (element.route  || '') }}</div>
                         <div>{{ 'dealer: ' + (element.dealerCou  || '') }}</div>
+                        <div>{{ 'holderID: ' + (element.holderId  || '') }}</div>
                         <div>{{ $t('message.msg1_40') +': ' + (element.lineCou || '') }}</div>                        
                       </el-col>
                     </el-row>
