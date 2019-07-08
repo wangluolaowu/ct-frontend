@@ -64,6 +64,11 @@
                 <el-button type="primary" @click="modifyInfo">{{$t('label.label8_18')}}</el-button>
             </el-form-item>
           </el-col>
+          <el-col :span="5">
+            <el-form-item>
+                <el-button type="primary" @click="modifyDefaultInfo">{{$t('message.msg1_79')}}</el-button>
+            </el-form-item>
+          </el-col>
         </el-row>
       </el-form>
          <el-table :data="userInfoList" style="width: 100%" border  min-height="100">
@@ -236,6 +241,7 @@
           dialogVisible: false,
           keyDisabled:false,
           dialogVisibleStart:false,
+          isDefault:false,
           submitDisabled:true,
           dialogresult:false,
           tableDataDialog:[],
@@ -314,6 +320,12 @@
           //  this.addFormReadOnly = true;
         },
         modifyInfo() {
+          this.isDefault = false
+          this.dialogVisibleStart = true
+          // this.addFormReadOnly = false;
+        },
+        modifyDefaultInfo() {
+          this.isDefault = true
           this.dialogVisibleStart = true
           // this.addFormReadOnly = false;
         },
@@ -329,6 +341,7 @@
       submit(){
         let resultData = {}
         resultData.result=JSON.stringify(this.selectlistRow)
+        resultData.isDefault = this.isDefault
         axios.post('holderManage/shelfModify/updateShelfInfo', qs.stringify(resultData)).then(res => {
          if (res.errCode === 'S') {
             if (res.errCode === 'S') {

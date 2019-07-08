@@ -78,7 +78,7 @@ const en = {
     msg1_76: 'Search',
     msg1_77: 'Resource management',
     msg1_78: 'Change password',
-    msg1_79: '',
+    msg1_79: 'Change of shelf default location',
     msg1_80: '',
     msg1_81: ''
   },
