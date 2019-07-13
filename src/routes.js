@@ -96,6 +96,11 @@ const routes = [
         name: '波次历史记录'
       },
       {
+        path: '/picking/batchErrorHistory',
+        component: () => import('@/pages/plate/pickManage/CreatWaveErrorMRecord'),
+        name: '波次异常记录'
+      },
+      {
         path: '/picking/print',
         component: () => import('@/pages/plate/pickManage/ManualPrint'),
         name: '手动打印'
@@ -122,6 +127,11 @@ const routes = [
         path: '/binning/batchHistory',
         component: () => import('@/pages/plate/binManage/CreatWaveMRecordBinning'),
         name: '波次历史记录'
+      },
+      {
+        path: '/binning/batchErrorHistory',
+        component: () => import('@/pages/plate/binManage/CreatWaveErrorMRecordBinning'),
+        name: '波次异常记录'
       }
     ]
   },
