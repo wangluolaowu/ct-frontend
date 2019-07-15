@@ -351,7 +351,7 @@
         },  
         loadData() {
           let param = {'params': JSON.stringify(this.filters)}
-          axios.post('/adminPageManage/createTask/selectCreateKidTaskChange', qs.stringify(param)).then((res) => {
+          axios.post('/adminpage/createTask/selectCreateKidTaskChange', qs.stringify(param)).then((res) => {
             if(res.errCode === 'S'){
               this.userInfoList = res.data.result
               this.totalRows = res.data.totalRows
@@ -381,7 +381,7 @@
             if (valid) {
               let result = {}
               result.params = JSON.stringify(this.addFormData)
-              axios.post('/adminPageManage/createTask/createKidTaskChange', qs.stringify(result)).then((res) => {
+              axios.post('/adminpage/createTask/createKidTaskChange', qs.stringify(result)).then((res) => {
                   if (res.errCode === 'S') {
                     this.addFormData = res.data
                     this.$message({
