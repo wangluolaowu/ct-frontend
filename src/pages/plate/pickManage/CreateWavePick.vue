@@ -164,8 +164,11 @@
                   <li>
                       <label for="">{{$t('message.msg1_37')}}</label><span>{{'&#12288;' +item.orderListCount}}</span>
                   </li>
-                  <li>
+                  <li v-if="search.orderType === 'S'">
                       <label for="">{{$t('message.msg1_38')}}</label><span>{{'&#12288;' +item.routeListCount}}</span>
+                  </li>
+                  <li v-if="search.orderType === 'U' || search.orderType === 'V' ">
+                      <label for="">{{$t('message.msg1_80')}}</label><span>{{'&#12288;' +item.routeListCount}}</span>
                   </li>
                   <li>
                       <label for="">{{$t('message.msg1_39')}}</label><span>{{'&#12288;' +item.forecastWallCount}}</span>
@@ -180,9 +183,9 @@
                       :key="index">
                       <el-col :span="6"> <div style="margin-top:3px">{{index + 1}}、</div></el-col>
                       <el-col :span="18" style="line-height:1.7">
-                        <div>{{ 'route: ' + (element.route  || '') }}</div>
+                        <div v-if="search.orderType === 'S'">{{ 'route: ' + (element.route  || '') }}</div>
+                        <div v-if="search.orderType === 'U' || search.orderType === 'V' ">{{ 'holderID: ' + (element.holderId ) }}</div>
                         <div>{{ 'dealer: ' + (element.dealerCou  || '') }}</div>
-                        <div>{{ 'holderID: ' + (element.holderId ) }}</div>
                         <div>{{ $t('message.msg1_40') +': ' + (element.lineCou || '') }}</div>                        
                       </el-col>
                     </el-row>
