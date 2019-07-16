@@ -139,7 +139,7 @@
               delete result.po_retmsg
               delete result.po_move_task_id
               let param = {'params': JSON.stringify(result)}
-              axios.post('/adminPageManage/createTask/createLoadMoveTask', qs.stringify(param)).then((res) => {
+              axios.post('/adminpage/createTask/createLoadMoveTask', qs.stringify(param)).then((res) => {
                 this.filters = res.data
                 this.$message.warning('提交成功')
               })
