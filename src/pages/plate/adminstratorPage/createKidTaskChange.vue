@@ -77,14 +77,9 @@
                      <el-button type="text" v-show="scope.row.taskStatus === 98" @click="modifyUser(scope.row)">{{$t('message.msg1_55')}}</el-button>
                   </template>
              </el-table-column>
-            <el-table-column prop="taskId" label="taskId" fixed  style='color:#fff!important;'>
+              <el-table-column prop="kidIncharge" label="kidIncharge" fixed min-width='110'>
             </el-table-column>
-             <el-table-column prop="taskType" label="taskType" min-width='90'>
-                <template slot-scope="scope">
-                {{$Enum.getEnumSelectByValue($Enum.EnumSelect().pi_task_type,scope.row.taskType)}}
-                </template>
-            </el-table-column>
-             <el-table-column prop="referenceTaskId" label="referenceTaskId" min-width='150'>
+              <el-table-column prop="objectId" label="objectId" min-width='100'>
             </el-table-column>
              <el-table-column prop="srcPosId" label="srcPosId"  >
             </el-table-column>
@@ -100,12 +95,19 @@
             </el-table-column>
              <el-table-column prop="destPosY" label="destPosY" min-width='100'>
             </el-table-column>
-             <el-table-column prop="taskStatus" label="taskStatus" min-width='120'>
-               <template slot-scope="scope">
+            <el-table-column prop="taskId" label="taskId"   style='color:#fff!important;'>
+            </el-table-column>
+            <el-table-column prop="taskStatus" label="taskStatus" min-width='120'>
+                    <template slot-scope="scope">
                 {{$Enum.getEnumSelectByValue($Enum.EnumSelect().task_status_all,scope.row.taskStatus)}}
                 </template>
             </el-table-column>
-             <el-table-column prop="creationDate" label="creationDate" min-width='120'>
+             <el-table-column prop="taskType" label="taskType" min-width='90'>
+                <template slot-scope="scope">
+                {{$Enum.getEnumSelectByValue($Enum.EnumSelect().pi_task_type,scope.row.taskType)}}
+                </template>
+            </el-table-column>
+              <el-table-column prop="creationDate" label="creationDate" min-width='120'>
                  <template slot-scope="scope">
                 {{$DateFormat.dateFormat(scope.row.creationDate,true)}}
                 </template>
@@ -115,10 +117,10 @@
                 {{$DateFormat.dateFormat(scope.row.lastUpdateDate,true)}}
                </template>
             </el-table-column>
+             <el-table-column prop="referenceTaskId" label="referenceTaskId" min-width='150'>
+            </el-table-column
              <el-table-column prop="reference01" label="reference01" min-width='130'>
-            </el-table-column>
-             <el-table-column prop="kidIncharge" label="kidIncharge" min-width='110'>
-            </el-table-column>
+            </el-table-column>     
              <el-table-column prop="destObjectSide" label="destObjectSide" min-width='150'>
                 <template slot-scope="scope">
                 {{$Enum.getEnumSelectByValue($Enum.EnumSelect().pi_dest_object_side,scope.row.destObjectSide)}}
@@ -130,8 +132,6 @@
                 </template>
             </el-table-column>
              <el-table-column prop="objectGrossWeight" label="objectGrossWeight" min-width='200'>
-            </el-table-column>
-             <el-table-column prop="objectId" label="objectId" min-width='100'>
             </el-table-column>
              <el-table-column prop="priorityNum" label="priorityNum" min-width='150'>
             </el-table-column>
@@ -166,7 +166,7 @@
                     <el-input v-model="addFormData.taskId" placeholder="Task Id" min-width='410' :disabled="true"></el-input>
                     </el-form-item>
                      <el-form-item label="Task Type">
-                          <el-select placeholder="Task Type" v-model="addFormData.taskType">
+                          <!--<el-select placeholder="Task Type" v-model="addFormData.taskType"  >
                         <el-option
                             v-for="item in $Enum.EnumSelect().pi_task_type"
                             :key="item.value"
@@ -174,7 +174,8 @@
                             :value="item.value" 
                         > 
                         </el-option>
-                        </el-select>
+                        </el-select>-->
+                        <span>{{addFormData.taskType}}</span>
                     </el-form-item>
                      <el-form-item label="Src PosX">
                           <el-input v-model="addFormData.srcPosX" placeholder="Src PosX" min-width='410'></el-input>
@@ -220,7 +221,8 @@
                     <el-input v-model="addFormData.objectGrossWeight" placeholder="Object Gross Weight" min-width='410'></el-input>
                     </el-form-item>
                      <el-form-item label="Object Id"> 
-                    <el-input v-model="addFormData.objectId" placeholder="Object Id" min-width='410'></el-input>
+                       <span>{{addFormData.objectId}}</span>
+                    <!--<el-input v-model="addFormData.objectId" placeholder="Object Id" min-width='410'></el-input>-->
                     </el-form-item>
                     <el-form-item label="Release Load Flag"> 
                          <el-select placeholder="Release Load Flag" v-model="addFormData.releaseLoadFlag">

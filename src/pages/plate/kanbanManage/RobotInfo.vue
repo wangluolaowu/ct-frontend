@@ -2,7 +2,7 @@
   <div class="robotInfo">
     <div class="tabOne">
       <h4 class="h2">{{$t('message.msg1_14')}}</h4>
-      <el-table :data='tableData.list' highlight-current-row v-loading="tableLoading" style="width: 100%" border>
+      <el-table :data='tableData.list' :row-class-name="tableRowClassName"  highlight-current-row v-loading="tableLoading" style="width: 100%" border>
         <el-table-column prop="kidId" :label="$t('label.label1_20')" min-width='200' >
         </el-table-column>
         <el-table-column prop="batteryFaultCode" :label="$t('label.label1_21')" min-width="200" >
@@ -199,6 +199,18 @@ export default {
       this.KM_KID_TASK_STATUS = Enum.KM_KID_TASK_STATUS
       this.TM_MOVE_TASK_RELEASE_LOAD = Enum.TM_MOVE_TASK_RELEASE_LOAD
     },
+    tableRowClassName({row, rowIndex}) {
+        if (row.kidStatus){
+          if(row.kidStatus === 2) {
+            return 'success-green'
+          }else if(row.kidStatus === 99){
+            return 'success-red'
+          }else if(row.kidStatus === 5){
+            return 'success-yellow'
+          }
+        }
+        return 'warning-row'
+      },
     getPostOne () {
       let that = this
       this.axios.get('kanban/kidInfoV/selectKidInfoVList', {
@@ -273,5 +285,19 @@ export default {
   }
   .pagination{
     text-align: right!important;
+  }
+   .el-table .warning-row {
+    background: oldlace;
+  }
+
+  .el-table .success-green {
+    background: rgba(0, 255, 136, 0.877);
+  }
+  .el-table .success-yellow {
+    background: rgba(179, 255, 0, 0.897);
+  }
+
+   .el-table .success-red {
+    background: rgba(235, 10, 10, 0.897);
   }
 </style>

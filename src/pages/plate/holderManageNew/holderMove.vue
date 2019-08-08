@@ -1,10 +1,10 @@
 
 <template>
   <div class="tableDate">
-    <div class="button" style="width:3%;float:right;">
-      <P><el-button class="el-icon-plus" @click.prevent="addRow()"></el-button></P>
-      <p><el-button class="el-icon-minus" @click.prevent="delData()"></el-button></p>
-      <p><el-button type="el-icon-minus" :disabled="submitDisabled" @click.prevent="submit">{{$t('message.msg1_34')}}</el-button></p>
+    <div class="button" style="margin-bottom:10px;">
+      <span><el-button class="el-icon-plus" @click.prevent="addRow()"></el-button></span>
+      <span style="margin-left:50px;"><el-button class="el-icon-minus" @click.prevent="delData()"></el-button></span>
+      <span style="margin-left:50px;"><el-button type="el-icon-minus" :disabled="submitDisabled" @click.prevent="submit">{{$t('message.msg1_34')}}</el-button></span>
     </div>
     <div class="table">
       <el-table
@@ -19,7 +19,7 @@
         <el-table-column  :label="$t('label.label1_86')" type="index" width="60" align="center"></el-table-column>
         <el-table-column   :label="$t('label.label1_20')" align="center">
           <template slot-scope="scope">
-               <el-select  v-model="scope.row.pi_kid_id">
+               <el-select  v-model="scope.row.pi_kid_id" filterable>
                 <el-option
                 v-for="item in PI_KID_ID"
                 :key="item.value"
@@ -32,7 +32,7 @@
         </el-table-column>
          <el-table-column  :label="$t('label.label8_02')" align="center">
           <template slot-scope="scope">
-               <el-select  v-model="scope.row.pi_holder_id">
+               <el-select  v-model="scope.row.pi_holder_id"  filterable >
                 <el-option
                 v-for="item in PI_HOLDER_ID"
                 :key="item.VALUE"

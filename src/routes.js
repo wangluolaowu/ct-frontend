@@ -391,6 +391,11 @@ const routes = [
         name: '货架检查任务'
       },
       {
+        path: '/adminstratorPage/taskHistoryChange',
+        component: () => import('@/pages/plate/adminstratorPage/taskHistoryChange'),
+        name: '任务变更历史记录'
+      },
+      {
         path: '/adminstratorPage/taskChange',
         component: () => import('@/pages/plate/adminstratorPage/createKidTaskChange'),
         name: '任务变更'
